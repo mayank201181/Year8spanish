@@ -68,7 +68,7 @@ function SpanishLine({ segs, label, english }: { segs: Seg[]; label: string; eng
 const COLS = 5; // street intersections across (x = 0..4)
 const ROWS = 4; // street intersections down (y = 0..3)
 const SP = 84; // px between intersections
-const MG = 26; // margin
+const MG = 32; // margin
 const W = MG * 2 + SP * (COLS - 1);
 const H = MG * 2 + SP * (ROWS - 1);
 const px = (x: number) => MG + x * SP;
@@ -93,21 +93,21 @@ interface MapPlace {
 /** BLOCKS[by][bx]: the building filling the block between intersections (bx, by) and (bx+1, by+1). */
 const BLOCKS: MapPlace[][] = [
   [
-    { n: "biblioteca", g: "f", emoji: "📚", lines: ["la biblioteca"] },
-    { n: "museo", g: "m", emoji: "🖼️", lines: ["el museo"] },
-    { n: "cine", g: "m", emoji: "🎬", lines: ["el cine"] },
+    { n: "biblioteca", g: "f", emoji: "📚", lines: ["la", "biblioteca"] },
+    { n: "museo", g: "m", emoji: "🖼️", lines: ["el", "museo"] },
+    { n: "cine", g: "m", emoji: "🎬", lines: ["el", "cine"] },
     { n: "estación de tren", g: "f", emoji: "🚆", lines: ["la estación", "de tren"] },
   ],
   [
-    { n: "banco", g: "m", emoji: "🏦", lines: ["el banco"] },
+    { n: "banco", g: "m", emoji: "🏦", lines: ["el", "banco"] },
     { n: "ayuntamiento", g: "m", emoji: "🏛️", lines: ["el", "ayuntamiento"] },
-    { n: "iglesia", g: "f", emoji: "⛪", lines: ["la iglesia"] },
-    { n: "piscina", g: "f", emoji: "🏊", lines: ["la piscina"] },
+    { n: "iglesia", g: "f", emoji: "⛪", lines: ["la", "iglesia"] },
+    { n: "piscina", g: "f", emoji: "🏊", lines: ["la", "piscina"] },
   ],
   [
-    { n: "parque", g: "m", emoji: "🌳", lines: ["el parque"] },
-    { n: "mercado", g: "m", emoji: "🧺", lines: ["el mercado"] },
-    { n: "farmacia", g: "f", emoji: "💊", lines: ["la farmacia"] },
+    { n: "parque", g: "m", emoji: "🌳", lines: ["el", "parque"] },
+    { n: "mercado", g: "m", emoji: "🧺", lines: ["el", "mercado"] },
+    { n: "farmacia", g: "f", emoji: "💊", lines: ["la", "farmacia"] },
     { n: "centro comercial", g: "m", emoji: "🛍️", lines: ["el centro", "comercial"] },
   ],
 ];
@@ -244,6 +244,7 @@ function TownMap() {
     if ("error" in r) setError(r.error);
     else {
       setError(null);
+      setShown(null);
       setWalk(r.walk);
     }
   };
@@ -297,16 +298,19 @@ function TownMap() {
       </>
     );
   } else {
-    const flipped = walk.prevH === 2 || (walk.prevH !== 0 && last.side === "derecha" ? walk.h === 3 : false);
     caption = (
       <>
         You were walking {MAP_DIR[walk.prevH]}, so <i lang="es">a la {last.side}</i> sent you {MAP_DIR[walk.h]}.{" "}
         {walk.prevH === 2
           ? "Facing down the map, your right is the screen's LEFT — right and left belong to the walker, never to the map."
-          : flipped
-            ? "Notice the screen direction isn't the same as your right/left — always imagine yourself in the walker's shoes."
+          : walk.prevH === 0
+            ? "Facing up the map, your right and the screen's right happen to match. Walk down the map and try again!"
             : "Right and left belong to the walker, not to the screen: turn the map in your head so you face the way you walk."}
-        {last.k === "toma" ? ` You passed ${last.n - 1 === 0 ? "no" : last.n - 1} side street${last.n - 1 === 1 ? "" : "s"} on that side before turning: *${ORD[last.n - 1]}* agrees with *la calle* (feminine).`.replace(/\*([^*]+)\*/g, "$1") : ""}
+        {last.k === "toma" ? (
+          <>
+            {" "}It was side street number {last.n} on your {last.side === "derecha" ? "right" : "left"} — <i lang="es">la {ORD[last.n - 1]} calle</i> ({ORD_EN[last.n - 1]}): the ordinal ends in <i>-a</i> to agree with <i lang="es">la calle</i>.
+          </>
+        ) : null}
       </>
     );
   }
@@ -341,7 +345,7 @@ function TownMap() {
                     {p.lines[0]}
                   </text>
                   {p.lines[1] ? (
-                    <text x={x0 + sz / 2} y={y0 + 58} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-ink">
+                    <text x={x0 + sz / 2} y={y0 + 58} textAnchor="middle" fontSize={p.lines[1].length > 10 ? 9 : 10} fontWeight={700} className="fill-ink">
                       {p.lines[1]}
                     </text>
                   ) : null}
@@ -541,7 +545,7 @@ function HayBuilder() {
   const plural = qty === "num" || qty === "some" || qty === "lots" || qty === "several" || (qty === "none" && p.none === "pl");
   const neg = qty === "none" || qty === "ningun";
   const nounSegs: Seg[] = plural ? p.plSegs : [{ t: p.n }];
-  const plainPl = p.plSegs.map((s) => s.t).join("").replace("estaciones", "estaciones");
+  const plainPl = p.plSegs.map((s) => s.t).join("");
 
   const segs: Seg[] = [{ t: `${frame.es} ` }];
   if (neg) segs.push({ t: "no hay", hl: "neg" }, { t: " " });
@@ -555,8 +559,6 @@ function HayBuilder() {
     else segs.push({ t: " " }, { t: "donde", hl: "link" }, { t: ` se ${PUEDE} ${p.act.es}` });
   }
   segs.push({ t: "." });
-  // Fix the accent on the plural of estación for display/speech: estaciones has no written accent.
-  const display = segs.map((s) => ({ ...s, t: s.t }));
 
   const enNoun = plural ? p.enPl : p.en;
   const enCore =
@@ -600,14 +602,14 @@ function HayBuilder() {
   } else if (qty === "ningun") {
     caption = (
       <>
-        Stretch: <i lang="es">{DET.ningun[p.g]}</i> = 'not a single'. It agrees in gender ({genderWord}: <i lang="es">{the({ n: p.n, g: p.g, emoji: "", lines: [""] })}</i>) but is <b>always singular</b> — and you still need <i lang="es">no</i> before <i lang="es">hay</i>.
+        Stretch: <i lang="es">{DET.ningun[p.g]}</i> = 'not a single'. It agrees in gender ({genderWord}: <i lang="es">{DEF[p.g]} {p.n}</i>) but is <b>always singular</b> — and you still need <i lang="es">no</i> before <i lang="es">hay</i>.
         {p.g === "m" ? " Before a masculine noun ninguno shortens to ningún (with an accent), just like uno → un." : ""}
       </>
     );
   } else if (qty === "one") {
     caption = (
       <>
-        <i lang="es">Hay</i> never changes. 'A' agrees with the place: <i lang="es">{the({ n: p.n, g: p.g, emoji: "", lines: [""] })}</i> is {genderWord}, so <i lang="es">{DET.one[p.g]} {p.n}</i>. Use <i lang="es">hay</i> + un/una for something new — never <i lang="es">hay {DEF[p.g]} {p.n}</i>.
+        <i lang="es">Hay</i> never changes. 'A' agrees with the place: <i lang="es">{DEF[p.g]} {p.n}</i> is {genderWord}, so <i lang="es">{DET.one[p.g]} {p.n}</i>. Use <i lang="es">hay</i> + un/una for something new — never <i lang="es">hay {DEF[p.g]} {p.n}</i>.
       </>
     );
   } else {
@@ -668,7 +670,7 @@ function HayBuilder() {
           </span>
         </label>
 
-        <SpanishLine segs={display} label="Your sentence" english={english} />
+        <SpanishLine segs={segs} label="Your sentence" english={english} />
 
         <div className="grid grid-cols-2 gap-2">
           <Readout label="Gender" value={<span lang="es" className="text-base">{genderWord} · {DEF[p.g]} {p.n}</span>} />

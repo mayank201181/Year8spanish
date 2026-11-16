@@ -232,7 +232,7 @@ function GustarMachine() {
       title="The gustar machine"
       tryThis={[
         "Predict first: switch on **Predict**, then build *A mis padres ___ las noticias*. Which pronoun and which form? Reveal to check.",
-        "Keep the person, swap *la película*-style singulars for plurals. Which word changes — the pronoun or the verb?",
+        "Keep the person and switch between *one thing* and *plural things*. Which word changes — the pronoun or the verb?",
         "Choose *bailar y cantar*. Two activities… so why is it still *gusta*?",
         "Pick *aburrir* and compare the English: who is the subject in English? Who is it in Spanish?",
       ]}
@@ -714,6 +714,9 @@ function PlansBuilder() {
               </tbody>
             </table>
           </div>
+          <p className="mt-1 text-xs text-ink-2">
+            <span lang="es">Tener</span> is a boot verb with a twist: its <span lang="es">yo</span> form is irregular (<span lang="es">tengo</span>).
+          </p>
         </div>
       </div>
     </WidgetFrame>

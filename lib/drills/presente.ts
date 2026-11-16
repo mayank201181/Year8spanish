@@ -954,7 +954,7 @@ const POSS: Record<Person, string> = { yo: "mis", tú: "tus", él: "sus", nosotr
 
 function qFull(ctx: QCtx, prefix: string, verb: string, rest = ""): string[] {
   const tail = rest ? ` ${rest}` : "";
-  if (ctx.subj) return [`${prefix} ${verb} ${ctx.subj}${tail}`];
+  if (ctx.subj) return uniq([`${prefix} ${verb} ${ctx.subj}${tail}`, `${prefix} ${verb}${tail} ${ctx.subj}`]);
   return [`${prefix} ${verb}${tail}`, ...SUBJECT_PRONOUNS[ctx.qp].map((pr) => `${prefix} ${verb} ${pr}${tail}`)];
 }
 
@@ -1026,10 +1026,10 @@ const Q_TEMPLATES: Array<(ctx: QCtx, rng: Rng) => QItem> = [
     const sa = c.subj ? ` ${c.subj}` : "";
     return {
       word: "por qué",
-      gap: `¿___ ${v}${sa} español?`,
+      gap: `¿___ ${v} español${sa}?`,
       reply: "Porque es muy útil.",
       en: `Why ${c.enDo} ${c.enS} study Spanish?`,
-      full: qFull(c, "por qué", v, "español"),
+      full: qFull(c, "por qué", v, "español").reverse(),
       traps: [["porque", "*porque* (one word, no accent) means 'because' — it's the answer. The question 'why?' is *¿Por qué?* (two words, accent)."]],
     };
   },
@@ -1304,8 +1304,8 @@ const buildSentence: Drill = {
       prompt: `Translate into Spanish: "${subj.en} ${enVerb} ${time.en}."${cue}`,
       answer: { type: "text", accept: uniq(accept) },
       solution: [
-        `Verb: *${act.inf}* (${meaning(act.inf)}); subject → *${P_NAME[p]}* → *${form}*.`,
-        `Add the rest: *${act.es}*${neg ? "; *no* goes right before the verb" + (info(act.inf).reflexive ? " and its pronoun" : "") : ""}.`,
+        `'${act.base}' = *${act.inf} ${act.es}*.`,
+        `Subject → *${P_NAME[p]}* → *${form}*${neg ? "; *no* goes right before the verb" + (info(act.inf).reflexive ? " and its pronoun" : "") : ""}.`,
         `Time phrase *${time.es[0]}* at the end (or the start).`,
         `→ **${cap(canonical)}.**`,
       ],
