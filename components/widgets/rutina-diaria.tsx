@@ -478,7 +478,7 @@ function RoutineBuilder() {
   const enSubj = !showSubject && person === "él" ? "She" : !showSubject && person === "ellos" ? "They" : enSubjFull;
   const enVerb = (person === "él" ? v.en3 : v.en).replace("{p}", enPoss);
   const SEQ_EN: Record<Seq, string> = { "": "", Primero: "First", Luego: "Then", Después: "Afterwards", Finalmente: "Finally" };
-  const english = seq ? `${SEQ_EN[seq]}, ${enSubj === "I" ? "I" : lowerFirst(enSubj)} ${enVerb} ${time.en}.` : `${enSubj} ${enVerb} ${time.en}.`;
+  const english = `${seq ? `${SEQ_EN[seq]}, ${enSubj === "I" ? "I" : lowerFirst(enSubj)}` : enSubj} ${enVerb} ${time.en}`; // time.en ends in "a.m." / "p.m."
 
   let caption: string;
   if (fp.irregular) {

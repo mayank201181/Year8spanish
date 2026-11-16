@@ -181,13 +181,15 @@ interface Adj {
   group: string;
   /** Natural after "un poco" / "demasiado" (slightly negative). */
   neg?: boolean;
+  /** Already extreme: never "muy enorme". */
+  noInt?: boolean;
 }
 const A4 = (ms: string): AdjForms => ({ ms, fs: ms.slice(0, -1) + "a", mp: ms + "s", fp: ms.slice(0, -1) + "as" });
 const A2 = (s: string, p: string): AdjForms => ({ ms: s, fs: s, mp: p, fp: p });
 const ADJS: Adj[] = [
   { forms: [A2("grande", "grandes")], en: "big", kinds: ["home", "room", "out"], group: "size", neg: true },
   { forms: [A4("pequeño")], en: "small", kinds: ["home", "room", "out"], group: "size", neg: true },
-  { forms: [A2("enorme", "enormes")], en: "huge", kinds: ["home", "room", "out"], group: "size" },
+  { forms: [A2("enorme", "enormes")], en: "huge", kinds: ["home", "room", "out"], group: "size", noInt: true },
   { forms: [A4("moderno")], en: "modern", kinds: ["home", "room"], group: "age" },
   { forms: [A4("antiguo"), A4("viejo")], en: "old", kinds: ["home", "room"], group: "age", neg: true },
   { forms: [A4("cómodo")], en: "comfortable", kinds: ["home", "room"], group: "comfort" },
@@ -402,11 +404,11 @@ const roomsEsEn: Drill = {
           ? `Translate into English: *${es}*`
           : `Wei Ling is showing you round her flat. She opens a door and says: *${n.g === "m" ? (pl ? "Estos son" : "Este es") : pl ? "Estas son" : "Esta es"} ${es}.* Which room${pl ? "s are they" : " is it"}? Answer in English.`;
     const wrongs: { wrong: string[]; feedback: string }[] = [];
-    if (n.sg === "salón") wrongs.push({ wrong: ["salon", "the salon"], feedback: "False friend! *El salón* is the living room, not a hair salon." });
+    if (n.sg === "salón") wrongs.push({ wrong: ["salon", "the salon", "salons", "the salons"], feedback: "False friend! *El salón* is the living room, not a hair salon." });
     if (n.sg === "aseo") wrongs.push({ wrong: ["bathroom", "the bathroom"], feedback: "Close — but *el aseo* is just a small room with a toilet and basin. A bathroom is *el cuarto de baño*." });
     if (n.sg === "biblioteca") wrongs.push({ wrong: ["bookshop", "the bookshop", "bookstore"], feedback: "False friend: a bookshop is *la librería*. *La biblioteca* is a library." });
     if (n.sg === "cocina") wrongs.push({ wrong: ["cooker", "the cooker"], feedback: "*Cocina* can mean cooker, but here it's a room: the kitchen." });
-    if (n.sg === "comedor") wrongs.push({ wrong: ["kitchen", "the kitchen"], feedback: "*Comedor* comes from *comer* (to eat) — it's the room where you eat: the dining room." });
+    if (n.sg === "comedor") wrongs.push({ wrong: ["kitchen", "the kitchen", "kitchens", "the kitchens"], feedback: "*Comedor* comes from *comer* (to eat) — it's the room where you eat: the dining room." });
     if (n.sg === "despacho") wrongs.push({ wrong: ["dispatch", "the dispatch"], feedback: "Not a cognate here: *el despacho* is a study / home office." });
     return {
       prompt,
@@ -444,12 +446,13 @@ const roomsEnEs: Drill = {
     const wrongs: { wrong: string[]; feedback: string }[] = [
       { wrong: r.forms.map((n) => `${defArt(n.g === "m" ? "f" : "m", pl)} ${pl ? n.pl : n.sg}`), feedback: `Check the gender: ${genderReason(n0)}.` },
     ];
-    if (pl) {
+    const badPl = r.forms.filter((n) => !n.sg.includes(" ") && !/[aeiouáéíóú]$/.test(n.sg));
+    if (pl && badPl.length) {
       wrongs.unshift({
-        wrong: r.forms.map((n) => `${defArt(n.g, true)} ${n.sg}s`),
+        wrong: badPl.map((n) => `${defArt(n.g, true)} ${n.sg}s`),
         feedback: "Check the plural: add *-s* after a vowel but *-es* after a consonant (*salón → salones*, *jardín → jardines*).",
       });
-    } else {
+    } else if (!pl) {
       wrongs.push({ wrong: r.forms.map((n) => n.sg), feedback: `Include the article: *${def(n0)}*.` });
     }
     return {
@@ -578,11 +581,11 @@ const VIVIR_FRAMES: Record<Person, string[]> = {
   vosotros: ["Vosotros ___ cerca de la playa, ¿verdad?", "¿Dónde ___ vosotros?"],
   ellos: ["Mis primos ___ en un pueblo.", "Lucía y Diego ___ en Madrid."],
 };
-const VIVIR_Q: { p: Person; ask: Person; q: string; en: string; extra: string[] }[] = [
-  { p: "yo", ask: "tú", q: "¿Dónde ___?", en: "I live", extra: [] },
-  { p: "nosotros", ask: "vosotros", q: "¿Dónde ___?", en: "We live", extra: [] },
-  { p: "él", ask: "él", q: "¿Dónde ___ tu abuela?", en: "She lives", extra: ["mi abuela"] },
-  { p: "ellos", ask: "ellos", q: "¿Dónde ___ tus primos?", en: "They live", extra: ["mis primos"] },
+const VIVIR_Q: { p: Person; ask: Person; q: string; en: string; who: string; extra: string[]; drop: string[] }[] = [
+  { p: "yo", ask: "tú", q: "¿Dónde ___?", en: "I live", who: "yourself", extra: [], drop: [] },
+  { p: "nosotros", ask: "vosotros", q: "¿Dónde ___?", en: "We live", who: "you and your family", extra: [], drop: [] },
+  { p: "él", ask: "él", q: "¿Dónde ___ tu abuela?", en: "She lives", who: "your grandmother", extra: ["mi abuela"], drop: ["él", "usted"] },
+  { p: "ellos", ask: "ellos", q: "¿Dónde ___ tus primos?", en: "They live", who: "your cousins", extra: ["mis primos"], drop: ["ellas", "ustedes"] },
 ];
 
 const vivirConj: Drill = {
@@ -599,7 +602,7 @@ const vivirConj: Drill = {
       const loc = rng.pick(LOCS.filter((l) => !home.farm || l.farmOk));
       const form = V("vivir", q.p);
       const tail = home.forms.map((n) => `en ${indef(n)} ${loc.es}`);
-      const starts = uniq([...acceptedForms("vivir", "present", q.p), ...q.extra.map((e) => `${e} ${form}`)]);
+      const starts = uniq([...acceptedForms("vivir", "present", q.p).filter((f) => !q.drop.includes(f.split(" ")[0])), ...q.extra.map((e) => `${e} ${form}`)]);
       const accept = cross(starts, tail);
       accept[0] = `${cap(form)} ${tail[0]}.`;
       const wrong = WRONG_ENDINGS[q.p];
@@ -607,13 +610,13 @@ const vivirConj: Drill = {
         prompt: `Answer the question in Spanish: *${q.q.replace("___", V("vivir", q.ask))}* — '${q.en} ${home.prep} ${aAn(home.en)} ${loc.en}.'`,
         answer: text(accept),
         solution: [
-          `The question uses *${V("vivir", q.ask)}*; the answer is about ${q.en.split(" ")[0].toLowerCase() === "i" ? "you" : q.en.split(" ")[0].toLowerCase()} → ${PERSON_LABEL[q.p]}.`,
+          `The question uses *${V("vivir", q.ask)}*; the answer is about ${q.who} → ${PERSON_LABEL[q.p]}.`,
           `*viv-* + the -ir ending → *${form}*.`,
           `**${accept[0]}**`,
         ],
         hint: "Switch the person: a question with *vives* gets an answer with *vivo*; *vivís* gets *vivimos*.",
         traps: mkTraps(accept, [
-          { wrong: tail.map((t) => `${V("vivir", q.ask)} ${t}`), feedback: `You copied the verb from the question. Answering about ${q.en.split(" ")[0]}, use *${form}*.` },
+          { wrong: tail.map((t) => `${V("vivir", q.ask)} ${t}`), feedback: `You copied the verb from the question. Answering about ${q.who}, use *${form}*.` },
           { wrong: [wrong.er, wrong.ar].map((x) => `${x} ${tail[0]}`), feedback: "*vivir* is an *-ir* verb: *vivimos, vivís* — not the *-er* or *-ar* endings." },
         ]),
       };
@@ -992,6 +995,7 @@ function pickAdj(rng: Rng, k: Kind, exclude: Adj[] = [], filter: (a: Adj) => boo
 }
 
 const NUM_SMALL = [2, 3, 4];
+const EN_ORDER = ["looks", "comfort", "noise", "light", "size", "age", "colour"];
 
 const adjAgreement: Drill = {
   id: `${TOPIC}.adjective-agreement`,
@@ -1037,13 +1041,16 @@ const adjAgreement: Drill = {
         answer: text(accept),
         solution: [
           `Noun first: *${det} ${pl ? n0.pl : n0.sg}* (${gn(n0.g, pl)}).`,
-          `Then the adjective, agreeing: *${a.forms[0].ms}* → *${form}*.`,
+          `Then the adjective, agreeing (${gn(n0.g, pl)}): *${a.forms[0].ms}* → *${form}*.`,
           `**${accept[0]}**`,
         ],
         hint: "Spanish names the thing first, then describes it. Make the adjective match.",
         traps: mkTraps(accept, [
           { wrong: t.forms.map((n) => `${pl ? NUM_ES[num] : indefArt(n.g)} ${agree(a, n.g, pl)} ${pl ? n.pl : n.sg}`), feedback: `English word order! In Spanish the adjective goes **after** the noun: *${accept[0]}*.` },
-          { wrong: t.forms.map((n) => `${pl ? NUM_ES[num] : indefArt(n.g)} ${pl ? n.pl : n.sg} ${a.forms[0].ms}`), feedback: `The adjective must agree with a ${gn(n0.g, pl)} noun: *${form}*.` },
+          {
+            wrong: t.forms.map((n) => `${pl ? NUM_ES[num] : indefArt(n.g)} ${pl ? n.pl : n.sg} ${n.g === "m" ? agree(a, "f", pl) : a.forms[0].ms}`),
+            feedback: `Make the adjective agree with its noun: ${t.forms.map((n) => `*${pl ? NUM_ES[num] : indefArt(n.g)} ${pl ? n.pl : n.sg} ${agree(a, n.g, pl)}*`).join(" / ")}.`,
+          },
         ]),
       };
     }
@@ -1057,7 +1064,7 @@ const adjAgreement: Drill = {
       return {
         prompt: `Translate into Spanish: 'The ${pl2 ? t.enPl : t.en} ${pl2 ? "are" : "is"} ${a.en}.'`,
         answer: text(accept),
-        solution: [`*${def(n0, pl2)}* is ${gn(n0.g, pl2)} → *${ser(pl2)}*.`, `*${a.forms[0].ms}* → *${form}*.`, `**${accept[0]}**`],
+        solution: [`*${def(n0, pl2)}* is ${gn(n0.g, pl2)} → *${ser(pl2)}*.`, `The adjective agrees (${gn(n0.g, pl2)}): *${a.forms[0].ms}* → *${form}*.`, `**${accept[0]}**`],
         hint: pl2 ? "Plural noun → *son* and a plural adjective." : "One thing → *es*; make the adjective match its gender.",
         traps: mkTraps(accept, [
           { wrong: t.forms.map((n) => `${def(n, pl2)} ${ser(pl2)} ${agree(a, n.g, false)}`), feedback: `The adjective must be plural too: *${form}*.` },
@@ -1066,8 +1073,8 @@ const adjAgreement: Drill = {
       };
     }
     // mode 3: two adjectives after the noun
-    const a1 = pickAdj(rng, t.kind);
-    const a2 = pickAdj(rng, t.kind, [a1]);
+    // English order: opinion → size → age → colour (a pretty, big, old, white house).
+    const [a1, a2] = [pickAdj(rng, t.kind)].flatMap((x) => [x, pickAdj(rng, t.kind, [x])]).sort((x, y) => EN_ORDER.indexOf(x.group) - EN_ORDER.indexOf(y.group));
     const num = pl ? rng.pick(NUM_SMALL) : 1;
     const accept = t.forms.flatMap((n) => {
       const det = pl ? NUM_ES[num] : indefArt(n.g);
@@ -1112,7 +1119,7 @@ const INTS: Int[] = [
   { es: "demasiado", en: "too", negOnly: true },
 ];
 /** Natural intensifier + adjective pairings (no colours; "too ugly" is odd). */
-const okWith = (i: Int, a: Adj) => a.group !== "colour" && (!i.negOnly || (!!a.neg && !(i.es === "demasiado" && a.group === "looks")));
+const okWith = (i: Int, a: Adj) => a.group !== "colour" && !a.noInt && (!i.negOnly || (!!a.neg && !(i.es === "demasiado" && a.group === "looks")));
 const INT_SUBJ: Subj[] = [
   HOUSE_SUBJ[0],
   HOUSE_SUBJ[1],
@@ -1180,7 +1187,7 @@ const intensifiers: Drill = {
         traps: mkTraps(accept, [
           ...(bad ? [{ wrong: s.forms.map((f) => `${f.es} ${sv} ${bad} ${agree(a1, f.g, s.pl)}`), feedback: `*${i1.es}* is an intensifier — it never changes its ending.` }] : []),
           { wrong: s.forms.map((f) => `${f.es} ${estar(s.pl)} ${i1.es} ${agree(a1, f.g, s.pl)}`), feedback: `Describing what something is like → *${sv}*, not *${estar(s.pl)}*.` },
-          { wrong: s.forms.map((f) => `${f.es} ${sv} ${i1.es} ${a1.forms[0].ms}`), feedback: `Make the adjective agree: *${agree(a1, g0, s.pl)}*.` },
+          { wrong: s.forms.map((f) => `${f.es} ${sv} ${i1.es} ${f.g === "m" ? agree(a1, "f", s.pl) : a1.forms[0].ms}`), feedback: `Make the adjective agree with the subject's gender and number: ${s.forms.map((f) => `*${f.es} ${sv} ${i1.es} ${agree(a1, f.g, s.pl)}*`).join(" / ")}.` },
         ]),
       };
     }
@@ -1188,7 +1195,7 @@ const intensifiers: Drill = {
     const iA = i1.negOnly ? rng.pick(INTS.filter((x) => !x.negOnly)) : i1;
     const i2 = rng.pick(INTS.filter((x) => x.negOnly));
     const aB = pickAdj(rng, s.kind, [], (a) => okWith(i2, a));
-    const aA = pickAdj(rng, s.kind, [aB], (a) => !a.neg && a.group !== "colour");
+    const aA = pickAdj(rng, s.kind, [aB], (a) => okWith(iA, a) && !a.neg);
     const accept = s.forms.flatMap((f) =>
       cross(agreeAll(aA, f.g, s.pl), agreeAll(aB, f.g, s.pl), "|").map((pair) => {
         const [x, y] = pair.split("|");
@@ -1206,7 +1213,7 @@ const intensifiers: Drill = {
       ],
       hint: "Both adjectives agree with the subject; both intensifiers stay the same.",
       traps: mkTraps(accept, [
-        { wrong: s.forms.map((f) => `${f.es} ${sv} ${iA.es} ${aA.forms[0].ms} pero ${i2.es} ${aB.forms[0].ms}`), feedback: `Both adjectives agree with ${gn(g0, s.pl)} *${s.forms[0].es}*.` },
+        { wrong: s.forms.map((f) => `${f.es} ${sv} ${iA.es} ${agree(aA, f.g === "m" ? "f" : "m", s.pl)} pero ${i2.es} ${agree(aB, f.g === "m" ? "f" : "m", s.pl)}`), feedback: `Both adjectives must agree with the subject: ${s.forms.map((f) => `*${f.es}* is ${gn(f.g, s.pl)}`).join("; ")}.` },
         ...(badInt(i2, g0, s.pl) ? [{ wrong: s.forms.map((f) => `${f.es} ${sv} ${iA.es} ${agree(aA, f.g, s.pl)} pero ${badInt(i2, f.g, s.pl) ?? i2.es} ${agree(aB, f.g, s.pl)}`), feedback: `*${i2.es}* never changes its ending.` }] : []),
       ]),
     };
@@ -1232,7 +1239,7 @@ const serEstar: Drill = {
       ? FLOORS.filter((f) => f.level === subj.floor).map((f) => ({ es: f.es, en: f.en }))
       : LOCS.filter((l) => !subj.farm || l.farmOk).map((l) => ({ es: l.es, en: l.en }));
     const loc = rng.pick(locs);
-    const adj = pickAdj(rng, subj.kind, [], (a) => a.group !== "colour");
+    const adj = pickAdj(rng, subj.kind, [], (a) => a.group !== "colour" && !a.noInt);
     if (mode === 0) {
       const isLoc = rng.bool();
       const sub = subj.forms[0].es;
@@ -1292,7 +1299,7 @@ const serEstar: Drill = {
       return locFirst ? `${f.es} ${l} y ${d}` : `${f.es} ${d} y ${l}`;
     });
     return {
-      prompt: `Translate into Spanish: '${en}' (No need to repeat 'it' — Spanish drops it.)`,
+      prompt: `Translate into Spanish: '${en}' (Spanish doesn't need a word for '${pl ? "they" : "it"}' here.)`,
       answer: text(accept),
       solution: [
         `'${loc.en}' is location → *${estar(pl)} ${loc.es}*.`,

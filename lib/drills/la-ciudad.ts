@@ -433,15 +433,17 @@ export const drills: Drill[] = [
       }
       let accept = cores.map((c) => `hay ${c}`);
       let english = cap(en);
+      let hayEl = [`hay ${the(p)}`];
       if (tier === 3 && rng.bool(0.6)) {
         const fr = rng.pick(FRAMES);
         english = `${fr.en}, ${en}`;
         accept = fr.es.flatMap((f) => cores.flatMap((c) => [`${f} hay ${c}`, `hay ${c} ${f}`]));
         wrong = wrong.flatMap((w) => fr.es.map((f) => `${f} ${w}`));
+        hayEl = fr.es.map((f) => `${f} hay ${the(p)}`);
       }
       accept = accept.map(sent);
       const trapList = [{ wrong, feedback: fb }];
-      if (mode === "a") trapList.push({ wrong: [`hay ${the(p)}`], feedback: "*Hay* introduces something new, so it takes *un/una*, never *el/la*. (For a known place use *está*: *El banco está en la plaza*.)" });
+      if (mode === "a") trapList.push({ wrong: hayEl, feedback: "*Hay* introduces something new, so it takes *un/una*, never *el/la*. (For a known place use *está*: *El banco está en la plaza*.)" });
       return {
         prompt: `Translate into Spanish: "${english}."`,
         answer: { type: "text", accept },
@@ -946,7 +948,6 @@ export const drills: Drill[] = [
         { en: "by car", es: ["en coche"] },
         { en: "by bus", es: ["en autobús"] },
         { en: "by metro", es: ["en metro"] },
-        { en: "by train", es: ["en tren"] },
         { en: "by bike", es: ["en bici", "en bicicleta"] },
       ];
       const n = rng.pick(NUM);
@@ -987,8 +988,8 @@ export const drills: Drill[] = [
         steps = [`*${the(p)}* + *está a* + distance.`, `${m.en} = *${m.es[0]}*.`, `**${accept[0]}**`];
       } else if (kind === "notfar") {
         english = `The ${p.en[0]} isn't far: it's ${n[2]} minutes away ${m.en}.`;
-        accept = dist(`${the(p)} no está lejos está `).map(sent);
-        distTraps(`${the(p)} no está lejos está `);
+        accept = dist(`${the(p)} no está lejos: está `).map(sent);
+        distTraps(`${the(p)} no está lejos: está `);
         steps = ["*no* before the verb: *no está lejos*.", `Then the distance: *está a ${n[0]} minutos ${m.es[0]}*.`, `**${accept[0]}**`];
       } else {
         english = `Is the ${p.en[0]} far? — No, it's ${n[2]} minutes away ${m.en}.`;
