@@ -11,7 +11,7 @@ L("dad", "The O worked for house-o.", mood="smug", shot="two")
 sfx("squawk")
 poof("lola", 1080)
 L("lola", "It did not work for house-o. The ending changes for every person. [[Hablo, hablas, habla.]] I speak, you speak, she speaks.", mood="annoyed", shot="close")
-L("dad", "Three words for one word? That's very inefficient.", mood="thinking", shot="close")
+L("dad", "Three words for one? Inefficient.", mood="thinking", shot="close")
 L("tara", "It's seven fifteen. Nobody has brushed their teeth. And we're arguing about verbs.", mood="deadpan", shot="close", gap=0.4)
 freeze("\"EVERYBODY HABLO.\"", 2.4, narrator="Narrator: Breakfast was getting tense. Present tense.")
 confess("tara", "TARA RAO · 12 · Present. Unfortunately.")
@@ -43,7 +43,7 @@ L("tara", "[[Come]] is, he eats. They eat is [[comen]]. Add an N for they. [[Ell
 L("mum", "My turn. [[Escucho música, leo un libro y escribo un correo.]] I listen to music, I read a book, and I write an email.", mood="happy", shot="close",
   board="[[escucho · leo · escribo]]")
 sfx("squawk")
-L("lola", "One of each. A, R. E, R. I, R. Mum, you are a machine.", mood="excited", shot="wide", offstage=True)
+L("lola", "One of each type. Mum, you are a machine.", mood="excited", shot="wide", offstage=True)
 L("mum", "[[Ayudo en casa y limpio la cocina.]] I help at home and I clean the kitchen. Every day. Alone.", mood="annoyed", shot="close",
   board="[[ayudo · limpio]]")
 L("dad", "I feel like that last bit was for me.", mood="worried", shot="close", gap=0.4)
@@ -120,7 +120,7 @@ L("lola", "The pronoun moves in front. [[Me levanto, te levantas, se levanta, no
   board="[[me · te · se · nos · os · se]]")
 L("tara", "[[Me levanto a las siete. Me ducho y me visto.]] I get up at seven. I shower, and I get dressed.", mood="deadpan", shot="close",
   board="[[Me levanto a las siete]]")
-L("mum", "And [[no]] goes before the pronoun. [[Los domingos no me levanto.]] On Sundays I don't get up. That's my dream.", mood="happy", shot="close",
+L("mum", "And [[no]] goes before the pronoun. [[Los domingos no me levanto.]] On Sundays I don't get up.", mood="happy", shot="close",
   board="[[no me levanto]]")
 L("pablo", "With [[voy a]], stick it on the end. [[Voy a levantarme.]] I'm going to get up. Or [[me voy a levantar.]] Both are correct.", mood="teach", shot="close",
   board="[[voy a levantarme]] = [[me voy a levantar]]")
