@@ -132,7 +132,7 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "topicShort": "The Near Future",
     "title": "Voy A Be Famous",
     "logline": "Dad signs up for the void deck talent show and announces he is going to be famous. The verb ir, ir + a + infinitive, reflexive pronouns, future time phrases, predictions and invitations, and present versus future.",
-    "durationSec": 478,
+    "durationSec": 479,
     "src": "/videos/futuro-inmediato.mp4",
     "poster": "/videos/posters/futuro-inmediato.jpg"
   },
