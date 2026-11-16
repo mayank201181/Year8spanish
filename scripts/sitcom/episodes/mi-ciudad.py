@@ -21,7 +21,7 @@ title()
 
 # ---------------- ACT 1: DESCRIBING A TOWN ----------------
 scene("living", [("tara", 260), ("pablo", 560), ("lola", 900)])
-L("pablo", "My entry is about Seville. [[Sevilla es una ciudad histórica y muy animada.]] Seville is a historic and very lively city.", mood="happy", shot="close", prop="tablet",
+L("pablo", "[[Sevilla es una ciudad histórica y muy animada.]] Seville is a historic and very lively city.", mood="happy", shot="close", prop="tablet",
   boardClear=True, board="[[Sevilla es una ciudad histórica]]")
 L("lola", "Town words. [[Histórica]], historic. [[Moderna]], modern. [[Turística]], touristy. [[Tranquila]], quiet. [[Ruidosa]], noisy. [[Limpia]], clean. [[Sucia]], dirty. [[Animada]], lively.", mood="teach", shot="close",
   board="[[histórica · moderna · tranquila]]")
@@ -41,7 +41,7 @@ L("dad", "And our part. Tampines es una barrio tranquila.", mood="smug", shot="c
 sfx("buzzer")
 L("lola", "[[Barrio]] ends in O. Masculine. [[Tampines es un barrio tranquilo.]] Tampines is a quiet neighbourhood.", mood="eyeroll", shot="close",
   board="✘ una barrio   ✔ [[un barrio tranquilo]]")
-L("dad", "Quiet? Have you heard the coffee shop downstairs at seven in the morning?", mood="annoyed", shot="close")
+L("dad", "Quiet? Have you heard the coffee shop downstairs?", mood="annoyed", shot="close")
 L("mum", "Then, [[Tampines es un barrio bastante ruidoso.]] A fairly noisy neighbourhood. Happy?", mood="deadpan", shot="close",
   board="[[un barrio bastante ruidoso]]")
 
@@ -52,24 +52,24 @@ L("dad", "How many inhabitants? Lots. Next question.", mood="smug", gap=0.6)
 # ---------------- ACT 2: LO BUENO, LO MALO & CONNECTIVES ----------------
 card("LO BUENO Y LO MALO", "Research trip to Uncle Hock's. Purely academic.", 2.4)
 scene("hawker", [("tara", 260), ("pablo", 520), ("dad", 780), ("uncle", 1000)], caption="HOCK'S HAWKER STALL · Research Trip")
-L("pablo", "Now, the good and the bad. [[Lo bueno de mi ciudad es que hay muchos parques.]] The good thing about my city is that there are lots of parks.", mood="happy", shot="close", boardClear=True,
+L("pablo", "[[Lo bueno de mi ciudad es que hay muchos parques.]] The good thing about my city is that there are lots of parks.", mood="happy", shot="close", boardClear=True,
   board="[[Lo bueno de mi ciudad es que…]]")
 L("lola", "[[Lo]], plus an adjective, means, the something thing. [[Lo bueno]], the good thing. [[Lo malo]], the bad thing. [[Lo mejor]], the best. [[Lo peor]], the worst.", mood="teach", shot="wide", offstage=True,
   board="[[lo bueno · lo malo · lo mejor · lo peor]]")
-L("uncle", "Easy one. [[Lo mejor de Singapur es la comida.]] The best thing about Singapore is the food.", mood="happy", shot="close", prop="plate",
+L("uncle", "[[Lo mejor de Singapur es la comida.]] The best thing about Singapore is the food.", mood="happy", shot="close", prop="plate",
   board="[[Lo mejor de Singapur es la comida]]")
 L("pablo", "And, [[lo peor de Sevilla es que en verano hace demasiado calor.]] The worst thing about Seville is that in summer it's too hot.", mood="worried", shot="close")
 L("dad", "Lo malo of Singapore is muy tráfico.", mood="smug", shot="close")
 sfx("buzzer")
 L("lola", "Never [[muy]] with a noun. With a noun, use [[mucho]] or [[demasiado]], and they agree. [[Mucho tráfico. Mucha contaminación. Demasiados coches.]]", mood="annoyed", shot="wide", offstage=True,
   boardClear=True, board="✘ muy tráfico   ✔ [[mucho tráfico]]")
-L("tara", "My favourite. [[No hay nada para los jóvenes.]] There's nothing for young people. Two negatives. In Spanish, that's correct.", mood="deadpan", shot="close",
+L("tara", "[[No hay nada para los jóvenes.]] There's nothing for young people. Two negatives. In Spanish, that's correct.", mood="deadpan", shot="close",
   board="[[No hay nada para los jóvenes]]")
-L("pablo", "And a wish, as one chunk. [[Me gustaría que hubiera una playa.]] I wish there was a beach. Don't change it. Just learn it.", mood="teach", shot="close",
+L("pablo", "Learn this as one chunk. [[Me gustaría que hubiera una playa.]] I wish there was a beach.", mood="teach", shot="close",
   board="[[Me gustaría que hubiera…]] (chunk)")
 
 scene("hawker", [("tara", 260), ("mum", 520), ("dad", 780), ("uncle", 1000)], caption="HOCK'S HAWKER STALL · Glue Time")
-L("lola", "Now the glue that joins ideas. [[Y]], and. [[Pero]], but. [[También]], also. [[Además]], what's more. [[Sin embargo]], however.", mood="teach", shot="wide", offstage=True, boardClear=True,
+L("lola", "Glue words. [[Y]], and. [[Pero]], but. [[También]], also. [[Además]], what's more. [[Sin embargo]], however.", mood="teach", shot="wide", offstage=True, boardClear=True,
   board="[[y · pero · también · además · sin embargo]]")
 L("lola", "Reason. [[Porque]] and [[ya que]], because. Result. [[Por eso]] and [[así que]], so. And contrast, [[aunque]], although.", mood="teach", shot="wide", offstage=True,
   board="[[porque · ya que · por eso · aunque]]")
@@ -91,7 +91,7 @@ L("pablo", "I go to Uncle Hock at ten. He says, you're very early for breakfast.
 card("THE NIGHT BEFORE THE DEADLINE", "Tara has a formula. Of course she does.", 2.4)
 scene("bedroom", [("tara", 260), ("pablo", 560), ("mum", 860)])
 poof("lola", 1080)
-L("tara", "To win, you need extended sentences. There's a formula. Time phrase, verb, detail, opinion, reason, then a contrast.", mood="deadpan", shot="close", boardClear=True,
+L("tara", "To win, use the formula. Time phrase, verb, detail, opinion, reason, then a contrast.", mood="deadpan", shot="close", boardClear=True,
   board="time + verb + detail + opinion + reason")
 L("lola", "Start tiny. [[Voy al parque.]] I go to the park.", mood="teach", shot="close",
   board="[[Voy al parque.]]")
@@ -101,7 +101,7 @@ L("pablo", "Opinion and reason. [[Los sábados voy al parque con mis amigos porq
   board="+ [[porque es muy divertido]]")
 L("mum", "And the contrast. [[Aunque a veces hay demasiada gente.]] Although sometimes there are too many people.", mood="happy", shot="close",
   board="+ [[aunque a veces hay demasiada gente]]")
-L("lola", "Three words became eighteen. That's not a sentence. That's a glow up.", mood="excited", shot="close", gap=0.3)
+L("lola", "Three words became eighteen. That's a glow up.", mood="excited", shot="close", gap=0.3)
 
 scene("bedroom", [("tara", 260), ("pablo", 560), ("mum", 860)])
 poof("lola", 1080)
@@ -114,7 +114,7 @@ L("mum", "Present. [[Normalmente voy al mercado los domingos.]] Normally I go to
   board="present: [[normalmente voy…]]")
 L("tara", "Future. [[El sábado que viene voy a visitar los Jardines de la Bahía.]] Next Saturday I'm going to visit Gardens by the Bay. [[Voy a]], plus the infinitive.", mood="neutral", shot="close",
   board="future: [[voy a]] + infinitive")
-L("lola", "Then put an opinion in each tense. [[Fue genial.]] It was great. [[Es genial.]] It's great. [[Va a ser genial.]] It's going to be great.", mood="teach", shot="close",
+L("lola", "Opinions in each tense. [[Fue genial.]] It was great. [[Es genial.]] It's great. [[Va a ser genial.]] It's going to be great.", mood="teach", shot="close",
   board="[[fue · es · va a ser genial]]")
 
 confess("lola", "LOLA · Recap Parrot · Competition Judge (Self-Appointed)")

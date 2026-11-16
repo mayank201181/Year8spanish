@@ -10,7 +10,7 @@ L("tara", "Dad, it's six in the morning. Pablo is asleep. I'm also asleep.", moo
 L("dad", "Watch and learn. Levanto! Shower-o! Breakfast-o! Bus-o!", mood="excited", shot="two", gap=0.3)
 sfx("squawk")
 poof("lola", 1060)
-L("lola", "[[Levanto]] on its own means, I lift. Lift what? Without [[me]], you're not getting up. You're lifting something.", mood="annoyed", shot="close")
+L("lola", "[[Levanto]] on its own means, I lift. Without [[me]], you're not getting up. You're lifting something.", mood="annoyed", shot="close")
 L("dad", "I'm lifting myself. Out of bed. It's very heavy.", mood="smug", shot="close")
 L("lola", "Then say it properly. [[Me levanto.]] I get up. That little [[me]] means, myself.", mood="eyeroll", shot="close")
 L("tara", "[[Vuelvo a la cama.]] I'm going back to bed.", mood="deadpan", shot="close", gap=0.3)
@@ -43,7 +43,7 @@ L("pablo", "Okay! Okay! [[¡Me levanto!]]", mood="shock", shot="close", gap=0.3)
 scene("bedroom", [("dad", 300), ("pablo", 620), ("lola", 940)])
 L("dad", "Good morning, everyone! I have already done my teeth. Me lavo mis dientes!", mood="smug", shot="close", boardClear=True)
 sfx("buzzer")
-L("lola", "Nearly. No [[mis]] with body parts. The [[me]] already tells us whose teeth they are. [[Me lavo los dientes.]] Unless you brush other people's teeth.", mood="eyeroll", shot="close",
+L("lola", "Nearly. No [[mis]] with body parts. The [[me]] already tells us whose teeth they are. [[Me lavo los dientes.]]", mood="eyeroll", shot="close",
   board="✘ mis dientes  ✔ [[me lavo los dientes]]", gap=0.3)
 
 scene("kitchen", [("mum", 300), ("tara", 620), ("lola", 940)])
@@ -64,13 +64,13 @@ L("lola", "Six is more than one, so it's plural. [[Son las seis.]] Only one o'cl
 L("lola", "Minutes past the hour, add [[y]]. [[Son las seis y cinco]], five past six. [[Y cuarto]], quarter past. [[Y media]], half past.", mood="teach", shot="close",
   boardClear=True, board="[[y cuarto]] = :15 · [[y media]] = :30")
 L("mum", "And after half past?", mood="thinking", shot="close")
-L("lola", "Count back from the next hour with [[menos]]. Minus. [[Son las siete menos cuarto.]] Quarter to seven. [[Son las siete menos veinte.]] Twenty to seven.", mood="teach", shot="close",
+L("lola", "Count back from the next hour with [[menos]]. Minus. [[Son las siete menos cuarto.]] Quarter to seven.", mood="teach", shot="close",
   board="[[las siete menos cuarto]] = 6:45")
 L("dad", "I get up at quarter past five. A las cinco y quarter.", mood="smug", shot="close")
 L("lola", "[[Cuarto.]] [[A las cinco y cuarto.]] And nobody gets up at quarter past five.", mood="annoyed", shot="close", gap=0.3)
 
 scene("kitchen", [("tara", 300), ("pablo", 620), ("lola", 940)])
-L("tara", "Two questions. [[¿Qué hora es?]] asks the time now. Answer with [[son las]]. But [[¿A qué hora?]] means, at what time. Answer with [[a las]].", mood="neutral", shot="close",
+L("tara", "[[¿Qué hora es?]] asks the time now. But [[¿A qué hora?]] means, at what time. Answer with [[a las]].", mood="neutral", shot="close",
   boardClear=True, board="[[¿A qué hora…?]] → [[a las…]]")
 L("pablo", "[[¿A qué hora te levantas?]] At what time do you get up?", mood="happy", shot="close")
 L("tara", "[[Me levanto a las seis de la mañana.]] I get up at six in the morning. Afternoon is [[de la tarde]]. Night is [[de la noche]].", mood="deadpan", shot="close",
@@ -130,7 +130,7 @@ L("lola", "Recap. One. Reflexive verbs carry a little pronoun. [[Me levanto, te 
 L("lola", "Two. Body parts take [[los]] or [[la]], never my. [[Me lavo los dientes.]]", mood="teach", board="2. [[me lavo los dientes]] (not mis!)")
 L("lola", "Three. [[Es la una]], but [[son las dos]]. And [[a las]] for at. [[A las siete y media.]]", mood="teach", board="3. [[es la una · son las dos · a las…]]")
 L("lola", "Four. Sequencers. [[Primero, luego, después, finalmente.]]", mood="teach", board="4. [[primero · luego · después]]")
-L("lola", "Five. Boot verbs and strange I forms. [[Me acuesto, salgo, hago, voy.]] And now, I go to bed. [[Me acuesto.]]", mood="smug", board="5. [[me acuesto · salgo · hago · voy]]", gap=0.5)
+L("lola", "Five. Boot verbs and strange I forms. [[Me acuesto, salgo, hago, voy.]]", mood="smug", board="5. [[me acuesto · salgo · hago · voy]]", gap=0.5)
 
 card("THE NEXT MORNING", "Six a.m. Again.", 2.2)
 scene("living", [("tara", 260), ("mum", 520), ("pablo", 780)])

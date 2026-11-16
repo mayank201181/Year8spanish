@@ -23,7 +23,7 @@ title()
 # ---------------- ACT 1: REGULAR VERBS ----------------
 scene("kitchen", [("tara", 260), ("pablo", 560), ("mum", 860)], caption="VERB BOOT CAMP · Lesson One")
 poof("lola", 1080)
-L("lola", "Lesson one. Regular verbs. Take the infinitive, [[hablar]], to speak. Chop off the ending. What's left is the stem. Then add the new ending.", mood="teach", shot="close",
+L("lola", "Lesson one. Regular verbs. Take [[hablar]], to speak. Chop off the ending to get the stem. Add a new ending.", mood="teach", shot="close",
   boardClear=True, board="[[hablar]] → habl + o = [[hablo]]")
 L("pablo", "A, R verbs. [[Hablo, hablas, habla, hablamos, habláis, hablan.]] I speak, you speak, he or she speaks, we speak, you all speak, they speak.", mood="teach", shot="close",
   board="-ar: [[-o -as -a -amos -áis -an]]")
@@ -33,7 +33,7 @@ L("mum", "And I, R verbs. [[Vivir]], to live. [[Vivo, vives, vive, vivimos, viv�
   board="-ir: [[-o -es -e -imos -ís -en]]")
 L("lola", "Every regular you all form has an accent. [[Habláis, coméis, vivís.]] And the I form never does.", mood="teach", shot="close",
   board="[[vosotros]]: [[habláis · coméis · vivís]]")
-L("pablo", "And we usually drop the I, the you, the he. The ending already tells you who. [[Hablo español.]] I speak Spanish.", mood="happy", shot="close")
+L("pablo", "We usually drop the I and the you. The ending tells you who. [[Hablo español.]] I speak Spanish.", mood="happy", shot="close")
 
 scene("kitchen", [("tara", 260), ("mum", 560), ("dad", 860)], caption="VERB BOOT CAMP · Lesson One · Dad Joins")
 L("dad", "I've got it. Ellos come. They eat.", mood="smug", shot="close", boardClear=True)
@@ -91,7 +91,7 @@ scene("park", [("tara", 260), ("pablo", 560), ("dad", 860)], caption="VERB BOOT 
 poof("lola", 1080)
 L("lola", "Boot verbs. Write the six forms in two columns. Draw a line round I, you, he and they. It looks like a boot.", mood="teach", shot="close", prop="ball",
   boardClear=True, board="BOOT = yo · tú · él · ellos")
-L("lola", "Inside the boot, the stem changes. We and you all are outside the boot. They stay normal. The endings are the usual ones.", mood="teach", shot="close",
+L("lola", "Inside the boot, the stem changes. We and you all are outside the boot. They stay normal.", mood="teach", shot="close",
   board="[[nosotros · vosotros]] = no change")
 L("pablo", "[[Poder]], to be able. O becomes U, E. [[Puedo, puedes, puede, podemos, podéis, pueden.]] Also [[vuelvo]], I go back, [[duermo]], I sleep, and [[cuesta]], it costs.", mood="teach", shot="close",
   board="o → ue: [[puedo · duermo · podemos]]")
@@ -103,7 +103,7 @@ L("dad", "Nosotros puedemos jugar! We can play!", mood="excited", shot="close", 
 sfx("buzzer")
 L("lola", "[[Podemos.]] We is outside the boot. The boot is a very exclusive club. [[Nosotros]] is not on the list.", mood="eyeroll", shot="close", boardClear=True,
   board="✘ puedemos   ✔ [[podemos]]")
-L("tara", "Last one. E becomes I. [[Pedir]], to ask for. [[Pido]], I ask for. And [[vestirse]], to get dressed. [[Me visto.]]", mood="neutral", shot="close",
+L("tara", "E becomes I. [[Pedir]], to ask for. [[Pido]], I ask for. And [[vestirse]], to get dressed. [[Me visto.]]", mood="neutral", shot="close",
   board="e → i: [[pido · me visto]]")
 
 confess("pablo", "PABLO RUIZ · 13 · Exchange Student · Misses His Abuela")
@@ -114,7 +114,7 @@ L("pablo", "She has never been wrong about boot verbs. About coats, always.", mo
 card("LESSON FOUR", "Reflexive verbs. You do them to yourself.", 2.2)
 scene("bedroom", [("tara", 260), ("pablo", 560), ("mum", 860)], caption="VERB BOOT CAMP · Lesson Four")
 poof("lola", 1080)
-L("lola", "Reflexive verbs. You do the action to yourself. [[Levantarse]], to get up. The [[se]] on the end tells you it's reflexive.", mood="teach", shot="close",
+L("lola", "Reflexive verbs. You do the action to yourself. [[Levantarse]], to get up. The [[se]] on the end gives it away.", mood="teach", shot="close",
   boardClear=True, board="[[levantarse]] = to get (yourself) up")
 L("lola", "The pronoun moves in front. [[Me levanto, te levantas, se levanta, nos levantamos, os levantáis, se levantan.]]", mood="teach", shot="close",
   board="[[me · te · se · nos · os · se]]")
@@ -135,11 +135,11 @@ L("lola", "Recap. One. Stem plus ending. [[Hablo, comes, vivimos.]] Drop the I a
 L("lola", "Two. Rule breakers. [[Soy, estoy, voy, doy. Hago, salgo, pongo, tengo.]] And age uses [[tener]].", mood="teach", board="2. [[soy · voy · hago · tengo]]")
 L("lola", "Three. [[Ser]] is what it's like. [[Estar]] is where it is, and how you feel.", mood="teach", board="3. [[es grande]] · [[está en Sevilla]]")
 L("lola", "Four. Boot verbs change inside the boot. [[Puedo, quiero, juego.]] But [[podemos]].", mood="teach", board="4. [[puedo · quiero · juego · podemos]]")
-L("lola", "Five. Reflexive pronoun in front. [[Me levanto.]] Now leave me alone. [[Me voy a dormir.]] I'm going to sleep.", mood="smug", board="5. [[me levanto · me visto]]", gap=0.5)
+L("lola", "Five. Reflexive pronoun in front. [[Me levanto.]] [[Me voy a dormir.]] I'm off to bed.", mood="smug", board="5. [[me levanto · me visto]]", gap=0.5)
 
 scene("kitchen", [("tara", 260), ("mum", 520), ("dad", 780), ("pablo", 1040)], caption="THE NEXT MORNING")
 L("dad", "Family meeting. I've practised. [[Somos una familia. Estamos juntos. Y hablamos español.]] We are a family. We are together. And we speak Spanish.", mood="determined", shot="close", boardClear=True)
-L("tara", "Wait. That was perfect. [[Somos]] for who we are. [[Estamos]] for where we are. And [[hablamos]] with A, M, O, S.", mood="shock", shot="close")
+L("tara", "Wait. That was perfect. [[Somos]] for who we are. [[Estamos]] for where we are.", mood="shock", shot="close")
 L("mum", "Who are you, and what have you done with my husband?", mood="shock", shot="close")
 L("dad", "I have no idea what I said. But I meant every word.", mood="happy", shot="close")
 L("pablo", "[[¡Olé!]] Breakfast is not tense any more.", mood="excited", shot="close")
