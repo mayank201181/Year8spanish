@@ -299,7 +299,8 @@ export const paper: ExamPaper = {
       traps: [
         { spec: { type: "text", accept: ["A mi hermana le gusta las películas de terror"] }, feedback: "*Las películas* is plural, so the verb is plural: *le gustan*." },
         { spec: { type: "text", accept: ["Mi hermana le gustan las películas de terror", "Mi hermana gusta las películas de terror", "Mi hermana gustan las películas de terror"] }, feedback: "With *gustar*, the person goes after *a*, plus *le*: *A mi hermana le gustan…*" },
-        { spec: { type: "text", accept: ["A mi hermana le gustan las películas de horror", "A mi hermana le gustan películas de terror"] }, feedback: "Nearly — in Spanish they're *las películas de terror*, with the article *las*." },
+        { spec: { type: "text", accept: ["A mi hermana le gustan las películas de horror"] }, feedback: "Nearly — in Spanish horror films are *las películas de terror*." },
+        { spec: { type: "text", accept: ["A mi hermana le gustan películas de terror"] }, feedback: "Nearly — Spanish keeps the article when talking about things in general: *le gustan las películas de terror*." },
         { spec: { type: "text", accept: ["A mi hermana me gustan las películas de terror", "A mi hermana se gustan las películas de terror"] }, feedback: "For 'she likes' the pronoun is *le*: *a mi hermana le gustan…*" },
       ],
       solution: ["'She likes' → *a mi hermana le gusta(n)*.", "*las películas de terror* is plural → *gustan*.", "→ **A mi hermana le gustan las películas de terror.**"],

@@ -525,6 +525,8 @@ export const paper: ExamPaper = {
           "Voy a levantarme a las seis mañana",
           "Me voy a levantar a las seis",
           "Voy a levantarme a las seis",
+          "Mañana me voy a levantar a las 6",
+          "Mañana voy a levantarme a las 6",
         ],
       },
       traps: [

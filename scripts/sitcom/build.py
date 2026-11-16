@@ -30,11 +30,14 @@ SPANISH = re.compile(r"\[\[(.+?)\]\]")
 
 def segments(text):
     """Split a line into (lang_kind, text) parts: [[...]] is Spanish, the rest English."""
+    # English pieces with no letters/digits (e.g. the "." in "[[del]].") are dropped: voiced on their own
+    # they come out as a stray breath or syllable. asr.py uses the same rule.
     out, pos = [], 0
+    real = lambda s: re.search(r"[A-Za-z0-9]", s)
     for m in SPANISH.finditer(text):
-        if text[pos:m.start()].strip(): out.append(("en", text[pos:m.start()].strip()))
+        if real(text[pos:m.start()]): out.append(("en", text[pos:m.start()].strip()))
         out.append(("es", m.group(1).strip())); pos = m.end()
-    if text[pos:].strip(): out.append(("en", text[pos:].strip()))
+    if real(text[pos:]): out.append(("en", text[pos:].strip()))
     return out
 
 def tts_one(who, text, kind):

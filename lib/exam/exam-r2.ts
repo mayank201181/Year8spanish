@@ -106,7 +106,7 @@ export const paper: ExamPaper = {
       answerIndex: 3,
       explanation:
         "*El otoño* = autumn. Spring is *la primavera*, summer *el verano* and winter *el invierno*.",
-      hints: ["It sounds a little like the American English word for this season."],
+      hints: ["Say *otoño* aloud — it's not far from the English name of the season between summer and winter."],
       strategy: "Spot the cognate",
     },
     {
