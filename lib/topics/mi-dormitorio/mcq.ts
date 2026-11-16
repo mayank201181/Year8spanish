@@ -182,7 +182,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 2,
         explanation:
           "*Mis pósteres* is plural, so it must be *me gustan*: **Me gustan mis pósteres** porque son bonitos. The verb agrees with the thing that is liked. The other three sentences are all correct.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "describing-my-room",
         hints: ["Check each verb against its subject.", "With *gustar*, the 'subject' is the thing you like.", "Singular thing → *gusta*; plural things → *gustan*."],
         strategy: "Agreement check",
@@ -222,7 +222,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "Lucía's clothes (*su ropa*) are all over the floor, but Carmen *siempre pongo mis cosas en el armario* — she is the tidy one. *Voy a tener mi propio dormitorio. ¡Qué bien!* shows she's looking forward to it. She doesn't have her own room yet: they *compartimos un dormitorio*.",
+          "Lucía's clothes (*su ropa*) are all over the floor, but Carmen says *Yo siempre pongo mis cosas en el armario* — she is the tidy one. *Voy a tener mi propio dormitorio. ¡Qué bien!* shows she's looking forward to it. She doesn't have her own room yet: they *compartimos un dormitorio*.",
         difficulty: "challenge",
         guideRef: "describing-my-room",
         hints: [
@@ -406,7 +406,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "mi-dormitorio-m2-q13",
         question:
-          "Mei's bed is on the other side of the room, facing the door across the floor. Which phrase describes the bed's position most precisely?",
+          "Your bed is on the other side of the room, facing the door across the floor. Which phrase describes the bed's position most precisely?",
         options: ["delante de la puerta", "enfrente del puerta", "detrás de la puerta", "enfrente de la puerta"],
         answerIndex: 3,
         explanation:

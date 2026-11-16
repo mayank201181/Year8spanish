@@ -235,7 +235,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "tareas-m1-q15",
         question:
-          "Read the text.\n\n> Normalmente los sábados juego al baloncesto con mis amigos y no ayudo mucho en casa. Pero este sábado es diferente: mis abuelos vienen a comer. Por la mañana voy a limpiar el cuarto de baño y mi hermano va a ir de compras al mercado. Por la tarde, después de comer, vamos a lavar los platos juntos. ¡No voy a jugar al baloncesto!\n\nWhat is the writer going to do **this Saturday morning**?",
+          "Read the text.\n\n> Normalmente los sábados juego al baloncesto con mis amigos y no ayudo mucho en casa. Pero este sábado es diferente: mis abuelos vienen a comer. Por la mañana voy a limpiar el cuarto de baño y mi hermano va a hacer la compra en el mercado. Por la tarde, después de comer, vamos a lavar los platos juntos. ¡No voy a jugar al baloncesto!\n\nWhat is the writer going to do **this Saturday morning**?",
         options: [
           "Play basketball with friends.",
           "Clean the bathroom.",
@@ -244,7 +244,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 1,
         explanation:
-          "*Por la mañana voy a limpiar el cuarto de baño* = in the morning I'm going to clean the bathroom. Basketball is what the writer *normally* does (present tense) — and *¡No voy a jugar al baloncesto!* says it won't happen this week. The shopping is the brother's job (*mi hermano va a ir*), and the dishes are *por la tarde* (in the afternoon).",
+          "*Por la mañana voy a limpiar el cuarto de baño* = in the morning I'm going to clean the bathroom. Basketball is what the writer *normally* does (present tense) — and *¡No voy a jugar al baloncesto!* says it won't happen this week. The shopping is the brother's job (*mi hermano va a hacer la compra*), and the dishes are *por la tarde* (in the afternoon).",
         difficulty: "challenge",
         guideRef: "chores-this-weekend",
         hints: [
@@ -284,7 +284,7 @@ export const mcqPapers: Paper[] = [
         options: ["15", "50", "5", "500"],
         answerIndex: 1,
         explanation:
-          "Tens end in *-enta* (*cuarenta, cincuenta, sesenta…*), so *cincuenta* = **50**. 15 is *quince*, 5 is *cinco* and 500 is *quinientos*.",
+          "From 40 to 90 the tens end in *-enta* (*cuarenta, cincuenta, sesenta…*), so *cincuenta* = **50**. 15 is *quince*, 5 is *cinco* and 500 is *quinientos*.",
         difficulty: "warmup",
         guideRef: "frequency-and-pocket-money",
         hints: ["Words ending in *-enta* are tens: 40, 50, 60…"],
@@ -360,7 +360,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "*Recibe sesenta dólares al mes porque es mayor y también lava el coche* — because he's older and also washes the car. The vacuuming on Saturdays and saving for a phone are things **Priya** says about herself, and both of them are paid *al mes* (monthly).",
+          "*Recibe sesenta dólares al mes porque es mayor y también lava el coche* — because he's older and also washes the car. The vacuuming on Saturdays and saving for a phone are things **Priya** says about herself, and both children are paid *al mes* (monthly), so it isn't about how often.",
         difficulty: "core",
         guideRef: "frequency-and-pocket-money",
         hints: ["Find Arjun's name, then look for *porque*.", "Watch the verb endings: *paso* (I) is Priya; *recibe*, *lava* (he) is Arjun."],
@@ -405,7 +405,7 @@ export const mcqPapers: Paper[] = [
         options: ["He takes out the rubbish.", "He clears the table.", "He waters the plants.", "He washes the dishes."],
         answerIndex: 2,
         explanation:
-          "*Viernes: Pablo riega las plantas* — on Friday Pablo waters the plants. The other three chores are Sofía's: *quita la mesa* (clears the table), *saca la basura* (takes out the rubbish) and *lava los platos* (washes the dishes). Careful: on Monday Pablo *pone* (lays) the table — he doesn't *quitar* (clear) it.",
+          "*Viernes: Pablo riega las plantas* — on Friday Pablo waters the plants. The other three chores are Sofía's: *quita la mesa* (clears the table), *saca la basura* (takes out the rubbish) and *lava los platos* (washes the dishes). Careful: on Monday Pablo *pone la mesa* (lays the table) — it's Sofía who *quita la mesa* (clears it).",
         difficulty: "core",
         guideRef: "chores-vocab",
         hints: ["Find every line with Pablo's name.", "*Poner la mesa* and *quitar la mesa* are opposites — which one does Pablo do?"],
@@ -486,7 +486,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "tareas-m2-q15",
         question:
-          "Read Diego's email.\n\n> ¡Hola, Mei! Este fin de semana mi familia va a hacer una fiesta en casa. El viernes por la tarde mis padres van a ir de compras al supermercado. El sábado por la mañana yo voy a ordenar mi dormitorio y mi hermana va a limpiar el salón. No voy a pasar la aspiradora porque mi hermano siempre lo hace. ¿Y tú? ¿Qué vas a hacer este fin de semana?\n\nWhich statement is true?",
+          "Read Diego's email.\n\n> ¡Hola, Mei! Este fin de semana mi familia va a hacer una fiesta en casa. El viernes por la tarde mis padres van a hacer la compra en el supermercado. El sábado por la mañana yo voy a ordenar mi dormitorio y mi hermana va a limpiar el salón. No voy a pasar la aspiradora porque mi hermano siempre lo hace. ¿Y tú? ¿Qué vas a hacer este fin de semana?\n\nWhich statement is true?",
         options: [
           "Diego is going to vacuum on Saturday.",
           "His parents are going shopping on Saturday morning.",
@@ -597,7 +597,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "tareas-m3-q07",
         question:
-          "Read the text about Hana.\n\n> Hana tiene trece años y vive en un piso cerca de una estación de MRT en Singapur. Por la mañana hace la cama y riega las plantas del balcón. Después del colegio pasea al perro por el parque. Su hermano Ravi cocina los martes y los jueves, y su padre plancha la ropa los domingos. Su madre trabaja mucho, pero los sábados va de compras al mercado.\n\nWho does the ironing, and when?",
+          "Read the text about Hana.\n\n> Hana tiene trece años y vive en un piso cerca de una estación de MRT en Singapur. Por la mañana hace la cama y riega las plantas del balcón. Después del colegio pasea al perro por el parque. Su hermano Ravi cocina los martes y los jueves, y su padre plancha la ropa los domingos. Su madre trabaja mucho, pero los sábados hace la compra en el mercado.\n\nWho does the ironing, and when?",
         options: [
           "Her father, on Sundays.",
           "Her brother Ravi, on Tuesdays and Thursdays.",
@@ -606,7 +606,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "*Su padre plancha la ropa los domingos* = her father irons the clothes on Sundays. Ravi *cocina* (cooks) on Tuesdays and Thursdays, her mother *va de compras* (goes shopping) on Saturdays, and in the mornings Hana makes her bed and waters the plants.",
+          "*Su padre plancha la ropa los domingos* = her father irons the clothes on Sundays. Ravi *cocina* (cooks) on Tuesdays and Thursdays, her mother *hace la compra* (does the food shopping) on Saturdays, and in the mornings Hana makes her bed and waters the plants.",
         difficulty: "core",
         guideRef: "chores-vocab",
         hints: ["Which verb means 'to iron'? Find it in the text.", "Who is the subject of that verb, and which day is next to it?"],

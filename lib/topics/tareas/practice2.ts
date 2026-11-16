@@ -79,6 +79,8 @@ export const morePapers: Paper[] = [
             "you have to take out the trash every monday",
             "you have to take the trash out on mondays",
             "you have to take the trash out every monday",
+            "you have to take out the garbage on mondays",
+            "you have to take the garbage out on mondays",
           ],
         },
         solution: [
@@ -217,7 +219,7 @@ export const morePapers: Paper[] = [
         ],
         answerIndex: 3,
         explanation:
-          "*Los niños deben quitar la mesa después de cenar* = the children must clear the table after dinner. The rubbish is Dad's job (*Papá tiene que…*), the plants are Mum's, and *no hay que planchar los domingos* means there's **no need** to iron on Sundays.",
+          "*Los niños deben quitar la mesa después de cenar* = the children must clear the table after dinner. The rubbish is Dad's job (*Papá tiene que…*), the plants are Mum's, and *¡No hay que planchar los domingos!* makes Sunday an ironing-free day for everyone — the opposite of 'Iron on Sundays'.",
         difficulty: "core",
         guideRef: "obligation",
         hints: ["Find the rule that mentions *los niños*.", "*Quitar la mesa* — lay it or clear it?"],
