@@ -78,8 +78,8 @@ const ADJS: Adj[] = [
   { es: "peligroso", en: "dangerous", er: "more dangerous", pos: false },
 ];
 const POS_ADJS = ADJS.filter((a) => a.pos);
-/** Adjectives where only ser makes sense for a place (estar would change the meaning). */
-const SER_ONLY = new Set(["bonito", "seguro", "moderno", "histórico", "ruidoso", "aburrido", "feo", "peligroso"]);
+/** Adjectives where only ser makes sense for a place (with estar they change meaning or sound wrong). */
+const SER_ONLY = new Set(["seguro", "moderno", "histórico", "aburrido", "peligroso"]);
 const NEG_ADJS = ADJS.filter((a) => !a.pos);
 
 interface Place {
@@ -107,6 +107,23 @@ const PLACES_PL: Place[] = [
   { es: "las calles de mi barrio", en: "the streets in my neighbourhood", g: "f", pl: true },
   { es: "los jardines", en: "the gardens", g: "m", pl: true },
   { es: "las afueras", en: "the outskirts", g: "f", pl: true },
+];
+
+/** Places that make sensible comparisons with each other. */
+const CMP_SG: Place[] = [
+  { es: "el centro", en: "the town centre", g: "m", pl: false },
+  { es: "la costa", en: "the coast", g: "f", pl: false },
+  { es: "el campo", en: "the countryside", g: "m", pl: false },
+  { es: "la ciudad", en: "the city", g: "f", pl: false },
+  { es: "el pueblo", en: "the village", g: "m", pl: false },
+  { es: "mi barrio", en: "my neighbourhood", g: "m", pl: false },
+];
+const CMP_PL: Place[] = [
+  { es: "los pueblos", en: "villages", g: "m", pl: true },
+  { es: "las ciudades", en: "cities", g: "f", pl: true },
+  { es: "las afueras", en: "the outskirts", g: "f", pl: true },
+  { es: "las playas de Málaga", en: "the beaches in Málaga", g: "f", pl: true },
+  { es: "los parques de Madrid", en: "the parks in Madrid", g: "m", pl: true },
 ];
 
 const ser = (pl: boolean) => conjugate("ser", "present", pl ? "ellos" : "él");
@@ -369,9 +386,9 @@ export const drills: Drill[] = [
         { es: "la playa", en: "the beach", pl: false },
         { es: "mi barrio", en: "my neighbourhood", pl: false },
         { es: "la costa", en: "the coast", pl: false },
-        { es: "el ruido", en: "the noise", pl: false },
         { es: "el centro", en: "the town centre", pl: false },
       ];
+      const negOnly: typeof things = [{ es: "el ruido", en: "the noise", pl: false }, { es: "la contaminación", en: "the pollution", pl: false }];
       if (tier >= 2) things.push(
         { es: "los parques", en: "the parks", pl: true },
         { es: "las tiendas", en: "the shops", pl: true },
@@ -379,7 +396,8 @@ export const drills: Drill[] = [
         { es: "las playas", en: "the beaches", pl: true },
       );
       const op = rng.pick(ops);
-      const t = rng.pick(things);
+      const isNeg = (op.kind === "like" && op.neg) || (op.kind === "yo" && op.inf === "odiar");
+      const t = rng.pick(isNeg ? [...things, ...negOnly] : things);
       let en: string;
       if (op.kind === "like" && op.nada) en = `I don't like ${t.en} at all`;
       else en = `${op.en} ${t.en}`;
@@ -468,7 +486,7 @@ export const drills: Drill[] = [
         hint: "Agreement check: find the noun the adjective describes. Masculine or feminine? One or more?",
         traps: mkTraps(accept, [
           { wrong: [mascSg], feedback: `The adjective must agree with *${p.es}* (${describeGN(p.g, p.pl)}): *${answer}*.` },
-          { wrong: [wrongGender], feedback: `Gender detective: *${p.es}* is ${p.g === "m" ? "masculine" : "feminine"}, so the ending is ${p.g === "m" ? "-o" : "-a"}${p.pl ? "s" : ""}.` },
+          { wrong: wrongGender === mascSg ? [] : [wrongGender], feedback: `Gender detective: *${p.es}* is ${p.g === "m" ? "masculine" : "feminine"}, so the ending is ${p.g === "m" ? "-o" : "-a"}${p.pl ? "s" : ""}.` },
         ]),
       };
     },
@@ -482,11 +500,17 @@ export const drills: Drill[] = [
     level: 2,
     guideRef: "justifying-opinions",
     generate(rng, tier) {
-      const subj = rng.pick(tier === 3 ? [...PLACES_SG.slice(0, 4), ...PLACES_PL.slice(0, 3)] : PLACES_SG.slice(0, 4));
+      const sgSubj: Place[] = [PLACES_SG[0], PLACES_SG[1], PLACES_SG[2], { es: "el pueblo de mis abuelos", en: "", g: "m", pl: false }];
+      const plSubj: Place[] = [
+        { es: "los parques de mi barrio", en: "", g: "m", pl: true },
+        { es: "las playas de Málaga", en: "", g: "f", pl: true },
+        { es: "las tiendas de mi barrio", en: "", g: "f", pl: true },
+      ];
+      const subj = rng.pick(tier === 3 ? [...sgSubj, ...plSubj] : sgSubj);
       const like = likeForm("gustar", subj.pl);
-      const opinionPos = rng.bool(0.6);
-      const kinds = subj.pl ? (["es", "esta", "hay"] as const) : (["es", "esta", "hay", "tiene"] as const);
+      const kinds = subj.pl ? (["es", "esta"] as const) : (["es", "esta", "hay", "tiene"] as const);
       const kind = rng.pick(kinds);
+      const opinionPos = kind === "tiene" ? true : rng.bool(0.6);
       const it = subj.pl ? "they are" : "it is";
       let gapTail: string;
       let answer: string;
@@ -494,29 +518,39 @@ export const drills: Drill[] = [
       let why: string;
       const trapList: { wrong: string[]; feedback: string }[] = [];
       if (kind === "es") {
-        const a = rng.pick((opinionPos ? POS_ADJS : NEG_ADJS).filter((x) => SER_ONLY.has(x.es)));
+        const a = rng.pick((opinionPos ? POS_ADJS : NEG_ADJS).filter((x) => SER_ONLY.has(x.es) && (!subj.pl || !["moderno", "histórico"].includes(x.es))));
+        // (positive: seguro, moderno, histórico · negative: aburrido, peligroso)
         gapTail = `${rng.pick(["muy ", "bastante ", ""])}${agree(a.es, subj.g, subj.pl)}`;
         answer = ser(subj.pl);
         label = it;
         why = `This describes **what it's like** (a characteristic) → *ser*: **${answer}**.`;
-        trapList.push({ wrong: [estar(subj.pl)], feedback: `*${estar(subj.pl)}* is for location. To say what a place is **like**, use *ser*: *${answer}*.` });
+        trapList.push({ wrong: [estar(subj.pl)], feedback: `*${estar(subj.pl)}* is for location (or how something is at the moment). To say what a place is **like**, use *ser*: *${answer}*.` });
       } else if (kind === "esta") {
-        gapTail = rng.pick(["cerca del mar", "cerca de la playa", "lejos del centro", "en la costa", "en el norte de España", "en el sur de España", "cerca de mi colegio"]);
+        gapTail = subj.pl
+          ? rng.pick(opinionPos ? ["cerca de mi casa", "cerca del centro"] : ["lejos de mi casa", "lejos del centro"])
+          : rng.pick(opinionPos ? ["cerca del mar", "cerca de la playa", "en la costa", "en el sur de España", "cerca de mi colegio"] : ["lejos del centro", "lejos de la playa", "lejos del mar", "lejos de mi colegio"]);
         answer = estar(subj.pl);
         label = it;
         why = `This says **where it is** (location) → *estar*: **${answer}**.`;
         trapList.push({ wrong: [ser(subj.pl)], feedback: `*${ser(subj.pl)}* describes what something is like. For **location** use *estar*: *${answer}*.` });
       } else if (kind === "hay") {
-        const n = rng.pick([
-          { es: "un parque grande", en: "there is" },
-          { es: "un polideportivo", en: "there is" },
-          { es: "mucho que hacer", en: "there is" },
-          { es: "mucho ruido", en: "there is" },
-          { es: "mucha contaminación", en: "there is" },
-          { es: "muchas tiendas", en: "there are" },
-          { es: "muchos parques", en: "there are" },
-          { es: "dos centros comerciales", en: "there are" },
-        ]);
+        const n = rng.pick(
+          opinionPos
+            ? [
+                { es: "un parque grande", en: "there is" },
+                { es: "un polideportivo", en: "there is" },
+                { es: "mucho que hacer", en: "there is" },
+                { es: "muchas tiendas", en: "there are" },
+                { es: "muchos parques", en: "there are" },
+                { es: "dos centros comerciales", en: "there are" },
+              ]
+            : [
+                { es: "mucho ruido", en: "there is" },
+                { es: "mucha contaminación", en: "there is" },
+                { es: "demasiado tráfico", en: "there is" },
+                { es: "pocas tiendas", en: "there are" },
+              ],
+        );
         gapTail = n.es;
         answer = "hay";
         label = n.en;
@@ -672,7 +706,7 @@ export const drills: Drill[] = [
     level: 2,
     guideRef: "comparing-places",
     generate(rng, tier) {
-      const pool = tier === 3 ? [...PLACES_SG.slice(4), ...PLACES_PL.slice(0, 3)] : PLACES_SG.slice(4);
+      const pool = tier === 3 ? [...CMP_SG, ...CMP_PL] : CMP_SG;
       const A = rng.pick(pool);
       const B = rng.pick(pool.filter((x) => x.es !== A.es));
       const types = tier === 1 ? (["mas", "menos", "tan"] as const) : (["mas", "menos", "tan", "mejor", "peor"] as const);
@@ -869,9 +903,7 @@ export const drills: Drill[] = [
     level: 3,
     guideRef: "comparing-places",
     generate(rng, tier) {
-      const sg = PLACES_SG.slice(4);
-      const pl = [PLACES_PL[0], PLACES_PL[1], PLACES_PL[2], PLACES_PL[5]];
-      const pool = tier === 3 ? [...sg, ...pl] : sg;
+      const pool = tier === 3 ? [...CMP_SG, ...CMP_PL] : CMP_SG;
       const A = rng.pick(pool);
       const B = rng.pick(pool.filter((x) => x.es !== A.es));
       const types = tier === 1 ? (["mas", "mas", "menos"] as const) : (["mas", "menos", "tan", "mejor", "peor"] as const);
@@ -972,7 +1004,7 @@ export const drills: Drill[] = [
       const trapList: { wrong: string[]; feedback: string }[] = [];
       if (adj !== a.es) trapList.push({ wrong: [`${head} ${p.es} ${tail("porque", a.es)}`], feedback: `Agreement check: *${p.es}* is feminine → *${adj}*.` });
       if (!who.ami) trapList.push({ wrong: [`${head.replace(/ (le|les) /, " me ")} ${p.es} ${tail("porque", adj)}`], feedback: `*Me* means 'to me'. For ${who.en.toLowerCase()} use *${who.s3 ? "le" : "les"}*.` });
-      if (SER_ONLY.has(a.es)) trapList.push({ wrong: [`${head} ${p.es} ${tail("porque", adj).replace(/^porque es/, "porque está")}`], feedback: "To say what a place is **like**, use *es* (from *ser*). *Está* is for location." });
+      if (SER_ONLY.has(a.es)) trapList.push({ wrong: [`${head} ${p.es} ${tail("porque", adj).replace(/^porque es/, "porque está")}`], feedback: `To say what a place is **like**, use *es* (from *ser*). *Está* is for location — and *está ${adj}* would change the meaning.` });
       return {
         prompt: `Translate into Spanish: '${en}'`,
         answer: { type: "text", accept },
