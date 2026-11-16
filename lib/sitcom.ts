@@ -25,6 +25,126 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "durationSec": 482,
     "src": "/videos/mi-casa.mp4",
     "poster": "/videos/posters/mi-casa.jpg"
+  },
+  {
+    "num": 2,
+    "topicId": "mi-dormitorio",
+    "topicShort": "My Bedroom",
+    "title": "Hay Fever",
+    "logline": "Dad loses his glasses, and the family turns the storeroom into Pablo's bedroom. Furniture, prepositions of place, hay versus está, colours that agree and possessives.",
+    "durationSec": 494,
+    "src": "/videos/mi-dormitorio.mp4",
+    "poster": "/videos/posters/mi-dormitorio.jpg"
+  },
+  {
+    "num": 3,
+    "topicId": "rutina-diaria",
+    "topicShort": "Daily Routine",
+    "title": "Me Levanto, Me Lamento",
+    "logline": "Singapore school starts at half past seven, and Pablo is used to Seville hours. Reflexive verbs, telling the time, sequencers, the evening routine, boot verbs and other people's routines.",
+    "durationSec": 485,
+    "src": "/videos/rutina-diaria.mp4",
+    "poster": "/videos/posters/rutina-diaria.jpg"
+  },
+  {
+    "num": 4,
+    "topicId": "donde-vivo",
+    "topicShort": "Where I Live",
+    "title": "Más O Menos",
+    "logline": "Pablo's class in Seville wants a video: do you like living in Singapore? Opinions with me gusta and me gustan, reasons with porque, what other people think, comparisons with más and menos, and where we're going to live.",
+    "durationSec": 482,
+    "src": "/videos/donde-vivo.mp4",
+    "poster": "/videos/posters/donde-vivo.jpg"
+  },
+  {
+    "num": 5,
+    "topicId": "deportes",
+    "topicShort": "Sport",
+    "title": "Own Goal, Olé",
+    "logline": "Dad claims he was a futsal legend, then scores from the halfway line, into his own goal. Sports and their genders, jugar a versus hacer, how often, opinions that agree, and inviting a friend.",
+    "durationSec": 468,
+    "src": "/videos/deportes.mp4",
+    "poster": "/videos/posters/deportes.jpg"
+  },
+  {
+    "num": 6,
+    "topicId": "tiempo-libre",
+    "topicShort": "Free Time",
+    "title": "Teleadicto",
+    "logline": "Dad discovers Spanish soap operas and will not leave the sofa. Free-time activities, tocar versus jugar, gusta and gustan, the sentence train, TV opinions, and making plans.",
+    "durationSec": 487,
+    "src": "/videos/tiempo-libre.mp4",
+    "poster": "/videos/posters/tiempo-libre.jpg"
+  },
+  {
+    "num": 7,
+    "topicId": "tareas",
+    "topicShort": "Chores",
+    "title": "Tengo Que What Now?",
+    "logline": "Mum puts a chore rota on the fridge and Dad discovers the words tengo que. Chores, obligation with tener que, deber and hay que, frequency, pocket money, opinions and weekend plans.",
+    "durationSec": 480,
+    "src": "/videos/tareas.mp4",
+    "poster": "/videos/posters/tareas.jpg"
+  },
+  {
+    "num": 8,
+    "topicId": "el-tiempo",
+    "topicShort": "The Weather",
+    "title": "Muy Calor",
+    "logline": "Dad melts on the walk to the MRT and declares it muy calor. Weather with hace, verbs, está and hay, mucho versus muy, seasons and climate, the weather map of Spain, cuando and si, the near future and yesterday's weather.",
+    "durationSec": 476,
+    "src": "/videos/el-tiempo.mp4",
+    "poster": "/videos/posters/el-tiempo.jpg"
+  },
+  {
+    "num": 9,
+    "topicId": "la-ciudad",
+    "topicShort": "Places In Town",
+    "title": "Todo Recto To Nowhere",
+    "logline": "Pablo must reach the library using only Spanish directions, and Dad insists on navigating. Places in town, hay, asking the way, left and right, location and distance, and se puede.",
+    "durationSec": 479,
+    "src": "/videos/la-ciudad.mp4",
+    "poster": "/videos/posters/la-ciudad.jpg"
+  },
+  {
+    "num": 10,
+    "topicId": "mi-ciudad",
+    "topicShort": "Describing My Town",
+    "title": "Lo Bueno, Lo Malo Y Lo Dad",
+    "logline": "Señor García runs a 'describe your town' writing competition and Dad enters. Town adjectives that agree, lo bueno and lo malo, connectives and intensifiers, the extended-sentence formula, and three time frames.",
+    "durationSec": 472,
+    "src": "/videos/mi-ciudad.mp4",
+    "poster": "/videos/posters/mi-ciudad.jpg"
+  },
+  {
+    "num": 11,
+    "topicId": "presente",
+    "topicShort": "The Present Tense",
+    "title": "Present Tense, Family Tense",
+    "logline": "Dad declares Spanish-only breakfasts and puts an O on everybody, so Lola runs Verb Boot Camp. Regular endings, key irregulars, ser versus estar, boot verbs and reflexive verbs.",
+    "durationSec": 479,
+    "src": "/videos/presente.mp4",
+    "poster": "/videos/posters/presente.jpg"
+  },
+  {
+    "num": 12,
+    "topicId": "futuro-inmediato",
+    "topicShort": "The Near Future",
+    "title": "Voy A Be Famous",
+    "logline": "Dad signs up for the void deck talent show and announces he is going to be famous. The verb ir, ir + a + infinitive, reflexive pronouns, future time phrases, predictions and invitations, and present versus future.",
+    "durationSec": 478,
+    "src": "/videos/futuro-inmediato.mp4",
+    "poster": "/videos/posters/futuro-inmediato.jpg"
+  },
+  {
+    "num": 13,
+    "topicId": "preterito",
+    "topicShort": "The Preterite",
+    "title": "Fui Fighters",
+    "logline": "Pablo's last week in Singapore. The family makes a memory book while Dad and Uncle Hock form a band called the Fui Fighters. Regular -ar, -er and -ir preterite, accents, spelling changes, irregulars and three time frames.",
+    "durationSec": 479,
+    "src": "/videos/preterito.mp4",
+    "poster": "/videos/posters/preterito.jpg"
   }
 ];
 
