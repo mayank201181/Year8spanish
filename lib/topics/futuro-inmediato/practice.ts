@@ -1406,6 +1406,10 @@ export const practice: TopicPractice = {
             "cómo vas a viajar",
             "cómo vas a ir tú",
             "cómo vas a viajar tú",
+            "en qué vas a ir",
+            "en qué vas a viajar",
+            "en qué vas a ir tú",
+            "en qué vas a viajar tú",
           ],
       },
       solution: [
@@ -1449,7 +1453,7 @@ export const practice: TopicPractice = {
         "*Vamos a la playa* can mean three different things in English, depending on context. Write all three, and explain how *Vamos a ir a la playa* is different.",
       marks: 3,
       modelAnswer:
-        "1. **'We go to the beach'** — a routine (e.g. *Los domingos vamos a la playa*).\n2. **'We're going to the beach'** — right now, or as a fixed plan with a time phrase (*Mañana vamos a la playa*).\n3. **'Let's go to the beach!'** — a suggestion; *vamos a* + place or infinitive can mean 'let's'.\n\n*Vamos a ir a la playa* is clearly the near future (*ir a* + the infinitive *ir*): 'We're going to go to the beach'. In *Vamos a la playa*, *a* is followed by a place, so on its own it's the present tense of *ir* — only context or a time phrase tells you which meaning is intended.",
+        "1. **'We go to the beach'** — a routine (e.g. *Los domingos vamos a la playa*).\n2. **'We're going to the beach'** — right now, or as a fixed plan with a time phrase (*Mañana vamos a la playa*).\n3. **'Let's go to the beach!'** — a suggestion; *vamos a* + place or infinitive can mean 'let's'.\n\n*Vamos a ir a la playa* has *ir a* + the infinitive *ir*, so it is the near future: 'We're going to go to the beach' (said as a suggestion it can still mean 'Let's go to the beach', but it can never describe a routine). In *Vamos a la playa*, *a* is followed by a place, so on its own it's the present tense of *ir* — only context or a time phrase tells you which meaning is intended.",
       markScheme: [
         { point: "Present routine: 'we go to the beach'", keywords: ["we go", "routine", "every", "usually"] },
         { point: "Present/arranged plan 'we're going to the beach' AND suggestion 'let's go to the beach'", keywords: ["we're going", "we are going", "let's", "lets", "suggestion"] },

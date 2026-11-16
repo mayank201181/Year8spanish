@@ -282,7 +282,7 @@ function OpinionOMeter() {
           Who is pleased? {who === "yo" ? "You" : w.enSubj.replace("My", "your")} → <Es>{w.pron}</Es>
           {who !== "yo" ? (
             <>
-              {" "}(and Spanish names them with <Es>{w.aPhrase.trim().toLowerCase()}</Es>)
+              {" "}(Spanish also names the person: <Es>{w.aPhrase.trim().toLowerCase()}</Es>)
             </>
           ) : null}
           .

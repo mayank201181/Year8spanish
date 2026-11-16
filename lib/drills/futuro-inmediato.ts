@@ -164,7 +164,6 @@ const PLACES: Place[] = [
   { noun: "mercado", art: "el", en: "the market" },
   { noun: "museo", art: "el", en: "the museum" },
   { noun: "instituto", art: "el", en: "school" },
-  { noun: "hawker centre", art: "el", en: "the hawker centre" },
   { noun: "playa", art: "la", en: "the beach" },
   { noun: "piscina", art: "la", en: "the pool" },
   { noun: "biblioteca", art: "la", en: "the library" },
@@ -245,6 +244,7 @@ const DAY_TIME: TimePhrase[] = DAYS.flatMap((d) => [
   { es: `el ${d.es} que viene`, en: [`next ${d.en}`] },
   { es: `el próximo ${d.es}`, en: [`next ${d.en}`] },
   { es: `este ${d.es}`, en: [`this ${d.en}`, `on ${d.en}`] },
+  { es: `el ${d.es}`, en: [`on ${d.en}`, `this ${d.en}`] },
 ]);
 
 const ALL_TIME: TimePhrase[] = [...VOCAB_TIME, ...EXTRA_TIME, ...DAY_TIME];
@@ -311,7 +311,7 @@ export const drills: Drill[] = [
     level: 1,
     guideRef: "ir-present",
     generate(rng, tier) {
-      if (tier === 1 || rng.bool(0.3)) {
+      if (rng.bool(tier === 1 ? 0.4 : 0.25)) {
         const p = rng.pick(["yo", "tú", "él", "nosotros", "vosotros", "ellos"] as Person[]);
         const s = PRONOUN_SUBJ[p];
         const form = irP(p);
@@ -331,20 +331,21 @@ export const drills: Drill[] = [
           ]),
         };
       }
-      // Gap-fill with a named subject (or pronoun) and a place.
-      const s = pickSubj(rng, tier, { pronouns: ["yo", "tú", "nosotros", "vosotros"] });
+      // Gap-fill: the subject (a pronoun or a name) is in the frame.
+      const s = pickSubj(rng, tier, { pronouns: ["yo", "tú", "él", "nosotros", "vosotros", "ellos"] });
+      const subjEs = s.es ?? rng.pick(SUBJECT_PRONOUNS[s.p].filter((x) => x !== "usted" && x !== "ustedes"));
       const pl = rng.pick(tier === 3 ? [...PLACES, ...BARE_PLACES] : PLACES);
       const time = tier === 3 ? rng.pick(["Los sábados", "Normalmente", "Hoy", "Ahora", "Todos los días"]) : "";
       const form = irP(s.p);
-      const frame = sentence(join(time, s.es ?? "", "___", toPlace(pl)));
-      const accept = s.es ? [form] : acceptedForms("ir", "present", s.p);
+      const frame = sentence(join(time, time ? subjEs : cap(subjEs), "___", toPlace(pl)));
+      const accept = [form];
       return {
-        prompt: `Fill the gap with the present tense of *ir*:\n\n    ${frame}${s.es ? "" : `\n\n(The subject is ${s.label}.)`}`,
+        prompt: `Fill the gap with the present tense of *ir*:\n\n    ${frame}`,
         answer: { type: "text", accept },
         solution: [
-          `Who is going? ${s.es ? `*${s.es}*` : s.label} → the *${s.p}* form.`,
+          `Who is going? *${subjEs}* → the *${s.p}* form.`,
           `*ir*: voy, vas, va, vamos, vais, van → **${form}**.`,
-          `${sentence(join(time, s.es ?? "", form, toPlace(pl)))}`,
+          `${sentence(join(time, time ? subjEs : cap(subjEs), form, toPlace(pl)))}`,
         ],
         hint: s.es && s.es.includes(" y ") ? "Two people joined by *y* make a plural subject — and if one of them is *yo*, it's 'we'." : "Find the subject first, then pick the matching form of *ir*.",
         traps: traps(accept, [
@@ -372,9 +373,11 @@ export const drills: Drill[] = [
       const placeHint = pl.art === "" ? `*${pl.noun}*` : `*${withArt(pl)}*`;
       const english = tier === 3;
       const enVerb = s.p === "yo" ? "am going" : s.p === "él" ? "is going" : "are going";
+      const shown = s.es ?? rng.pick(SUBJECT_PRONOUNS[s.p].filter((x) => x !== "usted" && x !== "ustedes"));
+      const useNote = s.es && s.es.toLowerCase() !== s.en.toLowerCase() ? ` (Use *${s.es}*.)` : s.p === "tú" ? " (*tú*)" : s.p === "vosotros" ? " (*vosotros*)" : "";
       const prompt = english
-        ? `Write in Spanish: '${cap(s.en)} ${enVerb} to ${pl.en}.'${s.es ? ` (Use *${s.es}*.)` : s.p === "tú" ? " (*tú*)" : s.p === "vosotros" ? " (*vosotros*)" : ""} Place: ${placeHint}.`
-        : `Complete the sentence with the right form of *ir* + *a / al / a la / a los / a las* and the place ${placeHint}:\n\n    ${sentence(join(s.es ?? "", "___"))}${s.es ? "" : `   (subject: ${s.label})`}`;
+        ? `Write in Spanish: '${cap(s.en)} ${enVerb} to ${pl.en}.'${useNote} Place: ${placeHint}.`
+        : `Complete the sentence with the right form of *ir* + *a / al / a la / a los / a las* and the place ${placeHint}:\n\n    ${cap(shown)} ___.`;
       const why =
         pl.art === "el"
           ? `*${pl.noun}* is masculine (*el*), and *a + el* always squashes into **al**.`
@@ -564,13 +567,15 @@ export const drills: Drill[] = [
       const a = rng.pick(tier === 3 ? [...ACTS, ...REFL_ACTS, ...REFL_ACTS] : ACTS);
       const s = pickSubj(rng, tier, { pronouns: tier === 1 ? ["yo", "tú", "nosotros"] : ["yo", "tú", "nosotros", "vosotros"] });
       const forms = nf(a.inf, s.p);
-      const positive = sentence(join(s.es ?? "", forms[0], a.es));
+      const shownForm = rng.pick(forms);
+      const positive = sentence(join(s.es ?? "", shownForm, a.es));
+      const positives = s.es ? forms.map((f) => join(s.es!, f, a.es)) : withSubj(s, forms).map((f) => join(f, a.es));
       const negForms = forms.map((f) => `no ${f}`);
       const accept = s.es ? negForms.map((f) => join(s.es!, f, a.es)) : withSubj(s, negForms).map((f) => join(f, a.es));
       const canon = sentence(join(s.es ?? "", negForms[0], a.es));
       const refl = forms.length > 1;
       return {
-        prompt: `Make this sentence negative:\n\n    ${positive}${s.es ? "" : `\n\n(The subject is ${s.label}.)`}`,
+        prompt: `Make this sentence negative (keep everything else the same):\n\n    ${positive}`,
         answer: { type: "text", accept, display: refl ? `${canon} / ${sentence(join(s.es ?? "", negForms[1], a.es))}` : canon },
         solution: [
           "Put *no* straight in front of the part of *ir*.",
@@ -583,7 +588,7 @@ export const drills: Drill[] = [
             wrong: [join(s.es ?? "", `${irP(s.p)} no a ${forms[0].split(" a ").slice(1).join(" a ")}`, a.es), join(s.es ?? "", `${irP(s.p)} a no ${forms[0].split(" a ").slice(1).join(" a ")}`, a.es)],
             feedback: `*No* goes before the part of *ir*: *no ${irP(s.p)} a…*`,
           },
-          { wrong: [join(s.es ?? "", `${forms[0]} no`, a.es), join(s.es ?? "", forms[0], a.es, "no")], feedback: "Spanish puts *no* in front of the verb, not at the end." },
+          { wrong: positives, feedback: "That's still the positive sentence — add *no* in front of the part of *ir*." },
         ]),
       };
     },
@@ -637,8 +642,12 @@ export const drills: Drill[] = [
       const accept = time ? uniq(times.flatMap((t) => cores.flatMap((c) => [`${t} ${c}`, `${c} ${t}`]))) : cores;
       const english = cap(join(enFuture(a.inf, s, a.en), time ? time.en[0] : "")) + ".";
       const youNote = p === "tú" ? " ('you' = *tú*)" : p === "vosotros" ? " ('you all' = *vosotros*)" : "";
+      const isRefl = a.inf.endsWith("se");
       const presentWrong = join(conjugate(a.inf, "present", p), a.es);
-      const wrongCores = [`${irP(p)} a ${presentWrong}`, `${irP(p)} ${join(a.inf, a.es)}`];
+      const wrongCores = [
+        isRefl ? `${irP(p)} a ${join(a.inf.slice(0, -2), a.es)}` : `${irP(p)} a ${presentWrong}`,
+        forms[0].replace(`${irP(p)} a `, `${irP(p)} `),
+      ];
       const wrongs = time ? wrongCores.flatMap((w) => [`${time.es} ${w}`, `${w} ${time.es}`]) : wrongCores;
       const canon = time ? sentence(`${time.es} ${forms[0]}`) : sentence(forms[0]);
       return {
@@ -651,7 +660,12 @@ export const drills: Drill[] = [
         ],
         hint: "Build the train: the right part of *ir* + *a* + infinitive. The subject pronoun is optional.",
         traps: traps(accept, [
-          { wrong: [wrongs[0], ...(time ? [wrongs[1]] : [])], feedback: `After *a* the verb stays in the infinitive: *${a.inf}*, not *${conjugate(a.inf, "present", p)}*.` },
+          {
+            wrong: [wrongs[0], ...(time ? [wrongs[1]] : [])],
+            feedback: isRefl
+              ? `*${a.inf}* is reflexive: keep the pronoun, matching the subject — *${forms[0]}*.`
+              : `After *a* the verb stays in the infinitive: *${a.inf}*, not *${conjugate(a.inf, "present", p)}*.`,
+          },
           { wrong: time ? wrongs.slice(2) : [wrongs[1]], feedback: "You need the little word *a* between *ir* and the infinitive." },
         ]),
       };
@@ -671,11 +685,12 @@ export const drills: Drill[] = [
       if (ask) {
         // Build the question.
         const who = rng.pick([
-          { p: "tú" as Person, label: "your friend Pablo (*tú*)", subj: "" },
-          { p: "vosotros" as Person, label: "two friends (*vosotros*)", subj: "" },
-          { p: "él" as Person, label: "someone about *tu hermano* (your brother)", subj: "tu hermano" },
-          { p: "ellos" as Person, label: "someone about *tus padres* (your parents)", subj: "tus padres" },
-          { p: "él" as Person, label: "someone about *Lucía*", subj: "Lucía" },
+          { p: "tú" as Person, ask: "Ask your friend Pablo (*tú*) what he is going to do", subj: "" },
+          { p: "tú" as Person, ask: "Ask your friend Sofía (*tú*) what she is going to do", subj: "" },
+          { p: "vosotros" as Person, ask: "Ask two friends (*vosotros*) what they are going to do", subj: "" },
+          { p: "él" as Person, ask: "Ask a friend what his or her brother (*tu hermano*) is going to do", subj: "tu hermano" },
+          { p: "ellos" as Person, ask: "Ask a friend what his or her parents (*tus padres*) are going to do", subj: "tus padres" },
+          { p: "él" as Person, ask: "Ask what Lucía is going to do", subj: "Lucía" },
         ]);
         const q = `qué ${irP(who.p)} a hacer`;
         const accept = who.subj
@@ -683,7 +698,7 @@ export const drills: Drill[] = [
           : uniq([`${q} ${time.es}`, `${time.es} ${q}`, ...SUBJECT_PRONOUNS[who.p].filter((x) => !["usted", "ustedes"].includes(x)).flatMap((pr) => [`${q} ${pr} ${time.es}`, `${pr} ${q} ${time.es}`])]);
         const display = `¿${cap(accept[0])}?`;
         return {
-          prompt: `Ask ${who.label} what ${who.p === "tú" ? "he is" : who.p === "vosotros" ? "they are" : who.p === "ellos" ? "they are" : "she/he is"} going to do ${time.en[0]}. Write the question in Spanish.`,
+          prompt: `${who.ask} ${time.en[0]}. Write the question in Spanish.`,
           answer: { type: "text", accept, display },
           solution: [
             "'What' = *¿Qué…?*; 'to do' = *hacer*.",
@@ -692,7 +707,7 @@ export const drills: Drill[] = [
           ],
           hint: "Start with *¿Qué…?*, then the train: part of *ir* + *a* + *hacer*.",
           traps: traps(accept, [
-            { wrong: [`qué ${irP(who.p)} hacer ${who.subj ? who.subj + " " : ""}${time.es}`, `qué ${irP(who.p)} hacer ${time.es}`], feedback: "Missing *a*: *¿Qué vas* **a** *hacer?*" },
+            { wrong: [`qué ${irP(who.p)} hacer ${who.subj ? who.subj + " " : ""}${time.es}`, `qué ${irP(who.p)} hacer ${time.es}`], feedback: `Missing *a*: *¿Qué ${irP(who.p)}* **a** *hacer?*` },
             { wrong: [`qué ${irP("yo")} a hacer ${time.es}`, `qué ${irP("nosotros")} a hacer ${time.es}`], feedback: "That asks about yourself. Use the form of *ir* for the person you're asking about." },
           ]),
         };
@@ -716,8 +731,8 @@ export const drills: Drill[] = [
         ],
         hint: `The question uses *${irP(qp)}* — what is the matching form when YOU answer?`,
         traps: traps(accept, [
-          { wrong: [`${irP(ap)} a hacer ${join(a.inf, a.es)}`, `${time.es} ${irP(ap)} a hacer ${join(a.inf, a.es)}`], feedback: `Swap *hacer* for the activity: *${irP(ap)} a ${a.inf}…*, not *${irP(ap)} a hacer ${a.inf}*.` },
-          { wrong: [join(irP(qp), "a", a.inf, a.es), `${time.es} ${join(irP(qp), "a", a.inf, a.es)}`], feedback: `*${irP(qp)}* is the form in the question. Answering about ${ap === "yo" ? "yourself" : "your group"} → *${irP(ap)}*.` },
+          { wrong: [`${irP(ap)} a hacer ${join(a.inf, a.es)}`, `${time.es} ${irP(ap)} a hacer ${join(a.inf, a.es)}`], feedback: `Swap *hacer* for the activity: *${forms[0]}*, not *${irP(ap)} a hacer ${a.inf}…*` },
+          { wrong: [join(nf(a.inf, qp)[0], a.es), `${time.es} ${join(nf(a.inf, qp)[0], a.es)}`], feedback: `*${irP(qp)}* is the form in the question. Answering about ${ap === "yo" ? "yourself" : "your group"} → *${irP(ap)}*.` },
         ]),
       };
     },

@@ -609,7 +609,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "preterito-m3-q05",
         question:
-          "Read the text.\n\n> El sábado pasado, Wei Ling y su amiga Mei pasaron el día en Sentosa. Por la mañana tomaron el teleférico y nadaron en la playa. A mediodía compraron helados porque hizo muchísimo calor. Por la tarde, Mei montó en bici, pero Wei Ling descansó en la arena y escuchó música. Volvieron a casa a las siete, cansadas pero contentas.\n\nWhat did Wei Ling do in the afternoon?",
+          "Read the text.\n\n> El sábado pasado, Wei Ling y su amiga Mei pasaron el día en Sentosa. Por la mañana tomaron el teleférico y nadaron en el mar. A mediodía compraron helados porque hizo muchísimo calor. Por la tarde, Mei montó en bici, pero Wei Ling descansó en la arena y escuchó música. Volvieron a casa a las siete, cansadas pero contentas.\n\nWhat did Wei Ling do in the afternoon?",
         options: [
           "She rested on the sand and listened to music.",
           "She rode a bike.",
@@ -723,7 +723,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "preterito-m3-q11",
         question:
-          "Read the text.\n\n> Hola, me llamo Marcus. El año pasado hice un intercambio con un chico español, Pablo. Fui a Valencia en abril y estuve tres semanas en su casa. Tuve que ir al instituto con él todos los días: ¡las clases empezaron a las ocho y terminaron a las tres! Lo mejor fue la comida: probé la paella de verduras y me encantó.\n\nWhich statement is true?",
+          "Read the text.\n\n> Hola, me llamo Marcus. El año pasado hice un intercambio con un chico español, Pablo. Fui a Valencia en abril y estuve tres semanas en su casa. El primer día fui al instituto con él: ¡las clases empezaron a las ocho y terminaron a las tres! Lo mejor fue la comida: probé la paella de verduras y me encantó.\n\nWhich statement is true?",
         options: [
           "Marcus stayed at Pablo's house for three weeks.",
           "Pablo visited Singapore in April.",

@@ -63,14 +63,14 @@ export const mcqPapers: Paper[] = [
         id: "futuro-inmediato-m1-q05",
         question: "Which sentence means 'I'm not going to watch TV tonight'?",
         options: [
-          "Voy a no ver la tele esta noche.",
+          "No va a ver la tele esta noche.",
           "No voy a ver la tele esta noche.",
           "Voy no a ver la tele esta noche.",
           "No voy ver la tele esta noche.",
         ],
         answerIndex: 1,
         explanation:
-          "To make the near future negative, put **no** in front of the form of *ir*: *No voy a ver…* *Voy no a ver* splits *voy a* apart, which Spanish never does. *No voy ver* has lost the *a*. *Voy a no ver* is a word-for-word copy of 'I'm going to not watch' — it isn't how Spanish normally makes a negative.",
+          "To make the near future negative, put **no** in front of the form of *ir*: *No voy a ver…* *Voy no a ver* splits *voy a* apart, which Spanish never does. *No voy ver* has lost the *a*. *No va a ver* has the right word order but the wrong person: *va* is 'he/she', not 'I'.",
         difficulty: "core",
         guideRef: "forming-the-near-future",
         hints: [
