@@ -40,8 +40,6 @@ L("lola", "Because [[a]] and [[el]] crash together into [[al]]. [[Al parque, al 
   boardClear=True, board="[[a + el = al]]   but [[a la]] stays")
 L("pablo", "And for home, or a city, no little word. [[Voy a casa.]] I'm going home. [[Voy a Sevilla.]]", mood="neutral", shot="close",
   board="[[Voy a casa.]] [[Voy a Sevilla.]]")
-L("mum", "So, [[mi marido va al centro comercial]]. My husband goes to the mall. Every day. To look at guitars.", mood="eyeroll", shot="close",
-  board="[[Mi marido va al centro comercial]] ✔")
 L("lola", "Perfect. Where are you GOING is [[¿Adónde vas?]] Where ARE you is [[¿Dónde estás?]]", mood="teach", shot="close",
   board="[[¿Adónde vas?]] vs [[¿Dónde estás?]]")
 
@@ -87,10 +85,8 @@ L("pablo", "It matches the person. [[Te vas a duchar]], you're going to shower. 
   board="[[me · te · se]] + [[voy · vas · va]]")
 L("dad", "Easy. Me voy a ducharme.", mood="smug", shot="close")
 sfx("buzzer")
-L("lola", "Both places! Before OR after. Never both. You don't wear two hats.", mood="annoyed", shot="close",
+L("lola", "Both places! Before OR after. Never both. You don't wear two hats.", mood="annoyed", shot="close", gap=0.4,
   board="✘ me voy a ducharme   ✔ one place only")
-L("dad", "A famous person might wear two hats.", mood="thinking", shot="close")
-L("pablo", "Then he's going to have very bad Spanish.", mood="worried", shot="close", gap=0.4)
 
 confess("pablo", "PABLO RUIZ · 13 · Exchange Student · Front Row")
 L("pablo", "In Seville, [[mañana]] means tomorrow. But when my uncle says, [[voy a arreglar el coche mañana]], it means next year.", mood="happy")
@@ -107,17 +103,16 @@ L("pablo", "And big dreams. [[El año que viene]], next year. [[En el futuro voy
   board="[[el año que viene]] · [[en el futuro]]")
 L("mum", "Got it. [[Mañana por la mañana vamos a ir al concurso.]] Tomorrow morning we're going to go to the show.", mood="happy", shot="close",
   boardClear=True, board="[[mañana por la mañana]] = tomorrow morning")
-L("lola", "Predictions too. Look at those clouds. [[Va a llover.]] It's going to rain. Every afternoon in Singapore, [[va a llover]].", mood="teach", shot="close", prop="umbrella",
+L("lola", "Predictions too. Look at those clouds. [[Va a llover.]] It's going to rain. Every afternoon, in Singapore.", mood="teach", shot="close", prop="umbrella",
   board="[[Va a llover.]] = It's going to rain.")
 L("tara", "And opinions. [[Va a ser genial]], it's going to be great. Or, [[va a ser un desastre]]. A disaster.", mood="deadpan", shot="close",
   board="[[Va a ser genial / un desastre]]")
-L("pablo", "I'll invite my friend. [[¿Quieres venir al concurso?]] Do you want to come to the show?", mood="happy", shot="close", prop="phone",
+L("pablo", "[[¿Quieres venir al concurso?]] Do you want to come to the show?", mood="happy", shot="close", prop="phone",
   boardClear=True, board="[[¿Quieres venir?]] = Do you want to come?")
 L("lola", "And the replies. Yes: [[¡Sí, claro!]] or [[¡Qué buena idea!]] No: [[Lo siento, no puedo.]] Sorry, I can't.", mood="teach", shot="close",
   board="[[¡Sí, claro!]] · [[Lo siento, no puedo]]")
-L("pablo", "He says, [[lo siento, no puedo porque voy a visitar a mis abuelos.]] He's going to visit his grandparents.", mood="sad", shot="close",
+L("pablo", "He says, [[lo siento, no puedo porque voy a visitar a mis abuelos.]] He's going to visit his grandparents.", mood="sad", shot="close", gap=0.4,
   board="[[No puedo porque voy a…]]")
-L("tara", "The grandparents excuse. Clever. I'm going to use that.", mood="smug", shot="close", gap=0.4)
 
 scene("park", [("tara", 260), ("dad", 560), ("lola", 900)])
 L("dad", "Last question. How do you know if a sentence is now, or the future?", mood="thinking", shot="close", boardClear=True)
