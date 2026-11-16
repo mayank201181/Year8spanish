@@ -2,6 +2,7 @@
 # Build + render one or more episodes end to end.
 #   scripts/sitcom/make_episode.sh <topic-id> [<topic-id> ...]
 # Output: public/videos/<topic>.mp4 and public/videos/posters/<topic>.jpg (+ out/<topic>/asr.txt QA report)
+# SKIP_ASR=1 skips the Whisper QA step (e.g. when qa/<topic>.asr.txt is already done). WORKERS=n overrides nproc.
 set -euo pipefail
 cd "$(dirname "$0")"
 ROOT="$(cd ../.. && pwd)"
@@ -14,8 +15,8 @@ mkdir -p "$ROOT/public/videos/posters"
 for T in "$@"; do
   echo "=== $T: lint"; python3 lint_episode.py "episodes/$T.py"
   echo "=== $T: voices + timeline"; python3 build.py "episodes/$T.py" "out/$T"
-  echo "=== $T: speech QA"; python3 asr.py "episodes/$T.py" > "out/$T/asr.txt" 2>/dev/null || echo "asr skipped"
-  echo "=== $T: frames"; rm -f out/$T/part*.mp4; node render.mjs "out/$T" --workers "$(nproc)"
+  if [ -z "${SKIP_ASR:-}" ]; then echo "=== $T: speech QA"; python3 asr.py "episodes/$T.py" > "out/$T/asr.txt" 2>/dev/null || echo "asr skipped"; fi
+  echo "=== $T: frames"; rm -f out/$T/part*.mp4; node render.mjs "out/$T" --workers "${WORKERS:-$(nproc)}"
   echo "=== $T: encode"
   ffmpeg -y -loglevel error -f concat -safe 0 -i "out/$T/parts.txt" -i "out/$T/audio.wav" \
     -c:v copy \
