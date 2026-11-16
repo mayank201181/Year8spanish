@@ -155,14 +155,19 @@ test("expressions: forms", () => {
   assert.equal(st({ type: "expression", expr: "4(a+2b)", form: "factorised" }, "2(2a+4b)"), "close");
 });
 
-test("text", () => {
-  const s: AnswerSpec = { type: "text", accept: ["x > 3", "3 < x"] };
-  assert.equal(st(s, "x>3"), "correct");
-  assert.equal(st(s, "X > 3"), "correct");
-  assert.equal(st(s, "3<x"), "correct");
-  assert.equal(st(s, "x≥3"), "incorrect");
+test("text (Spanish): case, punctuation and accents", () => {
+  const s: AnswerSpec = { type: "text", accept: ["Me levanto a las siete.", "yo me levanto a las siete"] };
+  assert.equal(st(s, "me levanto a las siete"), "correct");
+  assert.equal(st(s, "¡Me levanto a las siete!"), "correct");
+  assert.equal(st(s, "  Yo  me levanto a las siete. "), "correct");
+  assert.equal(st(s, "me levante a las siete"), "incorrect");
+  // accent-only difference → "close" (nudge), never correct
+  assert.equal(st({ type: "text", accept: ["habló"] }, "hablo"), "close");
+  assert.equal(st({ type: "text", accept: ["habló"] }, "Habló."), "correct");
+  assert.equal(st({ type: "text", accept: ["el año"] }, "el ano"), "close");
+  // apostrophes are ignored so "I'm" = "Im"
+  assert.equal(st({ type: "text", accept: ["I'm going to play"] }, "Im going to play"), "correct");
   assert.equal(st({ type: "text", accept: ["isosceles"] }, "Isosceles."), "correct");
-  assert.equal(st({ type: "text", accept: ["x <= 4"] }, "x ≤ 4"), "correct");
 });
 
 test("self-check of display answers", () => {

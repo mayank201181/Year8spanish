@@ -865,7 +865,7 @@ export const drills: Drill[] = [
         const h = kind === "place" ? rng.pick(HABIT) : "";
         text = sentence(join(h, s.es ?? "", irP(s.p), toPlace(pl)));
         isFuture = false;
-        reason = `After *${irP(s.p)} ${toPlace(pl).split(" ")[0]}* comes a **place** (*${withArt(pl)}*), not an infinitive — so this is just *ir* in the present ('go / am going to ${pl.en}').`;
+        reason = `After *${irP(s.p)} ${toPlace(pl).split(" ")[0]}* comes a **place** (*${withArt(pl)}*), not an infinitive — so this is just the verb *ir* (to go) in the present.`;
       }
       const accept = isFuture ? FUTURE : PRESENT;
       return {
@@ -927,7 +927,9 @@ export const drills: Drill[] = [
               ? `*${present} ${a.es}* is still the present (*ir* + place). The plan needs *${irP(s.p)} a ir ${a.es}*.`
               : "That's possible Spanish, but the task asks for the near future: *ir a* + infinitive.",
           },
-          { wrong: [`${plan} ${subjCanon(s, join(irP(s.p), "a", present, a.es))}`], feedback: `Keep the second verb as an infinitive: *${a.inf}*, not *${present}*.` },
+          a.inf.endsWith("se")
+            ? { wrong: [`${plan} ${subjCanon(s, join(irP(s.p), "a", a.inf.slice(0, -2), a.es))}`], feedback: `Keep the reflexive pronoun: *${forms[0]}* (or *${forms[1]}*).` }
+            : { wrong: [`${plan} ${subjCanon(s, join(irP(s.p), "a", present, a.es))}`], feedback: `Keep the second verb as an infinitive: *${a.inf}*, not *${present}*.` },
         ]),
       };
     },

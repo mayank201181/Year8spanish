@@ -550,7 +550,7 @@ export const drills: Drill[] = [
       } else {
         p = rng.pick(tier === 1 ? PERSONS : PERSONS);
         prompt = rng.pick([
-          `Write the *${PSHORT[p]}* form of *${inf}* (${info?.en ?? ""}) in the present tense.`,
+          `Write the *${PSHORT[p]}* form of *${inf}* (${(info?.en ?? "").replace(/\s*\([^)]*\)/g, "")}) in the present tense.`,
           `Present tense: conjugate *${inf}* for *${PSHORT[p]}*.`,
         ]);
         accept = acceptedForms(inf, "present", p);
@@ -713,7 +713,7 @@ export const drills: Drill[] = [
         // From English: both patterns accepted, own verbs too.
         const vo = vos(sp, s.p, "present");
         const accept = freqVariants(S, vo, { es: "nunca", en: "never", kind: "neg" });
-        const enS = `${cap(s.en)} never ${enVerb(sp.enDo, false)}.`;
+        const enS = `${cap(s.en)} never ${enVerb(sp.enDo, s.p === "él")}.`;
         return {
           prompt: `Translate into Spanish: '**${enS}**'${s.note ?? ""}`,
           answer: text(accept, sentence(shown || (s.drop ? "" : s.es), "nunca", main.v, main.o)),
@@ -728,7 +728,7 @@ export const drills: Drill[] = [
       }
       const pos: "before" | "after" = rng.bool() ? "before" : "after";
       const oldF = tier >= 2 && rng.bool(0.5) ? rng.pick(["a menudo", "siempre", "a veces", "todos los días"]) : "";
-      const original = oldF ? sentence(oldF, shown, main.v, main.o) : sentence(shown, main.v, main.o);
+      const original = !oldF ? sentence(shown, main.v, main.o) : oldF === "todos los días" ? sentence(shown, main.v, main.o, oldF) : sentence(shown, oldF, main.v, main.o);
       const instruction = oldF
         ? `Change *${oldF}* to *nunca* (never), putting *nunca* **${pos} the verb**:`
         : `Make this sentence mean 'never' with *nunca* **${pos} the verb**:`;
@@ -827,14 +827,20 @@ export const drills: Drill[] = [
     generate(rng, tier) {
       const pool: Thing[] =
         tier === 1 ? SING_SPORTS : tier === 2 ? [...SING_SPORTS, ...INF_THINGS, ...PLURAL_THINGS] : [...SING_SPORTS, ...INF_THINGS, ...PLURAL_THINGS, ...MIXED_THINGS, ...MIXED_THINGS];
-      const th = rng.pick(pool);
-      const a = rng.pick(ADJS);
+      // Re-roll most items where the answer is just the dictionary form (little to practise).
+      let th = rng.pick(pool);
+      let a = rng.pick(ADJS);
+      for (let i = 0; i < 3 && adjForm(a, th) === a.f[0] && !rng.bool(0.3); i++) {
+        th = rng.pick(pool);
+        a = rng.pick(ADJS);
+      }
       const right = adjForm(a, th);
       const ser = th.pl ? "son" : "es";
       const isInf = !/^(el|la|los|las) /.test(th.es);
+      const positive = ["fun", "exciting", "relaxing", "healthy", "easy"].includes(a.en);
       const frames = [`${cap(th.es)} ${ser} ___.`, `${cap(th.es)} ${ser} muy ___.`];
       if (!isInf) {
-        frames.push(`Me ${th.pl ? "gustan" : "gusta"} ${th.es} porque ${ser} ___.`, `Odio ${th.es} porque ${ser} bastante ___.`);
+        frames.push(positive ? `Me ${th.pl ? "gustan" : "gusta"} ${th.es} porque ${ser} ___.` : `Odio ${th.es} porque ${ser} bastante ___.`);
       }
       if (tier >= 2 && isInf) frames.push(`Para mí, ${th.es} ${ser} un poco ___.`);
       const line = rng.pick(frames);
@@ -848,7 +854,7 @@ export const drills: Drill[] = [
       }
       const oppGender = a.f[(th.pl ? 2 : 0) + (th.g === "f" ? 0 : 1)];
       trapList.push({ accept: [oppGender], feedback: `${th.why} → **${right}**.` });
-      trapList.push({ accept: [ms], feedback: `Make it agree: ${th.why} → **${right}**.` });
+      if (ms !== oppGender) trapList.push({ accept: [ms], feedback: `Make it agree: ${th.why} → **${right}**.` });
       return {
         prompt: `Complete with the correct form of *${ms}* (${a.en}): *${line}*`,
         answer: text(accept),
@@ -932,7 +938,7 @@ export const drills: Drill[] = [
         // Question to a friend / friends.
         verb = rng.bool() ? "querer" : "poder";
         p = tier === 1 ? "tú" : rng.pick<Person>(["tú", "vosotros"]);
-        line = `¿___ (${verb}, ${p}) ${act} ${w}${p === "tú" || p === "vosotros" ? " conmigo" : ""}?`;
+        line = `¿___ (${verb}, ${p}) ${act} conmigo ${w}?`;
       } else if (frame === 1) {
         // Statement with a subject.
         verb = rng.bool() ? "querer" : "poder";
