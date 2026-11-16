@@ -236,7 +236,7 @@ export const guide: TopicGuide = {
           answer: "*El museo está entre el banco y la biblioteca.*",
           yourTurn: {
             question: "Write 'The park is opposite the museum' in Spanish.",
-            answer: { type: "text", accept: ["el parque está enfrente del museo", "el parque está frente al museo"] },
+            answer: { type: "text", accept: ["el parque está enfrente del museo", "el parque está en frente del museo", "el parque está frente al museo"] },
             solution: "Location → *está*; 'opposite' → *enfrente de*; *de + el museo* → *del museo*: **El parque está enfrente del museo.**",
           },
         },
@@ -438,8 +438,8 @@ export const guide: TopicGuide = {
     mnemonics: [
       {
         topic: "derecha vs izquierda",
-        device: "Dexterous right hand",
-        explanation: "*Derecha* comes from Latin *dexter* (right) — as in 'dexterous', skilful like a right hand. *Izquierda* is the other one.",
+        device: "Derecha = direct = right",
+        explanation: "*Derecha* comes from Latin *directus* ('straight, direct') — think of the 'right' hand as the 'correct' one, just as English 'right' means both. *Izquierda* is the other one. Careful: from the same root, *todo derecho* means 'straight on', not 'right'.",
       },
       {
         topic: "al / del",

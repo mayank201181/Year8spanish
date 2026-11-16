@@ -97,13 +97,12 @@ export const morePapers: Paper[] = [
         question: "Write in Spanish, using the *tú* form: 'Go straight on and cross the bridge.'",
         answer: {
           type: "text",
-          accept: ["sigue todo recto y cruza el puente", "sigue recto y cruza el puente", "ve todo recto y cruza el puente", "ve recto y cruza el puente"],
+          accept: ["sigue todo recto y cruza el puente", "sigue recto y cruza el puente", "ve todo recto y cruza el puente", "ve recto y cruza el puente", "sigue todo derecho y cruza el puente", "sigue derecho y cruza el puente"],
         },
         solution: ["'Go straight on' = *sigue todo recto*.", "'Cross' (*tú* command of *cruzar*) = *cruza*; 'the bridge' = *el puente*.", "**Sigue todo recto y cruza el puente.**"],
         traps: [
           { spec: { type: "text", accept: ["siga todo recto y cruce el puente", "siga recto y cruce el puente"] }, feedback: "That's the polite *usted* form. To a friend: *sigue… cruza…*" },
           { spec: { type: "text", accept: ["sigue todo recto y cruza la puente"] }, feedback: "*Puente* is masculine: *el puente*." },
-          { spec: { type: "text", accept: ["sigue todo derecho y cruza el puente"] }, feedback: "In Spain, 'straight on' is *todo recto*. (*Derecho* is used in Latin America.)" },
         ],
         commonError: "Mixing *tú* and *usted* in one instruction.",
         difficulty: "core",
@@ -307,6 +306,8 @@ export const morePapers: Paper[] = [
             "la estación de autobús está enfrente del ayuntamiento a cinco minutos andando",
             "la estación de autobús está enfrente del ayuntamiento y está a cinco minutos a pie",
             "la estación de autobús está enfrente del ayuntamiento y está a cinco minutos andando",
+            "la estación de autobuses está enfrente del ayuntamiento a cinco minutos caminando",
+            "la estación de autobuses está enfrente del ayuntamiento y está a cinco minutos caminando",
           ],
         },
         solution: [

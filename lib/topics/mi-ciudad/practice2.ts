@@ -17,6 +17,8 @@ const PAELLA = [
   "a vegetarian paella",
   "paella with vegetables",
   "a paella with vegetables",
+  "some vegetable paella",
+  "some veggie paella",
 ];
 
 export const morePapers: Paper[] = [
@@ -125,7 +127,7 @@ export const morePapers: Paper[] = [
           "→ **Tiene unos doscientos mil habitantes.**",
         ],
         traps: [
-          { spec: { type: "text", accept: combos(["hay", "es"], ["unos"], ["doscientos mil"], ["habitantes"]) }, feedback: "A town *has* inhabitants: use *tiene*." },
+          { spec: { type: "text", accept: combos(["hay", "es"], ["unos"], ["doscientos mil"], ["habitantes"]) }, feedback: "The English says 'It has', so use *tener*: *tiene unos doscientos mil habitantes*. (*Hay* would be 'there are'; *es* doesn't work at all.)" },
           { spec: { type: "text", accept: combos(["tiene"], ["unos"], ["dos cientos mil", "doscientas mil", "doscientos miles"], ["habitantes"]) }, feedback: "Check the number: *doscientos* is one word, agrees with *habitantes* (masculine), and *mil* has no plural here." },
         ],
         commonError: "Writing *doscientos miles* — *mil* doesn't take an *-s* after a number.",
@@ -165,10 +167,12 @@ export const morePapers: Paper[] = [
         answer: {
           type: "text",
           accept: [
-            ...combos(["mi ciudad es"], ["bonita", "mona", "linda"], ["aunque es pequeña"]),
+            ...combos(["mi ciudad es"], ["bonita", "mona", "linda"], ["aunque es pequeña", "aunque pequeña"]),
             ...combos(["aunque es pequeña"], ["mi ciudad es"], ["bonita", "mona", "linda"]),
-            ...combos(["mi pueblo es"], ["bonito", "mono", "lindo"], ["aunque es pequeño"]),
+            ...combos(["aunque mi ciudad es pequeña es"], ["bonita", "mona", "linda"]),
+            ...combos(["mi pueblo es"], ["bonito", "mono", "lindo"], ["aunque es pequeño", "aunque pequeño"]),
             ...combos(["aunque es pequeño"], ["mi pueblo es"], ["bonito", "mono", "lindo"]),
+            ...combos(["aunque mi pueblo es pequeño es"], ["bonito", "mono", "lindo"]),
           ],
         },
         solution: [
@@ -214,7 +218,7 @@ export const morePapers: Paper[] = [
           "*Porque* means 'because': it comes **before the reason (the cause)**. *Por eso* means 'that's why / so': it comes **before the result**.\n\n    Voy al colegio en metro porque hay mucho tráfico.\n    Hay mucho tráfico; por eso voy al colegio en metro.\n\nBoth sentences give the same information, but the cause and the result swap places.",
         markScheme: [
           { point: "porque = because: it introduces the reason / cause", keywords: ["because", "reason", "cause"] },
-          { point: "por eso = that's why / so: it introduces the result / consequence", keywords: ["that's why", "that is why", "so", "therefore", "result", "consequence"] },
+          { point: "por eso = that's why / so: it introduces the result / consequence", keywords: ["that's why", "that is why", " so ", "therefore", "result", "consequence"] },
           { point: "A correct Spanish example sentence with each", keywords: ["porque", "por eso"] },
         ],
         commonError: "Writing *por eso* + the reason (*Voy en metro por eso hay tráfico*) — *por eso* must be followed by the result.",
@@ -315,7 +319,7 @@ export const morePapers: Paper[] = [
             ["in singapore"],
             ["because", "as", "since"],
             ["there are"],
-            ["loads of", "lots of", "so many", "a lot of", "tons of", "lots and lots of"],
+            ["loads of", "lots of", "so many", "a lot of", "plenty of", "tons of", "lots and lots of"],
             ["things to do"],
           ),
         },

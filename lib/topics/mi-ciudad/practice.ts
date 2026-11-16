@@ -45,7 +45,7 @@ export const practice: TopicPractice = {
       question: "Translate into English: *lo malo*",
       answer: {
         type: "text",
-        accept: ["the bad thing", "the bad part", "the bad point", "the bad side", "the downside", "what's bad", "what is bad", "the negative thing", "the negative"],
+        accept: ["the bad thing", "the bad part", "the bad bit", "the bad point", "the bad side", "the downside", "what's bad", "what is bad", "the negative thing", "the negative"],
       },
       solution: ["*Lo* + adjective = 'the … thing / the … part'.", "*malo* = bad → **the bad thing**."],
       traps: [{ spec: { type: "text", accept: ["the worst thing", "the worst", "the worst part"] }, feedback: "Close in spirit, but 'the worst thing' is *lo peor*. *Lo malo* is just 'the bad thing'." }],
@@ -159,7 +159,7 @@ export const practice: TopicPractice = {
         accept: combos(
           ["there is nothing", "there's nothing", "there isn't anything", "there is not anything"],
           ["for"],
-          ["young people", "the young", "teenagers", "teens", "youngsters", "young people to do", "teenagers to do"],
+          ["young people", "the young people", "the young", "teenagers", "teens", "youngsters", "young people to do", "teenagers to do"],
         ),
       },
       solution: [
@@ -256,7 +256,7 @@ export const practice: TopicPractice = {
           question: "Translate into English: *Mi pueblo es bastante pequeño.*",
           answer: {
             type: "text",
-            accept: combos(["my village is", "my town is"], ["quite", "fairly", "rather", "pretty", "reasonably"], ["small"]),
+            accept: combos(["my village is", "my town is", "my village's", "my town's"], ["quite", "fairly", "rather", "pretty", "reasonably"], ["small"]),
           },
           solution: ["*Mi pueblo* = my village / my town.", "*bastante* (before an adjective) = quite / fairly.", "→ **My village is quite small.**"],
           traps: [
@@ -273,7 +273,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "mi-ciudad-p1-q06",
           question: "Write a Spanish connective that means 'that's why / for that reason'.",
-          answer: { type: "text", accept: ["por eso", "por lo tanto", "por esa razón", "así que"] },
+          answer: { type: "text", accept: ["por eso", "por lo tanto", "por esa razón", "por esta razón", "así que"] },
           solution: ["You need a connective that points forward to a **result**.", "*por* (for) + *eso* (that) → **por eso**."],
           traps: [{ spec: { type: "text", accept: ["porque", "por qué"] }, feedback: "*Porque* means 'because' — it points back to a cause. 'That's why' points forward to a result: *por eso*." }],
           commonError: "Confusing *por eso* (that's why) with *porque* (because).",
@@ -363,7 +363,7 @@ export const practice: TopicPractice = {
           modelAnswer:
             "*En mi opinión, mi ciudad es muy bonita y bastante histórica porque hay muchos edificios antiguos; sin embargo, es un poco ruidosa los fines de semana.*\n\n(In my opinion, my town is very pretty and quite historic because there are lots of old buildings; however, it's a bit noisy at weekends.)",
           markScheme: [
-            { point: "An intensifier before an adjective (muy / bastante / realmente / tan / un poco)", keywords: ["muy", "bastante", "realmente", "tan", "un poco"] },
+            { point: "An intensifier before an adjective (muy / bastante / realmente / tan / un poco)", keywords: ["muy", "bastante", "realmente", " tan ", "un poco"] },
             {
               point: "A second adjective with feminine agreement (-a)",
               keywords: ["histórica", "historica", "moderna", "tranquila", "animada", "limpia", "pequeña", "pequena", "turística", "turistica", "ruidosa"],
@@ -388,7 +388,7 @@ export const practice: TopicPractice = {
             "Write 4 sentences in Spanish describing your town or neighbourhood for a Spanish website. Include: where it is, how big it is (or how many inhabitants), two adjectives with correct agreement, and what there is (*hay…*).",
           marks: 4,
           modelAnswer:
-            "*Vivo en Singapur, una ciudad grande y moderna. Está situada en el sudeste de Asia, en una isla. Tiene casi seis millones de habitantes. Mi barrio es bastante tranquilo y muy limpio, y hay un parque, un centro comercial y un hawker centre.*\n\n(I live in Singapore, a big, modern city. It is situated in South-East Asia, on an island. It has almost six million inhabitants. My neighbourhood is quite quiet and very clean, and there is a park, a shopping centre and a hawker centre.)",
+            "*Vivo en Singapur, una ciudad grande y moderna. Está situada en el sudeste de Asia, en una isla. Tiene unos seis millones de habitantes. Mi barrio es bastante tranquilo y muy limpio, y hay un parque, un centro comercial y un hawker centre.*\n\n(I live in Singapore, a big, modern city. It is situated in South-East Asia, on an island. It has about six million inhabitants. My neighbourhood is quite quiet and very clean, and there is a park, a shopping centre and a hawker centre.)",
           markScheme: [
             { point: "Says where it is with estar (está situado/a en… / está en…)", keywords: ["está situada", "está situado", "esta situada", "esta situado", "está en", "esta en", "se encuentra"] },
             { point: "Says how big it is or how many inhabitants (tiene … habitantes / es grande / pequeño)", keywords: ["tiene", "habitantes", "grande", "pequeña", "pequeño", "pequena", "pequeno"] },
@@ -414,7 +414,10 @@ export const practice: TopicPractice = {
           question: "Translate into Spanish: 'My town is modern and interesting, but it is too noisy.' (Use *ciudad* or *pueblo*.)",
           answer: {
             type: "text",
-            accept: ["mi ciudad es moderna e interesante pero es demasiado ruidosa", "mi pueblo es moderno e interesante pero es demasiado ruidoso"],
+            accept: [
+              ...combos(["mi ciudad es"], ["moderna e interesante", "interesante y moderna"], ["pero"], ["es demasiado ruidosa", "demasiado ruidosa"]),
+              ...combos(["mi pueblo es"], ["moderno e interesante", "interesante y moderno"], ["pero"], ["es demasiado ruidoso", "demasiado ruidoso"]),
+            ],
           },
           solution: [
             "Agree every adjective: *ciudad* → *moderna, interesante, ruidosa* (or *pueblo* → *moderno, interesante, ruidoso*).",
@@ -454,7 +457,7 @@ export const practice: TopicPractice = {
             { point: "Past: El sábado pasado fui al mercado (con mi hermana)", keywords: ["el sábado pasado", "el sabado pasado", "fui al mercado"] },
             { point: "Past: compré fruta (yo preterite -é)", keywords: ["compré", "compre"] },
             { point: "Present habit: Normalmente voy al parque los domingos", keywords: ["normalmente voy", "voy al parque", "los domingos"] },
-            { point: "Future: El fin de semana que viene / El próximo fin de semana voy a visitar el castillo", keywords: ["voy a visitar", "el fin de semana que viene", "el próximo fin de semana", "el proximo fin de semana"] },
+            { point: "Future: El fin de semana que viene / El próximo fin de semana voy a visitar el castillo", keywords: ["voy a visitar", "el fin de semana que viene", "el próximo fin de semana", "el fin de semana próximo"] },
             { point: "Reason with agreement: porque es muy histórico (el castillo = masculine)", keywords: ["histórico", "historico"] },
           ],
           commonError: "Writing *fue* (he/she went) for 'I went' — 'I went' is *fui*.",
@@ -730,7 +733,7 @@ export const practice: TopicPractice = {
           modelAnswer:
             "*Vivo en Singapur y, aunque hace mucho calor, me encanta porque hay muchísimas cosas que hacer.*\n\n(I live in Singapore and, although it's very hot, I love it because there are loads of things to do.)",
           markScheme: [
-            { point: "At least two different connectives used to join the ideas", keywords: ["y", "pero", "aunque", "sin embargo", "además", "ademas"] },
+            { point: "At least two different connectives used to join the ideas", keywords: [" y ", "pero", "aunque", "sin embargo", "además", "ademas"] },
             { point: "The heat is presented as a contrast to loving it (aunque / pero / sin embargo)", keywords: ["aunque", "pero", "sin embargo"] },
             { point: "A reason added with porque / ya que", keywords: ["porque", "ya que"] },
           ],
@@ -779,7 +782,7 @@ export const practice: TopicPractice = {
             "*El verano pasado fui a Barcelona con mi familia. Visité la Sagrada Familia y comí una paella de verduras en el puerto. ¡Fue increíble! Barcelona es una ciudad muy animada y bastante moderna, aunque hay demasiados turistas. La próxima vez voy a ir al Parque Güell porque quiero ver los mosaicos de Gaudí.*\n\n(Last summer I went to Barcelona with my family. I visited the Sagrada Familia and ate a vegetable paella at the harbour. It was amazing! Barcelona is a very lively and quite modern city, although there are too many tourists. Next time I'm going to go to Park Güell because I want to see Gaudí's mosaics.)",
           markScheme: [
             { point: "Says where you went: fui a… (preterite of ir)", keywords: ["fui a", "fuimos a"] },
-            { point: "Two more preterite verbs for things you did", keywords: ["visité", "visite", "comí", "comi", "vi", "compré", "compre", "visitamos", "comimos"] },
+            { point: "Two more preterite verbs for things you did", keywords: ["visité", "visite", "comí", "comi", " vi ", "compré", "compre", "visitamos", "comimos"] },
             { point: "An opinion of the trip in the past (fue genial / increíble…)", keywords: ["fue genial", "fue increíble", "fue increible", "fue estupendo", "fue divertido", "lo pasé bomba", "lo pase bomba"] },
             { point: "Describes the city in the present with agreement (es una ciudad… / hay…)", keywords: ["es una ciudad", "es muy", "está situada", "esta situada", "hay"] },
             { point: "What you are going to do next time (voy a + infinitive)", keywords: ["voy a", "vamos a", "la próxima vez", "la proxima vez"] },
@@ -892,7 +895,7 @@ export const practice: TopicPractice = {
       id: "mi-ciudad-ch-q02",
       question:
         "This sentence contains exactly ONE mistake. Find it and type the corrected word.\n\n    El fin de semana pasado fui a Sevilla con mi familia y vimos la catedral, que es muy antiguo.",
-      answer: { type: "text", accept: ["antigua", "muy antigua", "es muy antigua", "que es muy antigua"] },
+      answer: { type: "text", accept: ["antigua", "muy antigua", "es muy antigua", "que es muy antigua", "el fin de semana pasado fui a sevilla con mi familia y vimos la catedral que es muy antigua"] },
       solution: [
         "Check the verbs: *fui* (I went) and *vimos* (we saw) are both correct — 'I went with my family and **we** saw'.",
         "*Es* (present) is right too: the cathedral is still old today.",
@@ -925,7 +928,7 @@ export const practice: TopicPractice = {
       markScheme: [
         { point: "Sentences are joined and varied — no more than one starts the same way", keywords: ["una ciudad", "personalmente", "en mi opinión", "en mi opinion", "lo mejor", "sin embargo"] },
         { point: "At least three different connectives, including a contrast", keywords: ["sin embargo", "aunque", "pero", "además", "ademas", "así que", "asi que", "por eso"] },
-        { point: "Intensifiers with correctly agreeing adjectives", keywords: ["muy", "bastante", "demasiado", "realmente", "tan", "muchísimos", "muchisimos"] },
+        { point: "Intensifiers with correctly agreeing adjectives", keywords: ["muy", "bastante", "demasiado", "realmente", " tan ", "muchísimos", "muchisimos"] },
         { point: "An opinion justified with a reason", keywords: ["porque", "ya que"] },
         { point: "Pros and cons with lo bueno / lo mejor / lo malo / lo peor", keywords: ["lo bueno", "lo malo", "lo mejor", "lo peor"] },
       ],
@@ -1037,7 +1040,7 @@ export const practice: TopicPractice = {
         "This sentence has a grammar mistake AND it doesn't make sense. Keep *Lo mejor* and type the corrected sentence.\n\n    Lo mejor de mi barrio es que hay demasiado parques.",
       answer: {
         type: "text",
-        accept: combos(["lo mejor de mi barrio es que hay"], ["muchos", "muchísimos", "bastantes", "tantos"], ["parques"]),
+        accept: combos(["lo mejor de mi barrio es que hay"], ["muchos", "muchísimos", "bastantes", "tantos", "varios", "un montón de"], ["parques"]),
       },
       solution: [
         "Grammar: before a noun, *demasiado* must agree — *parques* is masculine plural → *demasiados*.",
@@ -1075,7 +1078,7 @@ export const practice: TopicPractice = {
         "*¡Hola, Javier! Vivo en Singapur, una ciudad enorme y muy moderna. Lo mejor es que hay muchísimas cosas que hacer; sin embargo, lo peor es que hace demasiado calor. El fin de semana pasado fui al Jardín Botánico con mi familia y luego comí un plato de fideos con verduras en un hawker centre. ¡Fue genial! El fin de semana que viene voy a ir a la playa de Sentosa con mis amigos porque va a hacer sol, aunque también voy a hacer los deberes, claro. ¿Y tú?*\n\n(Hi Javier! I live in Singapore, a huge and very modern city. The best thing is that there are loads of things to do; however, the worst thing is that it's too hot. Last weekend I went to the Botanic Gardens with my family and then I ate a plate of vegetable noodles at a hawker centre. It was great! Next weekend I'm going to go to the beach at Sentosa with my friends because it's going to be sunny, although I'm also going to do my homework, of course. And you?)",
       markScheme: [
         { point: "Describes the town with agreeing adjectives and a pro/con (lo bueno / lo peor…)", keywords: ["es una ciudad", "una ciudad", "lo bueno", "lo malo", "lo mejor", "lo peor"] },
-        { point: "Past: at least two preterite verbs about last weekend", keywords: ["fui", "visité", "visite", "comí", "comi", "jugué", "jugue", "compré", "compre", "vi", "fue genial"] },
+        { point: "Past: at least two preterite verbs about last weekend", keywords: ["fui", "visité", "visite", "comí", "comi", "jugué", "jugue", "compré", "compre", " vi ", "fue genial"] },
         { point: "Future: plans with ir a + infinitive", keywords: ["voy a", "vamos a"] },
         { point: "Opinions with reasons", keywords: ["porque", "ya que", "me encanta", "me gusta", "fue genial"] },
         { point: "A range of connectives and intensifiers", keywords: ["además", "ademas", "sin embargo", "aunque", "por eso", "así que", "asi que", "bastante", "demasiado", "muy"] },

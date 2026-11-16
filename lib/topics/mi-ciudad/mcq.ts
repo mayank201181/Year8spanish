@@ -139,16 +139,16 @@ export const mcqPapers: Paper[] = [
         question: "Which sentence follows the full extended-sentence formula: time phrase + verb + detail + opinion + reason?",
         options: [
           "Los domingos voy al parque con mi hermano.",
-          "Los domingos voy al parque con mi hermano porque es muy tranquilo.",
+          "Los domingos voy al parque con mi hermano y me encanta porque es muy tranquilo.",
           "Voy al parque porque es tranquilo.",
           "El parque es muy tranquilo y bonito.",
         ],
         answerIndex: 1,
         explanation:
-          "Only one sentence ticks every box: *Los domingos* (time phrase) + *voy* (verb) + *al parque con mi hermano* (detail) + *es muy tranquilo* (opinion) + *porque* (reason). *Los domingos voy al parque con mi hermano* stops before the opinion and reason.",
+          "Only one sentence ticks every box: *Los domingos* (time phrase) + *voy* (verb) + *al parque con mi hermano* (detail) + *y me encanta* (opinion) + *porque es muy tranquilo* (reason). *Los domingos voy al parque con mi hermano* stops before the opinion and reason; *Voy al parque porque es tranquilo* has no time phrase, detail or opinion.",
         difficulty: "core",
         guideRef: "extended-sentences",
-        hints: ["Tick off each part of the formula for each sentence.", "Which sentences have a time phrase? Of those, which also gives a reason?"],
+        hints: ["Tick off each part of the formula for each sentence.", "Which sentences have a time phrase? Of those, which also gives an opinion AND a reason?"],
         strategy: "Build it up (extended sentence)",
       },
       {
@@ -405,11 +405,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mi-ciudad-m2-q10",
-        question: "Which connective completes the sentence?\n\n    Me encanta mi pueblo ___ es muy tranquilo.",
+        question: "Which connective completes the sentence?\n\n    Me encanta mi pueblo ___ es muy bonito.",
         options: ["así que", "ya que", "sin embargo", "aunque"],
         answerIndex: 1,
         explanation:
-          "The second half gives the **reason** for loving the village, so you need 'because / since': **ya que**. *Así que* (so) introduces a result, *sin embargo* (however) and *aunque* (although) introduce a contrast — but 'quiet' isn't a contrast to 'I love it'.",
+          "The second half gives the **reason** for loving the village, so you need 'because / since': **ya que**. *Así que* (so) introduces a result, *sin embargo* (however) and *aunque* (although) introduce a contrast — but 'pretty' isn't a contrast to 'I love it'.",
         difficulty: "core",
         guideRef: "connectives-and-intensifiers",
         hints: ["Is the second half a reason, a result or a contrast?", "Which option is a fancier way of saying *porque*?"],

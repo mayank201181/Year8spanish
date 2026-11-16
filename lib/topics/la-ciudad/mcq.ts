@@ -288,7 +288,7 @@ export const mcqPapers: Paper[] = [
         options: ["Go straight on", "Follow the road round to the right", "Turn round", "Keep left"],
         answerIndex: 0,
         explanation:
-          "*Sigue* = carry on / keep going, *todo recto* = straight ahead: **go straight on**. *Recto* has nothing to do with 'right' — 'right' is *derecha*.",
+          "*Sigue* = carry on / keep going, *todo recto* = straight ahead: **go straight on**. *Recto* doesn't mean 'right' — 'right' is *derecha*.",
         difficulty: "warmup",
         guideRef: "directions",
         hints: ["*Recto* is related to 'rectangle' — straight lines. It does NOT mean 'right'."],
@@ -510,7 +510,7 @@ export const mcqPapers: Paper[] = [
         options: ["the main square", "the mayor's office", "the biggest beach", "the old market"],
         answerIndex: 0,
         explanation:
-          "*La plaza* = the square, *mayor* = main / biggest: **the main square**, the heart of many Spanish towns. *Mayor* is a false friend — the mayor is *el alcalde*, and his office is in *el ayuntamiento*.",
+          "*La plaza* = the square, *mayor* = main / biggest: **the main square**, the heart of many Spanish towns. *Mayor* is a false friend — the mayor is *el alcalde / la alcaldesa*, who works in *el ayuntamiento*.",
         difficulty: "warmup",
         guideRef: "places-in-town",
         hints: ["*Mayor* here is an adjective meaning 'bigger / main' — it's not the person who runs the town."],
@@ -577,7 +577,7 @@ export const mcqPapers: Paper[] = [
         options: ["al", "a el", "a la", "del"],
         answerIndex: 0,
         explanation:
-          "*Ir a* + *el parque* → *a + el* contracts to **al**: *Voy al parque.* *A el* is never written with the article. *A la* is for feminine places (*a la piscina*), and *del* means 'of / from the'.",
+          "*Ir a* + *el parque* → *a + el* contracts to **al**: *Voy al parque.* *A el* is always wrong here — it must contract. *A la* is for feminine places (*a la piscina*), and *del* means 'of / from the'.",
         difficulty: "core",
         guideRef: "location-and-distance",
         hints: ["'To go to' = *ir a*. What is the article of *parque*?", "*a + el* = ?"],

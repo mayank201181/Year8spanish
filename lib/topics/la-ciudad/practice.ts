@@ -187,7 +187,7 @@ export const practice: TopicPractice = {
           question: "Write in English: *el centro comercial*",
           answer: {
             type: "text",
-            accept: ["the shopping centre", "shopping centre", "the shopping center", "shopping center", "the shopping mall", "shopping mall", "the mall", "mall", "a shopping centre", "a shopping mall"],
+            accept: ["the shopping centre", "shopping centre", "the shopping center", "shopping center", "the shopping mall", "shopping mall", "the mall", "mall", "a shopping centre", "a shopping center", "a shopping mall", "a mall"],
           },
           solution: ["*Centro* = centre, *comercial* = to do with buying and selling.", "In natural English: **the shopping centre** (or mall)."],
           traps: [{ spec: { type: "text", accept: ["the commercial centre", "commercial centre", "the commercial center", "commercial center"] }, feedback: "Good literal guess! The natural English is 'shopping centre' or 'mall'." }],
@@ -298,7 +298,7 @@ export const practice: TopicPractice = {
             { spec: { type: "text", accept: ["ningún", "ninguno", "ningun"] }, feedback: "*Ningún* is for masculine nouns (*ningún museo*). *Piscina* is feminine." },
           ],
           commonError: "Using *ningún* with feminine nouns.",
-          difficulty: "challenge",
+          difficulty: "core",
           guideRef: "hay-un-una",
           hints: ["It works like *un / una*: it must match the noun.", "What gender is *piscina*?"],
           strategy: "Agreement check",
@@ -323,7 +323,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "la-ciudad-p1-q10",
           question: "Write the plural of *la estación* (with the article). Think about the accent!",
-          answer: { type: "text", accept: ["las estaciones", "estaciones"] },
+          answer: { type: "text", accept: ["las estaciones"] },
           solution: [
             "Ends in a consonant → add *-es*: *estacion* + *es*.",
             "The stress stays on *-cio-*, which is now the second-to-last syllable, so no written accent is needed.",
@@ -332,10 +332,11 @@ export const practice: TopicPractice = {
           traps: [
             { spec: { type: "text", accept: ["las estacions", "estacions"] }, feedback: "Nouns ending in a consonant add *-es*, not *-s*." },
             { spec: { type: "text", accept: ["los estaciones"] }, feedback: "It stays feminine: *las estaciones*." },
+            { spec: { type: "text", accept: ["estaciones"] }, feedback: "Right plural — now add the article the question asks for: *las estaciones*." },
           ],
           commonError: "Keeping the accent: *estaciónes*.",
           difficulty: "core",
-          guideRef: "places-in-town",
+          guideRef: "hay-un-una",
           hints: ["Words ending in a consonant add *-es* in the plural.", "Say *es-ta-CIO-nes* aloud. Is the stress now where Spanish expects it (second-to-last syllable)? Then does it need a written accent?"],
           strategy: "Mind the accent",
         },
@@ -431,6 +432,8 @@ export const practice: TopicPractice = {
               "no hay cine y no hay teatro en mi ciudad",
               "en mi pueblo no hay cine y no hay teatro",
               "no hay cine y no hay teatro en mi pueblo",
+              "en mi ciudad no hay ningún cine ni ningún teatro",
+              "no hay ningún cine ni ningún teatro en mi ciudad",
             ],
           },
           solution: [
@@ -547,7 +550,7 @@ export const practice: TopicPractice = {
           question: "Translate into Spanish: 'It's ten minutes on foot.'",
           answer: {
             type: "text",
-            accept: ["está a diez minutos a pie", "está a 10 minutos a pie", "está a diez minutos andando", "está a 10 minutos andando"],
+            accept: ["está a diez minutos a pie", "está a 10 minutos a pie", "está a diez minutos andando", "está a 10 minutos andando", "está a diez minutos caminando", "está a 10 minutos caminando"],
           },
           solution: ["Distance is location → *estar*: *está*.", "Distance phrases start with *a*: *a diez minutos*.", "'On foot' = *a pie* (or *andando*).", "**Está a diez minutos a pie.**"],
           traps: [
@@ -627,7 +630,7 @@ export const practice: TopicPractice = {
           question:
             "Look at the map. You are at *Estás aquí*, facing up the main street. Where do these directions take you? *Sigue todo recto hasta el final de la calle.* Write the place in Spanish, with its article.",
           diagram: MAP_TOWN,
-          answer: { type: "text", accept: ["la plaza mayor"] },
+          answer: { type: "text", accept: ["la plaza mayor", "la plaza"] },
           solution: ["*Sigue todo recto* = go straight on, *hasta el final de la calle* = to the end of the street.", "You don't turn at all, so you reach **la plaza mayor** at the top."],
           traps: [
             { spec: { type: "text", accept: ["el cine", "la biblioteca"] }, feedback: "Those are on the first street — but these directions never tell you to turn." },
@@ -692,6 +695,8 @@ export const practice: TopicPractice = {
               "cerca de mi casa hay un polideportivo pero no se puede nadar ya que no hay piscina",
               "cerca de mi casa hay un polideportivo pero no puedes nadar porque no hay piscina",
               "cerca de mi casa hay un polideportivo pero no puedes nadar ya que no hay piscina",
+              "hay un polideportivo cerca de mi casa pero no se puede nadar porque no hay ninguna piscina",
+              "cerca de mi casa hay un polideportivo pero no se puede nadar porque no hay ninguna piscina",
             ],
           },
           solution: [
