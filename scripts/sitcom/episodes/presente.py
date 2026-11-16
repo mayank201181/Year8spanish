@@ -139,9 +139,9 @@ L("lola", "Five. Reflexive pronoun in front. [[Me levanto.]] [[Me voy a dormir.]
 
 scene("kitchen", [("tara", 260), ("mum", 520), ("dad", 780), ("pablo", 1040)], caption="THE NEXT MORNING")
 L("dad", "Family meeting. I've practised. [[Somos una familia. Estamos juntos. Y hablamos español.]] We are a family. We are together. And we speak Spanish.", mood="determined", shot="close", boardClear=True)
-L("tara", "Wait. That was perfect. [[Somos]] for who we are. [[Estamos]] for where we are.", mood="shock", shot="close")
+L("tara", "That was perfect. [[Somos]] for who we are. [[Estamos]] for where we are.", mood="shock", shot="close")
 L("mum", "Who are you, and what have you done with my husband?", mood="shock", shot="close")
-L("dad", "I have no idea what I said. But I meant every word.", mood="happy", shot="close")
+L("dad", "No idea what I said. But I meant it.", mood="happy", shot="close")
 L("pablo", "[[¡Olé!]] Breakfast is not tense any more.", mood="excited", shot="close")
 L("lola", "It is. Present tense. It's the only tense this family has.", mood="smug", shot="wide", offstage=True, gap=0.8)
 
