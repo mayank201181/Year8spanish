@@ -15,7 +15,18 @@ export interface SitcomEpisode {
   poster: string;
 }
 
-export const SITCOM_EPISODES: SitcomEpisode[] = [];
+export const SITCOM_EPISODES: SitcomEpisode[] = [
+  {
+    "num": 1,
+    "topicId": "mi-casa",
+    "topicShort": "My Home",
+    "title": "Mi Casa Es Tu Caos",
+    "logline": "Pablo arrives from Sevilla with Lola, a parrot who corrects everyone's Spanish. Types of home, where it is, rooms with hay and tiene, and adjectives that agree.",
+    "durationSec": 482,
+    "src": "/videos/mi-casa.mp4",
+    "poster": "/videos/posters/mi-casa.jpg"
+  }
+];
 
 export function sitcomEpisodeFor(topicId: string): SitcomEpisode | undefined {
   return SITCOM_EPISODES.find((e) => e.topicId === topicId);
