@@ -130,20 +130,54 @@ def sfx_door():
     t = t_(0.5); return (np.sin(2*np.pi*90*t)*np.exp(-t*12) + rng.uniform(-1,1,len(t))*np.exp(-t*30)*0.3) * 0.8
 def sfx_drawer():
     t = t_(0.45); n = rng.uniform(-1, 1, len(t)); return n * (0.15 + 0.1*np.sin(2*np.pi*30*t)) * adsr(len(t), 0.05, 0.1)
+def sfx_squawk():
+    # parrot squawk: two harsh FM chirps
+    out = []
+    for f0, d in [(1500, 0.16), (1900, 0.22)]:
+        t = t_(d); f = f0 * (1 + 0.35*np.sin(np.pi*t/d)) + 180*np.sin(2*np.pi*55*t)
+        ph = np.cumsum(f) / SR
+        w = np.sign(np.sin(2*np.pi*ph)) * 0.25 + np.sin(2*np.pi*2*ph) * 0.2 + rng.uniform(-1, 1, len(t)) * 0.12
+        out.append(w * adsr(len(t), 0.01, 0.06)); out.append(np.zeros(int(0.05*SR)))
+    return np.concatenate(out) * 0.8
+def sfx_flap():
+    # wing flaps: five soft low-passed noise bursts
+    out = np.zeros(int(0.75*SR))
+    for k in range(5):
+        n = int(0.09*SR); x = rng.uniform(-1, 1, n); y = np.zeros(n); a = 0.0
+        for i in range(n): a += 0.12*(x[i]-a); y[i] = a
+        i0 = int((0.03 + k*0.13)*SR); out[i0:i0+n] += y * np.hanning(n) * 2.4
+    return out
+def sfx_whistle():
+    # referee pea-whistle: trilled tone, short-short-long
+    out = []
+    for d in (0.14, 0.14, 0.55):
+        t = t_(d); f = 2900 + 120*np.sin(2*np.pi*32*t)
+        ph = np.cumsum(f) / SR
+        w = np.sin(2*np.pi*ph) * (0.7 + 0.3*np.sin(2*np.pi*32*t)) + rng.uniform(-1, 1, len(t))*0.05
+        out.append(w * adsr(len(t), 0.01, 0.04) * 0.35); out.append(np.zeros(int(0.06*SR)))
+    return np.concatenate(out)
+def sfx_flamenco():
+    # rasgueado: four fast strums on E major, then F major and back to E (Andalusian flourish)
+    out = np.zeros(int(2.4*SR))
+    E = [40, 47, 52, 56, 59, 64]; F = [41, 48, 53, 57, 60, 65]
+    for at, ch, vel, up in [(0.0, E, .7, 0), (0.09, E, .6, 1), (0.18, E, .6, 0), (0.27, E, .8, 1), (0.55, F, .9, 0), (0.95, E, 1.0, 0)]:
+        for j, n in enumerate(ch[::-1] if up else ch):
+            p = pluck(NOTE(n), 1.4, 0.5*vel, 0.995); i = int((at + j*0.008)*SR); out[i:i+len(p)] += p[:len(out)-i]
+    return out * 0.45
 def jingle():
-    # bouncy ukulele-ish tune, C major
-    mel = [(72,.18),(76,.18),(79,.18),(84,.36),(81,.18),(79,.18),(76,.36),(77,.18),(79,.18),(81,.18),(83,.18),(84,.8)]
+    # bouncy theme over the Andalusian cadence (Am-G-F-E), guitar-ish plucks
+    mel = [(76,.18),(77,.18),(76,.18),(74,.36),(72,.18),(74,.18),(72,.36),(71,.18),(72,.18),(71,.18),(69,.18),(68,.8)]
     out = np.zeros(int(4.6*SR)); pos = 0.15
     for n, d in mel:
         p = pluck(NOTE(n), 1.0, 0.6, 0.995); i = int(pos*SR); out[i:i+len(p)] += p[:len(out)-i] * 0.5; pos += d
-    for k, (ch, at) in enumerate([([48,55,64], 0.15), ([53,57,65], 1.05), ([55,59,67], 1.95), ([48,55,64,72], 2.85)]):
+    for k, (ch, at) in enumerate([([45,52,57,60], 0.15), ([43,50,55,59], 1.05), ([41,48,53,57], 1.95), ([40,47,52,56,59,64], 2.85)]):
         for j, n in enumerate(ch):
             p = pluck(NOTE(n), 1.6, 0.5, 0.996); i = int((at + j*0.015)*SR); out[i:i+len(p)] += p[:len(out)-i]*0.35
     return out
 def music_bed(dur):
-    # gentle strummed loop C-G-Am-F at 100bpm, offbeat strums
+    # gentle strummed loop, Andalusian cadence Am-G-F-E at 100bpm, offbeat strums
     beat = 60/100; bar = 4*beat
-    chords = [[60,64,67,72],[55,59,62,67],[57,60,64,69],[53,57,60,65]]
+    chords = [[57,60,64,69],[55,59,62,67],[53,57,60,65],[52,56,59,64]]
     loop = np.zeros(int(4*bar*SR) + SR)
     for b, ch in enumerate(chords):
         for s, (off, vel) in enumerate([(0,1.0),(1.5,.6),(2,.8),(3,.6),(3.5,.5)]):
@@ -157,7 +191,8 @@ def music_bed(dur):
     return np.tile(loop, reps)[:int(dur*SR)]
 
 SFX = dict(ding=sfx_ding, buzzer=sfx_buzzer, scratch=sfx_scratch, trombone=sfx_trombone, poof=sfx_poof,
-           whoosh=sfx_whoosh, tick=sfx_tick, door=sfx_door, drawer=sfx_drawer)
+           whoosh=sfx_whoosh, tick=sfx_tick, door=sfx_door, drawer=sfx_drawer,
+           squawk=sfx_squawk, flap=sfx_flap, whistle=sfx_whistle, flamenco=sfx_flamenco)
 _sfx_cache = {}
 def get_sfx(n):
     if n not in _sfx_cache: _sfx_cache[n] = SFX[n]().astype(np.float32)
@@ -219,7 +254,7 @@ for b in BEATS:
         if caption: push("gap", 0.4)
         continue
     if k == "poof":
-        sfx_events.append((t, "poof", 0.9))
+        sfx_events.append((t, b.get("sfx", "poof"), 0.9))
         cast = [c for c in cast if c["who"] != b["who"]] + [dict(who=b["who"], x=b["x"], appear=round(t, 3))]
         moods[b["who"]] = "bored"
         push("poof", 0.7, who=b["who"])
