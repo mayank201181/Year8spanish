@@ -17,14 +17,13 @@ function sizeFrom(raw: string | null): number {
   return Math.round(Math.min(MAX, Math.max(MIN, n)));
 }
 
-/** A bold, hand-drawn π (stroked paths), so no font is needed. */
+/** A bold, hand-drawn ¡ (Spanish inverted exclamation) (stroked paths), so no font is needed. */
 function Pi({ px }: { px: number }) {
   return (
     <svg width={px} height={px} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="#ffffff" strokeWidth={11.5} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 37 C 20 28 26 25 34 25 L 84 25" />
-        <path d="M41 27 C 41 50 38 65 29 77" />
-        <path d="M65 27 L 65 64 C 65 74 70 77 79 73" />
+        <circle cx="50" cy="22" r="9" fill="#ffffff" stroke="none" />
+        <path d="M47 40 L 53 40 L 58 82 Q 50 88 42 82 Z" fill="#ffffff" stroke="#ffffff" strokeWidth={4} />
       </g>
     </svg>
   );
@@ -34,7 +33,7 @@ export function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const size = sizeFrom(searchParams.get("size"));
   const maskable = searchParams.get("maskable") === "1";
-  // Maskable icons may be cropped to a circle of 80% diameter. The π's ink spans
+  // Maskable icons may be cropped to a circle of 80% diameter. The glyph's ink spans
   // about 67% × 52% of its box, so a 60% box keeps it within a ~26% radius of the
   // centre (safe zone: 40%). "any" icons get rounded corners and a larger glyph.
   const glyph = Math.round(size * (maskable ? 0.6 : 0.66));

@@ -21,9 +21,8 @@ export default function AppleIcon() {
       >
         <svg width={100} height={100} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ marginTop: 4 }}>
           <g fill="none" stroke="#ffffff" strokeWidth={12} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 37 C 20 28 26 25 34 25 L 84 25" />
-            <path d="M41 27 C 41 50 38 65 29 77" />
-            <path d="M65 27 L 65 64 C 65 74 70 77 79 73" />
+            <circle cx="50" cy="22" r="9" fill="#ffffff" stroke="none" />
+        <path d="M47 40 L 53 40 L 58 82 Q 50 88 42 82 Z" fill="#ffffff" stroke="#ffffff" strokeWidth={4} />
           </g>
         </svg>
         <div

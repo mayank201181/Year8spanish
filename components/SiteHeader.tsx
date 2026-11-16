@@ -58,8 +58,8 @@ export function SiteHeader() {
     <header className="no-print sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4">
         <Link href="/" className="flex items-center gap-2 font-black tracking-tight">
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-lg text-white" aria-hidden>
-            π
+          <span className="flex h-8 min-w-8 px-1 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-sm text-white" aria-hidden>
+            ¡Ñ!
           </span>
           <span className="hidden sm:inline">Spanish Lab</span>
         </Link>
