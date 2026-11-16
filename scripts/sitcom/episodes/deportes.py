@@ -58,6 +58,7 @@ L("pablo", "Some sports have their own verb. [[Nado]], I swim. [[Corro]], I run.
   board="[[nado · corro · monto en bici]]")
 L("lola", "Verb three. [[Practicar]] works with every sport. It's the safe one. [[¿Qué deportes practicas?]] What sports do you do?", mood="teach", shot="close",
   board="[[¿Qué deportes practicas?]]")
+L("pablo", "And if the answer is nothing? [[No practico ningún deporte.]] I don't do any sport.", mood="neutral", shot="close")
 L("dad", "Practico... the goals. Lots of goals.", mood="smug", shot="close")
 L("pablo", "Into which goal?", mood="worried", shot="close")
 L("dad", "That's not important.", mood="annoyed", shot="close", gap=0.4)
@@ -76,6 +77,8 @@ L("pablo", "[[Juego al fútbol todos los días.]] I play football every day. And
   board="[[todos los días · los sábados]]")
 L("mum", "[[Hago yoga dos veces a la semana.]] I do yoga twice a week. [[Una vez]], once. [[Dos veces]], twice.", mood="happy", shot="close",
   board="[[una vez · dos veces a la semana]]")
+L("pablo", "Word order. Short words like [[a menudo]] go before the verb. Longer phrases go at the start, or the end. [[Los fines de semana hago natación.]] At weekends I go swimming.", mood="teach", shot="close",
+  board="[[Los fines de semana hago…]]")
 L("tara", "[[Nunca hago deporte.]] I never do sport. Or, [[no hago nunca deporte.]] If [[nunca]] comes after the verb, put [[no]] in front.", mood="deadpan", shot="close",
   board="[[Nunca hago… · No hago nunca…]]")
 L("lola", "Correct. Twice. And still allergic to exercise.", mood="smug", shot="close", gap=0.3)
@@ -88,7 +91,8 @@ L("lola", "Adjectives. [[Emocionante]], exciting. [[Divertido]], fun. [[Aburrido
 L("mum", "And they agree. [[La natación es agotadora.]] Swimming is exhausting. Feminine, so [[agotadora]].", mood="determined", shot="close",
   board="[[la natación es agotadora]]")
 L("tara", "But [[el yoga es relajante]]. [[Relajante]] ends in E, so it never changes for feminine. Nor do [[fácil]] and [[difícil]].", mood="neutral", shot="close",
-  board="[[relajante · fácil]] don't change", gap=0.4)
+  board="[[relajante · fácil]] don't change")
+L("mum", "And turn it up with [[muy]], very, or [[bastante]], quite. [[El fútbol es bastante peligroso.]] Football is quite dangerous. For some people more than others.", mood="smug", shot="close", gap=0.4)
 
 # ---------------- ACT 4: PLANS & INVITATIONS ----------------
 scene("park", [("tara", 260), ("pablo", 560), ("dad", 840)])
@@ -99,6 +103,7 @@ L("tara", "[[Lo siento, no puedo.]] Sorry, I can't. [[Tengo que estudiar.]] I ha
   board="[[Lo siento, no puedo]]")
 L("pablo", "On a Saturday? Study what?", mood="thinking", shot="close")
 L("tara", "How to avoid badminton.", mood="deadpan", shot="close")
+L("tara", "And for the record, [[el sábado que viene voy a leer.]] Next Saturday, I'm going to read.", mood="deadpan", shot="close")
 L("dad", "I'll play! Sí, okay-o!", mood="excited", shot="close")
 L("lola", "[[¡Sí, vale!]] Yes, okay! Or [[¡claro!]] Of course!", mood="teach", shot="close",
   board="[[¡Sí, vale! · ¡Claro!]]")
