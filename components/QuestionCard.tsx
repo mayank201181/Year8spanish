@@ -420,7 +420,15 @@ export function suggestMarks(q: WrittenQ, text: string): boolean[] {
   // Accent- and case-insensitive: "esta" earns the tick for "está" (the mark is self-assessed anyway).
   const fold = (x: string) => x.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ");
   const t = ` ${fold(text)} `;
-  return q.markScheme.map((p) => p.keywords.some((k) => k && t.includes(fold(k))));
+  // Short keywords ("vi", "y", "tan") must match whole words, not parts of "vivo", "hay", "también".
+  const hit = (k: string) => {
+    const f = fold(k).trim();
+    if (!f) return false;
+    if (f.length > 3) return t.includes(f);
+    const esc = f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(^|[^a-z0-9])${esc}([^a-z0-9]|$)`).test(t);
+  };
+  return q.markScheme.map((p) => p.keywords.some((k) => k && hit(k)));
 }
 
 function WrittenBody({ q, mode, restored, onDone, onAnswer, topicId, onNext, nextLabel }: QuestionCardProps & { q: WrittenQ }) {
