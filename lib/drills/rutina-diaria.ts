@@ -977,14 +977,13 @@ export const drills: Drill[] = [
         ? [CH.despertarse, CH.levantarse, CH.ducharse, CH.vestirse, CH.dientes, CH.desayunar, CH.salir, CH.irBus, CH.llegar]
         : [CH.volver, CH.deberes, CH.cenar, CH.tele, CH.acostarse];
       const n = tier === 1 ? 1 : 2;
-      const idx = rng
-        .shuffle(pool.map((_, i) => i))
-        .slice(0, n)
-        .sort((x, y) => x - y);
+      // Two actions close together in the day (next or next-but-one in the routine).
+      const first = rng.int(0, pool.length - 2);
+      const idx = n === 1 ? [first] : [first, Math.min(first + rng.int(1, 2), pool.length - 1)];
       const chunks = idx.map((i) => pool[i]);
       const plural = tier === 3 || (tier === 2 && rng.bool(0.3));
       const target: Person = plural ? "ellos" : "él";
-      const subj = plural ? rng.pick(["Mis padres", "Mis hermanos", "Pablo y Carmen", "Mis abuelos"]) : rng.pick(["Mi hermano", "Mi hermana", "Mi madre", "Diego", "Wei Ling"]);
+      const subj = plural ? rng.pick(["Mis hermanos", "Mis primas", "Pablo y Carmen", "Mis hermanas"]) : rng.pick(["Mi hermano", "Mi hermana", "Mi madre", "Diego", "Wei Ling"]);
       // A clock time on the first action (o'clock / quarter / half).
       const hoursFor = new Map<Chunk, number[]>([
         [CH.volver, [15, 16, 17]],
