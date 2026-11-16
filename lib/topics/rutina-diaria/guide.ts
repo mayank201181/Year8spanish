@@ -110,6 +110,7 @@ export const guide: TopicGuide = {
               type: "text",
               accept: [
                 "son las siete menos cuarto",
+                "las siete menos cuarto",
                 "son las siete menos quince",
                 "son las seis cuarenta y cinco",
                 "son las seis y cuarenta y cinco",
@@ -311,6 +312,9 @@ export const guide: TopicGuide = {
                 "después de la cena veo la televisión",
                 "veo la tele después de la cena",
                 "veo la televisión después de la cena",
+                "yo veo la tele después de cenar",
+                "yo veo la televisión después de cenar",
+                "después de la cena yo veo la tele",
               ],
             },
             solution: "'After' + verb → *después de* + infinitive *cenar*; 'I watch TV' → *veo la tele*: **Después de cenar, veo la tele.**",

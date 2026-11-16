@@ -201,7 +201,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 3,
         explanation:
-          "*Vivir cerca del mar* is an infinitive phrase, and an infinitive always counts as **singular** — so it must be *Me **gusta** vivir cerca del mar*. *Me chiflan los parques* is correct because *los parques* is plural, which is exactly the trap: learners copy the *-n* everywhere.",
+          "*Vivir cerca del mar* is an infinitive phrase, and an infinitive always counts as **singular** — so it must be *Me* **gusta** *vivir cerca del mar*. *Me chiflan los parques* is correct because *los parques* is plural, which is exactly the trap: learners copy the *-n* everywhere.",
         difficulty: "challenge",
         guideRef: "opinion-phrases",
         hints: [

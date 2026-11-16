@@ -62,7 +62,7 @@ export const practice: TopicPractice = {
       id: "donde-vivo-quiz-q05",
       question: "Write in Spanish: 'I am going to live' (use *ir* + *a* + infinitive).",
       answer: { type: "text", accept: ["voy a vivir", "yo voy a vivir"] },
-      traps: [{ spec: { type: "text", accept: ["voy vivir", "yo voy vivir"] }, feedback: "Don't forget the little *a*: *voy **a** vivir*." }],
+      traps: [{ spec: { type: "text", accept: ["voy vivir", "yo voy vivir"] }, feedback: "Don't forget the little *a*: *voy* **a** *vivir*." }],
       solution: ["*Yo* form of *ir* = *voy*.", "Add *a* + the infinitive *vivir* → **voy a vivir**."],
       commonError: "Dropping the *a*: *voy vivir*.",
       difficulty: "warmup",
@@ -372,7 +372,7 @@ export const practice: TopicPractice = {
           kind: "written",
           id: "donde-vivo-p1-q14",
           question:
-            "Explain in English why it is *A mis padres **les gusta** el campo* but *A mi padre **le gustan** los parques*. Cover both the pronoun and the verb ending.",
+            "Explain in English why it is *A mis padres* **les gusta** *el campo* but *A mi padre* **le gustan** *los parques*. Cover both the pronoun and the verb ending.",
           marks: 4,
           modelAnswer:
             "The **pronoun** shows who does the liking: *mis padres* is more than one person, so *les*; *mi padre* is one person, so *le*. The **verb** agrees with the thing that is liked, because with *gustar* the thing liked is the grammatical subject ('the countryside pleases my parents'): *el campo* is singular → *gusta*; *los parques* is plural → *gustan*. The *A* at the start (*A mis padres*, *A mi padre*) introduces the person, and the pronoun *le/les* is still needed even when the person is named.",
@@ -773,7 +773,7 @@ export const practice: TopicPractice = {
       ],
       answerIndex: 2,
       explanation:
-        "Diego says *mi ciudad es **más** animada que tu pueblo* — **Madrid** is livelier, so the statement that he finds the village livelier is false. Hana's *Es verdad* ('That's true') shows she accepts his points, *menos caro* = cheaper, and *tan bonito como* = as pretty as.",
+        "Diego says *mi ciudad es* **más** *animada que tu pueblo* — **Madrid** is livelier, so the statement that he finds the village livelier is false. Hana's *Es verdad* ('That's true') shows she accepts his points, *menos caro* = cheaper, and *tan bonito como* = as pretty as.",
       difficulty: "challenge",
       guideRef: "comparing-places",
       hints: [
@@ -821,7 +821,7 @@ export const practice: TopicPractice = {
       kind: "written",
       id: "donde-vivo-ch-q05",
       question:
-        "Explain in English:\n\n1. why it is *Madrid es **más grande** que mi pueblo* but *Las playas de aquí son **mejores** que las playas de allí*;\n2. why *más mejor* is wrong;\n\nthen 3. write your own correct Spanish sentence using *peor* or *peores* to compare two places.",
+        "Explain in English:\n\n1. why it is *Madrid es* **más grande** *que mi pueblo* but *Las playas de aquí son* **mejores** *que las playas de allí*;\n2. why *más mejor* is wrong;\n\nthen 3. write your own correct Spanish sentence using *peor* or *peores* to compare two places.",
       marks: 4,
       modelAnswer:
         "1. Most comparisons are built with **más + adjective + que** ('more big than'). But *bueno* and *malo* have irregular comparatives, **mejor** (better) and **peor** (worse), which replace *más bueno / más malo*.\n2. *Mejor* already means 'more good', so *más mejor* says 'more' twice — like 'more better' in English.\n3. *Mejor* and *peor* agree in number: *las playas* is plural → *mejores*. My sentence: *Las calles de la ciudad son peores que las calles de mi pueblo porque están sucias.* (The streets in the city are worse than the streets in my village because they're dirty.)",

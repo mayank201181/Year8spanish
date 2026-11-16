@@ -77,7 +77,7 @@ export const morePapers: Paper[] = [
           ],
         },
         traps: [
-          { spec: { type: "text", accept: ["creo mi pueblo es aburrido", "pienso mi pueblo es aburrido"] }, feedback: "In Spanish you can't leave out 'that': *creo **que**…*" },
+          { spec: { type: "text", accept: ["creo mi pueblo es aburrido", "pienso mi pueblo es aburrido"] }, feedback: "In Spanish you can't leave out 'that': *creo* **que**…" },
           { spec: { type: "text", accept: ["pienso que mi pueblo está aburrido", "creo que mi pueblo está aburrido"] }, feedback: "*Estar aburrido* means 'to be bored'! A boring place → *es aburrido*." },
         ],
         solution: ["'I think that' = *Creo que* / *Pienso que* — *que* is compulsory.", "Describing what a place is like → *ser*: *es aburrido* (*el pueblo* is masculine).", "→ **Creo que mi pueblo es aburrido.**"],
@@ -145,8 +145,8 @@ export const morePapers: Paper[] = [
         question: "Write in Spanish: 'There is nothing to do.'",
         answer: { type: "text", accept: ["No hay nada que hacer"] },
         traps: [
-          { spec: { type: "text", accept: ["hay nada que hacer"] }, feedback: "Spanish needs the double negative: ***No** hay nada…*" },
-          { spec: { type: "text", accept: ["no hay nada hacer", "no hay nada para hacer"] }, feedback: "The chunk uses *que* before the infinitive: *nada **que** hacer*." },
+          { spec: { type: "text", accept: ["hay nada que hacer"] }, feedback: "Spanish needs the double negative: **No** *hay nada…*" },
+          { spec: { type: "text", accept: ["no hay nada hacer", "no hay nada para hacer"] }, feedback: "The chunk uses *que* before the infinitive: *nada* **que** *hacer*." },
         ],
         solution: ["'There is' = *hay*; 'nothing' = *nada*.", "Spanish double negative: *no hay nada*.", "'To do' after *nada* = *que hacer*.", "→ **No hay nada que hacer.**"],
         commonError: "*Hay nada* — the *no* in front is compulsory.",
@@ -217,7 +217,7 @@ export const morePapers: Paper[] = [
         question: "Write in Spanish, using *ir a*: 'It's going to be fantastic.'",
         answer: { type: "text", accept: ["Va a ser fantástico"] },
         traps: [
-          { spec: { type: "text", accept: ["va a es fantástico", "va ser fantástico"] }, feedback: "*Va* + *a* + infinitive: *va a **ser***." },
+          { spec: { type: "text", accept: ["va a es fantástico", "va ser fantástico"] }, feedback: "*Va* + *a* + infinitive: *va a* **ser**." },
           { spec: { type: "text", accept: ["voy a ser fantástico", "van a ser fantástico"] }, feedback: "'It' is singular → *va*." },
         ],
         solution: ["'It' → *él/ella* form of *ir* = *va*.", "+ *a* + infinitive *ser*.", "*Fantástico* (masculine — it refers to a whole idea).", "→ **Va a ser fantástico.**"],
