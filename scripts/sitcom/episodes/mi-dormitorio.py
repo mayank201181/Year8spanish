@@ -13,7 +13,7 @@ poof("lola", 1060)
 L("lola", "[[¿Dónde están mis gafas?]] Where are my glasses? And the answer is, [[están encima de tu cabeza.]] They're on top of your head.", mood="eyeroll", shot="close")
 L("dad", "Ha! Found them. Where were they?", mood="happy", shot="close")
 L("tara", "On your head.", mood="deadpan", shot="close")
-freeze("\"DÓNDE ES MY GLASSES-O?\"", 2.4, narrator="Narrator: They were on his head the entire time.")
+freeze("\"MY GLASSES-O?\"", 2.4, narrator="Narrator: They were on his head the entire time.")
 confess("tara", "TARA RAO · 12 · Has Found Dad's Glasses 400 Times")
 L("tara", "Today we are turning the storeroom into a bedroom for Pablo. Dad is in charge of the furniture.", mood="deadpan")
 L("tara", "I've already called a carpenter. Just in case.", mood="deadpan", gap=0.5)
@@ -32,14 +32,14 @@ L("tara", "And the rug is [[la alfombra]], and the little table next to the bed 
 L("pablo", "We also say [[la cómoda]], a chest of drawers. And [[el póster]]. That is the most important furniture of all.", mood="happy", shot="close",
   board="[[la cómoda]] · [[el póster]]")
 L("lola", "Plurals. Ends in a vowel? Add S. [[Una cama, dos camas.]] Ends in a consonant? Add E S. [[Un ordenador, dos ordenadores.]] [[Un póster, dos pósteres.]]", mood="teach", shot="close",
-  boardClear=True, board="vowel + s: [[camas]]   consonant + es: [[ordenadores]]")
+  boardClear=True, board="+s [[camas]]   +es [[ordenadores]]")
 L("tara", "So, one lamp, two lamps. [[Una lámpara, dos lámparas.]]", mood="neutral", shot="close", board="[[una lámpara → dos lámparas]] ✔")
 L("pablo", "And in my room in Seville, I have three posters. [[Tengo tres pósteres.]] All of them are goalkeepers.", mood="happy", shot="close")
 L("tara", "Why goalkeepers?", mood="thinking", shot="two")
 L("pablo", "Because nobody else puts up goalkeepers. They are lonely.", mood="sad", shot="close", gap=0.4)
 
 # ---------------- ACT 2: WHERE IS IT? ----------------
-scene("bedroom", [("dad", 300), ("pablo", 600), ("lola", 920)])
+scene("bedroom", [("dad", 260), ("tara", 520), ("pablo", 780), ("lola", 1040)])
 L("dad", "Right. The furniture is all in. Where's the lamp? I put it somewhere.", mood="thinking", shot="close", boardClear=True)
 L("lola", "[[¿Dónde está la lámpara?]] Where is the lamp? Look. [[La lámpara está encima del escritorio.]] The lamp is on the desk.", mood="teach", shot="close",
   board="[[encima de]] = on top of / above")
@@ -48,7 +48,7 @@ L("lola", "And the ball? [[El balón está debajo de la cama.]] The ball is unde
 L("pablo", "[[La mesita de noche está al lado de la cama.]] The bedside table is next to the bed.", mood="neutral", shot="close",
   board="[[al lado de]] = next to")
 L("lola", "[[La silla está delante del escritorio.]] The chair is in front of the desk. And behind is [[detrás de]].", mood="teach", shot="close",
-  board="[[delante de]] = in front of   [[detrás de]] = behind")
+  board="[[delante de]] = in front   [[detrás de]] = behind")
 L("pablo", "And [[la ventana está entre la cama y el escritorio.]] The window is between the bed and the desk.", mood="happy", shot="close",
   board="[[entre … y …]] = between … and …")
 L("dad", "I see a pattern. Encima de el desk. Debajo de el bed.", mood="smug", shot="close", boardClear=True)
@@ -68,7 +68,7 @@ L("lola", "That's why I like Tara. Tara also doesn't do feelings.", mood="smug",
 
 # ---------------- ACT 3: HAY VS ESTÁ ----------------
 card("HAY FEVER", "Two little words. One big headache.", 2.4)
-scene("bedroom", [("tara", 300), ("mum", 600), ("lola", 920)])
+scene("bedroom", [("tara", 260), ("mum", 520), ("pablo", 780), ("lola", 1040)])
 L("mum", "Here's my question. When do I say [[hay]], and when do I say [[está]]?", mood="thinking", shot="close", boardClear=True)
 L("lola", "Best question all week. [[Hay]] says that something EXISTS. There is, there are. It comes with [[un]], [[una]], [[unos]], [[unas]], or a number.", mood="teach", shot="close",
   board="[[hay]] + [[un / una / unos / unas]] / number")
@@ -84,7 +84,7 @@ L("pablo", "Wait. There is no TV in my room?", mood="shock", shot="close")
 L("tara", "[[No hay televisión.]] But [[hay]] a parrot. Who watches you sleep.", mood="deadpan", shot="close")
 L("lola", "Only on Tuesdays.", mood="smug", shot="close", gap=0.4)
 L("mum", "Let me try a mixed one. [[Hay un ordenador. El ordenador está encima del escritorio.]] There is a computer. The computer is on the desk.", mood="determined", shot="close",
-  board="[[Hay un ordenador.]] → [[Está encima del escritorio.]]")
+  board="[[Hay un ordenador.]] → [[Está encima…]]")
 L("lola", "Flawless. First [[hay]] with [[un]]. Then [[está]] with [[el]]. Mum, you are my favourite human this week.", mood="excited", shot="close")
 
 confess("mum", "ANJALI RAO · Mum · Learning Fast · Hunting Bargains Faster")

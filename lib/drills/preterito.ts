@@ -76,7 +76,15 @@ function and(next: string): string {
 
 const GROUP_OF = (inf: string): Group => verbInfo(inf)!.group;
 const IS_REFL = (inf: string): boolean => verbInfo(inf)!.reflexive;
-const MEANING = (inf: string): string => verbInfo(inf)!.en;
+const MEANING_OVERRIDE: Record<string, string> = {
+  estar: "to be — location, feelings",
+  dar: "to give; *dar un paseo* = to go for a walk",
+};
+/** English meaning without nested brackets (it is shown inside brackets). */
+const MEANING = (inf: string): string => MEANING_OVERRIDE[inf] ?? verbInfo(inf)!.en.replace(/\s*\(([^)]*)\)/g, " $1");
+
+/** Person label for explanations: él → él / ella. */
+const PD = (p: Person): string => (p === "él" ? "él / ella" : p === "ellos" ? "ellos / ellas" : p);
 
 /** Regular stem: hablar → habl, levantarse → levant. */
 function regStem(inf: string): string {
@@ -243,6 +251,9 @@ const comps = (a: Act): string[] => [a.es, ...(a.alt ?? [])];
 // Explanations
 // ---------------------------------------------------------------------------
 
+/** Verbs whose englishGloss reads naturally with their activity (not dar un paseo, sacar fotos, hacer deporte). */
+const GLOSS_OK = new Set(ACTS.map((a) => a.inf).filter((i) => !["dar", "sacar", "hacer", "tomar", "practicar"].includes(i)));
+
 const SPELLING_INFS = new Set([
   ...verbsWithTag("spelling-car").map((v) => v.inf),
   ...verbsWithTag("spelling-gar").map((v) => v.inf),
@@ -260,21 +271,21 @@ function pretSteps(inf: string, p: Person): string[] {
   switch (inf) {
     case "ir":
     case "ser":
-      return [`*${inf}* is irregular: *fui, fuiste, fue, fuimos, fuisteis, fueron* (the same for *ir* and *ser*, no accents).`, `*${p}* → **${form}**.`];
+      return [`*${inf}* is irregular: *fui, fuiste, fue, fuimos, fuisteis, fueron* (the same for *ir* and *ser*, no accents).`, `*${PD(p)}* → **${form}**.`];
     case "hacer":
-      return [`*hacer* has the irregular stem *hic-* (*hiz-* before *o*): *hice, hiciste, hizo, hicimos, hicisteis, hicieron*.`, `No accents on irregular stems. *${p}* → **${form}**.`];
+      return [`*hacer* has the irregular stem *hic-* (*hiz-* before *o*): *hice, hiciste, hizo, hicimos, hicisteis, hicieron*.`, `No accents on irregular stems. *${PD(p)}* → **${form}**.`];
     case "tener":
-      return [`*tener* has the irregular stem *tuv-* + *-e, -iste, -o, -imos, -isteis, -ieron*.`, `No accents. *${p}* → **${form}**.`];
+      return [`*tener* has the irregular stem *tuv-* + *-e, -iste, -o, -imos, -isteis, -ieron*.`, `No accents. *${PD(p)}* → **${form}**.`];
     case "estar":
-      return [`*estar* has the irregular stem *estuv-* + *-e, -iste, -o, -imos, -isteis, -ieron*.`, `No accents. *${p}* → **${form}**.`];
+      return [`*estar* has the irregular stem *estuv-* + *-e, -iste, -o, -imos, -isteis, -ieron*.`, `No accents. *${PD(p)}* → **${form}**.`];
     case "dar":
-      return [`*dar* takes *-er/-ir* endings with no accents: *di, diste, dio, dimos, disteis, dieron*.`, `*${p}* → **${form}**.`];
+      return [`*dar* takes *-er/-ir* endings with no accents: *di, diste, dio, dimos, disteis, dieron*.`, `*${PD(p)}* → **${form}**.`];
     case "ver":
-      return [`*ver* → stem *v-* + *-er* endings, but one-syllable forms need no accent: *vi, viste, vio, vimos, visteis, vieron*.`, `*${p}* → **${form}**.`];
+      return [`*ver* → stem *v-* + *-er* endings, but one-syllable forms need no accent: *vi, viste, vio, vimos, visteis, vieron*.`, `*${PD(p)}* → **${form}**.`];
     case "leer":
       return p === "él" || p === "ellos"
         ? [`*leer* → stem *le-* + *-ió / -ieron*.`, `An unstressed *i* between two vowels becomes *y*: *leió* → **${form}**.`]
-        : [`*leer* → stem *le-* + *-${PRET_END.er[p]}*; the accent keeps the vowels separate.`, `*${p}* → **${form}**.`];
+        : [`*leer* → stem *le-* + *-${PRET_END.er[p]}*; the accent keeps the vowels separate.`, `*${PD(p)}* → **${form}**.`];
   }
   const end = PRET_END[g][p];
   const steps = [`*${inf}* → stem *${stem}-* (${g === "ar" ? "-ar" : "-er/-ir"} verb).${reflex}`];
@@ -288,7 +299,7 @@ function pretSteps(inf: string, p: Person): string[] {
           : "*z → c* before *é* (Spanish writes *ce*, not *ze*)";
     steps.push(`*yo* ending *-é*: *${stem}é* would change the sound, so ${why}.`);
   } else {
-    steps.push(`*${p}* ending: *-${end}*.`);
+    steps.push(`*${PD(p)}* ending: *-${end}*.`);
   }
   const pres3 = verbInfo(inf)!.tags.some((t) => t.startsWith("stem-"));
   steps.push(`→ **${form}**${pres3 && g !== "ir" ? " (no stem change in the preterite)" : ""}.`);
@@ -512,7 +523,7 @@ export const drills: Drill[] = [
       if (es.includes("pasada")) raw.push([[es.replace("pasada", "pasado")], "*semana* is feminine, so *pasado* must agree: *pasada*."]);
       else if (es.includes("pasado") && !es.startsWith("el fin")) raw.push([[es.replace("pasado", "pasada")], `*${es.split(" ")[1]}* is masculine, so it stays *pasado*.`]);
       if (es === "el fin de semana pasado") raw.push([["el fin de semana pasada"], "*pasado* agrees with *el fin* (masculine), so it stays *pasado*."]);
-      if (es.startsWith("ayer por la")) raw.push([[es.replace("por la ", "")], "Add *por la*: *ayer por la mañana*. (*Mañana* alone means tomorrow.)"]);
+      if (es === "ayer por la mañana") raw.push([["ayer mañana"], "Add *por la*: *ayer por la mañana*. (*Mañana* on its own means tomorrow.)"]);
       if (es === "anoche") raw.push([["esta noche"], "*esta noche* means tonight. Last night is *anoche*."]);
       return {
         prompt: `Write in Spanish: *${cap(en[0])}*.`,
@@ -562,8 +573,8 @@ export const drills: Drill[] = [
         ["It was fun.", [`${FUE} divertido`], ["es divertido", "fui divertido"], "Use *fue* (it was) — *es* is the present and *fui* means 'I was'."],
         ["It was a disaster.", [`${FUE} un desastre`], ["es un desastre"], "*es* is the present. For a past event: *fue*."],
         ["It was amazing.", [`${FUE} increíble`, `${FUE} alucinante`], ["es increíble", "fui increíble"], "Use *fue* (it was) — *es* is the present and *fui* means 'I was'."],
-        ["I had a brilliant time.", ["lo pasé bomba", "lo pasé genial", "lo pasé fenomenal"], ["lo paso bomba", "tuve un tiempo genial"], "Use the chunk *lo pasé* + *bomba / genial*. (Spanish doesn't say *tuve un tiempo*.)"],
-        ["I had a good time.", ["lo pasé bien"], ["lo paso bien", "tuve un buen tiempo"], "Use the chunk *lo pasé bien* — *buen tiempo* means good weather!"],
+        ["I had a brilliant time.", ["lo pasé bomba", "lo pasé genial", "lo pasé fenomenal"], ["lo paso bomba", "tuve un tiempo genial"], "Use the past chunk *lo pasé* + *bomba / genial*. (*lo paso* is the present, and Spanish doesn't say *tuve un tiempo*.)"],
+        ["I had a good time.", ["lo pasé bien"], ["lo paso bien", "tuve un buen tiempo"], "Use the past chunk *lo pasé bien*. (*lo paso* is the present — and *buen tiempo* means good weather!)"],
         ["I had an awful time.", ["lo pasé fatal"], ["lo paso fatal"], "*lo paso* is the present. Past: *lo pasé*."],
         ["I liked it.", ["me gustó"], ["me gusta", "me gusto"], "*me gusta* is the present. In the past: *me gustó*."],
         ["I loved it.", ["me encantó"], ["me encanta"], "*me encanta* is the present. In the past: *me encantó*."],
@@ -613,8 +624,8 @@ export const drills: Drill[] = [
           ["They", "ellos", ["", "ellos", "ellas"]],
           ["My sister", "él", ["mi hermana"]],
           ["Pablo", "él", ["pablo"]],
-          ["You (*tú*)", "tú", ["", "tú"]],
-          ["You all (*vosotros*)", "vosotros", ["", "vosotros", "vosotras"]],
+          ["You (tú)", "tú", ["", "tú"]],
+          ["You all (vosotros)", "vosotros", ["", "vosotros", "vosotras"]],
         ];
         const [howEn, adv] = rng.pick(HOW);
         const [whoEn, p, subj] = rng.pick(WHO);
@@ -625,7 +636,7 @@ export const drills: Drill[] = [
           answer: { type: "text", accept },
           solution: [
             `The chunk is *pasarlo* + adverb; only *pasar* changes.`,
-            `*pasar*, ${p} → *${v}*.`,
+            `*pasar*, ${PD(p)} → *${v}*.`,
             `**${cap(accept[0])}.**`,
           ],
           hint: "Keep *lo* and the adverb; change *pasé* to the right preterite ending.",
@@ -718,9 +729,9 @@ export const drills: Drill[] = [
       if (mode === 0) {
         const form = isPast ? elPast : yoPres;
         const accept = isPast ? enHePast : enIPres;
-        const sentenceBits = rng.pick(["", "", "Mira:", "En el mensaje pone:"]);
+        const sentenceBits = rng.pick(["", "", "A text message just says:", "Your exchange partner writes:"]);
         return {
-          prompt: `${sentenceBits ? sentenceBits + " " : ""}*${cap(form)}.* Who did it, and when? Write the English (for example *I walk* or *he/she walked*).`,
+          prompt: `${sentenceBits ? sentenceBits + " " : ""}*${cap(form)}.* Who is it, and is it past or present? Write the English (for example *I walk* or *he/she walked*).`,
           answer: { type: "text", accept },
           solution: isPast
             ? [`*${form}* ends in a **stressed *-ó*** (written accent) → preterite *él / ella* ending.`, `So it is **${accept[0]}** (or she). Compare *${yoPres}* = I ${base[0]}.`]
@@ -891,17 +902,19 @@ export const drills: Drill[] = [
             : `*${form}* is the present tense of *${act.inf}*${act.inf === "ir" ? " — no infinitive after *a*, so it's not the future" : ""}.`;
       const wrongFb = (t: string) =>
         t === "present"
-          ? `Check the verb ending, not just the meaning: is *${form}* really the present?`
+          ? tense === "near-future"
+            ? `*${form.split(" ")[0]}* alone would be present, but it is followed by *a* + an infinitive → near future.`
+            : `*${form}* does not have a present-tense ending. Look again at the end of the verb.`
           : t === "past"
-            ? `Is there a preterite ending in *${form}*?`
-            : "The near future needs *ir* + *a* + an infinitive.";
+            ? `There is no preterite ending (*-é, -ó, -í, -ió …*) or irregular past form in *${form}*.`
+            : "The near future needs a form of *ir* + *a* + an infinitive.";
       const raw: Array<[string[], string]> = (["past", "present", "future"] as const)
         .filter((t) => !accept.includes(t))
         .map((t) => [t === "past" ? PAST.slice(0, 5) : t === "present" ? PRESENT : FUTURE.slice(0, 5), wrongFb(t)] as [string[], string]);
       return {
         prompt: `Is this sentence in the **past**, the **present** or the **near future**? Type *past*, *present* or *future*.\n\n*${sentence}*`,
         answer: { type: "text", accept, display: label },
-        solution: [clue, `It means '${englishGloss(act.inf, tense, p)} …' → **${label}**.`],
+        solution: [clue, GLOSS_OK.has(act.inf) ? `It means '${englishGloss(act.inf, tense, p)} …' → **${label}**.` : `So the sentence is in the **${label}**.`],
         hint: time ? "The time phrase is a clue — but check that the verb agrees with it." : "Find the verb. Look at its ending, and check for *ir* + *a* + infinitive.",
         traps: mkTraps(accept, raw),
       };
@@ -922,8 +935,8 @@ export const drills: Drill[] = [
         ["She", "él", ["", "ella"]],
         ["We", "nosotros", ["", "nosotros", "nosotras"]],
         ["They", "ellos", ["", "ellos", "ellas"]],
-        ["You (*tú*)", "tú", ["", "tú"]],
-        ["You all (*vosotros*)", "vosotros", ["", "vosotros", "vosotras"]],
+        ["You (tú)", "tú", ["", "tú"]],
+        ["You all (vosotros)", "vosotros", ["", "vosotros", "vosotras"]],
       ];
       const TIMES: Array<[string, string]> = [
         ["yesterday", "ayer"], ["last night", "anoche"], ["last weekend", "el fin de semana pasado"],
@@ -954,7 +967,7 @@ export const drills: Drill[] = [
         prompt: `Translate into Spanish: *${en}*`,
         answer: { type: "text", accept, display: canonical },
         solution: [
-          `'${enPred.split(" ")[0]}' → *${act.inf}* in the preterite, ${p} → *${form}*.`,
+          `'${enPred.split(" ")[0]}' → *${act.inf}* in the preterite, ${PD(p)} → *${form}*.`,
           ...(tEs ? [`'${tEn}' → *${tEs}* (start or end of the sentence).`] : []),
           `**${canonical}**`,
         ],
@@ -1025,7 +1038,10 @@ export const drills: Drill[] = [
         const others = pool.filter((a) => a.inf !== act.inf);
         act2 = rng.pick(others);
       }
-      const p = tier === 1 ? rng.pick(["yo", "él", "ellos"] as const) : rng.pick(PERSONS);
+      const same = (q: Person) => pres(act.inf, q) === pret(act.inf, q) || (!!act2 && pres(act2.inf, q) === pret(act2.inf, q));
+      let p: Person = tier === 1 ? rng.pick(["yo", "él", "ellos"] as const) : rng.pick(PERSONS);
+      for (let i = 0; i < 10 && same(p); i++) p = rng.pick(PERSONS);
+      if (same(p)) p = "yo";
       const subj = pickSubject(rng, p);
       const now = rng.pick(NOW);
       let past = rng.pick(PAST_STARTS);
@@ -1048,7 +1064,7 @@ export const drills: Drill[] = [
         prompt: `Rewrite in the preterite, starting with *${past}*:\n\n*${original}*`,
         answer: { type: "text", accept, display: cap(accept[0]) + "." },
         solution: [
-          `*${pres(act.inf, p)}* → infinitive *${act.inf}* → preterite ${p}: *${pret(act.inf, p)}*.`,
+          `*${pres(act.inf, p)}* → infinitive *${act.inf}* → preterite ${PD(p)}: *${pret(act.inf, p)}*.`,
           ...(act2 ? [`*${pres(act2.inf, p)}* → *${act2.inf}* → *${pret(act2.inf, p)}*.`] : []),
           `Swap *${now}* for *${past}*.`,
           `**${cap(join(past, subj.show, pretCore))}.**`,
@@ -1095,7 +1111,7 @@ export const drills: Drill[] = [
         answer: { type: "text", accept },
         solution: [
           `*${time}* → ${name === "preterite" ? "past → preterite" : name === "present" ? "now / usually → present" : "future → *ir* + *a* + infinitive"}.`,
-          tense === "near-future" ? `*ir* for ${p}: *${conjugate("ir", "present", p)}* + *a* + *${act.inf}*.` : `*${act.inf}*, ${p} → *${forms[0]}*.`,
+          tense === "near-future" ? `*ir* for ${PD(p)}: *${conjugate("ir", "present", p)}* + *a* + *${act.inf}*.` : `*${act.inf}*, ${PD(p)} → *${forms[0]}*.`,
           `**${cap(join(time, subj.show, forms[0], act.es))}.**`,
         ],
         hint: "Past, present or future? Decide from the time phrase first, then find the right ending.",

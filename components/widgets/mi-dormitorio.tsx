@@ -79,15 +79,15 @@ type SpotId =
 /** x, y = where the object rests (bottom-centre). All geometry matches the drawing below. */
 const SPOTS: { id: SpotId; x: number; y: number; descs: Desc[] }[] = [
   { id: "encima-armario", x: 56, y: 90, descs: [{ prep: "encima de", a: "armario" }] },
-  { id: "delante-armario", x: 56, y: 296, descs: [{ prep: "delante de", a: "armario" }] },
+  { id: "delante-armario", x: 56, y: 302, descs: [{ prep: "delante de", a: "armario" }] },
   { id: "entre-armario-cama", x: 124, y: 250, descs: [{ prep: "entre", a: "armario", b: "cama" }, { prep: "al lado de", a: "armario" }, { prep: "al lado de", a: "cama" }] },
   { id: "encima-cama", x: 240, y: 196, descs: [{ prep: "encima de", a: "cama" }, { prep: "en", a: "cama" }] },
   { id: "debajo-cama", x: 224, y: 250, descs: [{ prep: "debajo de", a: "cama" }] },
-  { id: "delante-cama", x: 224, y: 296, descs: [{ prep: "delante de", a: "cama" }] },
+  { id: "delante-cama", x: 224, y: 302, descs: [{ prep: "delante de", a: "cama" }] },
   { id: "encima-mesita", x: 318, y: 206, descs: [{ prep: "encima de", a: "mesita" }, { prep: "en", a: "mesita" }, { prep: "al lado de", a: "cama" }] },
   { id: "encima-escritorio", x: 404, y: 186, descs: [{ prep: "encima de", a: "escritorio" }, { prep: "en", a: "escritorio" }, { prep: "debajo de", a: "ventana" }] },
   { id: "debajo-escritorio", x: 410, y: 250, descs: [{ prep: "debajo de", a: "escritorio" }] },
-  { id: "delante-escritorio", x: 410, y: 296, descs: [{ prep: "delante de", a: "escritorio" }] },
+  { id: "delante-escritorio", x: 410, y: 302, descs: [{ prep: "delante de", a: "escritorio" }] },
 ];
 const spotById = (id: SpotId) => SPOTS.find((s) => s.id === id)!;
 
@@ -165,7 +165,7 @@ function RoomFurniture() {
     <g>
       {/* wall + floor */}
       <rect x={0} y={0} width={480} height={250} className="fill-surface-2" />
-      <rect x={0} y={250} width={480} height={50} className="fill-brand-soft" />
+      <rect x={0} y={250} width={480} height={60} className="fill-brand-soft" />
       <line x1={0} y1={250} x2={480} y2={250} className={s} strokeWidth={1.5} />
       {/* window above the desk */}
       <rect x={365} y={40} width={90} height={90} className={`fill-info-soft ${s}`} strokeWidth={2} />
@@ -195,10 +195,10 @@ function RoomFurniture() {
       {/* labels on the floor, in front of each piece */}
       <g fontSize={11} textAnchor="middle" className="fill-ink-2" lang="es">
         <text x={56} y={265}>el armario</text>
-        <text x={222} y={265}>la cama</text>
-        <text x={318} y={263}>la mesita</text>
-        <text x={318} y={274}>de noche</text>
-        <text x={410} y={265}>el escritorio</text>
+        <text x={260} y={265}>la cama</text>
+        <text x={318} y={265}>la mesita</text>
+        <text x={318} y={276}>de noche</text>
+        <text x={440} y={265}>el escritorio</text>
       </g>
     </g>
   );
@@ -249,7 +249,7 @@ function RoomPlacer() {
   if (!selSpot) {
     caption = (
       <p>
-        Pick an object, then tap a dashed circle in the room. You&apos;ll get the Spanish for where it is — and every placed object joins your paragraph.
+        Pick an object, then tap a dashed circle in the room (or choose a place from the list). You&apos;ll get the Spanish for where it is — and every placed object joins your paragraph.
       </p>
     );
   } else {
@@ -314,40 +314,39 @@ function RoomPlacer() {
           ))}
         </div>
 
-        <svg viewBox="0 0 480 300" className="h-auto w-full rounded-xl border border-line" role="img" aria-label={aria}>
+        <svg viewBox="0 0 480 310" className="h-auto w-full touch-manipulation rounded-xl border border-line" role="img" aria-label={aria}>
           <RoomFurniture />
           {placed.map((id) => {
             const sp = spotById(pos[id]!);
             return (
               <g key={id} pointerEvents="none">
                 <ObjShape id={id} x={sp.x} y={sp.y} />
-                {id === sel ? <circle cx={sp.x} cy={sp.y - 13} r={20} fill="none" className="stroke-brand" strokeWidth={2} /> : null}
+                {id === sel ? <circle cx={sp.x} cy={sp.y - 13} r={18} fill="none" className="stroke-brand" strokeWidth={2} /> : null}
               </g>
             );
           })}
           {SPOTS.map((sp) => {
-            const mine = pos[sel] === sp.id;
-            if (mine) return null;
+            if (pos[sel] === sp.id) return null;
             return (
-              <g
-                key={sp.id}
-                role="button"
-                tabIndex={0}
-                aria-label={`Put ${selObj.en} ${descEn(sp.descs[0])}`}
-                onClick={() => place(sp.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    place(sp.id);
-                  }
-                }}
-                className="cursor-pointer outline-none [&:focus-visible>circle]:stroke-[3]"
-              >
-                <circle cx={sp.x} cy={sp.y - 13} r={21} className="fill-transparent stroke-brand opacity-70 hover:opacity-100" strokeWidth={1.5} strokeDasharray="4 3" fill="transparent" />
+              <g key={sp.id} aria-hidden onClick={() => place(sp.id)} className="group cursor-pointer">
+                <circle cx={sp.x} cy={sp.y - 13} r={26} fill="transparent" />
+                <circle cx={sp.x} cy={sp.y - 13} r={17} fill="transparent" className="stroke-brand opacity-70 group-hover:opacity-100" strokeWidth={1.5} strokeDasharray="4 3" />
               </g>
             );
           })}
         </svg>
+
+        <label className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink-2">
+          Or choose where to put <span lang="es">{selObj.def}</span>:
+          <select className="input !w-auto !py-2" value={pos[sel] ?? ""} onChange={(e) => e.target.value && place(e.target.value as SpotId)}>
+            <option value="">— pick a place —</option>
+            {SPOTS.map((sp) => (
+              <option key={sp.id} value={sp.id}>
+                {descEn(sp.descs[0])}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <div className="rounded-xl border border-line bg-surface p-3">
           {selSpot ? (

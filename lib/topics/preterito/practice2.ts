@@ -185,9 +185,11 @@ export const morePapers: Paper[] = [
             "nosotros estuvimos en Madrid una semana",
             "nosotros estuvimos una semana en Madrid",
             "nosotros estuvimos en Madrid durante una semana",
+            "nosotros estuvimos durante una semana en Madrid",
             "nosotras estuvimos en Madrid una semana",
             "nosotras estuvimos una semana en Madrid",
             "nosotras estuvimos en Madrid durante una semana",
+            "nosotras estuvimos durante una semana en Madrid",
           ],
         },
         solution: [
@@ -223,6 +225,7 @@ export const morePapers: Paper[] = [
             "fui a España el año pasado",
             "yo fui a España el año pasado",
             "el pasado año fui a España",
+            "el pasado año yo fui a España",
           ],
         },
         solution: [
@@ -250,7 +253,7 @@ export const morePapers: Paper[] = [
         question: "Rewrite this sentence about the past, starting with *El sábado pasado*:\n\n    El sábado que viene voy a ir al cine.",
         answer: {
           type: "text",
-          accept: ["El sábado pasado fui al cine", "el sábado pasado yo fui al cine", "el pasado sábado fui al cine"],
+          accept: ["El sábado pasado fui al cine", "el sábado pasado yo fui al cine", "el pasado sábado fui al cine", "el pasado sábado yo fui al cine"],
         },
         solution: [
           "*Voy a ir* = I'm going to go (near future, *yo*).",

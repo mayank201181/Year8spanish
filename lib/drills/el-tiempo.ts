@@ -1,5 +1,5 @@
 // Procedural skill drills for topic "el-tiempo" (the weather).
-import type { Drill, DrillItem, Rng } from "./types.ts";
+import type { Drill, DrillItem } from "./types.ts";
 import type { Trap } from "../types.ts";
 import { conjugate, acceptedForms, type Person } from "../spanish/verbs.ts";
 import { vocab } from "../vocab/el-tiempo.ts";
@@ -247,8 +247,8 @@ function familyExplain(w: Wx): string {
   }
 }
 
-function pastExplain(w: Wx): string {
-  switch (w.fam) {
+function pastExplain(fam: Family): string {
+  switch (fam) {
     case "hacer":
       return `*Hacer* is irregular in the preterite: *hace* → *${verbForm("hacer", "preterite")}* (no accent).`;
     case "estar":
@@ -265,10 +265,10 @@ function pastExplain(w: Wx): string {
 }
 
 /** Wrong preterite forms learners produce, as [wrong verb, feedback]. */
-function pastVerbTraps(w: Wx): Array<[string, string]> {
-  const pres = verbForm(w.fam, "present");
-  const presFb = `*${pres}* is the present. For the past, use the preterite: *${verbForm(w.fam, "preterite")}*.`;
-  switch (w.fam) {
+function pastVerbTraps(fam: Family): Array<[string, string]> {
+  const pres = verbForm(fam, "present");
+  const presFb = `*${pres}* is the present. For the past, use the preterite: *${verbForm(fam, "preterite")}*.`;
+  switch (fam) {
     case "hacer":
       return [["hació", "*Hacer* is irregular in the preterite: *hizo*."], [pres, presFb]];
     case "estar":
@@ -472,7 +472,7 @@ export const drills: Drill[] = [
       if (mode === "past") {
         es = wx(w, "preterite");
         en = w.enPast;
-        sol = [pastExplain(w), `Past → English: **${en[0]}**.`];
+        sol = [pastExplain(w.fam), `Past → English: **${en[0]}**.`];
         trapList = [[w.en[0], `*${cap(es)}* is the preterite, so it's about the past: '${en[0]}'.`]];
       } else if (mode === "future") {
         es = wx(w, "future");
@@ -700,7 +700,7 @@ export const drills: Drill[] = [
           acc,
           [o.sol, `**${acc[0]}**`],
           "Start with *En Singapur* — then the weather expression.",
-          o.acc[0].includes("muy") ? [] : [[o.acc[0].replace("mucho calor", "muy calor"), "*Calor* is a noun, so 'very' is *mucho*: *mucho calor*."]],
+          o.acc[0].includes("mucho calor") ? [[o.acc[0].replace("mucho calor", "muy calor"), "*Calor* is a noun, so 'very' is *mucho*: *mucho calor*."]] : [],
         );
       }
 
@@ -716,7 +716,7 @@ export const drills: Drill[] = [
         acc[0] = sent(acc[0]);
         const conf = MONTH_CONFUSE[m];
         return mk(
-          `Write in Spanish (about the climate in Madrid — no need to say Madrid): **In ${mEn} ${wEn}.**`,
+          `Describe the usual weather in Spain. Write in Spanish: **In ${mEn} ${wEn}.**`,
           acc,
           [`'In ${mEn}' = *en ${m}* — small letter, no article.`, strong ? `${familyExplain(w)} ${w.strongWhy}` : familyExplain(w), `**${acc[0]}**`],
           "Time phrase first (*en* + month), then the weather expression.",
@@ -753,7 +753,7 @@ export const drills: Drill[] = [
       acc[0] = sent(acc[0]);
       const wEn = w.key === "lluvia" || w.key === "nieve" ? w.en[1] : w.en[0];
       return mk(
-        `Write in Spanish: **In ${s.en} ${wEn}.**`,
+        `${rng.bool() ? "Write in Spanish" : "Describe the climate in Spain. Write in Spanish"}: **In ${s.en} ${wEn}.**`,
         acc,
         [`'In ${s.en}' = *en ${noun}* (small letter; *en ${s.es}* is fine too).`, familyExplain(w), `**${acc[0]}**`],
         "Season first (*en* + season), then the weather expression.",
@@ -980,7 +980,7 @@ export const drills: Drill[] = [
       }
       acc[0] = sent(acc[0]);
       return mk(
-        `Turn today's weather into tomorrow's forecast. Start with *Mañana* and use *va a* + infinitive: *Hoy${P} ${pres}.*`,
+        `${rng.bool() ? "Turn today's weather into tomorrow's forecast." : "You're the forecaster: say what tomorrow will bring."} Start with *Mañana* and use *va a* + infinitive: *Hoy${P} ${pres}.*`,
         acc,
         ["*Hoy* → *Mañana*: a forecast uses *va a* + infinitive.", ...explain, `**${acc[0]}**`],
         "Find the infinitive of each weather verb (*hace* → *hacer*, *llueve* → *llover*, *hay* → *haber*…).",
@@ -1023,19 +1023,18 @@ export const drills: Drill[] = [
         ];
         const g = rng.pick(GAPS);
         const ans = verbForm(g.fam, "preterite");
-        const fake: Wx = { ...WX[0], fam: g.fam };
         const intro = rng.bool() ? "Complete with the preterite of the verb in brackets:" : "Fill the gap with the past (preterite) form:";
         return mk(
           `${intro} *${g.s}* (${INF[g.fam]})`,
           [ans],
-          [`The time phrase points to the past → preterite, *él / ella* form.`, pastExplain(fake), `**${ans}**: *${g.s.replace("___", ans)}*`],
+          [`The time phrase points to the past → preterite, *él / ella* form.`, pastExplain(g.fam), `**${ans}**: *${g.s.replace("___", ans)}*`],
           "Is the verb regular (*-ó / -ió* with an accent) or one of the irregular ones (*hizo, estuvo, hubo*)?",
-          pastVerbTraps(fake),
+          pastVerbTraps(g.fam),
         );
       }
       const pool = WX.filter((w) => w.key !== "despejado" && (tier >= 2 || w.key !== "truena"));
       const w = rng.pick(pool);
-      const verbTraps = pastVerbTraps(w);
+      const verbTraps = pastVerbTraps(w.fam);
       if (mode === "phrase") {
         const pres = wx(w, "present");
         const past = wx(w, "preterite");
@@ -1046,7 +1045,7 @@ export const drills: Drill[] = [
         return mk(
           prompt,
           [past],
-          [pastExplain(w), `**${past}**`],
+          [pastExplain(w.fam), `**${past}**`],
           "Only the verb changes — the weather word stays the same.",
           verbTraps.map(([v, fb]) => [`${v}${tailStr}`, fb] as [string, string]),
         );
@@ -1059,13 +1058,14 @@ export const drills: Drill[] = [
       const strong = !!w.strongTail && rng.bool(0.45);
       const past = wx(w, "preterite", strong);
       const acc = [sent(`${tp.es} ${past}`), `${past} ${tp.es}`];
-      const enPast = strong ? (w.enStrong![0].replace(/^it's /, "it was ").replace(/^the weather is /, "the weather was ").replace(/^it rains /, "it rained ").replace(/^it's raining/, "it rained").replace(/^it snows /, "it snowed ").replace(/^there's /, "there was ")) : w.enPast[0];
-      const enShown = strong && (w.fam === "llover" || w.fam === "nevar") ? `${w.enPast[0]} a lot` : enPast;
+      const enShown = !strong ? w.enPast[0]
+        : w.fam === "llover" || w.fam === "nevar" ? `${w.enPast[0]} a lot`
+        : w.enStrong![0].replace(/^it's /, "it was ").replace(/^the weather is /, "the weather was ");
       const tailStr = (strong ? w.strongTail : w.tail) ? ` ${strong ? w.strongTail : w.tail}` : "";
       return mk(
         `Write in Spanish: **${tp.en} ${enShown}.**`,
         acc,
-        [`*${cap(tp.es)}* → preterite.`, pastExplain(w), ...(strong ? [w.strongWhy!] : []), `**${acc[0]}**`],
+        [`*${cap(tp.es)}* → preterite.`, pastExplain(w.fam), ...(strong ? [w.strongWhy!] : []), `**${acc[0]}**`],
         "Time phrase first, then the weather in the preterite.",
         verbTraps.map(([v, fb]) => [`${tp.es} ${v}${tailStr}`, fb] as [string, string]),
       );
@@ -1121,7 +1121,7 @@ export const drills: Drill[] = [
       if (tgt.tense === "future") trapList.push([`${tgt.es}${P} ${form("future").replace(new RegExp(`\\b${VA} a\\b`, "g"), "van a")}`, "Weather is always *va* ('it is going to') — never *van*."]);
       if (tgt.tense === "preterite") {
         const [w0, s0] = clauses[0];
-        const [badV, fb] = pastVerbTraps(w0)[0];
+        const [badV, fb] = pastVerbTraps(w0.fam)[0];
         const t0 = s0 && w0.strongTail ? w0.strongTail : w0.tail;
         const rest = clauses.length > 1 ? ` y ${wx(clauses[1][0], "preterite")}` : "";
         trapList.push([`${tgt.es}${P} ${badV}${t0 ? " " + t0 : ""}${rest}`, fb]);
@@ -1137,5 +1137,3 @@ export const drills: Drill[] = [
   },
 ];
 
-// Keep the Rng type referenced for readers of this file.
-export type { Rng };

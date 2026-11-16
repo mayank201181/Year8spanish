@@ -6,7 +6,7 @@ export const extras: TopicExtras = {
   didYouKnow: [
     "*Ir* (to go) and *ser* (to be) have exactly the same preterite forms — *fui, fuiste, fue, fuimos, fuisteis, fueron* — so *fui* can mean 'I went' or 'I was'. Only the context tells you which.",
     "In Spain, people usually use a different past tense for things that happened today (*Hoy he comido paella*), while in much of Latin America the preterite is normal even for today (*Hoy comí paella*).",
-    "In older books you may see *fué* or *dió* with an accent. Those accents were dropped from standard Spanish spelling in the 1950s, because one-syllable words like *fue, fui, dio* and *vio* don't need them.",
+    "In older books you may see *fué, fuí, dió* or *vió* with an accent. The Real Academia Española dropped those accents in its 1952 spelling rules (compulsory from 1959), because one-syllable verb forms like *fue, fui, dio* and *vio* don't need them.",
     "The word *pretérito* comes from Latin *praeteritum*, meaning '(time) gone by' — from *praeter* (past, beyond) and *ire* (to go).",
     "Julius Caesar's famous Latin boast *Veni, vidi, vici* ('I came, I saw, I conquered') is often given in Spanish as *Llegué, vi, vencí* (or *Vine, vi, vencí*) — three preterites, including a spelling change (*llegué*) and an accent-free *vi*.",
     "In Spain, *el finde* is a common informal way to say *el fin de semana*, so on a Monday you'll often hear: *¿Qué hiciste el finde?*",
