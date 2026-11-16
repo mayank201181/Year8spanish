@@ -84,7 +84,7 @@ L("lola", "And a trick. Before a word starting with an I sound, [[y]] becomes [[
   board="[[y]] → [[e]]: [[moderna e histórica]]")
 
 confess("pablo", "PABLO RUIZ · 13 · Exchange Student · Homesick (A Bit)")
-L("pablo", "Lo bueno of Singapore is that everything works. Lo malo is that nobody eats dinner at ten at night.", mood="happy")
+L("pablo", "[[Lo bueno]] of Singapore is that everything works. [[Lo malo]] is that nobody eats dinner at ten at night.", mood="happy")
 L("pablo", "I go to Uncle Hock at ten. He says, you're very early for breakfast.", mood="worried", gap=0.5)
 
 # ---------------- ACT 3: EXTENDED SENTENCES & THREE TIME FRAMES ----------------
@@ -132,7 +132,7 @@ L("dad", "Singapore good y pero también además sin embargo por eso hot.", mood
 L("teacher", "Six connectives. Zero verbs. A record.", mood="deadpan", shot="close")
 L("dad", "Wait. Let me try one more. [[Lo mejor de mi ciudad es mi familia.]]", mood="happy", shot="close")
 L("mum", "Oh. That's actually lovely.", mood="happy", shot="close")
-L("lola", "Correct. And sweet. Lo bueno, lo malo, and lo Dad.", mood="smug", shot="wide", offstage=True, gap=0.8)
+L("lola", "Correct. And sweet. [[Lo bueno, lo malo]], and lo Dad.", mood="smug", shot="wide", offstage=True, gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
 card("PAUSE CHALLENGE", "Lola gives you five seconds. Then she gets smug.", 3.0)

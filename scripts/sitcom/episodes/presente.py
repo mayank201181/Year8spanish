@@ -74,7 +74,7 @@ poof("lola", 1080)
 L("mum", "Here's what confuses me. [[Ser]] and [[estar]]. Both mean, to be.", mood="thinking", shot="close", boardClear=True)
 L("lola", "[[Ser]] is what something is like. Description, identity, where you're from, and the time. [[Mi piso es grande. Es la una.]] My flat is big. It's one o'clock.", mood="teach", shot="close",
   board="[[ser]]: description · origin · time")
-L("lola", "[[Estar]] is location, and how you feel right now. [[Estoy en la cocina.]] I'm in the kitchen. [[Estoy cansada.]] I'm tired.", mood="teach", shot="close",
+L("lola", "[[Estar]] is location, and how you feel right now. [[Estoy en el salón.]] I'm in the living room. [[Estoy cansada.]] I'm tired.", mood="teach", shot="close",
   board="[[estar]]: location · how you feel now")
 L("pablo", "So, [[soy de Sevilla, pero estoy en Singapur.]] I'm from Seville, but I'm in Singapore.", mood="happy", shot="close",
   board="[[Soy de Sevilla, pero estoy en Singapur]]")
