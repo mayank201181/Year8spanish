@@ -1,0 +1,10 @@
+# QA — mi-dormitorio (S01E02 "Hay Fever")
+# Lint: 0 errors (1 warning: challenge 1 answer is 38 chars; it auto-shrinks on the card).
+# build.py: OK, 493.6 s (8.2 min), built after the punctuation-fragment fix in build.py.
+# asr.py: NOT COMPLETED. The run was killed by the coordinator (too many parallel Whisper jobs on 4 cores).
+#   To finish:  cd scripts/sitcom && ASR_THREADS=4 python3 asr.py episodes/mi-dormitorio.py
+#   Expect the same benign patterns as mi-casa (see qa/mi-casa.asr.txt): Dad's fake Spanish outside the
+#   brackets ("Dónde es my glasses-o?", "Encima de el desk", "Dónde está mis gafas?"), number words as digits,
+#   v→b in Spanish, and short clips that start mid-sentence.
+# Manual review of every [[ ]] phrase: all correct Castilian Spanish (accents, ¿…?/¡…!, de+el=del,
+#   plural pósteres/ordenadores, invariable naranja/rosa, hay+un vs el…está).

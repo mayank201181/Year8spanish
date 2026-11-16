@@ -1,0 +1,761 @@
+// MCQ papers for topic "tareas" (Ayudar en casa — Chores).
+import type { Paper } from "../../types.ts";
+
+export const mcqPapers: Paper[] = [
+  // ======================================================================
+  // MCQ PAPER 1
+  // ======================================================================
+  {
+    id: "tareas-m1",
+    title: "MCQ Paper 1",
+    questions: [
+      {
+        kind: "mcq",
+        id: "tareas-m1-q01",
+        question: "What does *paso la aspiradora* mean?",
+        options: ["I vacuum (I do the hoovering).", "I lay the table.", "I take out the rubbish.", "I do the ironing."],
+        answerIndex: 0,
+        explanation:
+          "*Pasar la aspiradora* is literally 'to pass the vacuum cleaner' — Spanish for vacuuming. 'I lay the table' is *pongo la mesa*, 'I take out the rubbish' is *saco la basura* and 'I do the ironing' is *plancho*.",
+        difficulty: "warmup",
+        guideRef: "chores-vocab",
+        hints: ["*La aspiradora* sounds like 'aspirate' — something that sucks up air (and dust)."],
+        strategy: "Spot the cognate",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q02",
+        question: "Which phrase means 'I lay the table'?",
+        options: ["Quito la mesa.", "Pongo la mesa.", "Hago la mesa.", "Pongo el mesa."],
+        answerIndex: 1,
+        explanation:
+          "*Poner* means 'to put', so *pongo la mesa* is 'I put (lay) the table'. *Quito la mesa* is the opposite — 'I clear the table'. *Hago la mesa* uses the wrong verb (that would mean 'I make the table' — carpentry!), and *el mesa* has the wrong gender: *mesa* is feminine.",
+        difficulty: "warmup",
+        guideRef: "chores-vocab",
+        hints: ["Which verb means 'to put'? *Poner* or *quitar*?"],
+        strategy: "Gender detective (el/la)",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q03",
+        question: "Complete the sentence: *Yo ___ que lavar los platos.*",
+        options: ["tiene", "tienes", "tengo", "tener"],
+        answerIndex: 2,
+        explanation:
+          "The subject is *yo*, so you need the *yo* form of *tener*: **tengo** (irregular — it ends in *-go*, like *hago* and *pongo*). *Tienes* is the *tú* form and *tiene* the *él/ella* form; *tener* is the infinitive, which can't follow *yo*.",
+        difficulty: "warmup",
+        guideRef: "obligation",
+        hints: ["Check the subject: *yo*. Which form of *tener* goes with *yo*?"],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q04",
+        question: "Which verb completes the sentence? *Yo ___ la cama todos los días.*",
+        options: ["hace", "haco", "pongo", "hago"],
+        answerIndex: 3,
+        explanation:
+          "'To make the bed' is *hacer la cama*, and the *yo* form of *hacer* is irregular: **hago**. *Haco* is what you'd get if *hacer* were regular — a very common slip. *Hace* is the *él/ella* form, and *pongo* means 'I put': we say *pongo la mesa*, not *pongo la cama*.",
+        difficulty: "core",
+        guideRef: "chores-vocab",
+        hints: ["Which verb goes with *la cama* — 'make' or 'put'?", "'To make the bed' = *hacer la cama*.", "*Hacer* is a '-go' verb in the *yo* form, like *tengo* and *pongo*."],
+        strategy: "Recycle a chunk",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q05",
+        question: "Choose the correct Spanish for 'You (*tú*) have to tidy your bedroom.'",
+        options: [
+          "Tienes que ordenar tu dormitorio.",
+          "Tienes ordenar tu dormitorio.",
+          "Tienes que ordenas tu dormitorio.",
+          "Tienes de ordenar tu dormitorio.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "The pattern is *tener* + **que** + infinitive: *tienes que ordenar*. Leaving out *que* (*tienes ordenar*) is the most common mistake, and *tienes que ordenas* conjugates the second verb — after *que* it must stay in the infinitive. *Tener de* is not used for obligation.",
+        difficulty: "core",
+        guideRef: "obligation",
+        hints: ["How many verbs are there? Which one changes for the person?", "*Tener* changes; the action stays in the infinitive.", "Don't forget the little word between them: *tener ___ + infinitive*."],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q06",
+        question: "A sign on the kitchen wall gives a rule for everyone in the house: 'You have to take out the rubbish.' Which is correct?",
+        options: ["Hay sacar la basura.", "Hay que sacar la basura.", "Hay que saco la basura.", "Hay que sacando la basura."],
+        answerIndex: 1,
+        explanation:
+          "For a general rule (nobody in particular) use **hay que** + infinitive: *Hay que sacar la basura.* *Hay* on its own means 'there is/are', so *hay sacar* is missing *que*. *Hay que saco* conjugates the second verb, and *sacando* (-ing) is never used after *hay que*.",
+        difficulty: "core",
+        guideRef: "obligation",
+        hints: ["A rule for everyone → the impersonal phrase, not *tengo que*.", "*Hay que* never changes — and what form must the next verb be in?"],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q07",
+        question: "What does *una vez a la semana* mean?",
+        options: ["every weekend", "twice a week", "once a week", "once a month"],
+        answerIndex: 2,
+        explanation:
+          "*Una vez* = one time (once); *a la semana* = per week. So: **once a week**. 'Twice a week' would be *dos veces a la semana*, 'once a month' is *una vez al mes*, and 'every weekend' is *los fines de semana*.",
+        difficulty: "warmup",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["*Una vez* = one time. *La semana* = the week."],
+        strategy: "Build it up (extended sentence)",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q08",
+        question:
+          "Read the text.\n\n> Me llamo Wei Ling y vivo en un piso en Singapur. Ayudo mucho en casa. Cada día hago la cama y pongo la mesa. Los fines de semana paso la aspiradora y lavo los platos. Mis padres me dan veinte dólares a la semana. Con mi dinero compro libros y voy al cine con mis amigos.\n\nWhich statement is true?",
+        options: [
+          "She vacuums every day.",
+          "Her parents give her 20 dollars a week.",
+          "She lays the table only at weekends.",
+          "She spends her money on clothes.",
+        ],
+        answerIndex: 1,
+        explanation:
+          "*Mis padres me dan veinte dólares a la semana* = my parents give me 20 dollars a week. She vacuums *los fines de semana* (at weekends), not every day; she lays the table *cada día* (every day), not only at weekends; and she buys *libros* (books), not clothes.",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Find the time phrase next to each chore: *cada día* or *los fines de semana*?", "Look for the sentence with *dólares* — how many, and how often?"],
+        strategy: "Use the time phrase",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q09",
+        question: "Your Spanish friend groans: *Lavar los platos es un rollo.* What does *es un rollo* mean here?",
+        options: ["It's fair.", "It's a roll of paper.", "It's fun.", "It's a pain (really boring)."],
+        answerIndex: 3,
+        explanation:
+          "*Es un rollo* is a very common Spanish expression for something tedious: 'it's a pain / a drag'. Literally *un rollo* is a roll, but here it's slang — translating it word for word as 'a roll of paper' misses the meaning. The groan tells you it isn't 'fun' or 'fair' (*justo*).",
+        difficulty: "core",
+        guideRef: "opinions-on-chores",
+        hints: ["Your friend groans — positive or negative opinion?", "This is an idiom: don't translate it word for word."],
+        strategy: "Use context",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q10",
+        question: "Choose the correct Spanish for 'This weekend I'm going to wash the car.'",
+        options: [
+          "Este fin de semana voy a lavar el coche.",
+          "Este fin de semana voy lavar el coche.",
+          "Este fin de semana voy a lavo el coche.",
+          "Este fin de semana lavé el coche.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "The immediate future is *ir* + **a** + infinitive: *voy a lavar*. *Voy lavar* forgets the *a*; *voy a lavo* conjugates the second verb; *lavé* is the preterite ('I washed') — the past, not the future.",
+        difficulty: "core",
+        guideRef: "chores-this-weekend",
+        hints: ["'Going to' = a form of *ir* + ? + infinitive.", "Three parts: *voy* + *a* + an infinitive ending in *-ar/-er/-ir*."],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q11",
+        question:
+          "Read Javier's message.\n\n> Hola, soy Javier. En mi casa hay un problema. Mi hermana mayor, Carmen, nunca hace nada porque dice que tiene muchos deberes. Yo tengo que sacar la basura, pasear al perro y quitar la mesa cada día. ¡Es un rollo y no es justo! Mi madre dice que todos debemos ayudar, y pienso que tiene razón.\n\nWhy does Javier think the situation is unfair?",
+        options: [
+          "He has too much homework.",
+          "His mother never helps.",
+          "His sister Carmen never does anything.",
+          "He has to walk the dog twice a day.",
+        ],
+        answerIndex: 2,
+        explanation:
+          "*Mi hermana mayor, Carmen, nunca hace nada* = my older sister Carmen never does anything, while Javier does three chores every day. The homework (*muchos deberes*) is Carmen's excuse, not Javier's problem; his mother says everyone should help; and he walks the dog *cada día* (every day), not twice a day.",
+        difficulty: "core",
+        guideRef: "opinions-on-chores",
+        hints: ["Who is the subject of *nunca hace nada*?", "Careful: who says they have *muchos deberes*?"],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q12",
+        question: "Choose the correct form of *deber*: *Nosotros ___ ayudar en casa.*",
+        options: ["deben", "debéis", "debemos", "debo"],
+        answerIndex: 2,
+        explanation:
+          "*Deber* is a regular *-er* verb, and the *nosotros* ending is *-emos*: **debemos**. *Debéis* is *vosotros*, *deben* is *ellos/ellas* and *debo* is *yo*.",
+        difficulty: "core",
+        guideRef: "obligation",
+        hints: ["Check the subject: *nosotros*.", "Regular *-er* verb: which ending goes with 'we'?"],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q13",
+        question: "Your host sister says: *No tienes que lavar los platos.* What does she mean?",
+        options: [
+          "You don't have to wash the dishes (but you can if you want).",
+          "You mustn't wash the dishes.",
+          "You didn't wash the dishes.",
+          "You aren't going to wash the dishes.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "*No tener que* = **not have to**: there's no obligation, so it's your choice. It does NOT mean 'mustn't' — for a ban Spanish uses *no debes* (*No debes lavar los platos* = you mustn't wash the dishes). *Didn't* would need the preterite, and 'aren't going to' would be *no vas a*.",
+        difficulty: "challenge",
+        guideRef: "obligation",
+        hints: [
+          "Translate it piece by piece: *no* + *tienes que* + *lavar*.",
+          "In English, 'don't have to' and 'mustn't' mean very different things. Which one is *no tienes que*?",
+          "Spanish uses *no debes* for 'mustn't'.",
+        ],
+        strategy: "Translate back to check",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q14",
+        question: "One of these sentences contains a grammar mistake. Which one?",
+        options: [
+          "Mañana voy a pasear al perro.",
+          "El sábado mis hermanos van a cortar el césped.",
+          "Este fin de semana vamos a ordenar la casa.",
+          "Esta noche mi padre va a plancha las camisas.",
+        ],
+        answerIndex: 3,
+        explanation:
+          "After *va a* you need the infinitive: *va a **planchar** las camisas*. *Plancha* is the *él* form of the present. The others are all correct: *voy a pasear*, *van a cortar* (*mis hermanos* = they) and *vamos a ordenar*.",
+        difficulty: "challenge",
+        guideRef: "chores-this-weekend",
+        hints: [
+          "Every sentence uses *ir a* + a second verb. Check that second verb in each one.",
+          "Does every second verb end in *-ar*, *-er* or *-ir*?",
+          "Also check each form of *ir* matches its subject.",
+        ],
+        strategy: "Find the infinitive",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m1-q15",
+        question:
+          "Read the text.\n\n> Normalmente los sábados juego al baloncesto con mis amigos y no ayudo mucho en casa. Pero este sábado es diferente: mis abuelos vienen a comer. Por la mañana voy a limpiar el cuarto de baño y mi hermano va a hacer la compra en el mercado. Por la tarde, después de comer, vamos a lavar los platos juntos. ¡No voy a jugar al baloncesto!\n\nWhat is the writer going to do **this Saturday morning**?",
+        options: [
+          "Play basketball with friends.",
+          "Clean the bathroom.",
+          "Go shopping at the market.",
+          "Wash the dishes with their brother.",
+        ],
+        answerIndex: 1,
+        explanation:
+          "*Por la mañana voy a limpiar el cuarto de baño* = in the morning I'm going to clean the bathroom. Basketball is what the writer *normally* does (present tense) — and *¡No voy a jugar al baloncesto!* says it won't happen this week. The shopping is the brother's job (*mi hermano va a hacer la compra*), and the dishes are *por la tarde* (in the afternoon).",
+        difficulty: "challenge",
+        guideRef: "chores-this-weekend",
+        hints: [
+          "Sort the verbs: which are present (normal routine) and which are *voy a* (this Saturday)?",
+          "Find *por la mañana* — what comes after it?",
+          "Check the subject: *voy a* (I) or *va a* (my brother)?",
+        ],
+        strategy: "Use the time phrase",
+      },
+    ],
+  },
+
+  // ======================================================================
+  // MCQ PAPER 2
+  // ======================================================================
+  {
+    id: "tareas-m2",
+    title: "MCQ Paper 2",
+    questions: [
+      {
+        kind: "mcq",
+        id: "tareas-m2-q01",
+        question: "What does *saco la basura* mean?",
+        options: ["I take out the dog.", "I clear the table.", "I take out the rubbish.", "I wash the car."],
+        answerIndex: 2,
+        explanation:
+          "*Sacar* = to take out and *la basura* = the rubbish, so *saco la basura* = I take out the rubbish. 'I clear the table' is *quito la mesa* and 'I wash the car' is *lavo el coche*. (You *can* say *saco al perro* for taking the dog out — but that needs *al perro*.)",
+        difficulty: "warmup",
+        guideRef: "chores-vocab",
+        hints: ["*La basura* is what goes in the bin."],
+        strategy: "Recycle a chunk",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q02",
+        question: "Which number is *cincuenta*?",
+        options: ["15", "50", "5", "500"],
+        answerIndex: 1,
+        explanation:
+          "From 40 to 90 the tens end in *-enta* (*cuarenta, cincuenta, sesenta…*), so *cincuenta* = **50**. 15 is *quince*, 5 is *cinco* and 500 is *quinientos*.",
+        difficulty: "warmup",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Words ending in *-enta* are tens: 40, 50, 60…"],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q03",
+        question: "Which sentence means 'I hate ironing'?",
+        options: ["Odio planchar.", "Odio plancho.", "Me odio planchar.", "Odio a planchar."],
+        answerIndex: 0,
+        explanation:
+          "*Odiar* + infinitive: **Odio planchar.** English uses '-ing', but Spanish uses the infinitive. *Odio plancho* has two conjugated verbs; *me odio* means 'I hate myself'; and *odio* needs no *a* before a verb.",
+        difficulty: "warmup",
+        guideRef: "opinions-on-chores",
+        hints: ["After an opinion verb, the activity goes in the infinitive."],
+        strategy: "Find the infinitive",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q04",
+        question: "Complete the sentence: *Mañana mi madre ___ a cocinar.*",
+        options: ["voy", "van", "vas", "va"],
+        answerIndex: 3,
+        explanation:
+          "*Mi madre* = she, so you need the *ella* form of *ir*: **va**. *Voy* is *yo*, *vas* is *tú* and *van* is *ellos/ellas*.",
+        difficulty: "warmup",
+        guideRef: "chores-this-weekend",
+        hints: ["Check the subject: *mi madre* = he, she or they?"],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q05",
+        question: "Your dad asks: *¿Puedes regar las plantas?* What does he want you to do?",
+        options: ["Cut the grass.", "Water the plants.", "Pick the flowers.", "Tidy the garden."],
+        answerIndex: 1,
+        explanation:
+          "*Regar* = to water (think 'irrigate'), so *regar las plantas* = water the plants. Cutting the grass is *cortar el césped*. Remember *regar* is a stem-changer: *yo riego*.",
+        difficulty: "core",
+        guideRef: "chores-vocab",
+        hints: ["*Las plantas* is a cognate — so what do you do to plants?", "*Regar* is linked to the English word 'irrigate'."],
+        strategy: "Spot the cognate",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q06",
+        question: "How do you say 'I earn 30 euros a week'?",
+        options: [
+          "Gano trece euros a la semana.",
+          "Gana treinta euros a la semana.",
+          "Gano treinta euros a la semana.",
+          "Gano tres euros a la semana.",
+        ],
+        answerIndex: 2,
+        explanation:
+          "30 = **treinta** and 'I earn' = **gano** (*yo* form of *ganar*). *Trece* is 13 and *tres* is 3 — easy to mix up because they start the same way. *Gana* is the *él/ella* form ('he/she earns').",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Two things to check: the number and the verb ending.", "*Trece*, *tres* and *treinta* all start with *tre-*: which one is 30?", "The *yo* form of a regular *-ar* verb ends in *-o*."],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q07",
+        question:
+          "Read Priya's text.\n\n> Me llamo Priya y vivo en un condominio en Singapur. Mis padres me dan cuarenta dólares al mes, pero tengo que ayudar en casa. Si no paso la aspiradora los sábados, ¡no recibo nada! Mi hermano Arjun recibe sesenta dólares al mes porque es mayor y también lava el coche. Con mi dinero compro ropa y ahorro un poco para un móvil nuevo.\n\nWhy does Arjun get more money than Priya?",
+        options: [
+          "He is older and he also washes the car.",
+          "He vacuums every Saturday.",
+          "He is saving for a new phone.",
+          "He gets his money every week instead of every month.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "*Recibe sesenta dólares al mes porque es mayor y también lava el coche* — because he's older and also washes the car. The vacuuming on Saturdays and saving for a phone are things **Priya** says about herself, and both children are paid *al mes* (monthly), so it isn't about how often.",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Find Arjun's name, then look for *porque*.", "Watch the verb endings: *paso* (I) is Priya; *recibe*, *lava* (he) is Arjun."],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q08",
+        question: "Choose the best translation of *No me importa poner la mesa.*",
+        options: [
+          "Laying the table isn't important.",
+          "I don't like laying the table.",
+          "I don't have to lay the table.",
+          "I don't mind laying the table.",
+        ],
+        answerIndex: 3,
+        explanation:
+          "*No me importa* + infinitive = **I don't mind** doing something — a neutral opinion. It looks like 'important', which tempts people to write 'isn't important', but it's a fixed phrase about you. 'I don't like' would be *no me gusta*, and 'I don't have to' would be *no tengo que*.",
+        difficulty: "core",
+        guideRef: "opinions-on-chores",
+        hints: ["*Me* tells you this is about how *I* feel.", "*No me importa* is a fixed opinion phrase — neither positive nor negative."],
+        strategy: "Use context",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q09",
+        question: "Complete the sentence: *Mis hermanos ___ que limpiar el cuarto de baño.*",
+        options: ["tiene", "tienen", "tenen", "tienes"],
+        answerIndex: 1,
+        explanation:
+          "*Mis hermanos* = they, so use the *ellos* form of *tener*: **tienen**. It's inside the 'boot', so the stem changes e→ie (*tenen* forgets this). *Tiene* is singular (he/she) and *tienes* is *tú*.",
+        difficulty: "core",
+        guideRef: "obligation",
+        hints: ["*Mis hermanos* — one person or more than one?", "*Tener* is a boot verb: *ellos* is inside the boot, so e→ie."],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q10",
+        question:
+          "Read the chores list on the fridge.\n\n- Lunes: Pablo pone la mesa y Sofía quita la mesa.\n- Martes: Sofía saca la basura.\n- Miércoles: Pablo pasea al perro.\n- Jueves: Sofía lava los platos.\n- Viernes: Pablo riega las plantas.\n- Sábado: ¡todos limpiamos la casa!\n\nWhich of these chores does **Pablo** do?",
+        options: ["He takes out the rubbish.", "He clears the table.", "He waters the plants.", "He washes the dishes."],
+        answerIndex: 2,
+        explanation:
+          "*Viernes: Pablo riega las plantas* — on Friday Pablo waters the plants. The other three chores are Sofía's: *quita la mesa* (clears the table), *saca la basura* (takes out the rubbish) and *lava los platos* (washes the dishes). Careful: on Monday Pablo *pone la mesa* (lays the table) — it's Sofía who *quita la mesa* (clears it).",
+        difficulty: "core",
+        guideRef: "chores-vocab",
+        hints: ["Find every line with Pablo's name.", "*Poner la mesa* and *quitar la mesa* are opposites — which one does Pablo do?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q11",
+        question: "Your exchange partner writes: *El domingo no voy a hacer nada.* What does she mean?",
+        options: [
+          "On Sunday I'm not going to do anything.",
+          "On Sunday I didn't do anything.",
+          "I never do anything on Sundays.",
+          "On Sunday I'm going to do everything.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "*No voy a* + infinitive = I'm **not going to**; *no… nada* = not… anything. So: 'On Sunday I'm not going to do anything.' 'Didn't' would be the past, 'I never do' would be *nunca hago*, and *nada* means nothing — not everything (*todo*).",
+        difficulty: "core",
+        guideRef: "chores-this-weekend",
+        hints: ["*Voy a* + infinitive — past, present or future?", "Spanish uses a double negative: *no… nada*."],
+        strategy: "Translate back to check",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q12",
+        question: "Which is a correct way to say 'I never iron'?",
+        options: ["Plancho nunca.", "No nunca plancho.", "Nunca no plancho.", "Nunca plancho."],
+        answerIndex: 3,
+        explanation:
+          "Put *nunca* before the verb: **Nunca plancho.** (The other correct pattern is *No plancho nunca* — if *nunca* goes after the verb, you need *no* in front.) *Plancho nunca* is missing that *no*, and *no nunca* / *nunca no* put two negatives together before the verb, which Spanish doesn't do.",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Where does *nunca* usually go — before or after the verb?", "If *nunca* comes first, do you need *no* as well?"],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q13",
+        question:
+          "Read Aisha's message.\n\n> En mi familia somos cinco. Mi madre cocina y mi padre lava los platos. Yo paso la aspiradora, saco la basura y pongo la mesa. Pero mis dos hermanos pequeños solo juegan con la consola: no hacen nada. ¡Yo hago tres tareas y ellos, cero!\n\nWhich opinion is Aisha most likely to give next?",
+        options: ["Pienso que es justo.", "No me importa ayudar.", "Me encanta ayudar en casa.", "Pienso que es injusto."],
+        answerIndex: 3,
+        explanation:
+          "Aisha does three chores while her brothers *no hacen nada* (do nothing) — and the *¡…cero!* shows she's annoyed. So the natural next line is **Pienso que es injusto** (I think it's unfair). *Es justo* (it's fair) and *no me importa* (I don't mind) don't fit her tone, and nothing suggests she loves helping.",
+        difficulty: "challenge",
+        guideRef: "opinions-on-chores",
+        hints: [
+          "Count the chores: how many does Aisha do? How many do her brothers do?",
+          "Is her tone happy, neutral or annoyed? Look at the punctuation.",
+          "*Justo* = fair. What does the prefix *in-* do?",
+        ],
+        strategy: "Use context",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q14",
+        question: "Which sentence is correct Spanish?",
+        options: [
+          "Mi padre debe que cortar el césped.",
+          "Mi padre debe cortar el césped.",
+          "Mi padre tiene cortar el césped.",
+          "Mi padre debe corta el césped.",
+        ],
+        answerIndex: 1,
+        explanation:
+          "*Deber* goes **straight** to the infinitive: *debe cortar*. *Tener* is the one that needs *que* (*tiene que cortar*) — mixing the two patterns gives *debe que* and *tiene cortar*, both wrong. *Debe corta* conjugates the second verb.",
+        difficulty: "challenge",
+        guideRef: "obligation",
+        hints: [
+          "There are two different obligation patterns here: *tener ___ + infinitive* and *deber + infinitive*.",
+          "Which of the two verbs needs *que*, and which doesn't?",
+          "Finally check the second verb is an infinitive.",
+        ],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m2-q15",
+        question:
+          "Read Diego's email.\n\n> ¡Hola, Mei! Este fin de semana mi familia va a hacer una fiesta en casa. El viernes por la tarde mis padres van a hacer la compra en el supermercado. El sábado por la mañana yo voy a ordenar mi dormitorio y mi hermana va a limpiar el salón. No voy a pasar la aspiradora porque mi hermano siempre lo hace. ¿Y tú? ¿Qué vas a hacer este fin de semana?\n\nWhich statement is true?",
+        options: [
+          "Diego is going to vacuum on Saturday.",
+          "His parents are going shopping on Saturday morning.",
+          "Diego's brother usually does the vacuuming.",
+          "His sister is going to tidy her bedroom.",
+        ],
+        answerIndex: 2,
+        explanation:
+          "*No voy a pasar la aspiradora porque mi hermano siempre lo hace* — I'm not going to vacuum because my brother always does it. So Diego is **not** vacuuming; his parents shop on *viernes por la tarde* (Friday afternoon); and his sister is cleaning *el salón* (the living room) — it's Diego who tidies his bedroom.",
+        difficulty: "challenge",
+        guideRef: "chores-this-weekend",
+        hints: [
+          "Match each person to their chore and their day.",
+          "Look for *no voy a* — what is Diego NOT doing, and why?",
+          "*Siempre lo hace* — present tense: it describes what usually happens.",
+        ],
+        strategy: "Use the time phrase",
+      },
+    ],
+  },
+
+  // ======================================================================
+  // MCQ PAPER 3
+  // ======================================================================
+  {
+    id: "tareas-m3",
+    title: "MCQ Paper 3",
+    questions: [
+      {
+        kind: "mcq",
+        id: "tareas-m3-q01",
+        question: "What does *plancho* mean?",
+        options: ["I plan.", "I clean.", "I cook.", "I iron."],
+        answerIndex: 3,
+        explanation:
+          "*Planchar* = to iron (*la plancha* = the iron), so *plancho* = I iron / I do the ironing. It is a false friend — nothing to do with 'plan'. 'I clean' is *limpio* and 'I cook' is *cocino*.",
+        difficulty: "warmup",
+        guideRef: "chores-vocab",
+        hints: ["Careful — it looks like an English word, but it's a false friend."],
+        strategy: "Spot the cognate",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q02",
+        question: "Which expression means 'every day'?",
+        options: ["cada semana", "los fines de semana", "cada día", "de vez en cuando"],
+        answerIndex: 2,
+        explanation:
+          "*Cada* = each/every and *día* = day: **cada día** (also *todos los días*). *Cada semana* is every week, *los fines de semana* is at weekends and *de vez en cuando* is from time to time.",
+        difficulty: "warmup",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["*Día* = day. Which phrase contains it?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q03",
+        question: "What does *Es justo* mean in a discussion about chores?",
+        options: ["It's fair.", "It's just (only).", "It's boring.", "It's unfair."],
+        answerIndex: 0,
+        explanation:
+          "*Justo* = fair (think 'justice'), so *es justo* = **it's fair**. It doesn't mean 'just' in the sense of 'only'. Add *in-* for the opposite: *es injusto* = it's unfair. 'It's boring' is *es aburrido*.",
+        difficulty: "warmup",
+        guideRef: "opinions-on-chores",
+        hints: ["Think of the English word 'justice'."],
+        strategy: "Spot the cognate",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q04",
+        question: "Which time phrase tells you that a sentence is about the **future**?",
+        options: ["normalmente", "mañana", "cada día", "a veces"],
+        answerIndex: 1,
+        explanation:
+          "*Mañana* = tomorrow, so it goes with the future: *Mañana voy a planchar.* *Normalmente* (normally), *cada día* (every day) and *a veces* (sometimes) all describe routines, so they go with the present: *Normalmente plancho.*",
+        difficulty: "warmup",
+        guideRef: "chores-this-weekend",
+        hints: ["Three of these describe a routine. Which one points to a single day ahead?"],
+        strategy: "Use the time phrase",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q05",
+        question: "How do you say 'I tidy my bedroom'?",
+        options: ["Ordeno mí dormitorio.", "Ordena mi dormitorio.", "Ordeno mi dormitorio.", "Hago la cama."],
+        answerIndex: 2,
+        explanation:
+          "*Ordenar* = to tidy, *yo* form **ordeno**, and 'my' is *mi* with **no** accent. *Mí* with an accent means 'me' (as in *para mí*). *Ordena* is the *él/ella* form, and *hago la cama* means 'I make the bed' — a different chore.",
+        difficulty: "core",
+        guideRef: "chores-vocab",
+        hints: ["Check the verb ending for *yo*.", "*Mi* (my) or *mí* (me)? Only one needs an accent."],
+        strategy: "Mind the accent",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q06",
+        question: "You ask your friend Lucía about her chores. Complete the question: *¿Qué ___ que hacer en casa?*",
+        options: ["tengo", "tienes", "tenéis", "tener"],
+        answerIndex: 1,
+        explanation:
+          "You're talking **to** one friend, so use *tú*: **¿Qué tienes que hacer en casa?** = What do you have to do at home? *Tengo* is 'I have', *tenéis* is for talking to several people (*vosotros*), and the infinitive *tener* can't be used here.",
+        difficulty: "core",
+        guideRef: "obligation",
+        hints: ["Who are you speaking to — yourself, one friend, or a group?", "One friend = *tú*. Which form of *tener* goes with *tú*?"],
+        strategy: "Check the subject",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q07",
+        question:
+          "Read the text about Hana.\n\n> Hana tiene trece años y vive en un piso cerca de una estación de MRT en Singapur. Por la mañana hace la cama y riega las plantas del balcón. Después del colegio pasea al perro por el parque. Su hermano Ravi cocina los martes y los jueves, y su padre plancha la ropa los domingos. Su madre trabaja mucho, pero los sábados hace la compra en el mercado.\n\nWho does the ironing, and when?",
+        options: [
+          "Her father, on Sundays.",
+          "Her brother Ravi, on Tuesdays and Thursdays.",
+          "Her mother, on Saturdays.",
+          "Hana, every morning.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "*Su padre plancha la ropa los domingos* = her father irons the clothes on Sundays. Ravi *cocina* (cooks) on Tuesdays and Thursdays, her mother *hace la compra* (does the food shopping) on Saturdays, and in the mornings Hana makes her bed and waters the plants.",
+        difficulty: "core",
+        guideRef: "chores-vocab",
+        hints: ["Which verb means 'to iron'? Find it in the text.", "Who is the subject of that verb, and which day is next to it?"],
+        strategy: "Use the time phrase",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q08",
+        question: "*Mis padres me dan setenta euros al mes.* How much pocket money is this, and how often?",
+        options: ["€17 a month", "€70 a week", "€60 a month", "€70 a month"],
+        answerIndex: 3,
+        explanation:
+          "*Setenta* = 70 and *al mes* = a month: **€70 a month**. Watch the near-twins: *sesenta* (60) vs *setenta* (70), and *diecisiete* (17). 'A week' would be *a la semana*.",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["Two things to decode: the number and the time period.", "*Sesenta* or *setenta*? Remember: *siete* (7) → *setenta* (70)."],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q09",
+        question: "Choose the correct Spanish for 'My brother doesn't do anything.'",
+        options: ["Mi hermano hace nada.", "Mi hermano no hace nada.", "Mi hermano no hace algo.", "Mi hermano no hago nada."],
+        answerIndex: 1,
+        explanation:
+          "Spanish uses a **double negative**: *no* before the verb + *nada* after it: *Mi hermano no hace nada.* *Hace nada* forgets the *no*; *no hace algo* copies English 'anything' word for word; *hago* is the *yo* form, but *mi hermano* is *él*.",
+        difficulty: "core",
+        guideRef: "opinions-on-chores",
+        hints: ["'Not… anything' in Spanish = *no…* + ?", "Check the verb form too: *mi hermano* = he."],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q10",
+        question:
+          "Read what four students say about chores.\n\n> Zara: «Me gusta cocinar porque es creativo, pero odio limpiar el cuarto de baño.»\n> Marcus: «No me importa sacar la basura. ¡Es rápido!»\n> Sofía: «Planchar es aburrido y lavar los platos es un rollo.»\n> Javier: «Pienso que es injusto: mis hermanas no hacen nada y yo lo hago todo.»\n\nWho complains that the chores at home are **not shared fairly**?",
+        options: ["Zara", "Marcus", "Sofía", "Javier"],
+        answerIndex: 3,
+        explanation:
+          "Javier says *es injusto* (it's unfair) because *mis hermanas no hacen nada y yo lo hago todo* (my sisters do nothing and I do everything). Sofía also complains — but about chores being boring (*aburrido*, *un rollo*), not about who does them. Marcus doesn't mind, and Zara likes cooking.",
+        difficulty: "core",
+        guideRef: "opinions-on-chores",
+        hints: ["Two people are negative. Which one talks about *other people* in the family?", "*Injusto* = unfair."],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q11",
+        question: "Choose the correct Spanish for 'I wash the dishes twice a week.'",
+        options: [
+          "Lavo los platos dos vez a la semana.",
+          "Lavo los platos dos tiempos a la semana.",
+          "Lavo los platos dos veces a la semana.",
+          "Lava los platos dos veces a la semana.",
+        ],
+        answerIndex: 2,
+        explanation:
+          "'Times' (occasions) = *veces*, the plural of *vez* (z → c before *-es*): **dos veces a la semana**. *Dos vez* forgets the plural; *tiempos* is 'time' as in the clock or weather — not occasions; and *lava* means 'he/she washes'.",
+        difficulty: "core",
+        guideRef: "frequency-and-pocket-money",
+        hints: ["'Once' = *una vez*. What is the plural of *vez*?", "Spanish changes z to c before adding *-es*.", "Then check the verb is the *yo* form."],
+        strategy: "Look for the pattern",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q12",
+        question: "Which sentence correctly means 'I normally vacuum, but tomorrow I'm going to iron'?",
+        options: [
+          "Normalmente paso la aspiradora, pero mañana voy a planchar.",
+          "Normalmente voy a pasar la aspiradora, pero mañana plancho.",
+          "Normalmente paso la aspiradora, pero mañana voy planchar.",
+          "Normalmente paso la aspiradora, pero mañana voy a plancho.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Routine (*normalmente*) → **present**: *paso la aspiradora*. Plan (*mañana*) → **voy a + infinitive**: *voy a planchar*. Swapping the tenses round gets the meaning wrong; *voy planchar* drops the *a*; *voy a plancho* conjugates the infinitive.",
+        difficulty: "core",
+        guideRef: "chores-this-weekend",
+        hints: ["Which half is a routine and which half is a plan?", "Routine → present tense. Plan → *voy a* + infinitive."],
+        strategy: "Use the time phrase",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q13",
+        question:
+          "Read Pablo's message.\n\n> Me llamo Pablo y vivo en Valencia. No recibo paga fija: mis padres me dan cinco euros cada vez que lavo el coche y tres euros cuando corto el césped. Esta semana voy a lavar el coche dos veces y voy a cortar el césped una vez. Quiero comprar una camiseta de fútbol que cuesta veinte euros.\n\nWill Pablo earn enough this week to buy the shirt?",
+        options: [
+          "No — he will earn 13 euros, so he will still need 7 more.",
+          "Yes — he will earn exactly 20 euros.",
+          "No — he will earn only 8 euros.",
+          "Yes — he will earn 23 euros.",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Car: €5 × *dos veces* (twice) = €10. Grass: €3 × *una vez* (once) = €3. Total **€13** — the shirt costs *veinte* (€20), so he's €7 short. 'Only 8 euros' forgets that he washes the car **twice**.",
+        difficulty: "challenge",
+        guideRef: "frequency-and-pocket-money",
+        hints: [
+          "Find how much he earns for each chore.",
+          "Now find how many times he's going to do each chore this week: *una vez*, *dos veces*…",
+          "Multiply, add, then compare with *veinte euros*.",
+        ],
+        strategy: "Build it up (extended sentence)",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q14",
+        question: "Which sentence correctly means 'At home everyone has to help'?",
+        options: [
+          "En casa todo tienen que ayudar.",
+          "En casa todos tiene que ayudar.",
+          "En casa todos tienen que ayudar.",
+          "En casa todos tienen que ayudan.",
+        ],
+        answerIndex: 2,
+        explanation:
+          "'Everyone' = *todos* (literally 'all of them'), which is **plural** — so the verb is *tienen*: *Todos tienen que ayudar.* English 'everyone has' tempts you into the singular *tiene*. *Todo* (without *-s*) means 'everything', and *ayudan* conjugates the infinitive. (You could also say *todo el mundo tiene que ayudar* — *todo el mundo* is singular.)",
+        difficulty: "challenge",
+        guideRef: "obligation",
+        hints: [
+          "English says 'everyone **has**' — but is Spanish *todos* singular or plural?",
+          "*Todos* = all of them → which form of *tener*?",
+          "Check the last verb: after *que* it stays as an infinitive.",
+        ],
+        strategy: "Agreement check",
+      },
+      {
+        kind: "mcq",
+        id: "tareas-m3-q15",
+        question:
+          "Read Carmen's message.\n\n> ¡Hola! Soy Carmen. Normalmente no ayudo mucho en casa porque tengo muchos deberes y entreno con mi equipo de natación. Pero este fin de semana mi madre va a estar en Madrid por trabajo. Así que el sábado voy a cocinar para mi hermano y el domingo voy a limpiar toda la casa con mi padre. No me importa: pienso que todos debemos ayudar.\n\nWhat can you infer about Carmen?",
+        options: [
+          "She usually does lots of chores.",
+          "She is going to Madrid this weekend.",
+          "She thinks only parents should do chores.",
+          "She will help more than usual this weekend because her mother is away.",
+        ],
+        answerIndex: 3,
+        explanation:
+          "*Normalmente no ayudo mucho* (normally I don't help much) + *mi madre va a estar en Madrid* (my mum is going to be in Madrid) + *voy a cocinar… voy a limpiar toda la casa* → this weekend she'll do far more than usual. It's her **mother** who goes to Madrid, and *pienso que todos debemos ayudar* shows she thinks everyone should help.",
+        difficulty: "challenge",
+        guideRef: "chores-this-weekend",
+        hints: [
+          "Compare what Carmen does *normalmente* with what she *va a* do this weekend.",
+          "Who is going to Madrid? Check the subject of *va a estar*.",
+          "*Así que* = so. What is the cause, and what is the result?",
+        ],
+        strategy: "Use context",
+      },
+    ],
+  },
+];
