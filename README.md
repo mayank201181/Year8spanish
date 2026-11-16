@@ -3,7 +3,7 @@
 A complete Year 8 Spanish study app built from the school's Year 8 Spanish scheme (Term 1 home &
 routine, Term 2 free time, Term 3 town & weather, plus the present, immediate future and preterite).
 
-**Live (preview):** https://year8-spanish-git-claude-relaxed-51b70e-mayank-rawat-s-projects.vercel.app
+**Live:** https://year8-spanish.vercel.app
 
 ## What's inside
 
