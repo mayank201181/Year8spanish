@@ -9,7 +9,20 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "rutina-diaria-p3-q01",
         question: "Translate into English: *Me peino.*",
-        answer: { type: "text", accept: ["I brush my hair", "I comb my hair", "I do my hair", "I'm brushing my hair", "I am brushing my hair"] },
+        answer: {
+          type: "text",
+          accept: [
+            "I brush my hair",
+            "I comb my hair",
+            "I do my hair",
+            "I'm brushing my hair",
+            "I am brushing my hair",
+            "I'm combing my hair",
+            "I am combing my hair",
+            "I'm doing my hair",
+            "I am doing my hair",
+          ],
+        },
         solution: ["*Peinarse* = to brush / comb your hair (*el peine* = comb).", "*me peino* → **I brush my hair.**"],
         traps: [{ spec: { type: "text", accept: ["I brush my teeth"] }, feedback: "Teeth are *los dientes*: *me lavo los dientes*. *Me peino* is about your hair." }],
         difficulty: "warmup",
@@ -49,6 +62,8 @@ export const morePapers: Paper[] = [
             "I get to school at eight o'clock",
             "I get to school at 8",
             "I get to school at 8:00",
+            "I get to school at 8am",
+            "I get to school at 8 am",
             "I reach school at eight",
             "I reach school at 8",
           ],
@@ -66,7 +81,7 @@ export const morePapers: Paper[] = [
         question: "Write in Spanish: 'I watch TV.'",
         answer: {
           type: "text",
-          accept: ["veo la tele", "yo veo la tele", "veo la televisión", "yo veo la televisión", "miro la tele", "yo miro la tele", "miro la televisión"],
+          accept: ["veo la tele", "yo veo la tele", "veo la televisión", "yo veo la televisión", "miro la tele", "yo miro la tele", "miro la televisión", "yo miro la televisión"],
         },
         solution: ["*Ver* (to watch / see) → *yo* form *veo*.", "*la tele* (short for *la televisión*).", "→ **Veo la tele.**"],
         traps: [
@@ -119,7 +134,7 @@ export const morePapers: Paper[] = [
         question: "Write in Spanish, using words: 'It's twenty-five past eleven.'",
         answer: {
           type: "text",
-          accept: ["son las once y veinticinco", "son las 11 y 25", "son las once y 25", "son las 11 y veinticinco"],
+          accept: ["son las once y veinticinco"],
         },
         solution: ["Eleven is plural → *son las once*.", "'twenty-five past' → *y veinticinco* (one word).", "→ **Son las once y veinticinco.**"],
         traps: [
@@ -239,10 +254,10 @@ export const morePapers: Paper[] = [
         kind: "mcq",
         id: "rutina-diaria-p3-q11",
         question: "Which sentence means 'I wash the car' (not 'I wash myself')?",
-        options: ["Me lavo el coche.", "Me lavo.", "Lavo el coche.", "Se lava el coche."],
+        options: ["Me lavo la cara.", "Me lavo.", "Lavo el coche.", "Se lava el coche."],
         answerIndex: 2,
         explanation:
-          "A verb is reflexive only when the action bounces back to the person doing it. Washing a car is done **to the car**, so there is no reflexive pronoun: **Lavo el coche.** *Me lavo* = I wash (myself); *me lavo el coche* would mean you are washing 'your own car-body'!",
+          "A verb is reflexive only when the action bounces back to the person doing it. Washing a car is done **to the car**, so there is no reflexive pronoun: **Lavo el coche.** *Me lavo* = I wash (myself) and *me lavo la cara* = I wash my face — in both the action comes back to you. *Se lava el coche* uses the *él / ella* form, so it isn't 'I' at all.",
         difficulty: "core",
         guideRef: "reflexive-verbs",
         hints: [
