@@ -118,12 +118,7 @@ function TrainSvg({ pieces, ariaLabel }: { pieces: Piece[]; ariaLabel: string })
   const gap = 14;
   const widths = pieces.map((p) => Math.max(p.kind === "coupling" ? 34 : 50, Math.round(p.text.length * 8.6) + 22));
   const total = widths.reduce((a, b) => a + b, 0) + gap * (pieces.length - 1) + pad * 2;
-  let x = pad;
-  const placed = pieces.map((p, i) => {
-    const out = { ...p, x, w: widths[i] };
-    x += widths[i] + gap;
-    return out;
-  });
+  const placed = pieces.map((p, i) => ({ ...p, x: pad + widths.slice(0, i).reduce((a, b) => a + b + gap, 0), w: widths[i] }));
   return (
     <div className="overflow-x-auto">
       <svg
@@ -477,7 +472,7 @@ function WeekPlanner() {
           {mode === "plan" ? (
             <p>
               <Es>{cap(selTime.es)}</Es> is <strong>one</strong> day still to come, so a plan for it uses <Es>ir a</Es> + infinitive (near future).
-              {selected === 0 ? <> (<Es>Hoy</Es> + <Es>voy a…</Es> = what you're going to do later today.)</> : null}
+              {selected === 0 ? <> (<Es>Hoy</Es> + <Es>voy a…</Es> = what you&apos;re going to do later today.)</> : null}
             </p>
           ) : (
             <p>

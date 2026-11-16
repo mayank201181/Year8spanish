@@ -293,7 +293,7 @@ function TownMap() {
   } else if (last.k === "recto") {
     caption = (
       <>
-        <i lang="es">{cap(SIGUE)} todo recto</i> keeps your direction: you're still walking {MAP_DIR[walk.h]}. Look at the coloured blocks: the <span className="font-bold text-brand">blue</span> one is on <b>your</b> right, the{" "}
+        <i lang="es">{cap(SIGUE)} todo recto</i> keeps your direction: you&apos;re still walking {MAP_DIR[walk.h]}. Look at the coloured blocks: the <span className="font-bold text-brand">blue</span> one is on <b>your</b> right, the{" "}
         <span className="font-bold text-accent">amber</span> one on your left.
       </>
     );
@@ -463,7 +463,7 @@ function TownMap() {
             </div>
             {arrived ? (
               <p className="mt-2 font-bold text-good" role="status">
-                ¡Has llegado! You've reached {the(target)} — it's on your {s.right === target ? "right (a la derecha)" : "left (a la izquierda)"}.
+                ¡Has llegado! You&apos;ve reached {the(target)} — it&apos;s on your {s.right === target ? "right (a la derecha)" : "left (a la izquierda)"}.
               </p>
             ) : null}
           </div>
@@ -595,21 +595,21 @@ function HayBuilder() {
   if (qty === "none") {
     caption = (
       <>
-        After <i lang="es">no hay</i> the article disappears: <i lang="es">no hay {plural ? plainPl : p.n}</i>, never <i lang="es">no hay {plural ? DET.some[p.g] : DET.one[p.g]}…</i> — you're saying the whole category doesn't exist.{" "}
+        After <i lang="es">no hay</i> the article disappears: <i lang="es">no hay {plural ? plainPl : p.n}</i>, never <i lang="es">no hay {plural ? DET.some[p.g] : DET.one[p.g]}…</i> — you&apos;re saying the whole category doesn&apos;t exist.{" "}
         {plural ? `With places a town usually has several of (shops, restaurants) English says "there aren't any", and Spanish uses the plural.` : `With a one-off place, Spanish uses the bare singular: there isn't a ${p.en}.`}
       </>
     );
   } else if (qty === "ningun") {
     caption = (
       <>
-        Stretch: <i lang="es">{DET.ningun[p.g]}</i> = 'not a single'. It agrees in gender ({genderWord}: <i lang="es">{DEF[p.g]} {p.n}</i>) but is <b>always singular</b> — and you still need <i lang="es">no</i> before <i lang="es">hay</i>.
+        Stretch: <i lang="es">{DET.ningun[p.g]}</i> = &apos;not a single&apos;. It agrees in gender ({genderWord}: <i lang="es">{DEF[p.g]} {p.n}</i>) but is <b>always singular</b> — and you still need <i lang="es">no</i> before <i lang="es">hay</i>.
         {p.g === "m" ? " Before a masculine noun ninguno shortens to ningún (with an accent), just like uno → un." : ""}
       </>
     );
   } else if (qty === "one") {
     caption = (
       <>
-        <i lang="es">Hay</i> never changes. 'A' agrees with the place: <i lang="es">{DEF[p.g]} {p.n}</i> is {genderWord}, so <i lang="es">{DET.one[p.g]} {p.n}</i>. Use <i lang="es">hay</i> + un/una for something new — never <i lang="es">hay {DEF[p.g]} {p.n}</i>.
+        <i lang="es">Hay</i> never changes. &apos;A&apos; agrees with the place: <i lang="es">{DEF[p.g]} {p.n}</i> is {genderWord}, so <i lang="es">{DET.one[p.g]} {p.n}</i>. Use <i lang="es">hay</i> + un/una for something new — never <i lang="es">hay {DEF[p.g]} {p.n}</i>.
       </>
     );
   } else {
@@ -619,7 +619,7 @@ function HayBuilder() {
         {qty === "num"
           ? "Numbers from dos upwards don't change for gender."
           : `The quantity word agrees too: ${genderWord} plural → ${DET[qty][p.g]}.`}{" "}
-        <i lang="es">Hay</i> itself stays the same whether there's one or ten.
+        <i lang="es">Hay</i> itself stays the same whether there&apos;s one or ten.
       </>
     );
   }

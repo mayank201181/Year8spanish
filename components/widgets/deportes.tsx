@@ -246,11 +246,11 @@ function JugarHacerSorter() {
         sport.kind === "jugar" ? (
           <p>
             <em lang="es">Jugar</em> is a boot verb (u → ue). <em lang="es">{cap(PERSON_LABEL[subj.p])}</em> is {inBoot ? "inside" : "outside"} the boot,
-            so it's <strong lang="es">{form}</strong>{inBoot ? " — see the highlighted ue" : " — no ue here"}.
+            so it&apos;s <strong lang="es">{form}</strong>{inBoot ? " — see the highlighted ue" : " — no ue here"}.
           </p>
         ) : (
           <p>
-            <em lang="es">Hacer</em> is regular except <em lang="es">yo</em>: <strong lang="es">hago</strong>. For <em lang="es">{PERSON_LABEL[subj.p]}</em> it's{" "}
+            <em lang="es">Hacer</em> is regular except <em lang="es">yo</em>: <strong lang="es">hago</strong>. For <em lang="es">{PERSON_LABEL[subj.p]}</em> it&apos;s{" "}
             <strong lang="es">{form}</strong>.
           </p>
         )

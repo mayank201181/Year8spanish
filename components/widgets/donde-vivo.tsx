@@ -291,7 +291,7 @@ function OpinionOMeter() {
           What pleases? <Es>{thing.es}</Es> — {thing.inf ? "an activity, which counts as one thing" : thing.pl ? "plural" : "one thing"} → <Es>{stem + (thing.pl ? "n" : "")}</Es>. The verb agrees with the thing, never with the person.
         </li>,
       );
-      if (neg) notes.push(<li key="neg"><Es>No</Es> goes in front of <Es>{w.pron}</Es>{nada ? <>; <Es>nada</Es> after the verb makes it 'not at all'</> : null}.</li>);
+      if (neg) notes.push(<li key="neg"><Es>No</Es> goes in front of <Es>{w.pron}</Es>{nada ? <>; <Es>nada</Es> after the verb makes it &apos;not at all&apos;</> : null}.</li>);
     }
 
     // Reason
@@ -341,7 +341,7 @@ function OpinionOMeter() {
       caption={
         <div className="space-y-2">
           <ul className="list-disc space-y-1 pl-5">{built.notes}</ul>
-          {mismatch ? <p className="text-warn">Hmm — the grammar is fine, but the reason doesn't match the opinion. Change the reason or the slider (or, in your own writing, add a contrast with <Es>pero</Es>).</p> : null}
+          {mismatch ? <p className="text-warn">Hmm — the grammar is fine, but the reason doesn&apos;t match the opinion. Change the reason or the slider (or, in your own writing, add a contrast with <Es>pero</Es>).</p> : null}
         </div>
       }
     >
@@ -499,7 +499,7 @@ function ComparisonBuilder() {
       en = `${cap(A.en)} ${enV} ${mode === "mejor" ? "better" : "worse"} than ${B.en}.`;
       rule = (
         <>
-          'Better' and 'worse' have their own words: <Es>mejor</Es> / <Es>peor</Es> — never <Es>más bueno</Es> / <Es>más malo</Es>. They have no feminine form, only a plural in <Es>-es</Es>
+          &apos;Better&apos; and &apos;worse&apos; have their own words: <Es>mejor</Es> / <Es>peor</Es> — never <Es>más bueno</Es> / <Es>más malo</Es>. They have no feminine form, only a plural in <Es>-es</Es>
           {A.pl ? (
             <>
               : <Es>{A.es}</Es> is plural → <Es>{word}es</Es>
@@ -520,7 +520,7 @@ function ComparisonBuilder() {
             : `${cap(A.en)} ${enV} as ${adj.en} as ${B.en}.`;
       rule = (
         <>
-          <Es>{w}</Es> + adjective + <Es>{link}</Es>. The adjective agrees with the <strong>first</strong> place, <Es>{A.es}</Es> ({gnLabel(A.g, A.pl)}) → <Es>{adj.es.slice(0, -1) + ending(A.g, A.pl)}</Es> — it doesn't care that <Es>{B.es}</Es> comes after <Es>{link}</Es>.
+          <Es>{w}</Es> + adjective + <Es>{link}</Es>. The adjective agrees with the <strong>first</strong> place, <Es>{A.es}</Es> ({gnLabel(A.g, A.pl)}) → <Es>{adj.es.slice(0, -1) + ending(A.g, A.pl)}</Es> — it doesn&apos;t care that <Es>{B.es}</Es> comes after <Es>{link}</Es>.
         </>
       );
     }
@@ -542,7 +542,7 @@ function ComparisonBuilder() {
         <div className="space-y-1">
           <p>{built.rule}</p>
           <p>
-            See-saw: <Es>más … que</Es> and <Es>menos … que</Es> describe the same fact from opposite ends — that's why ⇄ Swap flips one into the other.
+            See-saw: <Es>más … que</Es> and <Es>menos … que</Es> describe the same fact from opposite ends — that&apos;s why ⇄ Swap flips one into the other.
           </p>
         </div>
       }
