@@ -312,15 +312,8 @@ const enBeNeg = (s: Subj) => (s.p === "yo" ? "am not" : isThird(s) ? "isn't" : "
 const enPres = (s: Subj, c: Chore) => (isThird(s) ? c.s3 : c.en);
 
 function verbAccept(verb: string, tense: "present" | "near-future", s: Subj): string[] {
-  if (s.pron) {
-    const prons = pronounsFor(s);
-    return acceptedForms(verb, tense, s.p).filter((f) => {
-      const first = f.split(" ")[0];
-      const isPron = (SUBJECT_PRONOUNS[s.p] as readonly string[]).includes(first) && f.split(" ").length > 1 && first !== conjugate(verb, tense, s.p).split(" ")[0];
-      return !isPron || prons.includes(first);
-    });
-  }
-  return [conjugate(verb, tense, s.p)];
+  const form = conjugate(verb, tense, s.p);
+  return s.pron ? [form, ...pronounsFor(s).map((pr) => `${pr} ${form}`)] : [form];
 }
 
 // ---------------------------------------------------------------------------
@@ -521,7 +514,7 @@ export const drills: Drill[] = [
       if (s.p !== "yo") raw.push({ wrong: [conjugate(v.verb, "present", "yo")], feedback: `That's the *yo* form. The subject is *${s.es}* — ${PERSON_LABEL[s.p]}.` });
       raw.push({ wrong: [v.verb], feedback: "That's the infinitive — conjugate it to match the subject." });
       return {
-        prompt: `Complete with the present tense of *${v.verb}*: *${subjShown(s, true)} ___ ${squash(`${v.rest} ${tail}`)}.*`.replace(" .*", ".*"),
+        prompt: `Complete with the present tense of *${v.verb}*: *${squash(`${subjShown(s, true)} ___ ${v.rest} ${tail}`)}.*`,
         answer: { type: "text", accept },
         solution: [`Subject *${s.es}* → ${PERSON_LABEL[s.p]}.`, presentStep(v.verb, s.p)],
         hint: v.verb === "ir" ? "*Ir* is completely irregular: *voy, vas, va…*" : "Who is doing the chore? Chop off -ar/-er/-ir and add that person's ending.",
@@ -965,10 +958,11 @@ export const drills: Drill[] = [
       const kind = tier === 1 ? "gap" : tier === 2 ? rng.pick(["gap", "rewrite"]) : rng.pick(["neg", "neg", "rewrite"]);
       const s = tier === 1 ? rng.pick(PRON_SUBJ) : rng.pick(ALL_SUBJ);
       const ir = conjugate("ir", "present", s.p);
-      const commonTraps = (frameFn: (core: string) => string[]): RawTrap[] => [
-        { wrong: frameFn(squash(`${ir} ${c.verb} ${c.rest}`)), feedback: `Don't forget the little *a*: *${ir} **a** ${c.verb}*.` },
-        { wrong: frameFn(squash(`${ir} a ${pres(c, s.p)}`)), feedback: "After *ir a* the chore stays in the **infinitive**." },
-        { wrong: frameFn(pres(c, s.p)), feedback: `That's the present tense. *${cap(t.es[0])}* is about a plan → *ir a* + infinitive.` },
+      // Wrong verb parts (without the rest of the chunk), framed per template.
+      const commonTraps = (frame: (verbPart: string) => string[]): RawTrap[] => [
+        { wrong: frame(`${ir} ${c.verb}`), feedback: `Don't forget the little *a*: *${ir} **a** ${c.verb}*.` },
+        { wrong: frame(`${ir} a ${conjugate(c.verb, "present", s.p)}`), feedback: "After *ir a* the chore stays in the **infinitive**." },
+        { wrong: frame(conjugate(c.verb, "present", s.p)), feedback: `That's the present tense. *${cap(t.es[0])}* is about a plan → *ir a* + infinitive.` },
       ];
       if (kind === "gap") {
         const accept = finalize(verbAccept(c.verb, "near-future", s), false);
@@ -977,11 +971,7 @@ export const drills: Drill[] = [
           answer: { type: "text", accept },
           solution: [`*Ir* for ${PERSON_LABEL[s.p]}: *${ir}*.`, `Add *a* + the infinitive *${c.verb}* → **${conjugate(c.verb, "near-future", s.p)}**.`],
           hint: "Three parts: the right form of *ir*, then *a*, then the infinitive.",
-          traps: makeTraps(accept, commonTraps((core) => {
-            const parts = core.split(" ");
-            const verbOnly = c.rest ? core.slice(0, core.length - c.rest.length).trim() : core;
-            return [verbOnly, parts.join(" ")];
-          })),
+          traps: makeTraps(accept, commonTraps((vp) => (s.pron ? [vp, ...pronounsFor(s).map((pr) => `${pr} ${vp}`)] : [vp]))),
         };
       }
       if (kind === "rewrite") {
@@ -993,7 +983,7 @@ export const drills: Drill[] = [
           answer: { type: "text", accept },
           solution: [`Swap *${from}* for *${t.es[0]}* — a plan, so use *ir a* + infinitive.`, `*${pres(c, s.p)}* → *${conjugate(c.verb, "near-future", s.p)}${c.rest ? " " + c.rest : ""}*.`, `→ **${accept[0]}.**`],
           hint: "Keep the person, change the verb to *ir (conjugated) + a + infinitive*.",
-          traps: makeTraps(accept, commonTraps((core) => withSubj(s, [core]).map((x) => `${t.es[0]} ${x}`))),
+          traps: makeTraps(accept, commonTraps((vp) => withSubj(s, [squash(`${vp} ${c.rest}`)]).map((x) => `${t.es[0]} ${x}`))),
         };
       }
       // negative translation
