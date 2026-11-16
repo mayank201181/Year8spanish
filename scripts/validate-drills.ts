@@ -61,7 +61,7 @@ for (const d of drills) {
       prompts.add(item.prompt);
     }
     perTier[tier] = prompts.size;
-    if (prompts.size < 25) issues.push({ where: `${d.id}[tier ${tier}]`, problem: `only ${prompts.size} distinct prompts in 200 seeds — needs more variety` });
+    if (prompts.size < 15) issues.push({ where: `${d.id}[tier ${tier}]`, problem: `only ${prompts.size} distinct prompts in 200 seeds (need 15) — needs more variety` });
   }
   report[d.id] = { title: d.title, level: d.level, distinctPrompts: perTier };
 }

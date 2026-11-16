@@ -1,44 +1,49 @@
-# Skill drills spec (procedural question generators)
+# Skill drills spec (procedural question generators) — Spanish
 
 Drills give a learner **unlimited fresh practice** on one fine-grained skill, auto-marked, with a
-worked solution — like DrFrost "Key Skills" / Sparx. You write `lib/drills/<topicId>.ts`:
+worked solution — like Language Gym / Conjuguemos. You write `lib/drills/<topicId>.ts`:
 
     import type { Drill } from "./types.ts";
-    import { frac, gcd, lcm, num, br, poly, money, roundTo, clean, signed, term, big, primeFactors, indexForm, isPrime, sample } from "./helpers.ts";
+    import { conjugate, acceptedForms, englishGloss, PERSONS, PERSON_LABEL, verbInfo, VERBS, type Person } from "../spanish/verbs.ts";
+    import { vocab } from "../vocab/<topicId>.ts";
     export const drills: Drill[] = [ … ];
 
-Read `lib/drills/types.ts`, `lib/drills/helpers.ts`, `lib/drills/_example.ts`, `lib/types.ts`
-(AnswerSpec), `lib/answerCheck.ts` (how answers are checked) and `docs/CONTENT.md` (text format,
-`{{maths}}` markup, house style).
+Read `lib/drills/types.ts`, `lib/spanish/verbs.ts` (tested conjugator — USE it for every verb form,
+never hand-conjugate inside a generator), `lib/vocab/<topicId>.ts` (the topic word list),
+`lib/answerCheck.ts` (text answers: case/space/punctuation-insensitive, accent-only differences get
+an "almost" nudge), `lib/types.ts` (AnswerSpec `text`) and `docs/CONTENT.md` (house style).
 
 ## Requirements
-- **8–12 drills per topic**, one per fine-grained skill, covering every non-stretch section of
-  the topic (set `guideRef` to the section id) plus 1–2 for stretch sections. Order them from
-  basic (`level: 1`) to harder (`level: 3`).
-- `id`: `"<topicId>.<kebab-skill>"`; `topicId` set; a clear `title` a 12-year-old understands
-  ("Subtract a negative number").
-- `generate(rng, tier)` must be **pure and deterministic** given the rng (use only `rng.*` for
-  randomness — never Math.random or Date). `tier` 1 = friendly numbers, 2 = typical Year 8
-  (negatives, decimals, bigger numbers), 3 = stretch (multi-step, unfamiliar context).
-- Use rejection loops (bounded, e.g. `for (let i = 0; i < 100; i++)`) to keep numbers nice:
-  integer answers where intended, no trivial cases (×1, +0, k = ±1 in algebra, answer 0 unless
-  deliberate), fractions in prompts already simplified, no duplicate options, no division by 0.
-- **Compute answers exactly.** Avoid float noise: build decimals from integers
-  (`clean`, `roundTo`), e.g. pick cents as integers then divide by 100.
-- Prompts use `{{ }}` maths markup for fractions/powers/roots and state the required form
-  ("Give your answer in its simplest form.", "Give your answer to 1 decimal place.").
-- `answer` is an `AnswerSpec` with the right form flags. `solution` = 2–4 short worked steps
-  with the real numbers. `hint` = one strategic nudge. Add `traps` for the 1–2 most common
-  wrong answers with targeted feedback (a trap must never equal the correct answer — guard it).
-- Vary the *wording/context* too where natural (2–4 templates), not just the numbers.
-- Money in `$`. Vegetarian food contexts.
+- **8–12 drills per topic**, one per fine-grained skill, covering every non-stretch section of the
+  topic (`guideRef` = the section id from `lib/topics/meta.ts`), ordered basic (`level: 1`) →
+  harder (`level: 3`). Mix skill types:
+  - vocab recall es→en and en→es (from the topic's vocab file; for en→es accept the item with and
+    without its article only if the prompt doesn't ask for the article — say clearly "Include
+    el/la/los/las.");
+  - conjugation for a random person (present / near future / preterite, as the topic needs) using
+    `acceptedForms` for the answer;
+  - gap-fill sentence frames built from templates with slots (e.g. "*Mi hermano ___ (levantarse) a las siete.*");
+  - transformations (yo → él, present → near future, singular → plural agreement, add *al/a la*);
+  - short build-a-sentence translations from small, fully-enumerable templates (list every
+    accepted variant: subject pronoun optional, time phrase at start or end, etc.);
+  - topic-specific generators (telling the time from a random time; weather from a symbol; directions;
+    numbers/prices for pocket money; adjective agreement with random nouns of known gender).
+- `id`: `"<topicId>.<kebab-skill>"`; `topicId` set; a clear English `title` ("Reflexive verbs: present tense").
+- `generate(rng, tier)` must be **pure and deterministic** given the rng (only `rng.*` for randomness).
+  `tier` 1 = common/regular items, 2 = typical Year 8 (stem-changers, irregulars, all persons),
+  3 = stretch (multi-step, longer sentences, mixed tenses).
+- No `{{ }}` markup. Prompts are English instructions with Spanish in *italics*.
+- `answer`: `{ type: "text", accept: [...] }` listing ALL acceptable variants. `solution`: 2–4 short
+  steps (infinitive → stem → ending → answer). `hint`: one strategic nudge. `traps`: 1–2 predictable
+  wrong answers with targeted feedback (guard so a trap never equals an accepted answer, and never
+  differs from an accepted answer only by accents — those are already caught as "check accents").
+- Vary templates (3–6) so items don't feel repetitive. Vegetarian food. Spain-standard Spanish.
 
 ## Validation (mandatory)
 
     node scripts/validate-drills.ts <topicId>
     node scripts/typecheck-file.mjs lib/drills/<topicId>.ts
 
-The validator runs every drill 200× per tier and checks text, markup, answer self-consistency,
-traps, float noise and variety. It also prints a sample of each drill — **read the samples and
-solve a few yourself** to confirm the maths is right. Fix everything before finishing.
-Do NOT run `npm run build`, `next build` or `npm install`. Edit only your drill file.
+The validator runs every drill 200× per tier, checks text, answer self-consistency, traps and
+variety, and prints samples — **read the samples and check the Spanish yourself**. Fix everything.
+Do NOT run `npm run build`, `next build` or `npm install`. Edit only your files.

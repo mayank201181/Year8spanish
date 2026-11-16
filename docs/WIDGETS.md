@@ -1,57 +1,47 @@
-# Interactive widgets ("explorables") + engagement extras spec
+# Interactive widgets ("explorables") spec — Spanish
 
-## 1. Widgets — `components/widgets/<topicId>.tsx`
-
-Each topic gets **2 genuinely useful interactive explorables** in its Interactive tab: the
-learner changes inputs (sliders, steppers, drag, toggles) and watches a mathematical object
-respond live, with a caption that explains what they see — plus "Try this" challenges that
-make them predict and test (AoPS discovery). Think Mathigon / Desmos-lite, not a toy.
+Each topic gets **2 genuinely useful interactive explorables** in its Explore tab: the learner
+changes inputs (selectors, steppers, toggles, drag/tap) and watches Spanish respond live, with a
+caption explaining the pattern — plus "Try this" challenges (predict, then test). Think
+"build-a-sentence machine", not a toy. Write `components/widgets/<topicId>.tsx`:
 
     "use client";
     import { useState, useMemo } from "react";
-    import { WidgetFrame, Slider, Stepper, Segmented, Readout, M, makePlane, PlaneGrid, type WidgetDef } from "./kit";
-    function FractionWall() { … }
-    function Another() { … }
-    export const widgets: WidgetDef[] = [
-      { id: "fraction-wall", title: "Fraction wall", blurb: "See which fractions are equal.", Component: FractionWall },
-      …
-    ];
+    import { WidgetFrame, Slider, Stepper, Segmented, Readout, type WidgetDef } from "./kit";
+    import { speakSpanish } from "@/lib/speech";            // 🔊 buttons (Web Speech, es-ES)
+    import { conjugate, PERSONS, PERSON_LABEL } from "@/lib/spanish/verbs";  // tested conjugator
+    function SentenceBuilder() { … }
+    export const widgets: WidgetDef[] = [ { id, title, blurb, Component }, … ];
+
+Ideas per topic (pick 2 that teach the topic's core pattern best, or better ones):
+- mi-casa: build-a-home (pick home type + location + rooms → live sentence *Vivo en un piso en el
+  centro. Tiene tres dormitorios…* with agreement of adjectives); floor-plan labeller.
+- mi-dormitorio: drag/tap furniture into an SVG room and read *La lámpara está encima de la mesa*;
+  colour + noun agreement mixer (rojo/roja/rojos/rojas).
+- rutina-diaria: clock → *Son las siete y media* (both directions, honest analogue clock SVG);
+  reflexive routine builder (person selector → *se levanta / nos levantamos*).
+- donde-vivo: opinion-o-meter (slider odio→me encanta + reason + connective); comparison builder (más/menos/tan … que/como with agreement).
+- deportes: jugar-a vs hacer sorter + al/a la contraction; frequency ladder sentence builder.
+- tiempo-libre: gustar machine (who likes → me/te/le/nos/os/les + gusta/gustan agreement); plans/invitation dialogue builder.
+- tareas: chore wheel with tener que + infinitive for each person; pocket-money calculator in Spanish words.
+- el-tiempo: weather map of Spain (tap regions/symbols → *En el norte llueve*); tense switch (ayer hizo / hoy hace / mañana va a hacer).
+- la-ciudad: town-map direction follower (sigue todo recto, gira a la izquierda… moves a marker on an SVG grid); hay un/una/unos/unas builder.
+- mi-ciudad: extended-sentence upgrader (add time phrase, opinion, reason, connective, intensifier — sentence grows live with a "level" meter); three-time-frame paragraph builder.
+- presente: verb machine (infinitive × person → form, highlighting stem/ending, boot shading for stem-changers); ser vs estar sorter.
+- futuro-inmediato: ir + a + infinitive train (person + verb + time phrase → sentence, reflexive position toggle).
+- preterito: tense time-machine (ayer/hoy/mañana slider re-conjugates a sentence); preterite ending builder with spelling-change spotlight (jugué, toqué, empecé).
 
 Rules:
-- Read `components/widgets/kit.tsx` (WidgetFrame, Slider, Stepper, Segmented, Readout, `M` for
-  inline maths, `makePlane`/`PlaneGrid` for coordinate SVGs) and `app/globals.css` (tokens).
-- Client component, React 19, TypeScript strict, **no new dependencies**, no network, no
-  `Math.random` during render (use useState initialisers or event handlers for randomness).
-- Style with Tailwind utilities and the theme tokens: `bg-surface`, `bg-surface-2`, `text-ink`,
-  `text-ink-2`, `border-line`, `text-brand`, `bg-brand`, `bg-brand-soft`, `text-good`,
-  `bg-good-soft`, `text-bad`, `bg-bad-soft`, `text-accent`. In SVG use `className="fill-brand
-  stroke-ink"` etc. (works in light and dark mode). Avoid hard-coded colours except inside small
-  accents.
-- Responsive: works at 360 px wide (SVG with viewBox and `className="w-full h-auto"`), touch
-  friendly (no hover-only interactions; buttons ≥ 40 px).
-- Mathematically **exact and honest**: compute with care (fractions via gcd, rounding shown),
-  label units, keep diagrams to scale.
-- Each widget's `WidgetFrame` gets 2–4 `tryThis` prompts (e.g. "Find two different fractions
-  equal to {{3/4}}", "Can you make the gradient negative?") and a live `caption` explaining the
-  maths in plain words, using `<M>` or `{{ }}` for notation.
-- Accessible: label every control; SVGs get `role="img"` and an `aria-label` describing the
-  current state.
+- Read `components/widgets/kit.tsx` and `app/globals.css` (tokens). Client component, React 19,
+  TypeScript strict, **no new dependencies**, no network, no `Math.random` during render.
+- Tailwind + theme tokens only (`bg-surface`, `text-ink`, `text-ink-2`, `border-line`, `text-brand`,
+  `bg-brand-soft`, `text-good`, `bg-good-soft`, `text-bad`, `text-accent`, …). SVG with
+  `className="fill-… stroke-…"`, viewBox, `w-full h-auto`. Works at 360 px; touch targets ≥ 40 px.
+- **Spanish must be exactly right** — use `conjugate()` for verb forms; handle gender/number
+  agreement explicitly with a small typed lexicon (es, gender, plural) inside the widget.
+- Show Spanish with `lang="es"` and offer a 🔊 button (speakSpanish) on the generated sentence.
+- Each WidgetFrame: 2–4 `tryThis` prompts and a live `caption` explaining the pattern in plain English.
+- Accessible: label every control; SVGs get `role="img"` + an `aria-label` describing the state.
 
-Check: `node scripts/typecheck-file.mjs components/widgets/<topicId>.tsx` must pass.
-
-## 2. Extras — `lib/extras/<topicId>.ts`
-
-    import type { TopicExtras } from "../types.ts";
-    export const extras: TopicExtras = { hook, didYouKnow, activities, bonusDiagrams, history };
-
-- `hook`: 1–2 sentence curiosity hook (a surprising question or fact) for the top of the guide.
-- `didYouKnow`: 4–6 surprising, TRUE facts connected to the topic (no myths; no invented stats).
-- `activities`: 2 hands-on activities/puzzles to do at home with everyday items
-  (`title, emoji, materials, steps, maths` — `maths` explains what it shows).
-- `bonusDiagrams`: 1–2 extra SVG diagrams (same SVG rules as docs/CONTENT.md) that illuminate a
-  key idea (e.g. a visual proof).
-- `history`: a short (80–150 words) true story from maths history related to the topic.
-Use the text format from docs/CONTENT.md (`{{ }}` maths). Check with
-`node scripts/typecheck-file.mjs lib/extras/<topicId>.ts`.
-
-Do NOT run `npm run build`, `next build` or `npm install`. Edit only your two files.
+Check: `node scripts/typecheck-file.mjs components/widgets/<topicId>.tsx` must pass. Do NOT run
+`npm run build`, `next build` or `npm install`. Edit only your file(s).
