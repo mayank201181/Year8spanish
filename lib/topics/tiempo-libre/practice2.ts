@@ -108,6 +108,8 @@ export const morePapers: Paper[] = [
             "Los domingos yo cocino con mi papá",
             "Cocino con mi papá los domingos",
             "Yo cocino con mi papá los domingos",
+            "Cocino los domingos con mi padre",
+            "Cocino los domingos con mi papá",
           ],
         },
         solution: [
@@ -283,7 +285,12 @@ export const morePapers: Paper[] = [
         question: "Translate into Spanish: *My brother wants to go to the concert, but he can't.*",
         answer: {
           type: "text",
-          accept: ["Mi hermano quiere ir al concierto, pero no puede", "Mi hermano quiere ir al concierto, pero él no puede"],
+          accept: [
+            "Mi hermano quiere ir al concierto, pero no puede",
+            "Mi hermano quiere ir al concierto, pero él no puede",
+            "Mi hermano quiere ir al concierto, pero no puede ir",
+            "Mi hermano quiere ir al concierto, pero él no puede ir",
+          ],
         },
         solution: [
           "'My brother wants' = *mi hermano quiere* (*querer*, e→ie).",

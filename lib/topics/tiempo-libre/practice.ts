@@ -100,7 +100,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "tiempo-libre-quiz-q07",
       question: "Translate into English: *Las noticias son aburridas.*",
-      answer: { type: "text", accept: ["The news is boring", "News is boring", "The news is dull", "The news are boring"] },
+      answer: { type: "text", accept: ["The news is boring", "News is boring", "The news is dull", "News is dull", "The news are boring"] },
       solution: [
         "*Las noticias* = the news — plural in Spanish, but singular in English.",
         "*son aburridas* = are boring → in English, 'the news **is** boring'.",
@@ -277,7 +277,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "tiempo-libre-p1-q08",
           question: "Translate into Spanish (something you do every week): *on Saturday mornings*",
-          answer: { type: "text", accept: ["los sábados por la mañana"] },
+          answer: { type: "text", accept: ["los sábados por la mañana", "todos los sábados por la mañana"] },
           solution: [
             "A regular habit → *los* + plural day: *los sábados* (days ending in *-o* add *-s*).",
             "'In the morning' = *por la mañana*.",
@@ -420,6 +420,9 @@ export const practice: TopicPractice = {
               "Esta noche no voy a ver la televisión; yo prefiero leer",
               "Esta noche no voy a ver la tele porque prefiero leer",
               "Esta noche no voy a ver la televisión porque prefiero leer",
+              "No voy a ver la tele esta noche porque prefiero leer",
+              "No voy a ver la televisión esta noche porque prefiero leer",
+              "No voy a ver la tele esta noche; yo prefiero leer",
             ],
           },
           solution: [
@@ -616,7 +619,7 @@ export const practice: TopicPractice = {
           question: "Translate into Spanish (a girl is speaking): *I watch TV alone.*",
           answer: {
             type: "text",
-            accept: ["Veo la tele sola", "Yo veo la tele sola", "Veo la televisión sola", "Yo veo la televisión sola", "Veo sola la tele", "Veo sola la televisión"],
+            accept: ["Veo la tele sola", "Yo veo la tele sola", "Veo la televisión sola", "Yo veo la televisión sola", "Veo sola la tele", "Veo sola la televisión", "Yo veo sola la tele", "Yo veo sola la televisión"],
           },
           solution: [
             "'I watch' = *veo* (from *ver*).",
@@ -662,6 +665,10 @@ export const practice: TopicPractice = {
               "Yo prefiero las pelis de terror",
               "Prefiero las películas de horror",
               "Yo prefiero las películas de horror",
+              "Prefiero las películas de miedo",
+              "Yo prefiero las películas de miedo",
+              "Prefiero las pelis de miedo",
+              "Yo prefiero las pelis de miedo",
             ],
           },
           solution: [
@@ -681,7 +688,7 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "tiempo-libre-p2-q12",
-          question: "Translate into Spanish: *We are going to play video games.*",
+          question: "Translate into Spanish (as said in Spain): *We are going to play video games.*",
           answer: {
             type: "text",
             accept: ["Vamos a jugar a los videojuegos", "Nosotros vamos a jugar a los videojuegos", "Nosotras vamos a jugar a los videojuegos"],
@@ -845,6 +852,12 @@ export const practice: TopicPractice = {
           "¿Queréis venir al cine con nosotras el sábado?",
           "¿Queréis venir al cine el sábado con nosotras?",
           "¿El sábado queréis venir al cine con nosotras?",
+          "¿Vosotros queréis venir al cine con nosotros el sábado?",
+          "¿Vosotras queréis venir al cine con nosotras el sábado?",
+          "¿Queréis ir con nosotros al cine el sábado?",
+          "¿Queréis venir con nosotros al cine el sábado?",
+          "¿Queréis ir con nosotras al cine el sábado?",
+          "¿Queréis venir con nosotras al cine el sábado?",
         ],
       },
       solution: [
@@ -1036,6 +1049,8 @@ export const practice: TopicPractice = {
           "Nosotras no podemos quedar a las siete. ¿Quedamos a las ocho y media?",
           "No podemos quedar a las siete. ¿Por qué no quedamos a las ocho y media?",
           "No podemos quedar a las siete. ¿Quedamos a las ocho y treinta?",
+          "No podemos quedar a las 7. ¿Quedamos a las 8 y media?",
+          "No podemos quedar a las 7. ¿Quedamos a las 8:30?",
         ],
       },
       solution: [
