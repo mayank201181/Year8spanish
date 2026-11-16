@@ -6,7 +6,58 @@ import { toMathML } from "@/lib/mathml";
 // Keys are positions within one render call, so re-rendering the same text keeps
 // the same DOM (no remounts: text selection and aria-live regions survive).
 
-/** Inline: {{maths}}, **bold**, *italic*, `code`. Newlines become <br/>. */
+/**
+ * Styled inline text: **bold** and *italic* may nest in either order
+ * (*Juego **al** fútbol* or **bold *it* bold**), `code` is literal, \n → <br/>.
+ * A lone * with spaces on both sides stays a literal asterisk.
+ */
+function pushStyled(text: string, out: ReactNode[]) {
+  let bold = false;
+  let italic = false;
+  let buf = "";
+  const flush = () => {
+    if (!buf) return;
+    const key = out.length;
+    let node: ReactNode = buf;
+    if (italic) node = <em>{node}</em>;
+    if (bold) node = <strong>{node}</strong>;
+    out.push(<Fragment key={key}>{node}</Fragment>);
+    buf = "";
+  };
+  const isSpace = (c: string | undefined) => c === undefined || /\s/.test(c);
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === "\n") {
+      flush();
+      out.push(<br key={out.length} />);
+    } else if (c === "`") {
+      const end = text.indexOf("`", i + 1);
+      if (end > i + 1) {
+        flush();
+        out.push(<code key={out.length}>{text.slice(i + 1, end)}</code>);
+        i = end;
+      } else buf += c;
+    } else if (c === "*" && text[i + 1] === "*") {
+      const opening = !bold;
+      if (opening ? !isSpace(text[i + 2]) && text.indexOf("**", i + 2) > 0 : !isSpace(text[i - 1])) {
+        flush();
+        bold = !bold;
+        i++;
+      } else buf += "**", i++;
+    } else if (c === "*") {
+      const opening = !italic;
+      const canOpen = !isSpace(text[i + 1]) && /\*/.test(text.slice(i + 1).replace(/\*\*/g, ""));
+      const canClose = !isSpace(text[i - 1]);
+      if (opening ? canOpen : canClose) {
+        flush();
+        italic = !italic;
+      } else buf += c;
+    } else buf += c;
+  }
+  flush();
+}
+
+/** Inline: {{maths}}, **bold**, *italic* (nestable), `code`. Newlines become <br/>. */
 export function renderInline(text: string): ReactNode[] {
   const out: ReactNode[] = [];
   const k = () => out.length;
@@ -19,15 +70,7 @@ export function renderInline(text: string): ReactNode[] {
       );
       continue;
     }
-    const tokens = part.split(/(\*\*[^*]+\*\*|`[^`]+`|\*[^*\s][^*]*\*|\n)/g);
-    for (const t of tokens) {
-      if (!t) continue;
-      if (t === "\n") out.push(<br key={k()} />);
-      else if (t.startsWith("**") && t.endsWith("**") && t.length > 4) out.push(<strong key={k()}>{t.slice(2, -2)}</strong>);
-      else if (t.startsWith("`") && t.endsWith("`") && t.length > 2) out.push(<code key={k()}>{t.slice(1, -1)}</code>);
-      else if (t.startsWith("*") && t.endsWith("*") && t.length > 2) out.push(<em key={k()}>{t.slice(1, -1)}</em>);
-      else out.push(<Fragment key={k()}>{t}</Fragment>);
-    }
+    pushStyled(part, out);
   }
   return out;
 }

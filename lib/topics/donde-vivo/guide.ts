@@ -105,6 +105,8 @@ export const guide: TopicGuide = {
                 "no me gusta mi ciudad ya que está sucia",
                 "a mí no me gusta mi ciudad porque es sucia",
                 "a mí no me gusta mi ciudad porque está sucia",
+                "a mí no me gusta mi ciudad ya que es sucia",
+                "a mí no me gusta mi ciudad ya que está sucia",
               ],
             },
             solution:

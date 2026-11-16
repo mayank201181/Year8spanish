@@ -406,7 +406,7 @@ export const practice: TopicPractice = {
             { point: "*a + el* always contracts to *al*; *a la* stays as it is", keywords: ["a + el", "a el", "al cine", "al "] },
             { point: "A correct new example of each, e.g. *enfrente del museo*, *voy al parque*", keywords: ["del museo", "del parque", "del ayuntamiento", "del hospital", "del mercado", "del castillo", "del estadio", "del polideportivo", "al parque", "al museo", "al mercado", "al estadio", "al castillo", "al polideportivo", "al ayuntamiento", "al centro"] },
           ],
-          commonError: "Thinking *la* contracts too (**dela*, *ala*) — only *el* does.",
+          commonError: "Thinking *la* contracts too (*dela*, *ala*) — only *el* does.",
           difficulty: "challenge",
           guideRef: "location-and-distance",
           hints: ["What is the article of *banco* and *cine*? And of *biblioteca* and *playa*?", "Which two pairs of words join together?", "Does it ever happen with *la*?"],

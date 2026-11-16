@@ -238,7 +238,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 0,
         explanation:
           "After *voy a* and *va a* you always need an **infinitive**: *voy a vivir*, *va a ser*. *Voy a vivo* and *va a es* put a conjugated verb after *a*; the version with just *vivir* has no conjugated verb at all, so it doesn't say who is going to live there.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "future-home",
         hints: [
           "All four start the same way — focus on the future part.",
@@ -450,7 +450,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 1,
         explanation:
           "*Me gusta mucho* is clearly positive. *Aunque* means 'although', and *a veces … un poco* ('sometimes … a bit') softens the complaint, so she is **mostly positive**. Nothing in the sentence is about the future, so 'going to move' isn't supported.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "opinion-phrases",
         hints: [
           "Start with the main opinion: what does *me gusta mucho* tell you?",
@@ -727,7 +727,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 1,
         explanation:
           "*Mi hermana* = *ella* → **va**, + *a* + infinitive *vivir*. 'It's going to be fun' refers to the whole idea, so *divertido* stays masculine singular. *Voy a* is the *yo* form; *va a vive* conjugates the infinitive; *va vivir* drops the *a*.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "future-home",
         hints: [
           "There are two future phrases. Check both.",

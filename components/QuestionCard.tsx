@@ -417,8 +417,10 @@ function ShortBody({ q, mode, restored, onDone, onAnswer, topicId, onNext, nextL
 
 // -------------------------------------------------------------- Written
 export function suggestMarks(q: WrittenQ, text: string): boolean[] {
-  const t = ` ${text.toLowerCase().replace(/\s+/g, " ")} `;
-  return q.markScheme.map((p) => p.keywords.some((k) => k && t.includes(k.toLowerCase())));
+  // Accent- and case-insensitive: "esta" earns the tick for "está" (the mark is self-assessed anyway).
+  const fold = (x: string) => x.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ");
+  const t = ` ${fold(text)} `;
+  return q.markScheme.map((p) => p.keywords.some((k) => k && t.includes(fold(k))));
 }
 
 function WrittenBody({ q, mode, restored, onDone, onAnswer, topicId, onNext, nextLabel }: QuestionCardProps & { q: WrittenQ }) {

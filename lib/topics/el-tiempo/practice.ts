@@ -356,7 +356,7 @@ export const practice: TopicPractice = {
             { spec: { type: "text", accept: ["nievó"] }, feedback: "There's no stem change in the preterite: *nev-* + *-ó* → *nevó*." },
             { spec: { type: "text", accept: ["nieva"] }, feedback: "*Nieva* is the present ('it snows'). The past is *nevó*." },
           ],
-          solution: ["Infinitive *nevar* → stem *nev-* (no e→ie in the preterite).", "'It' ending for *-ar* verbs in the preterite: *-ó*.", "**nevó** — the accent matters: *nevo* would sound like 'I snow'!"],
+          solution: ["Infinitive *nevar* → stem *nev-* (no e→ie in the preterite).", "'It' ending for *-ar* verbs in the preterite: *-ó*.", "**nevó** — the accent matters: it puts the stress on the last syllable, the sign of the preterite."],
           commonError: "Keeping the present-tense stem change: *nievó*.",
           difficulty: "core",
           guideRef: "past-weather",

@@ -146,11 +146,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "la-ciudad-m1-q10",
         question:
-          "Read the text, then answer the question.\n\n> Me llamo Javier y vivo en Toledo, una ciudad histórica en el centro de España. En mi ciudad hay un castillo muy antiguo, una catedral enorme y muchos museos. Hay también un mercado donde mi madre compra fruta los sábados. Sin embargo, no hay playa y no hay estadio de fútbol, así que los domingos voy a Madrid en tren con mi hermano para ver un partido.\n\nWhy does Javier go to Madrid on Sundays?",
+          "Read the text, then answer the question.\n\n> Me llamo Javier y vivo en un pueblo histórico cerca de Toledo, en el centro de España. En mi pueblo hay un castillo muy antiguo, una iglesia enorme y un museo pequeño. Hay también un mercado donde mi madre compra fruta los sábados. Sin embargo, no hay playa y no hay estadio de fútbol, así que los domingos voy a Madrid en tren con mi hermano para ver un partido.\n\nWhy does Javier go to Madrid on Sundays?",
         options: ["To watch a football match", "To go to the beach", "To visit a museum", "To buy fruit at the market"],
         answerIndex: 0,
         explanation:
-          "*No hay estadio de fútbol, así que los domingos voy a Madrid… para ver un partido* — Toledo has no football stadium, so he goes **to watch a match**. The beach is a trap: the text says *no hay playa*, but that isn't why he goes to Madrid.",
+          "*No hay estadio de fútbol, así que los domingos voy a Madrid… para ver un partido* — his village has no football stadium, so he goes **to watch a match**. The beach is a trap: the text says *no hay playa*, but that isn't why he goes to Madrid.",
         difficulty: "core",
         guideRef: "hay-un-una",
         hints: ["Find *Madrid* in the text. Which word straight after it tells you the purpose (*para…*)?", "*Ver un partido* — what kind of *partido* would you see at an *estadio de fútbol*?"],

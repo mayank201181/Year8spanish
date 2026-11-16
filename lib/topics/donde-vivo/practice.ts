@@ -100,7 +100,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "donde-vivo-quiz-q08",
       question: "Write in Spanish using *encantar*: 'I love the parks.'",
-      answer: { type: "text", accept: ["Me encantan los parques"] },
+      answer: { type: "text", accept: ["Me encantan los parques", "A mí me encantan los parques"] },
       traps: [
         { spec: { type: "text", accept: ["me encanta los parques"] }, feedback: "*Los parques* is plural, so the verb must be plural too: *encantan*." },
         { spec: { type: "text", accept: ["encanto los parques", "yo encanto los parques"] }, feedback: "*Encantar* works like *gustar*: *me encanta(n)*, never *encanto*." },
@@ -335,6 +335,9 @@ export const practice: TopicPractice = {
               "I am going to live on the coast in the future",
               "I'm going to live on the coast in the future",
               "I will live on the coast in the future",
+              "I'll live on the coast in the future",
+              "In the future I will live by the sea",
+              "In the future I'll live by the sea",
               "In the future I am going to live by the sea",
               "In the future I'm going to live by the sea",
               "In the future I am going to live at the seaside",
@@ -584,6 +587,8 @@ export const practice: TopicPractice = {
               "Vive en un piso pequeño y prefiere vivir en una casa",
               "Él vive en un piso pequeño y prefiere vivir en una casa",
               "Marcus vive en un piso pequeño y prefiere vivir en una casa",
+              "Mi amigo vive en un piso pequeño y prefiere vivir en una casa",
+              "Mi amigo Marcus vive en un piso pequeño y prefiere vivir en una casa",
             ],
           },
           traps: [
@@ -882,7 +887,7 @@ export const practice: TopicPractice = {
         "Write a **balanced** paragraph (5–6 Spanish sentences) about your town or neighbourhood. Include:\n\n- two advantages\n- two disadvantages\n- reasons with *porque* or *ya que*, using *hay / no hay*\n- at least one adjective that agrees with a feminine or plural noun\n- a conclusion with *pienso que / creo que / en mi opinión*",
       marks: 5,
       modelAnswer:
-        "*Vivo en Bishan, un barrio en el centro de Singapur. Lo bueno es que hay un parque enorme y la estación de MRT está muy cerca. Además, me gusta mi barrio porque las calles son limpias y seguras. Lo malo es que no hay nada que hacer por la noche, ya que no hay cines ni centros comerciales. También hace demasiado calor y no hay playa. En mi opinión, mi barrio es un poco aburrido, pero es muy cómodo para vivir.*\n\n(I live in Bishan, a neighbourhood in the centre of Singapore. The good thing is that there's a huge park and the MRT station is very close. Also, I like my area because the streets are clean and safe. The bad thing is that there's nothing to do at night, since there are no cinemas or shopping centres. It's also too hot and there's no beach. In my opinion, my area is a bit boring, but it's a very convenient place to live.)",
+        "*Vivo en un barrio residencial de Singapur. Lo bueno es que hay un parque enorme y la estación de MRT está muy cerca. Además, me gusta mi barrio porque las calles son limpias y seguras. Lo malo es que no hay nada que hacer por la noche, ya que no hay cines ni centros comerciales. También hace demasiado calor y no hay playa. En mi opinión, mi barrio es un poco aburrido, pero es muy cómodo para vivir.*\n\n(I live in a residential neighbourhood in Singapore. The good thing is that there's a huge park and the MRT station is very close. Also, I like my area because the streets are clean and safe. The bad thing is that there's nothing to do at night, since there are no cinemas or shopping centres. It's also too hot and there's no beach. In my opinion, my area is a bit boring, but it's a very convenient place to live.)",
       markScheme: [
         { point: "Two advantages", keywords: ["lo bueno", "me gusta", "me encanta", "hay un", "hay una"] },
         { point: "Two disadvantages", keywords: ["lo malo", "no me gusta", "odio", "no hay", "tampoco"] },

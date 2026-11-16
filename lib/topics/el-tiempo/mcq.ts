@@ -61,21 +61,21 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "el-tiempo-m1-q05",
-        question: "Which sentence is written correctly?",
+        question: "Which sentence is true about the weather in Spain?",
         options: [
           "En agosto hace mucho calor en Sevilla.",
-          "En Agosto hace mucho calor en Sevilla.",
-          "En agosto hace muy calor en Sevilla.",
-          "En agosto hace mucho calor en sevilla.",
+          "En enero hace mucho calor en Madrid.",
+          "En julio nieva mucho en Sevilla.",
+          "En diciembre hace calor en los Pirineos.",
         ],
         answerIndex: 0,
         explanation:
-          "Spanish months take a **small letter** (*agosto*), but city names keep their capital (*Sevilla*). *En Agosto* copies the English capital letter, *en sevilla* drops the capital a place name needs, and *muy calor* should be *mucho calor* because *calor* is a noun.",
+          "*Agosto* (August) is summer in Spain, and Sevilla, in the south, is one of the hottest cities in Europe: *hace mucho calor*. *Enero* and *diciembre* are winter — Madrid is cold in January and the Pyrenees are snowy in December — and *julio* is far too hot for snow in Sevilla.",
         difficulty: "core",
         guideRef: "seasons-and-months",
         hints: [
-          "Check the capital letters carefully — months and cities follow different rules.",
-          "Months: lower case. Place names: capital. Then check *muy* vs *mucho*.",
+          "Translate each month and decide which season it belongs to in Spain.",
+          "*agosto, julio* = summer; *diciembre, enero* = winter. Which sentence matches its season?",
         ],
         strategy: "Eliminate options",
       },
