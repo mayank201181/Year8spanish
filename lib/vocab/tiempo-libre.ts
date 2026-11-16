@@ -20,6 +20,8 @@ export const vocab: VocabGroup[] = [
       { es: "sacar fotos", en: "to take photos" },
       { es: "cocinar", en: "to cook" },
       { es: "montar en bici", en: "to ride a bike", note: "la bici = la bicicleta" },
+      { es: "la batería", en: "drums (drum kit)", note: "toco la batería; also means 'battery'" },
+      { es: "el coro", en: "choir", note: "canto en un coro" },
     ],
   },
   {
@@ -49,6 +51,7 @@ export const vocab: VocabGroup[] = [
       { es: "en casa", en: "at home", note: "no article" },
       { es: "en el parque", en: "in the park" },
       { es: "en el centro comercial", en: "at the shopping centre" },
+      { es: "la bolera", en: "bowling alley", note: "vamos a la bolera; bowling = los bolos" },
       { es: "después del colegio", en: "after school", note: "de + el = del" },
       { es: "por la tarde", en: "in the afternoon / evening" },
       { es: "los sábados", en: "on Saturdays", note: "every Saturday; el sábado = this Saturday" },
@@ -83,7 +86,8 @@ export const vocab: VocabGroup[] = [
     title: "Opinions",
     items: [
       { es: "divertido / divertida", en: "fun" },
-      { es: "aburrido / aburrida", en: "boring" },
+      { es: "aburrido / aburrida", en: "boring", note: "ser aburrido = to be boring" },
+      { es: "estar aburrido / aburrida", en: "to be bored", note: "estoy aburrido/a = I'm bored (a feeling); soy aburrido/a = I'm boring" },
       { es: "gracioso / graciosa", en: "funny" },
       { es: "emocionante", en: "exciting", note: "same for masculine and feminine" },
       { es: "interesante", en: "interesting" },
