@@ -50,7 +50,7 @@ L("lola", "And no S on the end of the you form. [[Hablaste.]] Not hablastes.", m
 # ---------------- ACT 2: -ER AND -IR VERBS ----------------
 card("UNCLE HOCK'S STALL", "Lunch. Vegetarian. Strong opinions.", 2.4)
 scene("hawker", [("tara", 260), ("pablo", 560), ("uncle", 1000)])
-L("uncle", "Pablo! [[¿Qué comiste ayer?]] What did you eat yesterday? I'm practising.", mood="happy", shot="close")
+L("uncle", "Pablo! [[¿Qué comiste ayer?]] What did you eat yesterday?", mood="happy", shot="close")
 L("pablo", "[[Ayer comí fideos con verduras.]] Yesterday I ate noodles with vegetables. And [[bebí un zumo de mango.]] I drank a mango juice.", mood="happy", shot="close", prop="plate",
   boardClear=True, board="[[comí]] = I ate   [[bebí]] = I drank")
 poof("lola", 800)
@@ -64,8 +64,7 @@ L("lola", "Accents only on I, and he or she. [[Comí, comió.]] But [[ver]], to 
   boardClear=True, board="[[ver]]: [[vi · vio]] (no accents!)")
 L("pablo", "[[Vi el río y los rascacielos.]] I saw the river and the skyscrapers. And every afternoon, [[llovió]]. It rained.", mood="happy", shot="close",
   board="[[llovió]] = it rained")
-L("uncle", "In Singapore, [[siempre llueve]]. It always rains. I don't need the past for rain.", mood="smug", shot="close")
-L("tara", "He's not wrong.", mood="deadpan", shot="close", gap=0.4)
+L("uncle", "In Singapore, [[siempre llueve]]. It always rains. I don't need the past for rain.", mood="smug", shot="close", gap=0.4)
 
 confess("uncle", "UNCLE HOCK · Hawker · Vegetarian Noodles Since Nineteen Ninety")
 L("uncle", "Pablo came to my stall every day. Every day, he said, [[¡qué rico!]] How tasty! Vikram just says, same as usual.", mood="sad", gap=0.5)
