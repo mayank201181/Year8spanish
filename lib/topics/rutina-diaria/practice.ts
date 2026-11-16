@@ -57,6 +57,8 @@ export const practice: TopicPractice = {
           "I have my breakfast at 7",
           "I eat my breakfast at seven",
           "I eat my breakfast at 7",
+          "I eat breakfast at 7am",
+          "I eat breakfast at 7 am",
         ],
       },
       solution: [
@@ -152,7 +154,14 @@ export const practice: TopicPractice = {
       question: "Write in Spanish: 'It's quarter to eight.'",
       answer: {
         type: "text",
-        accept: ["son las ocho menos cuarto", "son las 8 menos cuarto", "son las siete y cuarenta y cinco", "son las 7 y 45"],
+        accept: [
+          "son las ocho menos cuarto",
+          "son las 8 menos cuarto",
+          "son las ocho menos quince",
+          "son las siete y cuarenta y cinco",
+          "son las siete cuarenta y cinco",
+          "son las 7 y 45",
+        ],
       },
       solution: [
         "'Quarter to eight' = eight minus a quarter: *las ocho menos cuarto*.",
@@ -242,6 +251,9 @@ export const practice: TopicPractice = {
               "it's 9:30",
               "it is 9:30",
               "9:30",
+              "it's half nine",
+              "it is half nine",
+              "half nine",
             ],
           },
           solution: ["*Las nueve* = nine o'clock.", "*y media* = and a half → half past.", "→ **It's half past nine** (9:30)."],
@@ -491,6 +503,7 @@ export const practice: TopicPractice = {
               "mi hermano se levanta a las 7 pero yo me levanto a las 6 y media",
               "mi hermano se levanta a las 7 pero me levanto a las 6 y media",
               "mi hermano se levanta a las siete pero yo me levanto a las seis y treinta",
+              "mi hermano se levanta a las siete pero me levanto a las seis y treinta",
             ],
           },
           solution: [
@@ -671,6 +684,7 @@ export const practice: TopicPractice = {
               "I go to bed at 9:40",
               "I go to bed at nine forty",
               "I go to bed at 9:40 pm",
+              "I go to bed at 9:40pm",
               "I go to bed at 21:40",
             ],
           },
@@ -1110,7 +1124,7 @@ export const practice: TopicPractice = {
         "Your friend writes: *¿Qué hora es? — A las tres.* and *Me levanto son las siete.* Explain clearly what is wrong with each, and why Spanish says *Es la una* but *Son las dos*.",
       marks: 3,
       modelAnswer:
-        "*¿Qué hora es?* asks 'What time is it?', so the answer needs 'it is': **Son las tres.** *A las tres* means 'at three' and answers *¿A qué hora…?* ('At what time…?').\n\n*Me levanto son las siete* uses 'it is' where you need 'at': it should be **Me levanto a las siete.**\n\n*Es la una* is singular because it is one hour (*la una hora*); every other hour is plural (*las dos horas, las tres horas…*), so the verb is *son* and the article *las*.",
+        "*¿Qué hora es?* asks 'What time is it?', so the answer needs 'it is': **Son las tres.** *A las tres* means 'at three' and answers *¿A qué hora…?* ('At what time…?').\n\n*Me levanto son las siete* uses 'it is' where you need 'at': it should be **Me levanto a las siete.**\n\n*Es la una* is singular because it is one hour (*una hora*); every other hour is plural (*dos horas, tres horas…*), so the verb is *son* and the article *las*.",
       markScheme: [
         { point: "¿Qué hora es? is answered with Son las tres (it is) — a las tres answers ¿A qué hora…?", keywords: ["son las tres", "a que hora", "a qué hora", "it is"] },
         { point: "Me levanto son las siete → Me levanto a las siete (a las = at)", keywords: ["a las siete", "at"] },
