@@ -46,7 +46,7 @@ NEEDS_ACCENT = {"tambien": "también", "despues": "después", "jardin": "jardín
     "esqui": "esquí", "patin": None, "ultimo": "último", "proximo": "próximo", "practico": None,
     "tambien.": "también", "jamas": "jamás", "ademas": "además", "ningun": "ningún", "segun": "según",
     "autobus": "autobús", "metro": None, "medico": "médico", "historica": "histórica", "turistica": "turística",
-    "mas": None}
+    "mas": "más"}
 QWORDS = ["qué", "dónde", "cuándo", "cómo", "quién", "cuánto", "cuánta", "cuántos", "cuántas", "adónde", "cuál"]
 
 def check_spanish(t, where, errs, warns):
