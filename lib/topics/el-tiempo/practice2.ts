@@ -140,6 +140,10 @@ export const morePapers: Paper[] = [
             "en el este hay 30 grados",
             "en el este estamos a treinta grados",
             "en el este estamos a 30 grados",
+            "hay treinta grados en el este",
+            "hay 30 grados en el este",
+            "la temperatura en el este es de treinta grados",
+            "la temperatura en el este es de 30 grados",
           ],
         },
         traps: [
@@ -242,6 +246,8 @@ export const morePapers: Paper[] = [
           accept: [
             "el verano pasado llovió mucho pero este verano hace mucho calor",
             "llovió mucho el verano pasado pero este verano hace mucho calor",
+            "el verano pasado llovió mucho pero hace mucho calor este verano",
+            "llovió mucho el verano pasado pero hace mucho calor este verano",
           ],
         },
         traps: [

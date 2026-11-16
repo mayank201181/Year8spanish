@@ -65,7 +65,7 @@ export const guide: TopicGuide = {
         "Gender in Spanish is mostly about the shape of the word, not about the thing. Endings like *-ción* come from Latin feminine nouns (*natatio* → *natación*), so they stay feminine; *-ismo* comes from a masculine Latin/Greek ending, so it stays masculine. When Spanish borrowed brand-new words like *football* or *hockey*, they had no ending to guide them, so they took the gender of the general word they belonged to — *el deporte* — which is masculine. Spanish also loves keeping the article for things in general because the article signals 'this whole category': *el tenis* = tennis as an activity, everywhere.",
       strategies: ["Spot the cognate", "Gender detective (el/la)", "Mind the accent", "Say it aloud"],
       thinkDeeper:
-        "*El yoga* ends in *-a* but is masculine, and so does *el día*. Can you think why a word ending in *-a* might still be masculine? (Hint: where did *yoga* come from?) Then predict the gender of *el balonmano* (handball) and *la escalada* (climbing) from their endings — and work out what *balonmano* literally means.",
+        "*El yoga* ends in *-a* but is masculine — and so is *el día*. Can you think why a word ending in *-a* might still be masculine? (Hint: where did *yoga* come from?) Then predict the gender of *balonmano* (handball) and *escalada* (climbing) from their endings — and work out what *balonmano* literally means.",
     },
     // ------------------------------------------------------------------ 2
     {
@@ -146,6 +146,8 @@ export const guide: TopicGuide = {
                 "practicáis la gimnasia",
                 "vosotros practicáis gimnasia",
                 "vosotras practicáis gimnasia",
+                "vosotros practicáis la gimnasia",
+                "vosotras practicáis la gimnasia",
               ],
             },
             solution: "Gymnastics is an activity → *hacer*. *Vosotros* form: *hac-* + *-éis* → **¿Hacéis gimnasia?** (The question marks don't change the words — just the intonation.)",
@@ -220,6 +222,9 @@ export const guide: TopicGuide = {
                 "los sábados yo juego al tenis",
                 "practico el tenis los sábados",
                 "los sábados practico el tenis",
+                "yo practico el tenis los sábados",
+                "practico tenis los sábados",
+                "los sábados practico tenis",
               ],
             },
             solution: "'On Saturdays' = *los sábados* (plural, no *en*). *Juego al tenis* + time phrase at the start or end: **Los sábados juego al tenis** / **Juego al tenis los sábados.**",
@@ -251,7 +256,7 @@ export const guide: TopicGuide = {
           "1. *Gustar* really means 'to be pleasing'. *Me gusta el tenis* = 'tennis is pleasing to me'. The **thing you like is the subject**, so the verb agrees with it: one thing or an activity (infinitive) → **gusta**; plural things → **gustan**.\n2. In the third sentence the subject isn't *gimnasia* — it's the activity *hacer gimnasia*. An infinitive used as a subject counts as masculine singular, so the adjective is *divertido*.",
       },
       body:
-        "**Opinion adjectives** — they agree with the sport they describe.\n\n| English | masculine | feminine | plural |\n|---|---|---|---|\n| exciting | emocionante | emocionante | emocionantes |\n| fun | divertido | divertida | divertidos / divertidas |\n| boring | aburrido | aburrida | aburridos / aburridas |\n| exhausting, tiring | agotador | agotadora | agotadores / agotadoras |\n| dangerous | peligroso | peligrosa | peligrosos / peligrosas |\n| healthy | sano | sana | sanos / sanas |\n| relaxing | relajante | relajante | relajantes |\n| difficult | difícil | difícil | difíciles |\n| easy | fácil | fácil | fáciles |\n\n- Adjectives ending in *-o* change to *-a*: *el ciclismo es peligroso* / *la equitación es peligrosa*.\n- *Agotador* adds *-a*: *la natación es agotadora*.\n- Adjectives in *-e* or a consonant don't change for gender: *el yoga es relajante* / *la vela es relajante*.\n- An infinitive as subject is masculine singular: *Nadar es sano. Hacer kárate es divertido.*\n\nAdd a word to make it stronger or softer: *muy* (very), *bastante* (quite), *un poco* (a bit), *demasiado* (too).\n\n**Gustar: gusta or gustan?**\n\n| what you like | verb | example |\n|---|---|---|\n| one thing (with its article) | gusta | Me gusta **el** baloncesto. |\n| an activity (infinitive) | gusta | Me gusta **jugar** al baloncesto. |\n| two or more activities | gusta | Me gusta **nadar y correr**. |\n| plural thing / two things | gustan | Me gustan **los** deportes acuáticos. |\n\nThe same pattern works with *me encanta(n)* (I love) and *me interesa(n)* (it interests me). For other people change the pronoun: *¿Te gusta el rugby?* · *A mi hermano le gusta el hockey.* · *Nos gustan los deportes de invierno.*\n\nThe opinion ladder:\n\n    Me encanta… > Me gusta mucho… > Me gusta… > No me gusta… > No me gusta nada… > Odio…\n\n**Give a reason** with *porque* (because):\n\n    Mi deporte preferido es el baloncesto porque es emocionante.\n    Me encanta hacer vela porque es relajante, pero odio el atletismo porque es agotador.\n\n> *Porque* (one word, no accent) = because. *¿Por qué?* (two words, accent) = why? A perfect pair: *¿Por qué te gusta el tenis? — Porque es divertido.*",
+        "**Opinion adjectives** — they agree with the sport they describe.\n\n| English | masculine | feminine | plural |\n|---|---|---|---|\n| exciting | emocionante | emocionante | emocionantes |\n| fun | divertido | divertida | divertidos / divertidas |\n| boring | aburrido | aburrida | aburridos / aburridas |\n| exhausting, tiring | agotador | agotadora | agotadores / agotadoras |\n| dangerous | peligroso | peligrosa | peligrosos / peligrosas |\n| healthy | sano | sana | sanos / sanas |\n| relaxing | relajante | relajante | relajantes |\n| difficult | difícil | difícil | difíciles |\n| easy | fácil | fácil | fáciles |\n\n- Adjectives ending in *-o* change to *-a*: *el ciclismo es peligroso* / *la equitación es peligrosa*.\n- *Agotador* adds *-a*: *la natación es agotadora*.\n- Adjectives in *-e*, and those in *-l* like *difícil* and *fácil*, don't change for gender: *el yoga es relajante* / *la vela es relajante*. (*Agotador* is the exception to watch: *-or* adjectives do add *-a*.)\n- An infinitive as subject is masculine singular: *Nadar es sano. Hacer kárate es divertido.*\n\nAdd a word to make it stronger or softer: *muy* (very), *bastante* (quite), *un poco* (a bit), *demasiado* (too).\n\n**Gustar: gusta or gustan?**\n\n| what you like | verb | example |\n|---|---|---|\n| one thing (with its article) | gusta | Me gusta **el** baloncesto. |\n| an activity (infinitive) | gusta | Me gusta **jugar** al baloncesto. |\n| two or more activities | gusta | Me gusta **nadar y correr**. |\n| plural thing / two things | gustan | Me gustan **los** deportes acuáticos. |\n\nThe same pattern works with *me encanta(n)* (I love) and *me interesa(n)* (it interests me). For other people change the pronoun: *¿Te gusta el rugby?* · *A mi hermano le gusta el hockey.* · *Nos gustan los deportes de invierno.*\n\nThe opinion ladder:\n\n    Me encanta… > Me gusta mucho… > Me gusta… > No me gusta… > No me gusta nada… > Odio…\n\n**Give a reason** with *porque* (because):\n\n    Mi deporte preferido es el baloncesto porque es emocionante.\n    Me encanta hacer vela porque es relajante, pero odio el atletismo porque es agotador.\n\n> *Porque* (one word, no accent) = because. *¿Por qué?* (two words, accent) = why? A perfect pair: *¿Por qué te gusta el tenis? — Porque es divertido.*",
       workedExamples: [
         {
           title: "Gusta or gustan?",
@@ -306,7 +311,7 @@ export const guide: TopicGuide = {
       ],
       keyPoints: [
         "Adjectives agree: *el ciclismo es peligroso*, *la vela es peligrosa*.",
-        "*-e* and consonant adjectives don't change for gender: *relajante, difícil, fácil*.",
+        "*-e* and *-l* adjectives don't change for gender: *relajante, difícil, fácil* (but *-or* does: *agotadora*).",
         "Plural *-l* adjectives add *-es*: *difíciles, fáciles*.",
         "*me gusta* + one thing (with article) or infinitive(s); *me gustan* + plural.",
         "Keep the article after *gustar*: *Me gusta **el** tenis*, never *me gusta tenis*.",

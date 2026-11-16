@@ -440,7 +440,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 3,
         explanation:
-          "'Every weekend' = **todos los fines de semana** (or *cada fin de semana*). Watch out: 'todo el fin de semana' means 'all weekend long' — a very different claim! *Cada* is never followed by a plural, so 'cada fines de semana' is wrong; and 'hace' is singular, but *mis padres* = they → *hacen*.",
+          "'Every weekend' = **todos los fines de semana** (or *cada fin de semana*). Watch out: 'todo el fin de semana' means 'all weekend long' — a very different claim! *Cada* takes a singular noun (*cada fin de semana*), so 'cada fines de semana' is wrong; and 'hace' is singular, but *mis padres* = they → *hacen*.",
         difficulty: "challenge",
         guideRef: "frequency",
         hints: [
@@ -490,13 +490,13 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "deportes-m3-q02",
         question: "How do you say 'gymnastics' in Spanish?",
-        options: ["la gimnástica", "la gimnasia", "el gimnasio", "la gimnasta"],
+        options: ["el gimnasia", "la gimnasia", "el gimnasio", "la gimnasta"],
         answerIndex: 1,
         explanation:
-          "**La gimnasia** = gymnastics. *El gimnasio* is the gym (a place) and *la gimnasta* is a (female) gymnast — a person. 'La gimnástica' isn't a Spanish noun.",
+          "**La gimnasia** = gymnastics. *El gimnasio* is the gym (a place) and *la gimnasta* is a (female) gymnast — a person. 'El gimnasia' has the wrong article: *gimnasia* ends in *-a* and is feminine.",
         difficulty: "warmup",
         guideRef: "sports-vocab",
-        hints: ["You want the sport — not the place, and not the person."],
+        hints: ["You want the sport — not the place, and not the person. Then check the article."],
         strategy: "Eliminate options",
       },
       {

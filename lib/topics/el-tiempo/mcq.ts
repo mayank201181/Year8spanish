@@ -211,7 +211,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 1,
         explanation:
           "*Sol* is a noun (the sun), so it goes with *hace*: *hoy hace sol*. *Está* is for adjectives that describe the sky — *está nublado, está despejado* — so *está despejado* is right. *Hay* + noun works for things that are 'there': *hay niebla, hay tormenta*.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "weather-expressions",
         hints: [
           "Each weather verb has its own partners: *hace* + noun, *está* + adjective, *hay* + 'there is' noun.",
@@ -694,7 +694,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 3,
         explanation:
           "*Anoche* (last night) is a past time phrase, so *hay* must become the preterite **hubo**: *Anoche hubo tormenta en Madrid*. The other three verbs match their time phrases: *ayer hubo*, *el lunes pasado nevó*, *la semana pasada hizo*.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "past-weather",
         hints: ["Check that each verb matches its time phrase.", "*Anoche* = last night. Which verb is still in the present?"],
         strategy: "Use the time phrase",

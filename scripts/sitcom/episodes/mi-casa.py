@@ -46,7 +46,7 @@ poof("dad", 1120)
 L("dad", "Easy. So in Spanish, I live in un casa.", mood="smug", shot="close")
 sfx("buzzer")
 L("lola", "[[Casa]] ends in A. Feminine. [[Una casa.]] And you don't even live in a house. You live in a flat. [[Un piso.]]", mood="eyeroll", shot="close",
-  board="✘ un casa   ✔ [[una casa]]")
+  boardClear=True, board="✘ un casa   ✔ [[una casa]]")
 L("dad", "Fine. Un piso-o.", mood="annoyed", shot="close")
 L("lola", "No O on the end. It already has one. That's where you get the idea, isn't it.", mood="bored", shot="close", gap=0.4)
 
@@ -54,7 +54,7 @@ scene("living", [("mum", 260), ("pablo", 560), ("lola", 900)])
 L("mum", "Okay, let me try. The verb is [[vivir]], to live. So [[vivo]] is, I live. What's, you live?", mood="thinking", shot="close", boardClear=True,
   board="[[vivir]] = to live")
 L("pablo", "[[Vives.]] You live. And for he or she lives, [[vive]]. [[¿Vives en una casa o en un piso?]] Do you live in a house or in a flat?", mood="teach", shot="close",
-  board="[[vivo]] I live · [[vives]] you live · [[vive]] he/she lives")
+  board="[[vivo · vives · vive]] = I · you · he/she")
 L("mum", "[[Vivo en un piso.]] And Pablo, [[Pablo vive en un piso en Sevilla.]] Pablo lives in a flat in Seville.", mood="happy", shot="close",
   board="[[Pablo vive en un piso en Sevilla]] ✔")
 L("lola", "Perfect. She's been here five minutes and she's already better than him.", mood="smug", shot="close")
@@ -95,7 +95,7 @@ L("lola", "Outside, if you're lucky, [[el jardín]], the garden. [[El garaje]], 
   board="[[el jardín]] · [[el balcón]] · [[la terraza]]")
 L("mum", "How do I say, there are three bedrooms?", mood="thinking", shot="close")
 L("lola", "With the most useful word in Spanish. [[Hay.]] It means, there is, or, there are. Spelt H A Y, but the H is silent. It sounds like eye.", mood="teach", shot="close",
-  board="[[hay]] = there is / there are")
+  boardClear=True, board="[[hay]] = there is / there are")
 L("mum", "[[En mi piso hay tres dormitorios.]] In my flat there are three bedrooms.", mood="happy", shot="close",
   board="[[Hay tres dormitorios]] ✔")
 L("pablo", "And you can also use [[tiene]], it has. [[Mi piso tiene una terraza.]] My flat has a terrace. We eat dinner there at ten at night.", mood="happy", shot="close",
@@ -131,7 +131,7 @@ L("lola", "More: [[cómodo]], comfortable. [[Bonito]], pretty. [[Feo]], ugly. [[
 L("dad", "We have a big-o kitchen. Una grande cocina.", mood="smug", shot="close")
 sfx("buzzer")
 L("lola", "Two problems. In Spanish, the adjective goes AFTER the noun. And the adjective has to agree. Kitchen is feminine, so it's [[una cocina grande]].", mood="eyeroll", shot="close",
-  board="✘ una grande cocina   ✔ [[una cocina grande]]")
+  boardClear=True, board="✘ una grande cocina   ✔ [[una cocina grande]]")
 L("tara", "So [[grande]] stays the same. But [[pequeño]] changes. [[Un salón pequeño.]] [[Una cocina pequeña.]] A small living room, a small kitchen.", mood="thinking", shot="close",
   board="[[un salón pequeño]] · [[una cocina pequeña]]")
 L("lola", "Correct. Adjectives ending in O change to A for feminine. Add S for plural. [[Dos dormitorios pequeños.]] Two small bedrooms. Adjectives ending in E, like [[grande]], just add S. [[Dos dormitorios grandes.]]", mood="teach", shot="close",

@@ -76,6 +76,9 @@ export const practice: TopicPractice = {
           "it is sunny in the south",
           "in the south the sun is shining",
           "the sun is shining in the south",
+          "the south is sunny",
+          "in the south the weather is sunny",
+          "the weather is sunny in the south",
         ],
       },
       traps: [
@@ -134,6 +137,10 @@ export const practice: TopicPractice = {
           "yo veo la tele cuando llueve",
           "veo la televisión cuando llueve",
           "yo veo la televisión cuando llueve",
+          "cuando llueve miro la tele",
+          "cuando llueve miro la televisión",
+          "miro la tele cuando llueve",
+          "miro la televisión cuando llueve",
         ],
       },
       traps: [
@@ -317,6 +324,8 @@ export const practice: TopicPractice = {
               "i am going to play video games if it rains",
               "i'll play video games if it rains",
               "i will play video games if it rains",
+              "i'm going to play videogames if it rains",
+              "i am going to play videogames if it rains",
             ],
           },
           traps: [
@@ -574,6 +583,7 @@ export const practice: TopicPractice = {
               "en singapur hace siempre calor",
               "siempre hace calor en singapur",
               "hace calor siempre en singapur",
+              "hace siempre calor en singapur",
             ],
           },
           traps: [
@@ -593,7 +603,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "el-tiempo-p2-q07",
           question: "Write in Spanish: 'My birthday is in March.'",
-          answer: { type: "text", accept: ["mi cumpleaños es en marzo"] },
+          answer: { type: "text", accept: ["mi cumpleaños es en marzo", "en marzo es mi cumpleaños"] },
           traps: [
             { spec: { type: "text", accept: ["mi cumpleaños está en marzo"] }, feedback: "When something takes place, Spanish uses *ser*: *es en marzo*." },
             { spec: { type: "text", accept: ["mi cumpleaños es en mayo"] }, feedback: "*Mayo* is May. March is *marzo*." },
@@ -646,6 +656,8 @@ export const practice: TopicPractice = {
               "si hace frío yo me voy a quedar en casa",
               "voy a quedarme en casa si hace frío",
               "me voy a quedar en casa si hace frío",
+              "yo voy a quedarme en casa si hace frío",
+              "yo me voy a quedar en casa si hace frío",
             ],
           },
           traps: [
@@ -680,6 +692,8 @@ export const practice: TopicPractice = {
               "vamos a la playa cuando hace sol",
               "nosotros vamos a la playa cuando hace sol",
               "cuando hay sol vamos a la playa",
+              "cuando hay sol nosotros vamos a la playa",
+              "vamos a la playa cuando hay sol",
             ],
           },
           traps: [
@@ -787,6 +801,7 @@ export const practice: TopicPractice = {
           "ayer nevó hoy hace frío y mañana va a hacer sol",
           "ayer nevó hoy hace frío y mañana va a estar soleado",
           "ayer nevó hoy hace frío y mañana hará sol",
+          "ayer nevó hoy hace frío y va a hacer sol mañana",
         ],
       },
       traps: [
@@ -907,6 +922,8 @@ export const practice: TopicPractice = {
           "vamos a ver una película en casa si mañana llueve",
           "si llueve mañana vamos a ver una peli en casa",
           "si mañana llueve vamos a ver una peli en casa",
+          "vamos a ver una peli en casa si llueve mañana",
+          "vamos a ver una peli en casa si mañana llueve",
         ],
       },
       traps: [
@@ -992,6 +1009,9 @@ export const practice: TopicPractice = {
           "la temperatura máxima en el noroeste es de veintiún grados",
           "en el noroeste la máxima es de veintiún grados",
           "en el noroeste la temperatura máxima es veintiún grados",
+          "la temperatura máxima en el noroeste es veintiún grados",
+          "en el noroeste la máxima es veintiún grados",
+          "la máxima en el noroeste es de veintiún grados",
         ],
       },
       traps: [
