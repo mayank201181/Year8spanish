@@ -6,13 +6,13 @@ EP = dict(topic="preterito", logline="Pablo's last week in Singapore. The family
 # ---------------- COLD OPEN ----------------
 scene("living", [("tara", 300), ("dad", 760)])
 L("dad", "Pablo goes home on Sunday. I'm writing him a goodbye song. In the past tense!", mood="determined", shot="close", prop="guitar")
-L("dad", "Listen. Yesterday, I eat-ed the noodles. Ayer, yo como-ed.", mood="smug", shot="close", prop="guitar")
+L("dad", "Listen. Yesterday, I eat-ed a lot. Ayer, yo como-ed.", mood="smug", shot="close", prop="guitar")
 L("tara", "Dad. You can't put E D on a Spanish verb.", mood="deadpan", shot="close")
 sfx("squawk")
 poof("lola", 1060)
-L("lola", "[[Como]] is present. I eat. Yesterday, I ate, is [[comí]]. [[Ayer comí fideos.]] Yesterday I ate noodles.", mood="annoyed", shot="close")
+L("lola", "[[Como]] is present. I eat. Yesterday, I ate, is [[comí]]. [[Ayer comí mucho.]] Yesterday I ate a lot.", mood="annoyed", shot="close")
 L("dad", "Ayer, comí-ed.", mood="happy", shot="close")
-L("lola", "Just [[comí]]. The ending already means, ed. You don't need two.", mood="eyeroll", shot="close")
+L("lola", "Just [[comí]]. The ending already means the past. You don't need two.", mood="eyeroll", shot="close")
 freeze("\"COMÍ-ED.\"", 2.4, narrator="Narrator: Pablo had five days left. Dad had one song.")
 confess("pablo", "PABLO RUIZ · 13 · Exchange Student · Five Days Left")
 L("pablo", "Three months ago, I arrived here. A new country, a new family, and a parrot in my suitcase.", mood="worried")
@@ -43,7 +43,7 @@ L("lola", "Accents matter. [[Hablo]], without an accent, means I speak. Now. [[H
   boardClear=True, board="[[hablo]] = I speak   [[habló]] = he spoke")
 L("pablo", "So the accent changes the person AND the time. [[Pablo habló con Lola.]] That's me. In the past.", mood="neutral", shot="close",
   board="[[Pablo habló con Lola]] ✔")
-L("mum", "Only two forms have accents. I, and he or she. [[Compré un álbum.]] I bought an album. [[Mamá compró un álbum.]] Mum bought an album.", mood="happy", shot="close",
+L("mum", "Only two forms have accents. I, and he or she. [[Compré el álbum.]] I bought the album. [[Tara compró los bolígrafos.]] Tara bought the pens.", mood="happy", shot="close",
   board="[[compré · compró]] (accents!)")
 L("lola", "And no S on the end of the you form. [[Hablaste.]] Not hablastes.", mood="annoyed", shot="close", gap=0.4)
 
@@ -77,9 +77,9 @@ L("tara", "Dad. [[Jugo]] means juice. You just said, I juice football.", mood="d
 poof("lola", 1080)
 L("lola", "Past tense. [[Jugué.]] With a U. Without the U, the G before an E would go soft, like in [[gente]]. The U keeps it hard.", mood="teach", shot="close",
   board="[[jugar]] → [[jugué]] (g → gu)")
-L("lola", "Three groups change, only in the I form. C A R becomes Q U É. [[Toqué la guitarra.]] I played the guitar.", mood="teach", shot="close",
+L("lola", "Three groups change, only in the I form. C A R verbs swap the C for Q U. [[Toqué la guitarra.]] I played the guitar.", mood="teach", shot="close",
   board="-car → [[-qué]]: [[toqué · saqué]]")
-L("tara", "G A R becomes G U É. [[Llegué]], I arrived. [[Pagué]], I paid. And Z A R becomes C É. [[Empecé]], I started.", mood="neutral", shot="close",
+L("tara", "G A R verbs add a U. [[Llegué]], I arrived. [[Pagué]], I paid. And Z A R verbs swap the Z for a C. [[Empecé]], I started.", mood="neutral", shot="close",
   board="-gar → [[-gué]]   -zar → [[-cé]]: [[empecé]]")
 L("pablo", "But only the I form. [[Tara jugó muy bien.]] Tara played very well. No change. And [[leer]] becomes [[leyó]], with a Y. [[Tara leyó mi diario.]]", mood="happy", shot="close",
   board="[[jugó · empezó]] (normal)   [[leyó]]")
@@ -95,7 +95,7 @@ L("tara", "[[Fui a la playa]], I went to the beach. A place, so it's going. [[Fu
   board="[[fui a la playa]] · [[fue genial]]")
 L("uncle", "So our band is called, the I Went Fighters. Or the I Was Fighters.", mood="thinking", shot="close")
 L("lola", "Both very accurate.", mood="smug", shot="close")
-L("lola", "More irregulars. [[Hacer]] goes [[hice, hiciste, hizo]]. [[Tener]] goes [[tuve]]. [[Estar]] goes [[estuve]]. And [[dar]] goes [[di]]. And none of them has an accent.", mood="teach", shot="close",
+L("lola", "More irregulars. [[Hacer]] goes [[yo hice, tú hiciste, él hizo]]. [[Tener]] goes [[tuve]]. [[Estar]] goes [[estuve]]. And [[dar]] goes [[di]]. And none of them has an accent.", mood="teach", shot="close",
   boardClear=True, board="[[hice · hizo · tuve · estuve · di]]")
 L("tara", "[[Ayer hice los deberes.]] Yesterday I did my homework. [[Tuve un examen.]] I had a test.", mood="deadpan", shot="close",
   board="[[hice]] = I did   [[tuve]] = I had")
@@ -121,7 +121,7 @@ L("pablo", "And [[el domingo voy a volver a Sevilla.]] On Sunday I'm going to go
   board="[[El domingo voy a volver…]] (future)")
 
 confess("lola", "LOLA · Recap Parrot · Season Finale · Not Crying")
-L("lola", "Recap. One. A R verbs. [[Hablé, hablaste, habló.]] [[Hablo]] is I speak. [[Habló]] is he spoke. The accent matters.", mood="teach", boardClear=True, board="1. [[hablé · habló]]  ≠  [[hablo]]")
+L("lola", "Time to recap. One. A R verbs. [[Ayer hablé con Tara.]] [[Hablo]] is I speak. [[Habló]] is he spoke. The accent matters.", mood="teach", boardClear=True, board="1. [[hablé · habló]]  ≠  [[hablo]]")
 L("lola", "Two. E R and I R verbs. [[Comí, comiste, comió.]] [[Salí, saliste, salió.]]", mood="teach", board="2. [[comí · comiste · comió]]")
 L("lola", "Three. Spelling changes, only for I. [[Jugué, toqué, empecé.]]", mood="teach", board="3. [[jugué · toqué · empecé]]")
 L("lola", "Four. Irregulars, no accents. [[Fui, fue, hice, tuve, estuve.]]", mood="teach", board="4. [[fui · fue · hice · tuve]]")

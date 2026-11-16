@@ -5,7 +5,7 @@ EP = dict(topic="futuro-inmediato", logline="Dad signs up for the void deck tale
 
 # ---------------- COLD OPEN ----------------
 scene("living", [("tara", 300), ("dad", 760)])
-L("dad", "Tara. I've entered the void deck talent show. I'm going to be famous.", mood="smug", shot="close", prop="guitar")
+L("dad", "Tara. I've entered the talent show. I'm going to be famous.", mood="smug", shot="close", prop="guitar")
 L("dad", "And I'll announce it in Spanish. Voy a be famous!", mood="excited", shot="close", prop="guitar")
 L("tara", "Dad. That's half Spanish, half English.", mood="deadpan", shot="close")
 L("dad", "Yes. The famous half is in English. For my international fans.", mood="smug", shot="two", gap=0.4)
@@ -31,11 +31,11 @@ L("mum", "Wait. Let me ask properly. [[¿Adónde vas?]] Where are you going?", m
   boardClear=True, board="[[¿Adónde vas?]] = Where are you going?")
 L("pablo", "[[Voy al parque.]] I'm going to the park. Then [[voy a la piscina.]] To the pool.", mood="happy", shot="close",
   board="[[Voy al parque.]] [[Voy a la piscina.]]")
-L("lola", "The verb [[ir]], to go. The most irregular verb of the year. [[Voy, vas, va, vamos, vais, van.]]", mood="teach", shot="close",
+L("lola", "The verb [[ir]], to go. The most irregular verb of the year. [[Yo voy, tú vas, ella va. Nosotros vamos, vosotros vais, ellos van.]]", mood="teach", shot="close",
   board="[[ir]]: [[voy · vas · va]]")
-L("lola", "I go, you go, she goes, we go, you all go, they go. And [[vais]] has no accent.", mood="teach", shot="close",
+L("lola", "I go, you go, she goes, and so on. And [[vais]] has no accent.", mood="teach", shot="close",
   board="[[vamos · vais · van]]")
-L("mum", "Why [[al parque]], but [[a la piscina]]?", mood="thinking", shot="close")
+L("mum", "Why [[voy al parque]], but [[voy a la piscina]]?", mood="thinking", shot="close")
 L("lola", "Because [[a]] and [[el]] crash together into [[al]]. [[Al parque, al cine.]] But [[la]] stays. [[A la playa.]]", mood="teach", shot="close",
   boardClear=True, board="[[a + el = al]]   but [[a la]] stays")
 L("pablo", "And for home, or a city, no little word. [[Voy a casa.]] I'm going home. [[Voy a Sevilla.]]", mood="neutral", shot="close",
@@ -126,18 +126,18 @@ L("dad", "So my sentence. [[Voy a ser famoso.]] Engine, [[voy]]. Little [[a]]. I
 L("lola", "Correct. The grammar is perfect. The prediction is wrong.", mood="smug", shot="close", gap=0.4)
 
 confess("lola", "LOLA · Recap Parrot · Is Going To Be Smug")
-L("lola", "Recap. One. The verb [[ir]]. [[Voy, vas, va, vamos, vais, van.]] And [[a]] plus [[el]] is [[al]].", mood="teach", boardClear=True, board="1. [[voy · vas · va · vamos · vais · van]]")
+L("lola", "Time to recap. One. The verb [[ir]]. [[Yo voy, tú vas, ella va.]] And [[a]] plus [[el]] is [[al]].", mood="teach", boardClear=True, board="1. [[voy · vas · va · vamos · vais · van]]")
 L("lola", "Two. The future train. [[Ir]], plus [[a]], plus infinitive. [[Voy a cantar.]]", mood="teach", board="2. [[voy a cantar]] (ir + a + infinitive)")
 L("lola", "Three. Reflexive pronoun before, or after. Never both. [[Me voy a levantar]], or [[voy a levantarme]].", mood="teach", board="3. [[me voy a levantar = voy a levantarme]]")
 L("lola", "Four. Time phrases. [[Mañana, esta noche, el sábado que viene.]]", mood="teach", board="4. [[mañana · el sábado que viene]]")
-L("lola", "Five. [[Los sábados]] is a habit. [[Este sábado]] with [[voy a]] is the future. Now get me a ticket. Front row.", mood="smug", board="5. [[los sábados]] vs [[este sábado]]", gap=0.5)
+L("lola", "Five. [[Los sábados]] is a habit. [[Este sábado voy a jugar]] is the future. Now get me a front row ticket.", mood="smug", board="5. [[los sábados]] vs [[este sábado]]", gap=0.5)
 
 # ---------------- CLOSING GAG: THE TALENT SHOW ----------------
 card("SATURDAY", "The void deck. Fourteen plastic chairs. One dream.", 2.4)
 scene("park", [("tara", 220), ("mum", 440), ("dad", 660), ("pablo", 880)])
 L("dad", "This is it. [[Voy a cantar una canción en español.]] I'm going to sing a song in Spanish.", mood="determined", shot="close", prop="guitar")
 L("mum", "That sentence was perfect. He might actually do it.", mood="shock", shot="close")
-L("tara", "[[Va a llover.]] I'm just saying. Look at the sky.", mood="deadpan", shot="close")
+L("tara", "[[Creo que va a llover.]] I think it's going to rain.", mood="deadpan", shot="close")
 sfx("whistle")
 L("dad", "Ladies and gentlemen of block two hundred and seven!", mood="excited", shot="wide", prop="guitar")
 sfx("squawk")
@@ -157,7 +157,7 @@ challenge(1, "Say “We are going to watch a film.”", "[[Vamos a ver una pelí
   "[[Vamos a ver una película.]] The engine is [[vamos]], then [[a]], then the infinitive, [[ver]].")
 challenge(2, "Translate: “She is going to have a shower.” ([[ducharse]])", "[[Se va a duchar]]", "or [[va a ducharse]] — one place, never both",
   "Question two. Translate. She is going to have a shower. The verb is [[ducharse]].",
-  "[[Se va a duchar.]] Or, [[va a ducharse.]] One place for the [[se]]. If you used both, Dad says thank you.")
+  "[[Se va a duchar.]] Or, [[va a ducharse.]] The [[se]] goes in one place only. If you used both, Dad says thank you.")
 challenge(3, "Translate: “It's going to rain this afternoon.”", "[[Esta tarde va a llover]]", "prediction → [[va a]] + [[llover]]",
   "Question three. Translate. It's going to rain this afternoon.",
   "[[Esta tarde va a llover.]] A prediction, so [[va a llover]]. And in Singapore, it's always true.")
