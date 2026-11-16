@@ -295,7 +295,7 @@ function withSubj(s: Subj, cores: string[]): string[] {
 /** Put a time/frequency phrase at the start or the end. */
 function withTime(sentences: string[], times: string[]): string[] {
   const out: string[] = [];
-  for (const t of times) for (const s of sentences) out.push(`${t} ${s}`, `${s} ${t}`);
+  for (const t of times) for (const s of sentences) out.push(`${s} ${t}`, `${t} ${s}`);
   return out;
 }
 
@@ -353,8 +353,9 @@ function freqSentences(s: Subj, cores: string[], f: Freq): string[] {
     out.push(...withSubj(s, cores.map((c) => `no ${c} nunca`)));
     return out;
   }
-  out.push(...withTime(withSubj(s, cores), f.es));
+  // Adverbs (siempre, a veces…) read most naturally just before the verb, so list that first.
   if (f.adv) for (const e of f.es) out.push(...withSubj(s, cores.map((c) => `${e} ${c}`)));
+  out.push(...withTime(withSubj(s, cores), f.es));
   return out;
 }
 
@@ -434,7 +435,7 @@ export const drills: Drill[] = [
             : [...CHORES.filter((c) => !c.core).map(choreToPair), ...EXTRA_VERB_PAIRS, ...NOUN_PAIRS];
       const item = rng.pick(pool);
       const frame = rng.pick(["What does *{x}* mean in English?", "Translate into English: *{x}*", "Give the English for *{x}*."]);
-      const accept = finalize(item.en);
+      const accept = finalize(item.en, false);
       const isNoun = /^(el|la|los|las) /.test(item.es) && !item.es.includes(" de compras");
       return {
         prompt: frame.replace("{x}", item.es),
@@ -514,7 +515,10 @@ export const drills: Drill[] = [
       if (s.p !== "yo") raw.push({ wrong: [conjugate(v.verb, "present", "yo")], feedback: `That's the *yo* form. The subject is *${s.es}* — ${PERSON_LABEL[s.p]}.` });
       raw.push({ wrong: [v.verb], feedback: "That's the infinitive — conjugate it to match the subject." });
       return {
-        prompt: `Complete with the present tense of *${v.verb}*: *${squash(`${subjShown(s, true)} ___ ${v.rest} ${tail}`)}.*`,
+        prompt:
+          tail === "normalmente"
+            ? `Complete with the present tense of *${v.verb}*: *${squash(`Normalmente ${subjShown(s, false)} ___ ${v.rest}`)}.*`
+            : `Complete with the present tense of *${v.verb}*: *${squash(`${subjShown(s, true)} ___ ${v.rest} ${tail}`)}.*`,
         answer: { type: "text", accept },
         solution: [`Subject *${s.es}* → ${PERSON_LABEL[s.p]}.`, presentStep(v.verb, s.p)],
         hint: v.verb === "ir" ? "*Ir* is completely irregular: *voy, vas, va…*" : "Who is doing the chore? Chop off -ar/-er/-ir and add that person's ending.",
@@ -547,13 +551,13 @@ export const drills: Drill[] = [
         // ¿Qué ___ hacer en casa? — question frame with a pronoun subject.
         const qs = rng.pick(PRON_SUBJ.filter((x) => x.es !== "ella" && x.es !== "ellos"));
         const tq = conjugate("tener", "present", qs.p);
-        const shown = qs.es === "él" ? "él" : qs.es;
+        const shown = qs.es;
         accept = finalize([`${tq} que`], false);
         prompt = `Complete the question with the right form of *tener que* (subject: *${shown}*): *¿Qué ___ hacer en casa?*`;
         return {
           prompt,
           answer: { type: "text", accept },
-          solution: [`Subject *${shown}* → ${PERSON_LABEL[qs.p]}.`, presentStep("tener", qs.p), `Add *que*: *¿Qué **${tq} que** hacer en casa?*`],
+          solution: [`Subject *${shown}* → ${PERSON_LABEL[qs.p]}.`, presentStep("tener", qs.p), `Add *que*: **¿Qué ${tq} que hacer en casa?**`],
           hint: "Two words: the right part of *tener* + *que*.",
           traps: makeTraps(accept, tenerTraps(qs.p)),
         };
@@ -566,8 +570,12 @@ export const drills: Drill[] = [
         answer: { type: "text", accept },
         solution: [
           `Subject *${s.es}* → ${PERSON_LABEL[s.p]}.`,
-          s.p === "yo" ? "*Tener* has an irregular *yo* form: **tengo**." : `*Tener* is a boot verb (e→ie in *tienes, tiene, tienen*): **${t}**.`,
-          `Add *que* and keep the chore in the infinitive: *${neg_}**${t} que** ${inf(c)}*${neg ? " (*no tener que* = not have to — no need)" : ""}.`,
+          s.p === "yo"
+            ? "*Tener* has an irregular *yo* form: **tengo**."
+            : BOOT_PERSONS.includes(s.p)
+              ? `*Tener* is a boot verb — e→ie inside the boot: **${t}**.`
+              : `*Nosotros* and *vosotros* are outside the boot, so *tener* keeps its *e*: **${t}**.`,
+          `Add *que* and keep the chore in the infinitive: **${neg_}${t} que ${inf(c)}**${neg ? " (*no tener que* = not have to — there's no need)" : ""}.`,
         ],
         hint: "*Tener* changes, the chore doesn't. Which form of *tener* goes with this subject?",
         traps: makeTraps(accept, tenerTraps(s.p)),
@@ -604,14 +612,14 @@ export const drills: Drill[] = [
       const right = finalize(infAll(c).map((i) => `hay que ${i}`));
       if (kind === "rewrite") {
         const s = rng.pick(ALL_SUBJ);
-        const shown = s.pron ? squash(`${cap(s.es)} ${conjugate("tener", "present", s.p)} que ${inf(c)}`) : `${cap(s.es)} ${conjugate("tener", "present", s.p)} que ${inf(c)}`;
+        const shown = `${cap(s.es)} ${conjugate("tener", "present", s.p)} que ${inf(c)}`;
         return {
           prompt: `Rewrite as a general rule (it applies to everyone) using *hay que*: *${shown}.*`,
           answer: { type: "text", accept: right },
           solution: ["*Hay que* + infinitive = 'one has to / you have to' in general.", "Drop the subject and *tener* completely — *hay* never changes.", `→ **${right[0]}.**`],
           hint: "*Hay que* has no subject, so who does the chore doesn't matter any more.",
           traps: makeTraps(right, [
-            { wrong: infAll(c).map((i) => `hay ${i}`), feedback: "Don't drop *que*: *hay **que** + infinitive*." },
+            { wrong: infAll(c).map((i) => `hay ${i}`), feedback: "Don't drop *que*: it's always *hay que* + infinitive." },
             { wrong: presAll(c, s.p).map((p) => `hay que ${p}`), feedback: "Keep the chore in the infinitive after *hay que*." },
           ]),
         };
@@ -631,7 +639,7 @@ export const drills: Drill[] = [
         hint: "General 'you' (meaning everyone) → *hay que*, which never changes.",
         traps: makeTraps(accept, [
           { wrong: withTime(infAll(c).map((i) => `tienes que ${i}`), [where.es]), feedback: "*Tienes que* is 'you (personally) have to'. For a rule for everyone, use *hay que*." },
-          { wrong: withTime(infAll(c).map((i) => `hay ${i}`), [where.es]), feedback: "Don't drop *que*: *hay **que** + infinitive*." },
+          { wrong: withTime(infAll(c).map((i) => `hay ${i}`), [where.es]), feedback: "Don't drop *que*: it's always *hay que* + infinitive." },
         ]),
       };
     },
@@ -830,26 +838,27 @@ export const drills: Drill[] = [
       const c = rng.pick(CHORES);
       if (kind === "verb") {
         const op = rng.pick([
-          { es: ["odio", "yo odio"], en: "I hate" },
-          { es: ["no me importa"], en: "I don't mind" },
-          { es: ["me gusta", "a mí me gusta"], en: "I like" },
-          { es: ["me encanta", "a mí me encanta"], en: "I love" },
-          { es: ["no me gusta", "a mí no me gusta"], en: "I don't like" },
-          { es: ["prefiero", "yo prefiero"], en: "I prefer" },
-          { es: ["no me gusta nada", "a mí no me gusta nada"], en: "I don't like … at all —" },
+          { es: ["odio", "yo odio"], en: (x: string) => `I hate ${x}.`, label: "I hate" },
+          { es: ["no me importa"], en: (x: string) => `I don't mind ${x}.`, label: "I don't mind" },
+          { es: ["me gusta", "a mí me gusta"], en: (x: string) => `I like ${x}.`, label: "I like" },
+          { es: ["me encanta", "a mí me encanta"], en: (x: string) => `I love ${x}.`, label: "I love" },
+          { es: ["no me gusta", "a mí no me gusta"], en: (x: string) => `I don't like ${x}.`, label: "I don't like" },
+          { es: ["prefiero", "yo prefiero"], en: (x: string) => `I prefer ${x}.`, label: "I prefer" },
+          { es: ["no me gusta nada", "a mí no me gusta nada"], en: (x: string) => `I don't like ${x} at all.`, label: "I don't like … at all" },
         ]);
-        const atAll = op.en.includes("at all");
-        const english = atAll ? `I don't like ${c.ing} at all.` : `${op.en} ${c.ing}.`;
-        const accept = finalize(atAll ? infAll(c).flatMap((i) => [`no me gusta nada ${i}`, `a mí no me gusta nada ${i}`, `no me gusta ${i} nada`]) : op.es.flatMap((o) => infAll(c).map((i) => `${o} ${i}`)));
+        const atAll = op.es[0] === "no me gusta nada";
+        const accept = finalize(
+          op.es.flatMap((o) => infAll(c).map((i) => `${o} ${i}`)).concat(atAll ? infAll(c).flatMap((i) => [`no me gusta ${i} nada`, `a mí no me gusta ${i} nada`]) : []),
+        );
         const gerund = c.verb === "ir" ? null : c.verb.slice(0, -2) + (groupOf(c.verb) === "ar" ? "ando" : "iendo");
         const raw: RawTrap[] = [];
         if (gerund) raw.push({ wrong: op.es.map((o) => squash(`${o} ${gerund} ${c.rest}`)), feedback: `Spanish uses the **infinitive** where English uses '-ing': *${op.es[0]} ${inf(c)}*.` });
         raw.push({ wrong: op.es.map((o) => `${o} ${pres(c, "yo")}`), feedback: `After an opinion verb, keep the chore in the infinitive: *${inf(c)}*.` });
         if (op.es[0].includes("gusta")) raw.push({ wrong: op.es.map((o) => `${o.replace("gusta", "gustan")} ${inf(c)}`), feedback: "With an infinitive, *gusta* stays singular." });
         return {
-          prompt: `Translate into Spanish: "${atAll ? english : english}"`,
+          prompt: `Translate into Spanish: "${op.en(c.ing)}"`,
           answer: { type: "text", accept },
-          solution: [`"${atAll ? "I don't like … at all" : op.en}" = *${op.es[0]}${atAll ? " … nada" : ""}*.`, `'${c.ing}' → infinitive *${inf(c)}*.`, `→ **${accept[0]}.**`],
+          solution: [`"${op.label}" = *${atAll ? "no me gusta nada" : op.es[0]}*.`, `'${c.ing}' → infinitive *${inf(c)}*.`, `→ **${accept[0]}.**`],
           hint: "English '-ing' after a verb of liking/hating = Spanish infinitive.",
           traps: makeTraps(accept, raw),
         };
@@ -960,7 +969,7 @@ export const drills: Drill[] = [
       const ir = conjugate("ir", "present", s.p);
       // Wrong verb parts (without the rest of the chunk), framed per template.
       const commonTraps = (frame: (verbPart: string) => string[]): RawTrap[] => [
-        { wrong: frame(`${ir} ${c.verb}`), feedback: `Don't forget the little *a*: *${ir} **a** ${c.verb}*.` },
+        { wrong: frame(`${ir} ${c.verb}`), feedback: `Don't forget the little *a*: **${ir} a ${c.verb}**.` },
         { wrong: frame(`${ir} a ${conjugate(c.verb, "present", s.p)}`), feedback: "After *ir a* the chore stays in the **infinitive**." },
         { wrong: frame(conjugate(c.verb, "present", s.p)), feedback: `That's the present tense. *${cap(t.es[0])}* is about a plan → *ir a* + infinitive.` },
       ];
@@ -993,11 +1002,11 @@ export const drills: Drill[] = [
       return {
         prompt: `Translate into Spanish: "${english.replace(/^(.)/, (m) => m.toUpperCase())}"`,
         answer: { type: "text", accept },
-        solution: [`*Ir* for ${PERSON_LABEL[s.p]}: *${ir}*; then *a* + infinitive *${c.verb}*.`, `*No* goes in front of the part of *ir*: *no ${ir} a ${c.verb}*.`, `${cap(t.en)} = *${t.es[0]}* (start or end) → **${accept[0]}.**`],
+        solution: [`*Ir* for ${PERSON_LABEL[s.p]}: *${ir}*; then *a* + infinitive *${c.verb}*.`, `*No* goes in front of the part of *ir*: *no ${ir} a ${c.verb}*.`, `${cap(t.en)} = *${t.es[0]}* (end or start) → **${accept[0]}.**`],
         hint: "Where does *no* go — before *ir* or before the infinitive?",
         traps: makeTraps(accept, [
           { wrong: withTime(withSubj(s, [squash(`${ir} a no ${c.verb} ${c.rest}`)]), t.es), feedback: `*No* goes before the part of *ir*: *no ${ir} a …*.` },
-          { wrong: withTime(withSubj(s, [squash(`no ${ir} ${c.verb} ${c.rest}`)]), t.es), feedback: `Don't forget the little *a*: *no ${ir} **a** ${c.verb}*.` },
+          { wrong: withTime(withSubj(s, [squash(`no ${ir} ${c.verb} ${c.rest}`)]), t.es), feedback: `Don't forget the little *a*: **no ${ir} a ${c.verb}**.` },
         ]),
       };
     },
@@ -1066,7 +1075,7 @@ export const drills: Drill[] = [
       };
       const raw: RawTrap[] = [];
       if (neg) raw.push({ wrong: wrongWith(objects.map((o) => `no ${conjugate("deber", "present", s.p)} ${o}`)), feedback: "*No deber* = mustn't / shouldn't. 'Don't have to' (there's no need) is *no tener que*." });
-      raw.push({ wrong: wrongWith(objects.map((o) => `${neg_}${t} ${o}`)), feedback: "Don't forget *que*: *tener **que** + infinitive*." });
+      raw.push({ wrong: wrongWith(objects.map((o) => `${neg_}${t} ${o}`)), feedback: "Don't forget *que*: it's *tener que* + infinitive." });
       raw.push({ wrong: wrongWith([`${neg_}${t} que ${pres(c, s.p)}${c2 ? " y " + pres(c2, s.p) : ""}`]), feedback: "After *tener que* the chore stays in the infinitive." });
       const noBoot = noBootForm("tener", s.p);
       if (noBoot) raw.push({ wrong: wrongWith(objects.map((o) => `${neg_}${noBoot} que ${o}`)), feedback: `*Tener* changes e→ie in the boot: **${t}**.` });
@@ -1076,7 +1085,7 @@ export const drills: Drill[] = [
         solution: [
           `'${neg ? "don't have to" : "have to"}' = *${neg_}tener que* + infinitive → *${neg_}${t} que*.`,
           c2 ? `Two chores share one *${t} que*: *${inf(c)} y ${inf(c2)}*.` : `Chore (infinitive): *${inf(c)}*.`,
-          f ? `"${f.en[0]}" = *${f.es[0]}* (start or end) → **${accept[0]}.**` : `→ **${accept[0]}.**`,
+          f ? `"${f.en[0]}" = *${f.es[0]}* (end or start) → **${accept[0]}.**` : `→ **${accept[0]}.**`,
         ],
         hint: "Build it in layers: who → *tener que* → chore (infinitive) → how often.",
         traps: makeTraps(accept, raw),
@@ -1119,7 +1128,7 @@ function choreTraps(c: Chore, s: Subj | null): RawTrap[] {
 /** Traps for a gap answer "<tener> que". */
 function tenerTraps(p: Person): RawTrap[] {
   const t = conjugate("tener", "present", p);
-  const out: RawTrap[] = [{ wrong: [t], feedback: `Two words needed: *${t} **que***.` }];
+  const out: RawTrap[] = [{ wrong: [t], feedback: `Two words needed — don't forget *que*: **${t} que**.` }];
   const nb = noBootForm("tener", p);
   if (nb) out.push({ wrong: [`${nb} que`], feedback: p === "yo" ? "*Tener* has an irregular *yo* form: **tengo que**." : `*Tener* changes e→ie in the boot: **${t} que**.` });
   if (p !== "yo") out.push({ wrong: ["tengo que"], feedback: "*Tengo* is 'I have'. Check the subject." });

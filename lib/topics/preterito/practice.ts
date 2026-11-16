@@ -781,7 +781,7 @@ export const practice: TopicPractice = {
           answer: { type: "text", accept: ["diste", "tú diste"] },
           solution: [
             "*Dar* is irregular: it's an *-ar* verb that takes the *-er/-ir* preterite endings, without accents.",
-            "*di, **diste**, dio, dimos, disteis, dieron*.",
+            "*di, diste, dio, dimos, disteis, dieron* — the *tú* form is the second one.",
             "→ **diste** (you gave).",
           ],
           traps: [
@@ -805,7 +805,6 @@ export const practice: TopicPractice = {
             type: "text",
             accept: [
               "Primero desayuné y luego fui a la playa",
-              "primero desayuné y luego fui a la playa",
               "primero desayuné luego fui a la playa",
               "primero desayuné y después fui a la playa",
               "primero desayuné después fui a la playa",

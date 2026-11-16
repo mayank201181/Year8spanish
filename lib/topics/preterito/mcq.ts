@@ -599,7 +599,7 @@ export const mcqPapers: Paper[] = [
         options: ["vamos", "fuimos", "fueron", "fuemos"],
         answerIndex: 1,
         explanation:
-          "*Ir* is completely irregular in the preterite: *fui, fuiste, fue, **fuimos**, fuisteis, fueron*. *Vamos* is present; *fueron* = they went; *fuemos* mixes *fue* with *-emos*.",
+          "*Ir* is completely irregular in the preterite: *fui, fuiste, fue, fuimos, fuisteis, fueron* — 'we went' is **fuimos**. *Vamos* is present; *fueron* = they went; *fuemos* mixes *fue* with *-emos*.",
         difficulty: "warmup",
         guideRef: "irregular-preterites",
         hints: ["The preterite of *ir* starts *fu-*. Which ending means 'we'?"],
@@ -688,7 +688,7 @@ export const mcqPapers: Paper[] = [
         options: ["daron", "dio", "dimos", "dieron"],
         answerIndex: 3,
         explanation:
-          "*Dar* is an *-ar* verb but takes *-er/-ir* endings in the preterite, with no accents: *di, diste, dio, dimos, disteis, **dieron***. *Daron* treats it as a regular *-ar* verb; *dio* is singular; *dimos* = we gave.",
+          "*Dar* is an *-ar* verb but takes *-er/-ir* endings in the preterite, with no accents: *di, diste, dio, dimos, disteis, dieron* — so 'they gave' is **dieron**. *Daron* treats it as a regular *-ar* verb; *dio* is singular; *dimos* = we gave.",
         difficulty: "core",
         guideRef: "irregular-preterites",
         hints: [

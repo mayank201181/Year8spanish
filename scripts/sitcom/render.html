@@ -81,8 +81,9 @@ function drawHuman(id, x, st) {
   if (id === 'pablo') { // white-and-red football shirt
     ctx.fillStyle = c.top2; ctx.beginPath(); ctx.moveTo(-24, -300); ctx.lineTo(0, -266); ctx.lineTo(24, -300); ctx.fill();
     ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(-15, -300); ctx.lineTo(0, -278); ctx.lineTo(15, -300); ctx.fill();
-    ctx.fillStyle = c.top2; rr(-bw, -146, bw * 2, 16, 6); ctx.fill(); rr(-bw + 6, -300, 8, 150, 4); ctx.fill(); rr(bw - 14, -300, 8, 150, 4); ctx.fill();
-    text('10', 6, -205, 46, c.top2, { stroke: '#fff', sw: 4 }); circ(-30, -262, 10); fillC('#dc2626'); circ(-30, -262, 5); fillC('#fff'); }
+    ctx.fillStyle = c.top2; rr(-bw, -146, bw * 2, 16, 6); ctx.fill(); ctx.fillRect(-bw + 4, -232, 10, 70); ctx.fillRect(bw - 14, -232, 10, 70);
+    text('10', 6, -205, 46, c.top2, { stroke: '#fff', sw: 4 });
+    circ(-20, -262, 9); fillC('#dc2626'); circ(-20, -262, 4); fillC('#fff'); }
   if (id === 'teacher') { // blazer, white shirt, red-and-yellow tie
     ctx.fillStyle = '#f8fafc'; ctx.beginPath(); ctx.moveTo(-26, -300); ctx.lineTo(0, -215); ctx.lineTo(26, -300); ctx.fill();
     ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.moveTo(-7, -296); ctx.lineTo(7, -296); ctx.lineTo(9, -232); ctx.lineTo(0, -220); ctx.lineTo(-9, -232); ctx.fill();
@@ -134,9 +135,10 @@ function drawHuman(id, x, st) {
   ctx.fillStyle = c.hair;
   if (c.hairStyle === 'cap') { ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(hx, hy - 8, hr + 2, Math.PI * 1.05, Math.PI * 1.95); ctx.fill(); rr(hx - 10, hy - 30, 90, 14, 7); ctx.fill(); }
   else {
-    ctx.beginPath(); ctx.arc(hx, hy - 4, hr + 3, Math.PI * 1.0, Math.PI * 2.0); ctx.fill();
+    if (c.hairStyle === 'curly') { ctx.save(); ctx.beginPath(); ctx.rect(hx - 80, hy - 120, 160, 92); ctx.clip(); circ(hx, hy - 4, hr + 3); ctx.fill(); ctx.restore(); }
+    else { ctx.beginPath(); ctx.arc(hx, hy - 4, hr + 3, Math.PI * 1.0, Math.PI * 2.0); ctx.fill(); }
     if (c.hairStyle === 'short') { ctx.fillStyle = '#9ca3af'; ell(hx - hr + 6, hy - 6, 7, 16); ctx.fill(); ell(hx + hr - 6, hy - 6, 7, 16); ctx.fill(); }
-    if (c.hairStyle === 'curly') { ctx.fillStyle = c.hair; for (let i = -3; i <= 3; i++) { circ(hx + i * 15 + 4, hy - 46 + Math.abs(i) * 3, 13); ctx.fill(); } circ(hx - hr + 4, hy - 18, 12); ctx.fill(); circ(hx + hr - 4, hy - 18, 12); ctx.fill(); }
+    if (c.hairStyle === 'curly') { ctx.fillStyle = c.hair; for (let i = -3; i <= 3; i++) { circ(hx + i * 15 + 4, hy - 34 + Math.abs(i) * 2, 12); ctx.fill(); } circ(hx - hr + 6, hy - 26, 12); ctx.fill(); circ(hx + hr - 6, hy - 26, 12); ctx.fill(); }
     if (c.hairStyle === 'pony' || c.hairStyle === 'bun' || c.hairStyle === 'bob') { ctx.fillStyle = c.hair; ctx.beginPath(); ctx.moveTo(hx - hr - 2, hy); ctx.quadraticCurveTo(hx - 20, hy - 70, hx + 30, hy - 40); ctx.quadraticCurveTo(hx + 10, hy - 30, hx - hr + 10, hy + 10); ctx.fill(); }
   }
   // face
@@ -213,7 +215,7 @@ function drawLola(x, st, opts = {}) {
   // wings (one lifts to gesture while she teaches)
   const gest = st.talking && ['teach', 'excited', 'smug', 'annoyed', 'shock'].includes(mood);
   for (const side of [-1, 1]) {
-    let ang = side * 0.22; if (gest && side === 1) ang = 0.22 + 0.9 + Math.sin(t * 3.4) * 0.35 * (0.4 + m);
+    let ang = side * 0.22; if (gest && side === 1) ang = 0.22 + 0.6 + Math.sin(t * 3.4) * 0.3 * (0.4 + m);
     if (mood === 'shock') ang = side * 1.1;
     ctx.save(); ctx.translate(side * 34, -360); ctx.rotate(-ang * (side === 1 ? 1 : 1) * (side === 1 ? 1 : 1));
     ell(0, 44, 19, 52); fillC('#15803d'); ell(0, 74, 14, 26); fillC('#2563eb'); ell(0, 92, 9, 14); fillC('#dc2626');
@@ -320,8 +322,8 @@ function setMall(t) {
   text('★ CENTRO COMERCIAL ★', 640, 86, 58, '#fde047', { stroke: '#4c1d95', sw: 8 });
   // banners
   const sw = Math.sin(t * 2) * 0.03;
-  ctx.save(); ctx.translate(320, 170); ctx.rotate(-0.05 + sw); ctx.fillStyle = '#dc2626'; rr(-170, 0, 340, 120, 12); ctx.fill(); text('CINE', 0, 42, 52, '#fff'); text('HOY: 2 x 1', 0, 92, 26, '#fde047'); ctx.restore();
-  ctx.save(); ctx.translate(960, 170); ctx.rotate(0.05 - sw); ctx.fillStyle = '#f97316'; rr(-190, 0, 380, 120, 12); ctx.fill(); text('¡REBAJAS!', 0, 42, 44, '#fff'); text('videojuegos · libros · música', 0, 92, 22, '#fff7ed'); ctx.restore();
+  ctx.save(); ctx.translate(320, 150); ctx.rotate(-0.05 + sw); ctx.fillStyle = '#dc2626'; rr(-170, 0, 340, 120, 12); ctx.fill(); text('CINE', 0, 42, 52, '#fff'); text('HOY: 2 x 1', 0, 92, 26, '#fde047'); ctx.restore();
+  ctx.save(); ctx.translate(960, 150); ctx.rotate(0.05 - sw); ctx.fillStyle = '#f97316'; rr(-190, 0, 380, 120, 12); ctx.fill(); text('¡REBAJAS!', 0, 42, 44, '#fff'); text('videojuegos · libros · música', 0, 92, 22, '#fff7ed'); ctx.restore();
   // shelves of cushions
   for (let s = 0; s < 2; s++) { const sx = s ? 900 : 60; ctx.fillStyle = '#d6d3d1'; ctx.fillRect(sx, 330, 320, 12); ctx.fillRect(sx, 430, 320, 12);
     for (let i = 0; i < 5; i++) { cushion(sx + 35 + i * 62, 300, 60, 52, CUSH[(i + s * 5) % 14], 0); cushion(sx + 35 + i * 62, 400, 60, 52, CUSH[(i + s * 5 + 3) % 14], 0); } }
@@ -485,7 +487,7 @@ function richWords(s) {
   while (i < s.length) {
     if (s.startsWith('[[', i)) { es = true; i += 2; continue; }
     if (s.startsWith(']]', i)) { es = false; i += 2; continue; }
-    const ch = s[i++]; if (ch === ' ') { if (word.length) words.push(word); word = []; } else push(ch);
+    const ch = s[i++]; if (ch === ' ') { if (word.length || (words.length && s[i - 2] === ' ')) words.push(word); word = []; } else push(ch);
   }
   if (word.length) words.push(word); return words;
 }
@@ -535,7 +537,14 @@ function drawBoard(entries, t, side) {
     ctx.save(); rr(x + 10, y + 50 + i * lh, (w - 20) * kk, lh, 6); ctx.clip();
     if (isNew) { ctx.fillStyle = 'rgba(250,204,21,0.12)'; ctx.fillRect(x + 10, y + 50 + i * lh, w - 20, lh); }
     const col = /✔/.test(l.text) ? '#86efac' : /✘|\?\?\?|NOT/.test(l.text) ? '#fca5a5' : '#f8fafc';
-    drawRich(l.text, x + 22, y + 75 + i * lh, 34, col, { align: 'left', font: 'Hand', weight: 400, maxW: w - 44, min: 20 });
+    const xi = l.text.indexOf('✘'), ci = l.text.indexOf('✔');
+    if (xi >= 0 && ci > xi) { // split: red mistake, then green correction (same font size for both halves)
+      const a = l.text.slice(0, ci), b = l.text.slice(ci); let sz = 34; setFont(sz, 'Hand', 400);
+      while (lineW(richWords(l.text)) > w - 44 && sz > 20) { sz--; setFont(sz, 'Hand', 400); }
+      drawRich(a, x + 22, y + 75 + i * lh, sz, '#fca5a5', { align: 'left', font: 'Hand', weight: 400, esColor: '#fca5a5' });
+      setFont(sz, 'Hand', 400); const aw = lineW(richWords(a)) + ctx.measureText(' ').width;
+      drawRich(b, x + 22 + aw, y + 75 + i * lh, sz, '#86efac', { align: 'left', font: 'Hand', weight: 400 });
+    } else drawRich(l.text, x + 22, y + 75 + i * lh, 34, col, { align: 'left', font: 'Hand', weight: 400, maxW: w - 44, min: 20 });
     ctx.restore();
   });
   if (img) { ctx.globalAlpha = k * ease((t - dg.t) / 0.5); ctx.drawImage(img, x + 20, y + 56 + vis.length * lh + 8, 520, dh); ctx.globalAlpha = k; }
@@ -578,7 +587,8 @@ function camera(seg, t) {
   // returns {cx, cy, s}
   const conf = seg.scene && seg.scene.startsWith('confess');
   if (conf) { const c0 = seg.cast[0]; const drift = (t - firstOf(seg).t0) * 0.003;
-    return { cx: c0.x - 90, cy: GROUND - headOff(c0.who) + (CH[c0.who].parrot ? 95 : 105), s: 1.8 + drift }; }
+    const brd = seg.board.some(b => t >= b.t); // recap board on the right: slide the speaker to the left third
+    return { cx: c0.x + (brd ? 170 : -90), cy: GROUND - headOff(c0.who) + (CH[c0.who].parrot ? 95 : 105), s: 1.8 + drift }; }
   if (seg.kind !== 'line' || seg.offstage) return { cx: 640, cy: 360, s: 1 };
   const sp = speakerAt(seg); if (!sp) return { cx: 640, cy: 360, s: 1 };
   const boardOn = seg.board.some(b => t >= b.t);
