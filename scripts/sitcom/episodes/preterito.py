@@ -5,7 +5,7 @@ EP = dict(topic="preterito", logline="Pablo's last week in Singapore. The family
 
 # ---------------- COLD OPEN ----------------
 scene("living", [("tara", 300), ("dad", 760)])
-L("dad", "Tara. Pablo goes home on Sunday. So I'm writing him a goodbye song. In the past tense!", mood="determined", shot="close", prop="guitar")
+L("dad", "Pablo goes home on Sunday. I'm writing him a goodbye song. In the past tense!", mood="determined", shot="close", prop="guitar")
 L("dad", "Listen. Yesterday, I eat-ed the noodles. Ayer, yo como-ed.", mood="smug", shot="close", prop="guitar")
 L("tara", "Dad. You can't put E D on a Spanish verb.", mood="deadpan", shot="close")
 sfx("squawk")
@@ -26,7 +26,7 @@ title()
 # ---------------- ACT 1: REGULAR -AR VERBS ----------------
 scene("living", [("mum", 260), ("pablo", 560), ("lola", 900)])
 L("mum", "I've bought a memory book. We're going to fill it with everything we did. In the past.", mood="happy", shot="close", prop="book")
-L("lola", "Then we need the preterite. For finished actions. I did, she ate. Start with A R verbs, like [[hablar]].", mood="teach", shot="close",
+L("lola", "The preterite. For finished actions. I did, she ate. Start with A R verbs, like [[hablar]].", mood="teach", shot="close",
   boardClear=True, board="preterite = finished action in the past")
 L("lola", "Chop off the A R, and add the endings. [[Hablé, hablaste, habló, hablamos, hablasteis, hablaron.]]", mood="teach", shot="close",
   board="[[hablé · hablaste · habló]]")
@@ -68,8 +68,7 @@ L("uncle", "In Singapore, [[siempre llueve]]. It always rains. I don't need the 
 L("tara", "He's not wrong.", mood="deadpan", shot="close", gap=0.4)
 
 confess("uncle", "UNCLE HOCK · Hawker · Vegetarian Noodles Since Nineteen Ninety")
-L("uncle", "Pablo came to my stall every day. Every day, he said, [[¡qué rico!]] How tasty!", mood="happy")
-L("uncle", "Next week, nobody says that. Vikram just says, same as usual.", mood="sad", gap=0.5)
+L("uncle", "Pablo came to my stall every day. Every day, he said, [[¡qué rico!]] How tasty! Vikram just says, same as usual.", mood="sad", gap=0.5)
 
 # ---------------- ACT 3: SPELLING CHANGES ----------------
 scene("park", [("tara", 260), ("pablo", 560), ("dad", 860)], caption="THE FUTSAL COURT · One Last Match")
@@ -99,7 +98,7 @@ L("uncle", "So our band is called, the I Went Fighters. Or the I Was Fighters.",
 L("lola", "Both very accurate.", mood="smug", shot="close")
 L("lola", "More irregulars. [[Hacer]] goes [[hice, hiciste, hizo]]. [[Tener]] goes [[tuve]]. [[Estar]] goes [[estuve]]. And [[dar]] goes [[di]]. And none of them has an accent.", mood="teach", shot="close",
   boardClear=True, board="[[hice · hizo · tuve · estuve · di]]")
-L("tara", "[[Ayer hice los deberes.]] Yesterday I did my homework. [[Tuve un examen.]] I had a test. [[Estuve en el colegio.]] I was at school.", mood="deadpan", shot="close",
+L("tara", "[[Ayer hice los deberes.]] Yesterday I did my homework. [[Tuve un examen.]] I had a test.", mood="deadpan", shot="close",
   board="[[hice]] = I did   [[tuve]] = I had")
 L("dad", "And the weather! Last week, muy calor!", mood="excited", shot="close", prop="guitar")
 sfx("buzzer")
@@ -139,12 +138,12 @@ L("dad", "[[Llegaste con un loro. Viviste con nosotros. Fue genial.]] You arrive
 L("tara", "Dad. That was three perfect verbs in a row.", mood="shock", shot="close")
 L("pablo", "Thank you. All of you. [[Mi casa fue tu casa.]] My home was your home. And [[lo pasé bomba.]]", mood="happy", shot="close")
 L("tara", "[[Te voy a echar de menos.]] I'm going to miss you. That's all. Don't make it weird.", mood="deadpan", shot="close")
-L("pablo", "One problem. Lola. Where is Lola?", mood="worried", shot="two")
+L("pablo", "Wait. Where is Lola?", mood="worried", shot="two")
 sfx("squawk")
 poof("lola", 1080)
 L("lola", "I've decided. I'm staying. [[Me quedo.]] Present tense. Somebody has to look after Dad's Spanish.", mood="smug", shot="close")
 L("dad", "[[¡Muchas gracias, Lola!]]", mood="excited", shot="close")
-L("lola", "Perfect. You see? This is going to be a very long season two.", mood="happy", shot="wide", gap=0.8)
+L("lola", "Perfect. This is going to be a very long season two.", mood="happy", shot="wide", gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
 card("PAUSE CHALLENGE", "Lola gives you five seconds. Then she gets smug.", 3.0)
