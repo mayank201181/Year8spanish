@@ -82,6 +82,10 @@ export const morePapers: Paper[] = [
             "my father shaves and then dresses himself",
             "my father has a shave and then gets dressed",
             "my dad has a shave and then gets dressed",
+            "my dad shaves himself and then gets dressed",
+            "my dad shaves and then dresses himself",
+            "my father shaves and then he dresses",
+            "my dad shaves and then he dresses",
           ],
         },
         solution: [

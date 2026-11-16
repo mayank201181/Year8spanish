@@ -148,6 +148,8 @@ export const practice: TopicPractice = {
           "yo nunca veo la televisión",
           "no veo nunca la televisión",
           "no veo la televisión nunca",
+          "yo no veo nunca la televisión",
+          "yo no veo la televisión nunca",
         ],
       },
       solution: [
@@ -229,7 +231,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "presente-p1-q04",
           question: "Translate into English: *¿Dónde vives?*",
-          answer: { type: "text", accept: ["where do you live"] },
+          answer: { type: "text", accept: ["where do you live", "where are you living"] },
           solution: ["*¿Dónde?* = where?", "*vives* = *tú* form of *vivir* (the *-es* ending = you).", "→ **Where do you live?**"],
           traps: [{ spec: { type: "text", accept: ["where does he live", "where does she live", "where do i live", "where do we live"] }, feedback: "Look at the ending of *vives*: *-es* is the *tú* form — 'you'." }],
           difficulty: "warmup",
@@ -525,6 +527,10 @@ export const practice: TopicPractice = {
               "en el salón veo la televisión",
               "veo la tele en la sala de estar",
               "veo la televisión en la sala de estar",
+              "yo veo la tele en la sala de estar",
+              "yo veo la televisión en la sala de estar",
+              "en la sala de estar veo la tele",
+              "en la sala de estar veo la televisión",
             ],
           },
           solution: ["'to watch' = *ver*, whose *yo* form keeps the *e*: *veo*.", "'TV' = *la tele* (*la televisión*); 'living room' = *el salón*.", "→ **Veo la tele en el salón.**"],
@@ -585,7 +591,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "presente-p2-q09",
           question: "Rewrite this sentence with the reflexive pronoun attached to the end of the infinitive:\n\n    Me voy a levantar a las ocho.",
-          answer: { type: "text", accept: ["voy a levantarme a las ocho", "yo voy a levantarme a las ocho", "voy a levantarme a las 8"] },
+          answer: { type: "text", accept: ["voy a levantarme a las ocho", "yo voy a levantarme a las ocho", "voy a levantarme a las 8", "yo voy a levantarme a las 8"] },
           solution: ["Take *me* from the front.", "Glue it onto the end of the infinitive: *levantar* + *me* → *levantarme*.", "→ **Voy a levantarme a las ocho.** (Same meaning.)"],
           traps: [
             { spec: { type: "text", accept: ["me voy a levantarme a las ocho"] }, feedback: "Move the pronoun — don't copy it. It appears only once." },
@@ -666,6 +672,10 @@ export const practice: TopicPractice = {
               "nosotros queremos ir pero no pueden",
               "nosotras queremos ir pero ellos no pueden",
               "nosotras queremos ir pero no pueden",
+              "queremos ir pero ellos no pueden ir",
+              "queremos ir pero no pueden ir",
+              "nosotros queremos ir pero ellos no pueden ir",
+              "nosotras queremos ir pero ellos no pueden ir",
             ],
           },
           solution: [
@@ -752,6 +762,7 @@ export const practice: TopicPractice = {
           "mi madre quiere dormir pero mis hermanos juegan al fútbol en el jardín",
           "mi mamá quiere dormir pero mis hermanos juegan al fútbol en el jardín",
           "mi madre quiere dormir pero en el jardín mis hermanos juegan al fútbol",
+          "mi mamá quiere dormir pero en el jardín mis hermanos juegan al fútbol",
         ],
       },
       solution: [
@@ -884,6 +895,9 @@ export const practice: TopicPractice = {
           "no juego al tenis tampoco y no voy al polideportivo nunca",
           "yo no juego al tenis tampoco y no voy al polideportivo nunca",
           "no juego tampoco al tenis y no voy al polideportivo nunca",
+          "yo no juego tampoco al tenis y nunca voy al polideportivo",
+          "yo no juego tampoco al tenis y no voy nunca al polideportivo",
+          "yo no juego tampoco al tenis y no voy al polideportivo nunca",
         ],
       },
       solution: [
@@ -976,9 +990,9 @@ export const practice: TopicPractice = {
         "Find and correct the **five** mistakes in Hana's paragraph. For each one, write the correction and a short reason.\n\n    Me llamo Hana y soy en Singapur. Me despierto a las seis y ducho. Mi hermano y yo vamos al colegio en autobús. Mi hermano juga al fútbol, pero yo no hago algo después de las clases. ¿Que haces tú?",
       marks: 5,
       modelAnswer:
-        "1. *soy en Singapur* → **estoy en Singapur** (or *vivo en Singapur*): location takes *estar*.\n2. *y ducho* → **y me ducho**: *ducharse* is reflexive, so it needs *me*.\n3. *juga* → **juega**: *jugar* is u→ue and *él* is inside the boot.\n4. *no hago algo* → **no hago nada**: Spanish uses a double negative.\n5. *¿Que haces tú?* → **¿Qué haces tú?**: question words carry an accent.\n\n(*Mi hermano y yo vamos* is correct — *nosotros* form of *ir*.)",
+        "1. *soy en Singapur* → **estoy en Singapur** (or *vivo en Singapur*): location takes *estar*. (If Hana means where she's from, *soy de Singapur* — origin with *ser* + *de* — is also a good correction.)\n2. *y ducho* → **y me ducho**: *ducharse* is reflexive, so it needs *me*.\n3. *juga* → **juega**: *jugar* is u→ue and *él* is inside the boot.\n4. *no hago algo* → **no hago nada**: Spanish uses a double negative.\n5. *¿Que haces tú?* → **¿Qué haces tú?**: question words carry an accent.\n\n(*Mi hermano y yo vamos* is correct — *nosotros* form of *ir*.)",
       markScheme: [
-        { point: "soy en → estoy en (or vivo en): location uses estar", keywords: ["estoy", "vivo", "location", "estar"] },
+        { point: "soy en → estoy en (or vivo en / soy de): location uses estar; origin is ser de", keywords: ["estoy", "vivo", "soy de", "location", "estar"] },
         { point: "ducho → me ducho: reflexive pronoun needed", keywords: ["me ducho", "reflexive"] },
         { point: "juga → juega: boot verb u→ue", keywords: ["juega", "boot", "ue"] },
         { point: "algo → nada: double negative", keywords: ["nada", "double negative", "negative"] },

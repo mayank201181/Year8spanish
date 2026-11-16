@@ -172,7 +172,7 @@ challenge(1, "Say “I live in a flat” in Spanish.", "[[Vivo en un piso]]", "v
   "Question one. How do you say, I live in a flat, in Spanish?",
   "[[Vivo en un piso.]] [[Piso]] ends in O, so it's masculine, so it takes [[un]].")
 challenge(2, "[[un]] or [[una]]?  ___ [[granja]] (a farm)", "[[una granja]]", "[[granja]] ends in -a → feminine → [[una]]",
-  "Question two. Farm is [[granja]]. Is it [[un granja]], or [[una granja]]?",
+  "Question two. Farm is [[granja]]. Does it take [[un]], or [[una]]?",
   "[[Una granja.]] It ends in A, so it's feminine. If you said [[un]], I'm telling Dad you agree with him.")
 challenge(3, "Translate: “The kitchen is small.”", "[[La cocina es pequeña]]", "[[cocina]] is feminine → [[pequeña]]",
   "Question three. Translate. The kitchen is small.",
