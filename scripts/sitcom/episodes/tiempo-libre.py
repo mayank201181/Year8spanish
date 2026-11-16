@@ -28,7 +28,7 @@ L("pablo", "So, Tara. [[¿Qué haces en tu tiempo libre?]] What do you do in you
   boardClear=True, board="[[¿Qué haces en tu tiempo libre?]]")
 L("tara", "[[Leo.]] I read. [[Escucho música.]] I listen to music. And [[dibujo]], I draw. Mostly my dad, asleep on the sofa.", mood="deadpan", shot="close",
   board="[[leo · escucho música · dibujo]]")
-L("lola", "Learn hobbies as chunks. [[Ver la tele]], to watch TV. [[Ir de compras]], to go shopping. [[Salir con mis amigos]], to go out with my friends. [[Bailar]], to dance. [[Montar en bici]], to ride a bike.", mood="teach", shot="close",
+L("lola", "Learn hobbies as chunks. [[Ver la tele]], to watch TV. [[Ir de compras]], to go shopping. [[Salir con mis amigos]], to go out with my friends. [[Bailar]], to dance.", mood="teach", shot="close",
   board="[[ver la tele · ir de compras · bailar]]")
 L("pablo", "Instruments use [[tocar]]. [[Toco el piano.]] Games use [[jugar a]]. [[Juego a los videojuegos.]] I play video games.", mood="teach", shot="close",
   boardClear=True, board="[[toco el piano]] · [[juego a los videojuegos]]")
@@ -54,7 +54,7 @@ L("tara", "So the verb agrees with the thing you like. One thing, or an activity
   board="[[gusta]] + 1 thing · [[gustan]] + plural")
 L("lola", "And keep the article. [[Me gusta la música]], never, me gusta música.", mood="teach", shot="close",
   board="[[Me gusta la música]] (keep [[la]])")
-L("tara", "For other people, change the little word. [[Te gusta]], you like. [[Le gusta]], he or she likes. [[Nos gusta]], we like. And [[a mi padre le gustan las telenovelas.]] My dad likes soap operas.", mood="deadpan", shot="close",
+L("tara", "For other people, change the little word. [[Te gusta]], you like. [[Le gusta]], he or she likes. And [[a mi padre le gustan las telenovelas.]] My dad likes soap operas.", mood="deadpan", shot="close",
   board="[[me · te · le · nos · os · les]]")
 L("dad", "Like? I love them. Me encanta mucho the telenovelas.", mood="excited", shot="close", prop="tablet")
 L("lola", "[[Me encantan las telenovelas.]] Plural, so add the N. And [[encantar]] is already strong, so no [[mucho]]. Same family: [[me aburre]], it bores me.", mood="teach", shot="close",
@@ -74,7 +74,7 @@ L("teacher", "Today, no short answers. [[Juego al fútbol]] is a very small, sad
   boardClear=True, board="when + what + where + who + opinion")
 L("tara", "When. [[Después del colegio]], after school. [[Los fines de semana]], at weekends. [[Los sábados]] means every Saturday.", mood="neutral", shot="close",
   board="[[los sábados]] = every Saturday")
-L("pablo", "Where. [[En casa]], at home, with no little word. [[En el centro comercial]], in the shopping centre. Basically a second home here.", mood="happy", shot="close",
+L("pablo", "Where. [[En casa]], at home, with no little word. [[En el centro comercial]], in the shopping centre.", mood="happy", shot="close",
   board="[[en casa · en el centro comercial]]")
 L("teacher", "Who with. [[Con mis amigos.]] Alone is [[solo]] for a boy, [[sola]] for a girl. With me is [[conmigo]].", mood="teach", shot="close",
   board="[[con mis amigos · solo / sola · conmigo]]")
@@ -86,7 +86,7 @@ L("lola", "Five carriages! Glue on more with [[pero]], but, and [[también]], al
   board="[[y · pero · también · además · porque]]")
 
 scene("living", [("tara", 260), ("dad", 520), ("mum", 780), ("lola", 1040)])
-L("mum", "Vikram. What kind of programmes do you watch? In Spanish, please.", mood="determined", shot="close", boardClear=True)
+L("mum", "Vikram. What do you watch? In Spanish, please.", mood="determined", shot="close", boardClear=True)
 L("dad", "Everything. The news-o. The cartoons-o. The game show-o.", mood="smug", shot="close", prop="tablet")
 L("lola", "[[Las noticias]], the news. [[Los dibujos animados]], cartoons. [[Los documentales]], documentaries. [[Los concursos]], game shows. And [[las telenovelas]], soap operas.", mood="teach", shot="close",
   board="[[las noticias · los dibujos animados]]")
@@ -135,7 +135,7 @@ L("pablo", "So, Vikram? [[¿Te gusta la película?]]", mood="happy", shot="close
 L("dad", "It's wonderful. The twin brother has a twin brother.", mood="excited", shot="close")
 L("tara", "So he's a triplet.", mood="deadpan", shot="close")
 L("mum", "Admit it, Vikram. [[Eres un teleadicto.]] You're a TV addict.", mood="smug", shot="close")
-L("dad", "Not any more. I've changed. Now I go out. Voy a watch-o the soap opera on my phone-o.", mood="happy", shot="close", prop="phone")
+L("dad", "I've changed. Voy a watch-o the soap opera on my phone-o.", mood="happy", shot="close", prop="phone")
 sfx("squawk")
 L("lola", "[[Voy a ver la telenovela en el móvil.]] Correct Spanish. Same problem.", mood="eyeroll", shot="wide", offstage=True,
   boardClear=True, board="[[Voy a ver la telenovela en el móvil]]")
@@ -148,7 +148,7 @@ challenge(1, "Say “I play the guitar” in Spanish.", "[[Toco la guitarra]]", 
   "[[Toco la guitarra.]] Instruments use [[tocar]]. If you said [[juego]], you and Dad can start a band.")
 challenge(2, "[[gusta]] or [[gustan]]?  [[Me ___ los videojuegos.]]", "[[Me gustan los videojuegos]]", "[[los videojuegos]] is plural → [[gustan]]",
   "Question two. I like video games. Is it [[me gusta]], or [[me gustan]]?",
-  "[[Me gustan los videojuegos.]] The video games are plural, and they are doing the pleasing. So, [[gustan]].")
+  "[[Me gustan los videojuegos.]] Video games are plural. So, [[gustan]].")
 challenge(3, "Translate: “Do you want to go to the cinema?”", "[[¿Quieres ir al cine?]]", "[[querer]] → [[quieres]] + infinitive;  [[a + el = al]]",
   "Question three. Translate. Do you want to go to the cinema?",
   "[[¿Quieres ir al cine?]] And the answer is, [[¡Qué buena idea!]] Unless you're Dad.")
