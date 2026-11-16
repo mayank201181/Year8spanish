@@ -16,7 +16,7 @@ L("pablo", "Uncle Hock, [[¿te gusta vivir aquí?]] Do you like living here?", m
 L("uncle", "Since nineteen eighty-seven I'm at this stall. Do I like it? My Spanish answer is, [[más o menos.]]", mood="smug", shot="close")
 L("pablo", "More or less! You speak Spanish!", mood="excited", shot="close")
 L("uncle", "Three words. That's my limit.", mood="neutral", shot="close")
-L("dad", "Más o menos. Brilliant. I'm going to use that for everything.", mood="smug", shot="close", gap=0.3)
+L("dad", "Más o menos. I'm going to use that for everything.", mood="smug", shot="close", gap=0.3)
 freeze("\"ME GUSTO!\"", 2.4, narrator="Narrator: He did use it for everything.")
 confess("tara", "TARA RAO · 12 · Opinions: Strictly Private")
 L("tara", "Pablo asked me if I like living in Tampines. I said, it's fine.", mood="deadpan")
@@ -80,7 +80,7 @@ L("pablo", "Now other people. My mum loves Seville. [[A mi madre le encanta Sevi
   board="[[A mi madre le encanta Sevilla]]")
 L("lola", "Swap [[me]] for [[le]]. One person, [[le]]. Several people, [[les]]. [[A mis padres les gusta el campo.]] My parents like the countryside.", mood="teach", shot="close",
   board="one → [[le]]  ·  several → [[les]]")
-L("mum", "So two questions. Who likes it? And what? [[A mi hija le gustan los parques.]] My daughter likes the parks.", mood="thinking", shot="close",
+L("mum", "[[A mi hija le gustan los parques.]] My daughter likes the parks.", mood="thinking", shot="close",
   board="[[A mi hija le gustan los parques]]")
 L("dad", "My turn. A Tara le gusta Dad.", mood="smug", shot="close")
 L("lola", "Grammar, correct. Facts, unconfirmed.", mood="bored", shot="close")
@@ -92,7 +92,7 @@ L("mum", "[[Mi marido dice que es un genio.]] My husband says he's a genius. Rep
 
 confess("pablo", "PABLO RUIZ · 13 · Homesick, More Or Less")
 L("pablo", "Do I miss Seville? [[Más o menos.]] I miss my grandmother's cooking.", mood="sad")
-L("pablo", "But Uncle Hock now gives me extra noodles. He says, for the boy from Seville. So now I miss Seville a bit less.", mood="happy", gap=0.5)
+L("pablo", "But Uncle Hock now gives me extra noodles. So now I miss Seville a bit less.", mood="happy", gap=0.5)
 
 # ---------------- ACT 3: COMPARING & THE FUTURE ----------------
 card("SEVILLA VS SINGAPUR", "The referee is a parrot. She is not neutral.", 2.4)
@@ -118,8 +118,8 @@ L("pablo", "Actually, no. [[En agosto, en Sevilla hace más calor que en Singapu
 L("dad", "Más o menos.", mood="smug", shot="close", gap=0.3)
 
 scene("living", [("tara", 260), ("mum", 520), ("pablo", 780), ("lola", 1040)])
-L("mum", "Last thing. The future. Where are you going to live?", mood="thinking", shot="close", boardClear=True)
-L("lola", "[[Ir]], plus [[a]], plus the infinitive. [[Voy a vivir]], I'm going to live. [[Vas a vivir]], you're going to live. [[Va a ser]], it's going to be.", mood="teach", shot="close",
+L("mum", "The future. Where are you going to live?", mood="thinking", shot="close", boardClear=True)
+L("lola", "[[Ir]], plus [[a]], plus the infinitive. [[Voy a vivir]], I'm going to live. [[Va a ser]], it's going to be.", mood="teach", shot="close",
   board="[[voy a + vivir / comprar / ser]]")
 L("pablo", "[[En el futuro voy a vivir en la costa porque va a ser más tranquilo.]] In the future I'm going to live on the coast, because it's going to be quieter.", mood="happy", shot="close",
   board="[[En el futuro voy a vivir en…]]")

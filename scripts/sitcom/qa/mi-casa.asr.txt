@@ -1,0 +1,54 @@
+# QA — mi-casa (S01E01 "Mi Casa Es Tu Caos")   asr.py, Whisper small, int8
+# Result: checked 183 segments; flagged 31; skipped 81 one-word clips. Duration 482.5 s (8.0 min).
+#
+# Fixed during QA:
+#  - Pipeline bug: punctuation-only English pieces after ]] (e.g. the "." in "[[del]].") were voiced as
+#    separate clips and came out as stray syllables ("That's", "Bye", "Thank you"). build.py/asr.py now drop
+#    them. Flags fell from 93 to 31.
+#  - Script trimmed from 8.7k to 6.3k spoken chars (first build was 10.4 min).
+#  - Unbracketed Spanish words inside English sentences (Casa, Piso, Cocina, pequeño, grande) put in [[ ]]
+#    so they use the Spanish voice.
+#
+# Remaining flags reviewed — none needs a rewrite:
+#  - Dad's deliberate fake Spanish outside brackets ("Una grande cocina", "Soy en", "Me gustaría vivir in a
+#    castle-o", "One-o. Two-o."): it is supposed to sound wrong.
+#  - Number words transcribed as digits ("Uno, dos, tres…" -> "1, 2, 3", "ten at night" -> "10").
+#  - Spanish v pronounced as b ("Vivo" -> "Bivo"): correct Castilian pronunciation.
+#  - Short fragments that start with a comma (", a flat." -> "the flat.", ", a bit." -> "Zabit"): Whisper
+#    loses the first syllable of a clip that starts mid-sentence; in the mix the pieces run together.
+#  - "Un piso" -> "un beso", "no hay" -> "No va ahí", "la planta baja" -> "baje": 2–3 word clips, audibly fine.
+#  - UK/US spelling (Colours/Colors, centre/center).
+#
+# Raw asr.py output:
+(0.0, 'lola', '[en] , an apartment.', ' in apartments.')
+(0.0, 'lola', '[es] Uno, dos, tres, cuatro, cinco.', ' 1, 2, 3, 4, 5.')
+(0.0, 'mum', '[es] Vivo en un piso.', ' ¡Bibor y numpiso!')
+(0.0, 'pablo', '[en] , a bit.', ' Zabit!')
+(0.29, 'lola', '[en] Question two. Farm is', ' Question 2, Farmers.')
+(0.4, 'lola', '[en] Recap. One.', ' Rick Happy One.')
+(0.4, 'lola', '[es] no hay', ' No va ahí.')
+(0.44, 'lola', '[en] . Ends in O? Usually masculine. Ends in A? Usually feminine.', ' N-zeno usually masculine.  N-zenae usually feminine.')
+(0.5, 'lola', '[en] , a farm.', ' the farm.')
+(0.5, 'lola', '[en] , a flat.', ' the flat.')
+(0.5, 'lola', '[en] , a house.', ' the house.')
+(0.5, 'lola', '[es] Un piso', ' un beso.')
+(0.5, 'pablo', '[es] Un poco', ' ¡Dúm poco!')
+(0.5, 'tara', '[en] Colours too.', ' Colors too.')
+(0.57, 'lola', '[en] ends in A. Feminine.', ' Nzin A Feminine')
+(0.59, 'dad', '[en] Let me count the rooms. One-o. Two-o. Three-o.', ' Let me count the rooms, 102030.')
+(0.62, 'dad', '[en] Me gustaría vivir in a castle-o.', ' me, Gusteria, Vivia in a castle.')
+(0.64, 'dad', '[en] Exactly. Spanish is easy. You just add O. Pizza-o. Computer-o. Genius-o.', ' Exactly Spanish is easy. You just add o.  Pizzaro, computero, geniuso.')
+(0.67, 'lola', '[en] is feminine, so', " It's feminine, so.")
+(0.67, 'tara', '[es] la planta baja', ' La planta baje.')
+(0.71, 'dad', '[en] We have a big-o kitchen. Una grande cocina.', ' We have a big-o kitchen, Unigrand Kossiner.')
+(0.75, 'lola', "[en] , it's in the centre.", " It's in the center.")
+(0.75, 'lola', "[en] is polite, for grown-ups. For a friend, it's", ' is polite for grownups for a friend.')
+(0.76, 'dad', '[en] My turn. Our flat is near the school. Soy en near the school-o.', ' My turn, a flat is near the school, so I end near the school-o.')
+(0.78, 'mum', "[en] Ten at night? I'm asleep at ten at night.", " 10 at night, I'm asleep at 10 at night.")
+(0.8, 'lola', '[en] , feminine takes', ' of feminine takes')
+(0.8, 'lola', '[en] For WHERE something is, use', ' for where something is used.')
+(0.82, 'dad', '[en] Easy. So in Spanish, I live in un casa.', ' Easy, so in Spanish, I live in Uncasa.')
+(0.83, 'lola', '[en] , not house-o. And your flat is not big-o. Big is', ' Not how so and your flat is not big o, big is.')
+(0.83, 'mum', "[en] is, I live. What's, you live?", ' Is I live what you live?')
+(0.85, 'dad', "[en] People say I'm not fluent. But I have watched every Spanish football match since two thousand and ten.", " People say I'm not fluent, but I have watched every Spanish football match since 2010.")
+checked 183 segments; flagged 31 ; skipped 81 one-word clips

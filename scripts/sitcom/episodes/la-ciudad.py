@@ -22,10 +22,9 @@ title()
 
 # ---------------- ACT 1: PLACES IN TOWN & HAY ----------------
 scene("classroom", [("teacher", 300), ("pablo", 600), ("tara", 900)], caption="SEÑOR GARCÍA'S CLASSROOM · Mission Briefing")
-L("teacher", "[[¡Buenos días!]] Places in town. Some are easy. [[El museo, el hospital, el teatro, el estadio.]]", mood="happy", shot="close",
+L("teacher", "[[¡Buenos días!]] Places in town. Some look like English. [[El museo, el hospital, el teatro, el estadio.]]", mood="happy", shot="close",
   boardClear=True, board="[[el museo · el hospital · el teatro]]")
-L("tara", "Cognates. They look like the English. Museum, hospital, theatre, stadium.", mood="deadpan", shot="close")
-L("teacher", "[[Muy bien.]] Now the ones you must learn. [[El ayuntamiento]], the town hall. [[La biblioteca]], the library. [[El polideportivo]], the sports centre. [[La piscina]], the swimming pool.", mood="teach", shot="close",
+L("teacher", "Now the ones to learn. [[El ayuntamiento]], the town hall. [[La biblioteca]], the library. [[El polideportivo]], the sports centre. [[La piscina]], the swimming pool.", mood="teach", shot="close",
   board="[[el ayuntamiento · la biblioteca]]")
 L("pablo", "And [[el centro comercial]], the shopping centre. [[El mercado]], the market. [[La estación de tren]], the train station. [[La plaza mayor]], the main square.", mood="happy", shot="close",
   board="[[el centro comercial · la plaza mayor]]")
@@ -58,7 +57,7 @@ L("dad", "Right now, for example, I'm in a little room, talking to a camera. Nai
 card("THE MISSION", "Destination: the library. Navigator: Dad. Hope: low.", 2.4)
 scene("park", [("tara", 260), ("pablo", 560), ("dad", 860)], caption="THE VOID DECK · Mission Start")
 poof("lola", 1100)
-L("pablo", "First, how to ask. [[Perdone, ¿por dónde se va a la biblioteca?]] Excuse me, how do I get to the library?", mood="happy", shot="close", boardClear=True,
+L("pablo", "[[Perdone, ¿por dónde se va a la biblioteca?]] Excuse me, how do I get to the library?", mood="happy", shot="close", boardClear=True,
   board="[[¿Por dónde se va a la…?]]")
 L("lola", "[[Perdone]] for a grown-up stranger. [[Perdona]] for a friend. Masculine place? [[A]] plus [[el]] squash into [[al]]. [[¿Por dónde se va al museo?]]", mood="teach", shot="close",
   board="[[a + el = al]] → [[al museo]]")
@@ -84,7 +83,7 @@ L("dad", "Oh. It's this one. It's been this one my whole life.", mood="shock", s
 
 scene("park", [("mum", 260), ("pablo", 560), ("dad", 860)], caption="THE VOID DECK · Take Two")
 poof("lola", 1100)
-L("mum", "What if a stranger gives me directions? Do they say [[sigue]] to me?", mood="thinking", shot="close", boardClear=True)
+L("mum", "Do strangers say [[sigue]] to me too?", mood="thinking", shot="close", boardClear=True)
 L("lola", "No. To a grown-up, they're polite. That's [[usted]]. [[Sigue]] becomes [[siga]]. [[Toma]] becomes [[tome]]. [[Gira]] becomes [[gire]].", mood="teach", shot="close",
   board="tú [[sigue · toma]] → usted [[siga · tome]]")
 L("mum", "So, [[siga todo recto y tome la segunda calle a la derecha.]] Go straight on and take the second street on the right.", mood="happy", shot="close",
@@ -96,24 +95,24 @@ sfx("buzzer")
 L("lola", "[[Hasta]] means as far as. [[Hasta la vista]] means see you later. Nobody is going as far as the view.", mood="eyeroll", shot="close", gap=0.4)
 
 confess("pablo", "PABLO RUIZ · 13 · Exchange Student · From Seville")
-L("pablo", "In Seville, if you ask for directions, everybody helps. You get five different routes. All of them go past a café.", mood="happy")
-L("pablo", "You never reach the place. But you have a very nice afternoon.", mood="happy", gap=0.5)
+L("pablo", "In Seville, ask for directions and you get five different routes. All of them go past a café.", mood="happy")
+L("pablo", "You never reach the place. But it's a very nice afternoon.", mood="happy", gap=0.5)
 
 # ---------------- ACT 3: WHERE IS IT? DISTANCE & SE PUEDE ----------------
 card("FORTY MINUTES LATER", "Still no library. Plenty of Dad.", 2.4)
 scene("hawker", [("tara", 260), ("pablo", 520), ("dad", 780), ("uncle", 1000)], caption="HOCK'S HAWKER STALL · Definitely Not The Library")
-L("uncle", "Lost, ah? I learnt some Spanish from tourists. [[La biblioteca está muy cerca. Está a cinco minutos a pie.]]", mood="happy", shot="close", boardClear=True,
+L("uncle", "Lost, ah? [[La biblioteca está muy cerca. Está a cinco minutos a pie.]]", mood="happy", shot="close", boardClear=True,
   board="[[Está a cinco minutos a pie]]")
-L("tara", "Five minutes on foot. Location uses [[está]], never [[es]]. And distance needs [[a]]. [[A cinco minutos a pie.]] [[A diez minutos en autobús.]]", mood="deadpan", shot="close",
+L("tara", "Location uses [[está]], never [[es]]. And distance needs [[a]]. [[A cinco minutos a pie.]] [[A diez minutos en autobús.]]", mood="deadpan", shot="close",
   board="[[a diez minutos en autobús]]")
 L("uncle", "[[La biblioteca está enfrente del centro comercial.]] Opposite the shopping centre. My stall is [[en la esquina, entre el banco y la frutería.]] On the corner, between the bank and the fruit shop.", mood="teach", shot="close",
   board="[[enfrente del centro comercial]]")
 sfx("squawk")
-L("lola", "Uncle, I love you. [[Del]], because [[de]] plus [[el]] makes [[del]]. And [[entre]], between, needs no [[de]] at all.", mood="excited", shot="wide", offstage=True,
+L("lola", "[[Del]], because [[de]] plus [[el]] makes [[del]]. And [[entre]], between, needs no [[de]] at all.", mood="excited", shot="wide", offstage=True,
   board="[[de + el = del]] · [[entre … y …]]")
 L("dad", "So the library is near the bank. Está cerca de el banco.", mood="thinking", shot="close")
 sfx("buzzer")
-L("tara", "[[Cerca del banco.]] It squashes every time, Dad. With [[la]], nothing happens. [[Cerca de la iglesia.]]", mood="deadpan", shot="close", gap=0.3)
+L("tara", "[[Cerca del banco.]] With [[la]], nothing happens. [[Cerca de la iglesia.]]", mood="deadpan", shot="close", gap=0.3)
 
 scene("hawker", [("mum", 260), ("pablo", 520), ("dad", 780), ("uncle", 1000)], caption="HOCK'S HAWKER STALL · Snack Break")
 L("pablo", "What can you do in town? [[Se puede]], plus the infinitive. [[Aquí se puede comer muy bien.]] Here you can eat really well.", mood="happy", shot="close", boardClear=True,
