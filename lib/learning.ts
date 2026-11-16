@@ -117,7 +117,7 @@ export const RANKS: Rank[] = [
   { min: 120, name: "Problem Solver", emoji: "🧩" },
   { min: 300, name: "Pattern Hunter", emoji: "🔍" },
   { min: 600, name: "Proof Builder", emoji: "📐" },
-  { min: 1000, name: "Theorem Tamer", emoji: "🦉" },
+  { min: 1000, name: "Theorem Tamer", emoji: "🦜" },
   { min: 1600, name: "Grandmaster", emoji: "♾️" },
   { min: 2500, name: "Legend", emoji: "🏆" },
 ];

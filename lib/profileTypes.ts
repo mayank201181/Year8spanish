@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // Account / learner / progress shapes shared by the client store and the API,
-// plus normalisation (and migration from the v1 Maths Lab format).
+// plus normalisation (and migration from the v1 Spanish Lab format).
 // Imports only relative .ts files so Node tests can load it directly.
 // ---------------------------------------------------------------------------
 import { dayDiff, todayISO } from "./dates.ts";
@@ -342,7 +342,7 @@ function newestDates<T>(m: Record<string, T>, n: number): Record<string, T> {
   return out;
 }
 
-/** v1 (original Maths Lab) documents used arrays and different analytics. */
+/** v1 (original Spanish Lab) documents used arrays and different analytics. */
 function isLegacy(raw: Obj): boolean {
   return raw.v !== 2 && (Array.isArray(raw.awarded) || typeof raw.streak === "number" || Array.isArray(raw.srs) || Array.isArray(raw.guidesRead));
 }

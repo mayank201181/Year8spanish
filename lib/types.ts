@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Content data model for the Year 8 Spanish Lab (engine shared with the Maths Lab v2).
+// Content data model for the Year 8 Spanish Lab (engine shared with the Spanish Lab v2).
 //
 // Audited exam content lives in lib/topics/<id>/{guide,mcq,practice}.ts.
 // Engagement extras live in lib/extras/<id>.ts and never touch audited files.
