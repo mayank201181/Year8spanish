@@ -45,7 +45,7 @@ L("pablo", "So the accent changes the person AND the time. [[Pablo habló con Lo
   board="[[Pablo habló con Lola]] ✔")
 L("mum", "Only two forms have accents. I, and he or she. [[Compré un álbum.]] I bought an album. [[Mamá compró un álbum.]] Mum bought an album.", mood="happy", shot="close",
   board="[[compré · compró]] (accents!)")
-L("lola", "And no S on the you form. [[Hablaste]]. Not hablastes. I've heard you, Dad.", mood="annoyed", shot="close", gap=0.4)
+L("lola", "And no S on the end of the you form. [[Hablaste.]] Not hablastes.", mood="annoyed", shot="close", gap=0.4)
 
 # ---------------- ACT 2: -ER AND -IR VERBS ----------------
 card("UNCLE HOCK'S STALL", "Lunch. Vegetarian. Strong opinions.", 2.4)
@@ -84,12 +84,12 @@ L("tara", "G A R becomes G U É. [[Llegué]], I arrived. [[Pagué]], I paid. And
   board="-gar → [[-gué]]   -zar → [[-cé]]: [[empecé]]")
 L("pablo", "But only the I form. [[Tara jugó muy bien.]] Tara played very well. No change. And [[leer]] becomes [[leyó]], with a Y. [[Tara leyó mi diario.]]", mood="happy", shot="close",
   board="[[jugó · empezó]] (normal)   [[leyó]]")
-L("tara", "I read it to check your Spanish. Your Spanish was fine. Your poems were not.", mood="deadpan", shot="close", gap=0.4)
+L("tara", "I was checking your Spanish. Your Spanish was fine. Your poems were not.", mood="deadpan", shot="close", gap=0.4)
 
 # ---------------- ACT 4: IRREGULARS & FUI FIGHTERS ----------------
 card("BAND PRACTICE", "Dad has formed a band. Nobody asked him to.", 2.4)
 scene("living", [("dad", 260), ("uncle", 520), ("tara", 780), ("lola", 1040)])
-L("dad", "Uncle Hock and I have formed a band. We are called, the Fui Fighters.", mood="excited", shot="close", prop="guitar", boardClear=True)
+L("dad", "Uncle Hock and I have a band. We are the Fui Fighters.", mood="excited", shot="close", prop="guitar", boardClear=True)
 L("lola", "[[Fui]] is irregular. And it's two verbs at once. From [[ir]], it means I went. From [[ser]], it means I was. [[Fui, fuiste, fue, fuimos, fuisteis, fueron.]]", mood="teach", shot="close",
   board="[[ir / ser]]: [[fui · fuiste · fue]]")
 L("tara", "[[Fui a la playa]], I went to the beach. A place, so it's going. [[Fue genial]], it was great. An opinion, so it's being.", mood="neutral", shot="close",
@@ -118,9 +118,8 @@ L("pablo", "[[Hace tres meses llegué a Singapur.]] Three months ago I arrived i
   board="[[Hace tres meses llegué…]] (past)")
 L("pablo", "[[Hoy vivo con la familia Rao.]] Today I live with the Rao family. Present.", mood="happy", shot="close",
   board="[[Hoy vivo con…]] (present)")
-L("pablo", "And [[el domingo voy a volver a Sevilla.]] On Sunday I'm going to go back to Seville. Future.", mood="sad", shot="close",
+L("pablo", "And [[el domingo voy a volver a Sevilla.]] On Sunday I'm going to go back to Seville. Future.", mood="sad", shot="close", gap=0.5,
   board="[[El domingo voy a volver…]] (future)")
-L("mum", "That's beautiful. Somebody hand me a tissue.", mood="sad", shot="close", gap=0.4)
 
 confess("lola", "LOLA · Recap Parrot · Season Finale · Not Crying")
 L("lola", "Recap. One. A R verbs. [[Hablé, hablaste, habló.]] [[Hablo]] is I speak. [[Habló]] is he spoke. The accent matters.", mood="teach", boardClear=True, board="1. [[hablé · habló]]  ≠  [[hablo]]")
