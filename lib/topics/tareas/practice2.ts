@@ -329,7 +329,7 @@ export const morePapers: Paper[] = [
           { spec: { type: "text", accept: ["una vez a la semana tengo que paso la aspiradora", "tengo que paso la aspiradora una vez a la semana"] }, feedback: "After *tengo que*, use the infinitive: *pasar*, not *paso*." },
           { spec: { type: "text", accept: ["una vez a la semana tengo pasar la aspiradora", "tengo pasar la aspiradora una vez a la semana"] }, feedback: "*Tener* needs *que*: *tengo **que** pasar*." },
         ],
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "frequency-and-pocket-money",
         hints: [
           "Three chunks: frequency + obligation + chore.",

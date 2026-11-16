@@ -1,5 +1,9 @@
 """Static checks for an episode script.  Usage: python3 lint_episode.py episodes/<topic>.py [...]
 Exit code 1 if any ERROR.  WARNs are worth fixing but don't block.
+Spoken text (line text, challenge qs/as_) must write numbers and times as words, in English AND in
+Spanish ("a las siete y media"); board lines, challenge q/a/work and captions may use digits.
+[[...]] marks Spanish: it must be balanced, and the Spanish inside must be correct (Dad's broken
+Spanish goes OUTSIDE the brackets, so it is voiced in English and shown in white).
 """
 import sys, os, re
 import xml.etree.ElementTree as ET
@@ -19,6 +23,51 @@ BAD_SPOKEN = [
     (r"\b(Sigh|Ugh|Hmm+|Pfft|Tsk|Argh|Ahem)\b", "interjection TTS mangles — use a real word"),
     (r"(^|[.!?]\s+)(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+(Per ?cent|Percent)", "'One. Percent' is heard as 'one percent'"),
 ]
+
+SPANISH = re.compile(r"\[\[(.+?)\]\]")
+# errors that must never appear inside [[ ]] (they are Dad's jokes, not Spanish)
+ES_WRONG = [
+    (r"\bmuy (calor|frío|frio|sol|viento|hambre|sed)\b", "'muy calor' → 'hace mucho calor' / 'tengo mucha hambre'"),
+    (r"\bsoy en\b", "'soy en' → 'estoy en' (location takes estar)"),
+    (r"\b(juego|juegas|juega|jugamos|juegan|jugar) (fútbol|tenis|baloncesto|voleibol|hockey|bádminton)\b", "jugar needs 'a': juego al fútbol"),
+    (r"\b(juego|juegas|juega|jugamos|juegan|jugar) a el\b", "a + el = al"),
+    (r"\bde el\b", "de + el = del"),
+    (r"\ba el\b", "a + el = al"),
+]
+# common words that need an accent (unaccented form inside [[ ]] is an error)
+NEEDS_ACCENT = {"tambien": "también", "despues": "después", "jardin": "jardín", "salon": "salón", "facil": "fácil",
+    "dificil": "difícil", "futbol": "fútbol", "estacion": "estación", "musica": "música", "sabado": "sábado",
+    "miercoles": "miércoles", "manana": "mañana", "television": "televisión", "habitacion": "habitación",
+    "comedor": None, "ingles": "inglés", "espanol": "español", "esta": None, "aqui": "aquí", "alli": "allí",
+    "aleman": "alemán", "dias": "días", "telefono": "teléfono", "rapido": "rápido", "comodo": "cómodo",
+    "lampara": "lámpara", "estanteria": "estantería", "ordenador": None, "baño": None, "bano": "baño",
+    "ano": "año", "pequeno": "pequeño", "senor": "señor", "senora": "señora", "nino": "niño",
+    "natacion": "natación", "atletismo": None, "kárate": None, "karate": "kárate", "badminton": "bádminton",
+    "esqui": "esquí", "patin": None, "ultimo": "último", "proximo": "próximo", "practico": None,
+    "tambien.": "también", "jamas": "jamás", "ademas": "además", "ningun": "ningún", "segun": "según",
+    "autobus": "autobús", "metro": None, "medico": "médico", "historica": "histórica", "turistica": "turística",
+    "mas": None}
+QWORDS = ["qué", "dónde", "cuándo", "cómo", "quién", "cuánto", "cuánta", "cuántos", "cuántas", "adónde", "cuál"]
+
+def check_spanish(t, where, errs, warns):
+    """Balance of [[ ]] plus basic correctness of the Spanish inside."""
+    if t.count("[[") != t.count("]]"): errs.append(f"{where}: unbalanced [[ ]]: {t[:70]!r}"); return
+    depth = 0
+    for m in re.finditer(r"\[\[|\]\]", t):
+        depth += 1 if m.group() == "[[" else -1
+        if depth not in (0, 1): errs.append(f"{where}: nested or reversed [[ ]]: {t[:70]!r}"); return
+    for es in SPANISH.findall(t):
+        low = es.lower()
+        if es.count("?") != es.count("¿"): errs.append(f"{where}: Spanish question needs ¿…?: {es!r}")
+        if es.count("!") != es.count("¡"): errs.append(f"{where}: Spanish exclamation needs ¡…!: {es!r}")
+        for pat, msg in ES_WRONG:
+            if re.search(pat, low): errs.append(f"{where}: Spanish error inside [[ ]] ({msg}): {es!r}")
+        for w in re.findall(r"[a-záéíóúñü]+", low):
+            fix = NEEDS_ACCENT.get(w)
+            if fix: errs.append(f"{where}: missing accent '{w}' → '{fix}' in {es!r}")
+        if re.search(r"¿\s*(que|donde|cuando|como|quien|cuanto|cuanta|cuantos|cuantas|adonde|cual)\b", low):
+            errs.append(f"{where}: question word needs its accent in {es!r}")
+    if re.search(r"\]\]\w", t): warns.append(f"{where}: letter glued after ]] — {t[:60]!r}")
 
 def lint(path):
     errs, warns = [], []
@@ -47,9 +96,10 @@ def lint(path):
                 if not (180 <= x <= 1100): warns.append(f"{where}: x={x} for {w} near edge (use 200..1080)")
             xs = sorted(x for w, x in b["cast"])
             if any(b2 - a2 < 200 for a2, b2 in zip(xs, xs[1:])): warns.append(f"{where}: characters closer than 200px")
-            if sid in ("checkout", "hawker"):
+            if sid == "hawker":
                 for w, x in b["cast"]:
-                    if w in ("cashier", "uncle") and not (950 <= x <= 1060): warns.append(f"{where}: {w} should stand at x≈1000 behind the counter")
+                    if w == "uncle" and not (950 <= x <= 1060): warns.append(f"{where}: uncle should stand at x≈1000 behind the counter")
+            if b.get("caption"): check_spanish(b["caption"], where + " caption", errs, warns)
             board_n = 0; has_diag = False
         elif k == "poof":
             if b["who"] not in ns["CHARACTERS"]: errs.append(f"{where}: unknown poof {b['who']}")
@@ -69,11 +119,13 @@ def lint(path):
             if b.get("prop") and b["prop"] not in ns["PROPS"]: errs.append(f"{where}: unknown prop {b['prop']}")
             for pat, msg in BAD_SPOKEN:
                 if re.search(pat, t): errs.append(f"{where} ({w}): {msg}: {t[:70]!r}")
+            check_spanish(t, f"{where} ({w})", errs, warns)
             if len(t) > 330: warns.append(f"{where}: very long line ({len(t)} chars) — split it")
             if b.get("boardClear"): board_n = 0; has_diag = False
             if b.get("board"):
                 board_n += 1
-                if len(b["board"]) > 44: errs.append(f"{where}: board line > 44 chars: {b['board']!r}")
+                check_spanish(b["board"], where + " board", errs, warns)
+                if len(b["board"].replace("[[", "").replace("]]", "")) > 44: errs.append(f"{where}: board line > 44 chars: {b['board']!r}")
             if b.get("diagram"):
                 has_diag = True
                 try:
@@ -91,11 +143,16 @@ def lint(path):
             for f in ("qs", "as_"):
                 for pat, msg in BAD_SPOKEN:
                     if re.search(pat, b[f]): errs.append(f"{where} challenge {f}: {msg}: {b[f][:70]!r}")
-            if len(b["work"]) > 60: warns.append(f"{where}: challenge work text long ({len(b['work'])})")
-            if len(b["a"]) > 14: warns.append(f"{where}: challenge answer should be short (<=14 chars)")
+            for f in ("q", "a", "work", "qs", "as_"): check_spanish(b[f], f"{where} challenge {f}", errs, warns)
+            pl = lambda s: s.replace("[[", "").replace("]]", "")
+            if len(pl(b["work"])) > 60: warns.append(f"{where}: challenge work text long ({len(pl(b['work']))})")
+            if len(pl(b["a"])) > 34: warns.append(f"{where}: challenge answer should be short (<=34 chars)")
             spoken += len(b["qs"]) + len(b["as_"])
         elif k == "freeze":
             if len(b["text"]) > 22: warns.append(f"{where}: freeze text long")
+            check_spanish(b["text"], where + " freeze", errs, warns); check_spanish(b.get("narrator", ""), where + " narrator", errs, warns)
+        elif k == "card":
+            check_spanish(b["text"] + " " + b.get("sub", ""), where + " card", errs, warns)
     if not (4300 <= spoken <= 7200): warns.append(f"spoken length {spoken} chars (aim 4500-6500 ≈ 6-8 min)")
     if n_lines < 45: warns.append(f"only {n_lines} dialogue lines")
     return errs, warns

@@ -20,8 +20,10 @@ export const morePapers: Paper[] = [
             "a nightstand",
             "night stand",
             "the night stand",
+            "a night stand",
             "night table",
             "the night table",
+            "a night table",
             "bedside cabinet",
             "the bedside cabinet",
             "a bedside cabinet",
@@ -51,7 +53,7 @@ export const morePapers: Paper[] = [
       {
         kind: "short",
         id: "mi-dormitorio-p3-q03",
-        question: "Write the Spanish for 'in front of', as in 'in front of the wardrobe'. (Just the preposition.)",
+        question: "Write the Spanish for 'in front of' meaning *directly* in front, as in 'the chair is right in front of the wardrobe'. (Just the preposition.)",
         answer: { type: "text", accept: ["delante de"] },
         traps: [
           { spec: { type: "text", accept: ["enfrente de"] }, feedback: "In Spain *enfrente de* means 'opposite / facing' (across a space). Directly in front of = *delante de*." },
@@ -171,6 +173,9 @@ export const morePapers: Paper[] = [
             "mi dormitorio es pequeño pero cómodo",
             "mi habitación es pequeña pero cómoda",
             "mi cuarto es pequeño pero cómodo",
+            "mi dormitorio es pequeño pero es cómodo",
+            "mi habitación es pequeña pero es cómoda",
+            "mi cuarto es pequeño pero es cómodo",
           ],
         },
         traps: [

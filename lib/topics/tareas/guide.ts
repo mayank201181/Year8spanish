@@ -63,7 +63,7 @@ export const guide: TopicGuide = {
         "*ir de compras* = go shopping; *hacer la compra* = do the food shopping.",
       ],
       whyItWorks:
-        "Why *hago* and *pongo*? As Latin slowly turned into Spanish, a handful of the most common verbs picked up a *g* in the *yo* form (*hago, pongo, tengo, salgo, digo*). Very frequent words keep their quirks because people use them so often that they never get 'smoothed out' — English does the same with *I am / I was*. The personal *a* works like a flag: it tells the listener 'this object is **someone**, not something' — which is why your dog gets one and your car doesn't.",
+        "Why *hago* and *pongo*? As Latin slowly turned into Spanish, a handful of the most common verbs ended up with a *g* in the *yo* form (*hago, pongo, tengo, salgo, digo*): in *hago* and *digo* it grew out of a Latin *c* (*facio, dico*), and *pongo, tengo, salgo* copied the pattern. Very frequent words keep their quirks because people use them so often that they never get 'smoothed out' — English does the same with *I am / I was*. The personal *a* works like a flag: it tells the listener 'this object is **someone**, not something' — which is why your dog gets one and your car doesn't.",
       strategies: ["Find the infinitive", "Look for the pattern", "Recycle a chunk", "Gender detective (el/la)"],
       thinkDeeper:
         "*Hago la cama* uses *hacer* (to do / make) — and luckily English also says 'make the bed'. But English says 'do the washing-up' where Spanish says *lavo los platos*, and 'set the table' where Spanish says *pongo* ('I put') *la mesa*. Find one more chore where the two languages choose a different verb. What does this tell you about translating chores word by word?",

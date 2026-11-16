@@ -8,7 +8,7 @@ import type { Rng } from "@/lib/drills/types";
 import { makeRng } from "@/lib/drills/rng";
 import { freshSeed } from "@/lib/drills";
 import { checkAnswer } from "@/lib/answerCheck";
-import { parseNumberAnswer } from "@/lib/mathParse";
+import { VOCAB } from "@/lib/generated/vocab";
 import { todayISO } from "@/lib/dates";
 import { useStore } from "@/lib/store";
 import {
@@ -19,6 +19,7 @@ import {
   sprintBestKey,
   sprintItem,
   sprintStars,
+  setSprintVocab,
   type SprintItem,
   type SprintMode,
 } from "@/lib/sprint";
@@ -87,7 +88,7 @@ function clock(): number {
 const RETRY_GAP = [3, 5] as const;
 
 function idleRun(): Run {
-  return { mode: "tables", timed: true, score: 0, answered: 0, misses: [], queue: [], recent: [], current: null, startedAt: 0, endAt: 0, finished: true };
+  return { mode: "present", timed: true, score: 0, answered: 0, misses: [], queue: [], recent: [], current: null, startedAt: 0, endAt: 0, finished: true };
 }
 
 /** Next fact: a due retry first, otherwise a fresh one that isn't a recent repeat. */
@@ -113,11 +114,14 @@ function wordy(prompt: string): boolean {
   return prompt.replace(/\{\{[\s\S]*?\}\}/g, "").trim().length > 6;
 }
 
+setSprintVocab(VOCAB);
+
 export function SprintRunner() {
   const store = useStore();
   const [phase, setPhase] = useState<Phase>("pick");
   const [timed, setTimed] = useState(true);
-  const [mode, setMode] = useState<SprintMode>("tables");
+  const [mode, setMode] = useState<SprintMode>("present");
+  const accentNudged = useRef(false);
   const [cur, setCur] = useState<Current | null>(null);
   const [value, setValue] = useState("");
   const [score, setScore] = useState(0);
@@ -209,24 +213,17 @@ export function SprintRunner() {
     let ok = false;
     let hint: string | undefined;
     if (raw !== null) {
-      // Every sprint answer is a whole number or a decimal. A fraction typed back
-      // ("63/9", or "3/4" for "write 3/4 as a decimal") isn't an answer yet:
-      // nudge, don't mark.
-      if (parseNumberAnswer(raw)?.frac) {
-        setNote(Number.isInteger(item.answer) ? "Work it out and type the answer as a whole number." : "Type it as a decimal, like 0.75.");
-        inputRef.current?.focus();
-        return;
-      }
-      const res = checkAnswer({ type: "number", value: item.answer, allowFraction: false }, raw);
-      if (res.status === "invalid") {
-        setNote("Type a single number, like 12 or −3.5.");
+      const res = checkAnswer({ type: "text", accept: item.answer }, raw);
+      if (res.status === "close" && !accentNudged.current) {
+        // One gentle accent nudge per question, then it's marked.
+        accentNudged.current = true;
+        setNote("Check your accents — then press Enter again.");
         inputRef.current?.focus();
         return;
       }
       ok = res.status === "correct";
-      // Only the sign hint helps here ("close" rounding advice doesn't apply to exact facts).
-      hint = res.status === "incorrect" ? res.feedback : undefined;
     }
+    accentNudged.current = false;
     run.answered += 1;
     const miss = run.misses.find((m) => m.key === item.prompt);
     if (ok) {

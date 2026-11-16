@@ -111,7 +111,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "tareas-quiz-q08",
       question: "Translate into English: *Nunca plancho.*",
-      answer: { type: "text", accept: ["I never iron", "I never do the ironing", "I never do any ironing"] },
+      answer: { type: "text", accept: ["I never iron", "I never do the ironing", "I never do any ironing", "I don't ever iron", "I do not ever iron"] },
       solution: ["*Nunca* = never.", "*Plancho* = I iron (*planchar*).", "→ **I never iron.**"],
       traps: [{ spec: { type: "text", accept: ["I always iron", "I always do the ironing"] }, feedback: "*Siempre* is 'always'. *Nunca* is the opposite." }],
       difficulty: "core",
@@ -995,6 +995,10 @@ export const practice: TopicPractice = {
           "i am not going to help out at home this weekend because i've got to study",
           "this weekend i am not going to help out at home because i must study",
           "i am not going to help out at home this weekend because i must study",
+          "this weekend i won't help at home because i have to study",
+          "i won't help at home this weekend because i have to study",
+          "this weekend i will not help at home because i have to study",
+          "i will not help at home this weekend because i have to study",
         ],
       },
       solution: [
@@ -1081,7 +1085,7 @@ export const practice: TopicPractice = {
       kind: "written",
       id: "tareas-ch-q08",
       question:
-        "Rewrite this paragraph about your brother Diego. Change every verb to the *él* form, and change *mi/mis* and *me* so they refer to him.\n\n> Normalmente pongo la mesa y paseo al perro. Tengo que ordenar mi dormitorio cada día. Mis padres me dan treinta euros al mes. Este sábado voy a regar las plantas.",
+        "Rewrite this paragraph about your brother Diego. Change every verb whose subject is *yo* to the *él* form, and change *mi/mis* and *me* so they refer to him.\n\n> Normalmente pongo la mesa y paseo al perro. Tengo que ordenar mi dormitorio cada día. Mis padres me dan treinta euros al mes. Este sábado voy a regar las plantas.",
       marks: 5,
       modelAnswer:
         "*Normalmente **pone** la mesa y **pasea** al perro. **Tiene que** ordenar **su** dormitorio cada día. **Sus** padres **le** dan treinta euros al mes. Este sábado **va a** regar las plantas.*\n\n- *pongo* → *pone*, *paseo* → *pasea*\n- *tengo que* → *tiene que* (infinitive *ordenar* stays)\n- *mi dormitorio* → *su dormitorio*\n- *mis padres me dan* → *sus padres le dan* — *dan* stays because the subject is still *sus padres*!\n- *voy a regar* → *va a regar*",

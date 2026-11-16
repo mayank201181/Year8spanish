@@ -475,6 +475,46 @@ function drawSet(id, t) {
   if (f) f(t); else if (id && id.startsWith('confess_')) setConfess(id.slice(8), t);
 }
 
+// ---------- rich text: [[Spanish]] in yellow, brackets hidden ----------
+const ES_COL = '#fde047';
+const plain = s => String(s).replace(/\[\[|\]\]/g, '');
+// words = [[{s, es}, ...], ...]: each word is a list of runs, so "[[hola]]." keeps its full stop glued on
+function richWords(s) {
+  const words = []; let word = [], es = false, i = 0; s = String(s);
+  const push = (ch) => { const last = word[word.length - 1]; if (last && last.es === es) last.s += ch; else word.push({ s: ch, es }); };
+  while (i < s.length) {
+    if (s.startsWith('[[', i)) { es = true; i += 2; continue; }
+    if (s.startsWith(']]', i)) { es = false; i += 2; continue; }
+    const ch = s[i++]; if (ch === ' ') { if (word.length) words.push(word); word = []; } else push(ch);
+  }
+  if (word.length) words.push(word); return words;
+}
+function setFont(size, font, weight) { ctx.font = `${weight} ${size}px ${font}`; }
+const wordW = w => w.reduce((a, r) => a + ctx.measureText(r.s).width, 0);
+function richWrap(s, maxW, size, font = 'Fredoka', weight = 600) {
+  setFont(size, font, weight); const sp = ctx.measureText(' ').width;
+  const lines = []; let cur = [], cw = 0;
+  for (const w of richWords(s)) { const ww = wordW(w); if (cur.length && cw + sp + ww > maxW) { lines.push(cur); cur = [w]; cw = ww; } else { cw += (cur.length ? sp : 0) + ww; cur.push(w); } }
+  if (cur.length) lines.push(cur); return lines;
+}
+function lineW(line) { const sp = ctx.measureText(' ').width; return line.reduce((a, w) => a + wordW(w), 0) + sp * Math.max(0, line.length - 1); }
+// draw one wrapped line; align 'center' or 'left'; Spanish runs in yellow
+function drawRichLine(line, x, y, size, color, opts = {}) {
+  const font = opts.font || 'Fredoka', weight = opts.weight || 600; setFont(size, font, weight);
+  const sp = ctx.measureText(' ').width; let cx = opts.align === 'left' ? x : x - lineW(line) / 2;
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  for (const w of line) { for (const r of w) {
+      if (opts.stroke) { ctx.lineJoin = 'round'; ctx.strokeStyle = opts.stroke; ctx.lineWidth = opts.sw || size * 0.18; ctx.strokeText(r.s, cx, y); }
+      ctx.fillStyle = r.es ? (opts.esColor || ES_COL) : color; ctx.fillText(r.s, cx, y); cx += ctx.measureText(r.s).width; }
+    cx += sp; }
+}
+function drawRich(s, x, y, size, color, opts = {}) { // single line, shrinks to fit opts.maxW
+  let sz = size; const font = opts.font || 'Fredoka', weight = opts.weight || 600;
+  const all = () => richWords(s); setFont(sz, font, weight);
+  if (opts.maxW) while (lineW(all()) > opts.maxW && sz > (opts.min || 14)) { sz--; setFont(sz, font, weight); }
+  drawRichLine(all(), x, y, sz, color, opts); return sz;
+}
+
 // ---------- overlays ----------
 const SVG_IMG = new Map();
 function drawBoard(entries, t, side) {
@@ -486,17 +526,16 @@ function drawBoard(entries, t, side) {
   ctx.save(); ctx.globalAlpha = k; ctx.translate(0, (1 - k) * -20);
   ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 20;
   ctx.fillStyle = 'rgba(20,40,32,0.93)'; rr(x, y, w, h, 18); ctx.fill(); ctx.shadowBlur = 0;
-  ctx.strokeStyle = '#a78bfa'; ctx.lineWidth = 4; rr(x, y, w, h, 18); ctx.stroke();
-  text("CENTI'S HOLO-BOARD", x + 22, y + 26, 17, '#c4b5fd', { align: 'left', weight: 700 });
-  for (let i = 0; i < 9; i++) { circ(x + w - 30 - i * 16, y + 26, 4); fillC(i % 2 ? '#c084fc' : '#a78bfa'); }
+  ctx.strokeStyle = '#4ade80'; ctx.lineWidth = 4; rr(x, y, w, h, 18); ctx.stroke();
+  text('LA PIZARRA DE LOLA', x + 22, y + 26, 17, '#86efac', { align: 'left', weight: 700 });
+  for (let i = 0; i < 9; i++) { circ(x + w - 30 - i * 16, y + 26, 4); fillC(i % 3 === 1 ? '#facc15' : '#ef4444'); }
   vis.forEach((l, i) => {
     const kk = clamp((t - l.t) / 0.7, 0, 1);
     const isNew = t - l.t < 1.6 && i === vis.length - 1;
     ctx.save(); rr(x + 10, y + 50 + i * lh, (w - 20) * kk, lh, 6); ctx.clip();
     if (isNew) { ctx.fillStyle = 'rgba(250,204,21,0.12)'; ctx.fillRect(x + 10, y + 50 + i * lh, w - 20, lh); }
-    let size = 34; ctx.font = `400 ${size}px Hand`; while (ctx.measureText(l.text).width > w - 44 && size > 20) { size--; ctx.font = `400 ${size}px Hand`; }
     const col = /✔/.test(l.text) ? '#86efac' : /✘|\?\?\?|NOT/.test(l.text) ? '#fca5a5' : '#f8fafc';
-    text(l.text, x + 22, y + 75 + i * lh, size, col, { align: 'left', font: 'Hand', weight: 400 });
+    drawRich(l.text, x + 22, y + 75 + i * lh, 34, col, { align: 'left', font: 'Hand', weight: 400, maxW: w - 44, min: 20 });
     ctx.restore();
   });
   if (img) { ctx.globalAlpha = k * ease((t - dg.t) / 0.5); ctx.drawImage(img, x + 20, y + 56 + vis.length * lh + 8, 520, dh); ctx.globalAlpha = k; }
@@ -505,16 +544,16 @@ function drawBoard(entries, t, side) {
 function drawSubs(seg, t) {
   if (!seg.subs || !seg.subs.length || t < seg.subs[0].t - 0.1) return;
   let cur = seg.subs[0]; for (const s of seg.subs) if (t >= s.t) cur = s;
-  const name = CH[seg.who].name + (seg.offstage ? ' (from the junk drawer)' : '');
-  const lines = wrap(cur.text, 1020, 30);
+  const name = CH[seg.who].name + (seg.offstage ? ' (off screen)' : '');
+  const lines = richWrap(cur.text, 1020, 30);
   const h = 54 + lines.length * 38, y = H - h - 18;
   ctx.fillStyle = 'rgba(12,10,30,0.82)'; rr(90, y, 1100, h, 18); ctx.fill();
   text(name, 116, y + 24, 19, CH[seg.who].color, { align: 'left' });
-  lines.forEach((ln, i) => text(ln, 640, y + 62 + i * 38, 30, '#fff', { weight: 600 }));
+  lines.forEach((ln, i) => drawRichLine(ln, 640, y + 62 + i * 38, 30, '#fff', { weight: 600 }));
 }
 function drawLowerThird(cap, t) {
   const k = ease(t / 0.5), out = ease((t - 4.5) / 0.5); if (t > 5) return;
-  const [nm, ...rest] = cap.split(' · ');
+  const [nm, ...rest] = plain(cap).split(' · ');
   ctx.save(); ctx.translate(lerp(-700, 0, k) - out * 700, 0);
   ctx.fillStyle = '#fde047'; rr(50, 410, 620, 60, 8); ctx.fill(); text(nm, 72, 441, 34, '#111', { align: 'left' });
   ctx.fillStyle = '#111827'; rr(50, 470, 620, 44, 8); ctx.fill(); text(rest.join(' · '), 72, 492, 20, '#fff', { align: 'left', weight: 500 });
@@ -538,23 +577,26 @@ function charState(seg, c, t) {
 function camera(seg, t) {
   // returns {cx, cy, s}
   const conf = seg.scene && seg.scene.startsWith('confess');
-  if (conf) { const c0 = seg.cast[0]; const cs0 = CH[c0.who]; const drift = (t - firstOf(seg).t0) * 0.003;
-    if (cs0.monster) return { cx: c0.x - 110, cy: GROUND - 175, s: 1.45 + drift };
-    return { cx: c0.x - 90, cy: GROUND - 370 * cs0.h + 105, s: 1.8 + drift }; }
+  if (conf) { const c0 = seg.cast[0]; const drift = (t - firstOf(seg).t0) * 0.003;
+    return { cx: c0.x - 90, cy: GROUND - headOff(c0.who) + (CH[c0.who].parrot ? 95 : 105), s: 1.8 + drift }; }
   if (seg.kind !== 'line' || seg.offstage) return { cx: 640, cy: 360, s: 1 };
   const sp = speakerAt(seg); if (!sp) return { cx: 640, cy: 360, s: 1 };
   const boardOn = seg.board.some(b => t >= b.t);
-  const cs = CH[sp.who]; const headY = GROUND - (cs.monster ? 230 : 370 * cs.h);
+  const headY = GROUND - headOff(sp.who);
   if (seg.shot === 'wide') return { cx: 640, cy: 360, s: 1 };
   if (seg.shot === 'two') {
     const others = seg.cast.filter(o => o.who !== sp.who).sort((a, b) => Math.abs(a.x - sp.x) - Math.abs(b.x - sp.x));
     const mid = others.length ? (sp.x + others[0].x) / 2 : sp.x; return { cx: mid, cy: 380, s: 1.2 };
   }
-  const s = cs.monster ? 1.45 : 1.6; let cx = sp.x; if (boardOn) cx = sp.x + (sp.x < 640 ? 300 : -300) / s;
-  return { cx, cy: cs.monster ? GROUND - 170 : headY + 105, s };
+  const s = 1.6; let cx = sp.x; if (boardOn) cx = sp.x + (sp.x < 640 ? 300 : -300) / s;
+  return { cx, cy: headY + (CH[sp.who].parrot ? 90 : 105), s };
 }
 function clampCam(c) { const hw = W / 2 / c.s, hh = H / 2 / c.s; c.cx = clamp(c.cx, hw, W - hw); c.cy = clamp(c.cy, hh, H - hh); return c; }
 
+function feathers(x, k) { // Lola's entrance: feathers burst out instead of a poof cloud
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2 + 0.3; ctx.save(); ctx.translate(x + Math.cos(a) * 150 * k, GROUND - 330 + Math.sin(a) * 120 * k + k * k * 60); ctx.rotate(a + k * 4);
+    ctx.globalAlpha = 1 - k; ell(0, 0, 6, 15); fillC(['#22c55e', '#ef4444', '#facc15', '#2563eb'][i % 4]); ctx.restore(); }
+}
 function drawStage(seg, t, opts = {}) {
   const cam = clampCam(camera(seg, t));
   const conf = seg.scene && seg.scene.startsWith('confess');
@@ -564,7 +606,7 @@ function drawStage(seg, t, opts = {}) {
   if (conf) ctx.rotate(Math.sin(t * 0.5) * 0.004);
   ctx.scale(cam.s * (opts.zoom || 1), cam.s * (opts.zoom || 1)); ctx.translate(-cam.cx, -cam.cy);
   drawSet(seg.scene, t);
-  const behind = w => (w === 'cashier' || w === 'uncle') && (seg.scene === 'checkout' || seg.scene === 'hawker');
+  const behind = w => w === 'uncle' && seg.scene === 'hawker';
   const order = [...seg.cast].sort((a, b) => behind(a.who) - behind(b.who));
   for (const c of order) {
     if (t < c.appear) continue;
@@ -573,9 +615,10 @@ function drawStage(seg, t, opts = {}) {
     if (pk < 1) { const sc = back(pk); ctx.translate(c.x, GROUND); ctx.scale(sc, sc); ctx.translate(-c.x, -GROUND); }
     drawChar(c.who, c.x, charState(seg, c, t));
     ctx.restore();
-    if (c.who === 'cashier' && seg.scene === 'checkout') counterFront(c.x);
-    if ((c.who === 'uncle' || c.who === 'cashier') && seg.scene === 'hawker') stallFront(c.x);
-    if (c.appear > 0 && t - c.appear < 0.8) { const k = (t - c.appear) / 0.8; for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2; circ(c.x + Math.cos(a) * 130 * k, GROUND - 160 + Math.sin(a) * 110 * k, 50 * (1 - k) + 10); fillC(`rgba(237,233,254,${0.9 * (1 - k)})`); } }
+    if (c.who === 'uncle' && seg.scene === 'hawker') stallFront(c.x);
+    if (c.appear > 0 && t - c.appear < 0.8) { const k = (t - c.appear) / 0.8;
+      if (CH[c.who].parrot) feathers(c.x, k);
+      else for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2; circ(c.x + Math.cos(a) * 130 * k, GROUND - 160 + Math.sin(a) * 110 * k, 50 * (1 - k) + 10); fillC(`rgba(237,233,254,${0.9 * (1 - k)})`); } }
   }
   ctx.restore();
 }
@@ -583,49 +626,57 @@ function drawStage(seg, t, opts = {}) {
 function findSeg(t) { const S = TL.segments; let lo = 0, hi = S.length - 1; if (t < S[0].t0) return S[0]; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (S[m].t0 <= t) lo = m; else hi = m - 1; } return S[lo]; }
 function boardSide(seg) { const sp = seg.kind === 'line' ? speakerAt(seg) : null; if (seg.scene && seg.scene.startsWith('confess')) return 'right'; if (!sp) return 'right'; return sp.x < 640 ? 'right' : 'left'; }
 
+const CAST = ['dad', 'mum', 'pablo', 'tara', 'lola'];
+const CAST_MOOD = { dad: 'smug', mum: 'happy', pablo: 'excited', tara: 'deadpan', lola: 'smug' };
 function drawTitle(seg, t) {
   const k = t - seg.t0;
-  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#7c3aed'); g.addColorStop(1, '#ec4899'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-  for (let i = 0; i < 40; i++) { const x = (hash(i) * W + k * 40 * (hash(i + 1) + 0.3)) % W, y = hash(i + 2) * H; text(['%', '×', '÷', '100'][i % 4], x, y, 20 + hash(i + 3) * 30, 'rgba(255,255,255,0.15)'); }
-  const word = seg.title; ctx.font = '700 104px Fredoka'; const tw = ctx.measureText(word).width; let x = 640 - tw / 2;
-  for (let i = 0; i < word.length; i++) { const ch = word[i]; const cw = ctx.measureText(ch).width; const kk = back((k - 0.1 - i * 0.05) / 0.4);
-    if (kk > 0) { ctx.save(); ctx.translate(x + cw / 2, 250); ctx.scale(kk, kk); ctx.rotate(Math.sin(k * 3 + i) * 0.04); text(ch, 0, 0, 104, i >= 7 && i <= 9 ? '#fde047' : '#fff', { stroke: '#3b0764', sw: 14 }); ctx.restore(); }
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#dc2626'); g.addColorStop(0.55, '#f97316'); g.addColorStop(1, '#facc15'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 40; i++) { const x = (hash(i) * W + k * 40 * (hash(i + 1) + 0.3)) % W, y = hash(i + 2) * H; text(['¡', '¿', 'ñ', 'á', 'olé'][i % 5], x, y, 20 + hash(i + 3) * 30, 'rgba(255,255,255,0.18)'); }
+  const word = seg.title; ctx.font = '700 112px Fredoka'; const tw = ctx.measureText(word).width; let x = 640 - tw / 2;
+  const hl = word.indexOf('CAOS');
+  for (let i = 0; i < word.length; i++) { const ch = word[i]; ctx.font = '700 112px Fredoka'; const cw = ctx.measureText(ch).width; const kk = back((k - 0.1 - i * 0.05) / 0.4);
+    if (kk > 0 && ch !== ' ') { ctx.save(); ctx.translate(x + cw / 2, 240); ctx.scale(kk, kk); ctx.rotate(Math.sin(k * 3 + i) * 0.04); text(ch, 0, 0, 112, hl >= 0 && i >= hl && i < hl + 4 ? '#fde047' : '#fff', { stroke: '#7f1d1d', sw: 14 }); ctx.restore(); }
     x += cw; }
-  const sk = ease((k - 1.2) / 0.5); ctx.globalAlpha = sk; text(seg.sub, 640, 345, 36, '#fff', { stroke: '#3b0764', sw: 7 }); ctx.globalAlpha = 1;
-  const ids = ['dad', 'mum', 'tara', 'centi']; ids.forEach((id, i) => { const kk = back((k - 1.6 - i * 0.18) / 0.4); if (kk <= 0) return;
-    ctx.save(); ctx.translate(310 + i * 220, 720); ctx.scale(0.62 * kk, 0.62 * kk); ctx.translate(-0, -GROUND - 40);
-    drawChar(id, 0, { t, seed: i * 11, mood: id === 'centi' ? 'bored' : id === 'dad' ? 'smug' : id === 'tara' ? 'deadpan' : 'excited', look: 0 }); ctx.restore(); });
+  const sk = ease((k - 1.2) / 0.5); ctx.globalAlpha = sk; text(seg.sub, 640, 340, 36, '#fff', { stroke: '#7f1d1d', sw: 7 }); ctx.globalAlpha = 1;
+  CAST.forEach((id, i) => { const kk = back((k - 1.6 - i * 0.18) / 0.4); if (kk <= 0) return;
+    ctx.save(); ctx.translate(240 + i * 200, 720); ctx.scale(0.6 * kk, 0.6 * kk); ctx.translate(0, -GROUND - 40);
+    drawChar(id, 0, { t, seed: i * 11, mood: CAST_MOOD[id], look: 0 }); ctx.restore(); });
 }
 function drawCard(seg, t) {
   const k = t - seg.t0;
   ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = '#fde047'; ctx.fillRect(0, 300, W * ease(k / 0.4), 8);
-  const kk = back(k / 0.5); ctx.save(); ctx.translate(640, 250); ctx.scale(kk, kk); text(seg.text, 0, 0, 64, '#fff'); ctx.restore();
-  ctx.globalAlpha = ease((k - 0.5) / 0.4); text(seg.sub, 640, 370, 32, '#fde047', { weight: 500 }); ctx.globalAlpha = 1;
-  if (seg.text === 'TOTALLY RAOTIONAL') { ['dad', 'mum', 'tara', 'centi'].forEach((id, i) => { ctx.save(); ctx.translate(350 + i * 195, 720); ctx.scale(0.42, 0.42); ctx.translate(0, -GROUND - 30); drawChar(id, 0, { t, seed: i, mood: 'happy', look: 0 }); ctx.restore(); }); }
+  ctx.fillStyle = '#dc2626'; ctx.fillRect(0, 296, W * ease(k / 0.4), 6); ctx.fillStyle = '#fde047'; ctx.fillRect(0, 302, W * ease(k / 0.4), 8); ctx.fillStyle = '#dc2626'; ctx.fillRect(0, 310, W * ease(k / 0.4), 6);
+  const kk = back(k / 0.5); ctx.save(); ctx.translate(640, 250); ctx.scale(kk, kk); drawRich(seg.text, 0, 0, 64, '#fff', { weight: 700, maxW: 1180, min: 30 }); ctx.restore();
+  ctx.globalAlpha = ease((k - 0.5) / 0.4); drawRich(seg.sub, 640, 370, 32, '#fde047', { weight: 500, maxW: 1180, min: 18, esColor: '#fef9c3' }); ctx.globalAlpha = 1;
+  if (seg.text === '¡QUÉ CAOS!') { CAST.forEach((id, i) => { ctx.save(); ctx.translate(290 + i * 175, 720); ctx.scale(0.42, 0.42); ctx.translate(0, -GROUND - 30); drawChar(id, 0, { t, seed: i, mood: 'happy', look: 0 }); ctx.restore(); }); }
 }
 function drawChallenge(seg, t) {
-  const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#1e1b4b'); g.addColorStop(1, '#312e81'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-  text(`PAUSE CHALLENGE  #${seg.n}`, 640, 70, 40, '#fde047');
-  ctx.fillStyle = 'rgba(255,255,255,0.08)'; rr(80, 120, 1120, 190, 20); ctx.fill();
-  wrap(seg.q, 1040, 46, 'Fredoka', 700).forEach((ln, i, arr) => text(ln, 640, 215 - (arr.length - 1) * 28 + i * 56, 46, '#fff'));
+  const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#14532d'); g.addColorStop(1, '#166534'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  text(`PAUSE CHALLENGE  #${seg.n}`, 640, 66, 40, '#fde047');
+  ctx.fillStyle = 'rgba(255,255,255,0.08)'; rr(80, 116, 1120, 200, 20); ctx.fill();
+  let qs = 46, ql = richWrap(seg.q, 1040, qs, 'Fredoka', 700); while (ql.length > 3 && qs > 30) { qs -= 2; ql = richWrap(seg.q, 1040, qs, 'Fredoka', 700); }
+  ql.forEach((ln, i, arr) => drawRichLine(ln, 640, 216 - (arr.length - 1) * qs * 0.6 + i * qs * 1.2, qs, '#fff', { weight: 700 }));
+  const host = TL.host || 'lola';
   const st = { t, seed: 5, mood: seg.phase === 'a' ? 'smug' : 'bored', look: -0.5 };
   if (seg.phase !== 'count') { const i = Math.floor((t - seg.say0) * TL.fps); st.talking = true; st.mouth = i >= 0 && i < seg.env.length ? seg.env[i] : 0; }
-  ctx.save(); ctx.translate(1110, 720); ctx.scale(0.62, 0.62); ctx.translate(0, -GROUND); drawCenti(0, st); ctx.restore();
+  ctx.save(); ctx.translate(1140, 720); ctx.scale(0.62, 0.62); ctx.translate(0, -GROUND); drawChar(host, 0, st); ctx.restore();
   if (seg.phase === 'count') {
     const k = t - seg.t0, n = Math.max(1, 5 - Math.floor(k));
     ctx.beginPath(); ctx.arc(640, 470, 110, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (1 - (k % 1))); strokeC('#fde047', 16);
-    text(String(n), 640, 475, 120, '#fff'); text('pause now if you need longer!', 640, 640, 26, '#c7d2fe', { weight: 500 });
+    text(String(n), 640, 475, 120, '#fff'); text('pause now if you need longer!', 640, 640, 26, '#bbf7d0', { weight: 500 });
   }
   if (seg.phase === 'a') {
-    const k = back((t - seg.t0) / 0.5); ctx.save(); ctx.translate(560, 430); ctx.scale(k, k);
-    ctx.fillStyle = '#16a34a'; rr(-260, -70, 520, 140, 24); ctx.fill(); text(seg.a, 0, 0, 84, '#fff'); ctx.restore();
-    ctx.globalAlpha = ease((t - seg.t0 - 0.6) / 0.5); text(seg.work, 560, 580, 36, '#e0e7ff', { font: 'Hand', weight: 400 }); ctx.globalAlpha = 1;
+    const k = back((t - seg.t0) / 0.5);
+    let as = 76; setFont(as, 'Fredoka', 700); while (lineW(richWords(seg.a)) > 880 && as > 34) { as -= 2; setFont(as, 'Fredoka', 700); }
+    const bw = Math.max(520, lineW(richWords(seg.a)) + 90);
+    ctx.save(); ctx.translate(540, 430); ctx.scale(k, k);
+    ctx.fillStyle = '#1d4ed8'; rr(-bw / 2, -70, bw, 140, 24); ctx.fill(); strokeC('#fde047', 5); drawRich(seg.a, 0, 2, as, '#fff', { weight: 700 }); ctx.restore();
+    ctx.globalAlpha = ease((t - seg.t0 - 0.6) / 0.5); drawRich(seg.work, 540, 580, 36, '#e0f2fe', { font: 'Hand', weight: 400, maxW: 960, min: 20 }); ctx.globalAlpha = 1;
   }
   if (seg.phase === 'q') text('Think…', 640, 470, 50, 'rgba(255,255,255,0.4)');
-  if (seg.subs !== undefined && seg.phase !== 'count') { /* subtitles */ const s2 = Object.assign({}, seg, { subs: [{ t: seg.say0, text: seg.text }] }); drawSubsSmall(s2, t); }
+  if (seg.subs !== undefined && seg.phase !== 'count') { const s2 = Object.assign({}, seg, { subs: [{ t: seg.say0, text: seg.text }] }); drawSubsSmall(s2, t); }
 }
-function drawSubsSmall(seg, t) { if (t < seg.say0) return; const lines = wrap(seg.subs[0].text, 860, 24); const h = 20 + lines.length * 30, y = H - h - 14; ctx.fillStyle = 'rgba(0,0,0,0.6)'; rr(60, y, 900, h, 12); ctx.fill(); lines.forEach((l, i) => text(l, 510, y + 25 + i * 30, 24, '#fff', { weight: 500 })); }
+function drawSubsSmall(seg, t) { if (t < seg.say0) return; const lines = richWrap(seg.subs[0].text, 860, 24, 'Fredoka', 500); const h = 20 + lines.length * 30, y = H - h - 14; ctx.fillStyle = 'rgba(0,0,0,0.6)'; rr(60, y, 900, h, 12); ctx.fill(); lines.forEach((l, i) => drawRichLine(l, 510, y + 25 + i * 30, 24, '#fff', { weight: 500 })); }
 
 function drawFreeze(seg, t) {
   const ref = TL.segments[seg.ref]; const k = t - seg.t0;
@@ -633,8 +684,8 @@ function drawFreeze(seg, t) {
   drawStage(ref, seg.hold, { zoom: 1 + ease(k / 0.3) * 0.08 }); ctx.restore();
   ctx.fillStyle = 'rgba(255,240,200,0.12)'; ctx.fillRect(0, 0, W, H);
   const kk = back((k - 0.25) / 0.35); if (kk > 0) { ctx.save(); ctx.translate(640, 470); ctx.rotate(-0.06); ctx.scale(kk, kk);
-    ctx.fillStyle = '#dc2626'; rr(-330, -60, 660, 120, 14); ctx.fill(); text(seg.text, 0, 4, 70, '#fff'); ctx.restore(); }
-  const k2 = ease((k - 1.0) / 0.3); if (k2 > 0 && seg.narrator) { ctx.globalAlpha = k2; const nl = wrap(seg.narrator, 760, 30); ctx.fillStyle = '#111'; rr(240, 600, 800, 64, 10); ctx.fill(); text(nl[0], 640, 632, 30, '#fde047'); ctx.globalAlpha = 1; }
+    ctx.fillStyle = '#dc2626'; rr(-330, -60, 660, 120, 14); ctx.fill(); drawRich(seg.text, 0, 4, 70, '#fff', { weight: 700, maxW: 620, min: 30 }); ctx.restore(); }
+  const k2 = ease((k - 1.0) / 0.3); if (k2 > 0 && seg.narrator) { ctx.globalAlpha = k2; ctx.fillStyle = '#111'; rr(240, 600, 800, 64, 10); ctx.fill(); drawRich(seg.narrator, 640, 632, 30, '#fde047', { weight: 700, maxW: 770, min: 16, esColor: '#fff' }); ctx.globalAlpha = 1; }
 }
 
 window.renderAt = function (t) {
@@ -648,7 +699,7 @@ window.renderAt = function (t) {
   if (!seg.scene) return;
   drawStage(seg, t);
   drawBoard(seg.board, t, boardSide(seg));
-  if (seg.caption) { let first = seg; for (const s of TL.segments) { if (s.scene === seg.scene && s.caption === seg.caption && s.t0 <= seg.t0) { first = s; break; } } drawLowerThird(seg.caption, t - firstOf(seg).t0); }
+  if (seg.caption) drawLowerThird(seg.caption, t - firstOf(seg).t0);
   if (seg.kind === 'line') drawSubs(seg, t);
   // fade from black at very start
   if (t < 0.6) { ctx.fillStyle = `rgba(0,0,0,${1 - t / 0.6})`; ctx.fillRect(0, 0, W, H); }

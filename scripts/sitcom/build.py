@@ -335,5 +335,5 @@ mix /= max(1.0, np.abs(mix).max() / 0.97)
 sf.write(os.path.join(out, "audio.wav"), mix, SR)
 
 title_t = next((x["t0"] for x in segs if x["kind"] == "title"), 5.0)
-json.dump(dict(fps=FPS, duration=round(total, 3), topic=EP["topic"], poster_t=round(title_t + 3.6, 2), segments=segs), open(os.path.join(out, "timeline.json"), "w"))
+json.dump(dict(fps=FPS, duration=round(total, 3), topic=EP["topic"], host=HOST, poster_t=round(title_t + 3.6, 2), segments=segs), open(os.path.join(out, "timeline.json"), "w"))
 print(f"segments={len(segs)} duration={total:.1f}s ({total/60:.1f} min)")
