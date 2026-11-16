@@ -51,7 +51,7 @@ L("pablo", "And to ask, [[¿Hay un banco por aquí?]] Is there a bank round here
 
 confess("dad", "VIKRAM RAO · Dad · Navigator · Self-Appointed")
 L("dad", "I have a perfect sense of direction.", mood="smug")
-L("dad", "Right now, for example, I'm in a little room, talking to a camera. Nailed it.", mood="happy", gap=0.6)
+L("dad", "Right now, I'm in a little room, talking to a camera. Nailed it.", mood="happy", gap=0.6)
 
 # ---------------- ACT 2: ASKING THE WAY & DIRECTIONS ----------------
 card("THE MISSION", "Destination: the library. Navigator: Dad. Hope: low.", 2.4)
@@ -88,7 +88,7 @@ L("lola", "No. To a grown-up, they're polite. That's [[usted]]. [[Sigue]] become
   board="tú [[sigue · toma]] → usted [[siga · tome]]")
 L("mum", "So, [[siga todo recto y tome la segunda calle a la derecha.]] Go straight on and take the second street on the right.", mood="happy", shot="close",
   board="[[Siga todo recto y tome…]] ✔")
-L("pablo", "Perfect! And, [[gira a la derecha en el primer semáforo.]] Turn right at the first traffic lights. Before a masculine noun, [[primero]] loses its O.", mood="teach", shot="close",
+L("pablo", "[[Gira a la derecha en el primer semáforo.]] Turn right at the first traffic lights. Before a masculine noun, [[primero]] loses its O.", mood="teach", shot="close",
   board="[[el primer semáforo]] · [[la primera calle]]")
 L("dad", "My turn. Sigue todo recto, then derecha-o, then hasta la vista, baby.", mood="smug", shot="close")
 sfx("buzzer")
@@ -128,7 +128,7 @@ L("mum", "[[En Tampines hay un polideportivo donde se puede nadar.]] There's a s
   board="[[Hay un… donde se puede…]]")
 
 confess("lola", "LOLA · Recap Parrot · Knows The Way. Always.")
-L("lola", "Recap. One. Learn places with [[el]] or [[la]]. [[La biblioteca]] is the library.", mood="teach", boardClear=True, board="1. [[el polideportivo · la biblioteca]]")
+L("lola", "Recap. One. Learn places with [[el]] or [[la]].", mood="teach", boardClear=True, board="1. [[el polideportivo · la biblioteca]]")
 L("lola", "Two. [[Hay]] never changes. [[Hay un parque. No hay castillo.]]", mood="teach", board="2. [[Hay un parque · No hay castillo]]")
 L("lola", "Three. [[Sigue todo recto, gira a la derecha, toma la primera calle.]] Your left, not the map's.", mood="teach", board="3. [[sigue todo recto · gira a la…]]")
 L("lola", "Four. Location uses [[está]]. [[Está a cinco minutos a pie.]]", mood="teach", board="4. [[Está a cinco minutos a pie]]")
@@ -138,7 +138,6 @@ scene("hawker", [("tara", 260), ("pablo", 520), ("dad", 780), ("uncle", 1000)], 
 L("dad", "I've got it now. Follow me. [[Gira a la derecha. Gira a la derecha. Gira a la derecha. Gira a la derecha.]]", mood="determined", shot="close", boardClear=True)
 sfx("whoosh")
 L("tara", "Dad. Right, right, right, right. That's a square. We're back where we started.", mood="deadpan", shot="close")
-L("uncle", "[[¡Hola otra vez!]] Hello again!", mood="happy", shot="close")
 L("lola", "Perfect Spanish. Totally useless. [[Todo recto]] to nowhere.", mood="eyeroll", shot="wide", offstage=True)
 L("pablo", "Dad. [[Todo recto.]] The library is just there. Opposite the shopping centre.", mood="happy", shot="close")
 L("dad", "Straight on. Totally correct. Like I said this morning.", mood="smug", shot="close", gap=0.8)
