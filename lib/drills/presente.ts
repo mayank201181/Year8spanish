@@ -200,6 +200,17 @@ const MEANING: Record<string, string> = {
   estar: "to be — where it is, how it is now",
   navegar: "to surf the internet",
   poner: "to put",
+  jugar: "to play a sport or game",
+  tocar: "to play an instrument",
+  escuchar: "to listen to",
+  pagar: "to pay",
+  pasear: "to go for a walk",
+  chatear: "to chat online",
+  pasar: "to spend time",
+  quitar: "to clear the table",
+  coger: "to catch",
+  tomar: "to take",
+  lavarse: "to get washed",
 };
 const meaning = (inf: string) => MEANING[inf] ?? info(inf).en.split(/, (?![^()]*\))/)[0];
 
@@ -596,7 +607,7 @@ const reflexives: Drill = {
     ];
     if (stemType(inf) && inBoot(p)) list.unshift([regularPattern(inf, p), `*${inf}* is a boot verb too (${STEM_LABEL[stemType(inf)!]}) → *${form}*.`]);
     const steps = [
-      frame ? `The subject is *${subj}* → *${P_NAME[p]}* → pronoun *${PRONOUN[p]}*.` : `*${inf}* is reflexive: drop *-se* and put the matching pronoun in front. *${P_NAME[p]}* → *${PRONOUN[p]}*.`,
+      frame ? `The subject is *${subj}*${subj === p ? "" : ` → *${P_NAME[p]}*`} → pronoun *${PRONOUN[p]}*.` : `*${inf}* is reflexive: drop *-se* and put the matching pronoun in front. *${P_NAME[p]}* → *${PRONOUN[p]}*.`,
       stemType(inf)
         ? `*${baseInf(inf)}* is ${aStem(stemType(inf)!)} boot verb; *${P_NAME[p]}* is ${inBoot(p) ? "inside" : "outside"} the boot → *${v}*.`
         : `Conjugate *${baseInf(inf)}* like a regular *-${info(inf).group}* verb → *${v}*.`,
@@ -666,11 +677,11 @@ const inv = (s: string): [string, string, string, string] => [s, s, s, s];
 const adjO = (stem: string, pre = ""): [string, string, string, string] => [`${pre}${stem}o`, `${pre}${stem}a`, `${pre}${stem}os`, `${pre}${stem}as`];
 const adjE = (w: string, pre = ""): [string, string, string, string] => [`${pre}${w}`, `${pre}${w}`, `${pre}${w}s`, `${pre}${w}s`];
 
-const LOC = "location (where it is) → *estar*, even if it never moves";
-const STATE = "how someone is right now (a temporary state or mood) → *estar*";
-const NOW = "the state something is in right now → *estar*";
-const DESC = "what it's like (a description / characteristic) → *ser*";
-const PERS = "what someone is like (personality / appearance) → *ser*";
+const LOC = "location (where it is — even if it never moves)";
+const STATE = "how someone is right now (a temporary state or mood)";
+const NOW = "the state something is in right now";
+const DESC = "what it's like (a description / characteristic)";
+const PERS = "what someone is like (personality / appearance)";
 const SE_COMPS: SeComp[] = [
   { forms: inv("en el centro"), verb: "estar", kinds: ["person", "home", "place"], reason: LOC },
   { forms: inv("cerca de la playa"), verb: "estar", kinds: ["person", "home", "place"], reason: LOC },
@@ -693,9 +704,9 @@ const SE_COMPS: SeComp[] = [
   { forms: adjO("alt"), verb: "ser", kinds: ["person"], reason: PERS },
   { forms: adjE("inteligente"), verb: "ser", kinds: ["person"], reason: PERS },
   { forms: adjO("divertid"), verb: "ser", kinds: ["person"], reason: PERS },
-  { forms: inv("de Singapur"), verb: "ser", kinds: ["person"], reason: "origin (where someone is from) → *ser*" },
-  { forms: inv("de Sevilla"), verb: "ser", kinds: ["person"], reason: "origin (where someone is from) → *ser*" },
-  { forms: ["español", "española", "españoles", "españolas"], verb: "ser", kinds: ["person"], reason: "nationality → *ser*" },
+  { forms: inv("de Singapur"), verb: "ser", kinds: ["person"], reason: "origin (where someone is from)" },
+  { forms: inv("de Sevilla"), verb: "ser", kinds: ["person"], reason: "origin (where someone is from)" },
+  { forms: ["español", "española", "españoles", "españolas"], verb: "ser", kinds: ["person"], reason: "nationality" },
 ];
 const compText = (c: SeComp, s: SeSubj) => c.forms[(s.pl ? 2 : 0) + (s.g === "f" ? 1 : 0)];
 const otherVerb = (v: "ser" | "estar") => (v === "ser" ? "estar" : "ser");
@@ -746,13 +757,15 @@ const serEstar: Drill = {
       const ans = serFirst ? `${serF} ${estF}` : `${estF} ${serF}`;
       const swapped = serFirst ? `${estF} ${serF}` : `${serF} ${estF}`;
       const accept = [ans];
+      const serStep = `*${compText(serC, s)}*: ${serC.reason} → *ser* → *${serF}*.`;
+      const estStep = `*${compText(estC, s)}*: ${estC.reason} → *estar* → *${estF}*.`;
       return {
-        prompt: `${intro} two gaps, so type both verbs in order (e.g. *es, está*).\n\n*${sentence}*`,
+        prompt: `Fill both gaps with the correct present-tense form of *ser* or *estar*. Type both verbs in order (e.g. *es, está*):\n\n*${sentence}*`,
         answer: { type: "text", accept },
         solution: [
-          `*${compText(serC, s)}*: ${serC.reason} → *${serF}*.`,
-          `*${compText(estC, s)}*: ${estC.reason} → *${estF}*.`,
-          `The subject is *${s.es}* (*${P_NAME[s.p]}*) → **${serFirst ? `${serF} … ${estF}` : `${estF} … ${serF}`}**`,
+          `The subject is *${s.es}*${s.es === s.p ? "" : ` → *${P_NAME[s.p]}*`}.`,
+          ...(serFirst ? [serStep, estStep] : [estStep, serStep]),
+          `→ **${serFirst ? `${serF} … ${estF}` : `${estF} … ${serF}`}**`,
         ],
         hint: "Ask for each gap: is it WHAT it's like (ser) or WHERE / HOW it is right now (estar)?",
         traps: makeTraps(accept, [[swapped, "You've swapped them. Description / identity → *ser*; location and how something is right now → *estar*."]]),
@@ -768,13 +781,13 @@ const serEstar: Drill = {
       prompt: `${intro}\n\n*${cap(s.es)} ___ ${compText(c, s)}.*`,
       answer: { type: "text", accept },
       solution: [
-        `*${compText(c, s)}* = ${c.reason}.`,
+        `*${compText(c, s)}* = ${c.reason} → *${c.verb}*.`,
         `The subject is *${s.es}* → the *${P_NAME[s.p]}* form of *${c.verb}*.`,
         `→ **${form}**`,
       ],
       hint: "Ask: is it WHAT someone / something is like (ser), or WHERE it is / HOW it is right now (estar)?",
       traps: makeTraps(accept, [
-        [wrong, c.verb === "estar" ? `*${wrong}* is *ser*. But ${c.reason.replace(" → *estar*", "")} needs *estar* → *${form}*.` : `*${wrong}* is *estar*. But ${c.reason.replace(" → *ser*", "")} needs *ser* → *${form}*.`],
+        [wrong, `*${wrong}* is *${otherVerb(c.verb)}*. But ${c.reason} needs *${c.verb}* → *${form}*.`],
       ]),
     };
   },
