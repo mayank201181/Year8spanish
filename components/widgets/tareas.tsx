@@ -618,15 +618,11 @@ function PocketMoney() {
 
         <svg viewBox="0 0 300 24" className="h-auto w-full" role="img" aria-label={`Weekly earnings bar: ${weekly} out of a possible ${max}`}>
           <rect x={0} y={4} width={300} height={16} rx={8} className="fill-surface-2 stroke-line" strokeWidth={1} />
-          {(() => {
-            let x = 0;
-            return rows.map((r, i) => {
-              const w = (r.price * r.times * 300) / max;
-              const el = <rect key={i} x={x} y={4} width={w} height={16} className={["fill-brand", "fill-good", "fill-accent"][i]} />;
-              x += w;
-              return el;
-            });
-          })()}
+          {rows.map((r, i) => {
+            const w = (r.price * r.times * 300) / max;
+            const x = rows.slice(0, i).reduce((a, q) => a + (q.price * q.times * 300) / max, 0);
+            return <rect key={i} x={x} y={4} width={w} height={16} className={["fill-brand", "fill-good", "fill-accent"][i]} />;
+          })}
         </svg>
       </div>
     </WidgetFrame>

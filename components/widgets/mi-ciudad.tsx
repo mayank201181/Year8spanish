@@ -220,7 +220,7 @@ function SentenceUpgrader() {
   const conList = contrastsFor(pos, place.g).filter((c) => !reasonOn || !c.clash.includes(adjChoice.es));
   const contrast = conList[conIdx % conList.length];
 
-  const { segs, plain, english, words } = useMemo(() => {
+  const { segs, plain, english, words } = (() => {
     const s: Seg[] = [];
     if (timeOn) s.push({ text: time.es, kind: "time" });
     s.push({ text: `voy ${place.to}`, kind: "core" });
@@ -251,7 +251,7 @@ function SentenceUpgrader() {
     en += ".";
     const w = p.replace(/[.,;]/g, " ").split(/\s+/).filter(Boolean).length;
     return { segs: s, plain: p, english: en, words: w };
-  }, [timeOn, time, place, compOn, comp, opOn, opinion, reasonOn, intActive, intens, adjForm, adjChoice, conOn, connective, contrast]);
+  })();
 
   const blocks = [timeOn, compOn, opOn, reasonOn, intActive, conOn];
   const level = 1 + blocks.filter(Boolean).length;
