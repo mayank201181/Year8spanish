@@ -295,7 +295,7 @@ export const mcqPapers: Paper[] = [
         options: ["interesa", "intereso", "interesan", "interesamos"],
         answerIndex: 2,
         explanation:
-          "*Interesar* works like *gustar*: the verb agrees with what interests you. *Los documentales* is plural → **interesan**. *Intereso* would mean 'I am interesting' — the *yo* ending is a trap.",
+          "*Interesar* works like *gustar*: the verb agrees with what interests you. *Los documentales* is plural → **interesan**. *Intereso* would mean 'I interest (someone)' — the *yo* ending is a trap.",
         difficulty: "warmup",
         guideRef: "gustar-and-preferences",
         hints: ["*Interesar* behaves like *gustar*. What is the subject — you, or the documentaries?"],

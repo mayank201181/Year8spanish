@@ -176,6 +176,8 @@ export const guide: TopicGuide = {
                 "hay tres dormitorios en mi apartamento",
                 "mi apartamento tiene tres dormitorios",
                 "en mi apartamento hay tres habitaciones",
+                "hay tres habitaciones en mi apartamento",
+                "mi apartamento tiene tres habitaciones",
               ],
             },
             solution: "'there are' → *hay* (it never changes); *dormitorio* → *dormitorios*: **En mi piso hay tres dormitorios.** (Also fine: *Mi piso tiene tres dormitorios.*)",

@@ -211,7 +211,7 @@ export const morePapers: Paper[] = [
         ],
         difficulty: "challenge",
         guideRef: "describing-home",
-        hints: ["Apart from the noun, six words must change. Find them.", "*Chalet* is masculine: what happens to every *-a* ending?", "*Es* → ? (twice). Does *muy* change?"],
+        hints: ["Apart from *Los chalets* itself, five words must change. Find them.", "*Chalet* is masculine: what happens to every *-a* ending?", "*Es* → ? (twice). Does *muy* change?"],
         strategy: "Agreement check",
       },
       {

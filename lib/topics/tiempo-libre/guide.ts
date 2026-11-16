@@ -98,7 +98,7 @@ export const guide: TopicGuide = {
           answer: "*Me encantan los videojuegos.*",
           yourTurn: {
             question: "Your turn: write 'I like films' in Spanish, using *gustar*.",
-            answer: { type: "text", accept: ["me gustan las películas", "a mí me gustan las películas"] },
+            answer: { type: "text", accept: ["me gustan las películas", "a mí me gustan las películas", "me gustan las pelis", "a mí me gustan las pelis"] },
             solution: "Films are plural → *gustan*, and a general noun needs its article: **Me gustan las películas.**",
           },
         },
@@ -141,7 +141,7 @@ export const guide: TopicGuide = {
         "Keep the article: *me gusta **la** música*.",
       ],
       whyItWorks:
-        "*Gustar* comes from Latin *gustare*, 'to taste' — something is tasty *to* you. So Spanish says 'Music pleases me', and the verb has to agree with the music, just as in English we say 'Video games **please** me', not 'please' with an *-s*.\n\nEnglish once worked the same way: in older English, 'like' meant 'to please'. In Shakespeare's *Hamlet*, King Claudius says 'It likes us well' — meaning 'It pleases us'.",
+        "*Gustar* comes from Latin *gustare*, 'to taste' — something is tasty *to* you. So Spanish says 'Music pleases me', and the verb has to agree with the music, just as in English we say 'Video games **please** me', not 'Video games pleases me'.\n\nEnglish once worked the same way: in older English, 'like' meant 'to please'. In Shakespeare's *Hamlet*, King Claudius says 'It likes us well' — meaning 'It pleases us'.",
       strategies: ["Check the subject", "Agreement check", "Look for the pattern", "Translate back to check"],
       thinkDeeper:
         "*Le gusta el tenis* could mean 'he likes tennis', 'she likes tennis' or 'you (*usted*) like tennis'. How would you make it crystal clear that you are talking to your teacher politely? And why does *Me gusta bailar y cantar* keep the singular *gusta* even though there are two activities?",
@@ -180,7 +180,9 @@ export const guide: TopicGuide = {
                 "los sábados voy de compras con mi madre",
                 "los sábados yo voy de compras con mi madre",
                 "voy de compras con mi madre los sábados",
+                "yo voy de compras con mi madre los sábados",
                 "voy de compras los sábados con mi madre",
+                "los sábados voy con mi madre de compras",
                 "los sábados voy de compras con mi mamá",
                 "voy de compras con mi mamá los sábados",
                 "voy de compras los sábados con mi mamá",
@@ -330,7 +332,7 @@ export const guide: TopicGuide = {
           answer: "*El sábado vamos a ir al cine.*",
           yourTurn: {
             question: "Your turn: write 'I am going to watch a film' in Spanish.",
-            answer: { type: "text", accept: ["voy a ver una película", "yo voy a ver una película"] },
+            answer: { type: "text", accept: ["voy a ver una película", "yo voy a ver una película", "voy a ver una peli", "yo voy a ver una peli"] },
             solution: "*Voy* + *a* + infinitive *ver* + *una película*: **Voy a ver una película.**",
           },
         },
