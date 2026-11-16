@@ -91,11 +91,11 @@ const TIPS = [
 function CalcBadge({ calculator }: { calculator: boolean }) {
   return calculator ? (
     <span className="chip border-0 bg-info-soft text-info">
-      <span aria-hidden>🧮</span> Calculator
+      <span aria-hidden>✍️</span> Translation &amp; writing
     </span>
   ) : (
-    <span className="chip border-0 bg-bad-soft text-bad">
-      <span aria-hidden>🚫🧮</span> Non-calculator
+    <span className="chip border-0 bg-accent-soft text-warn">
+      <span aria-hidden>📖</span> Reading &amp; grammar
     </span>
   );
 }
@@ -194,11 +194,9 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
           <CalcBadge calculator={active.calculator} />
           <span className="chip">{running.timed ? `⏱ Timed · ${active.minutes} min` : "Untimed"}</span>
         </div>
-        {!active.calculator ? (
-          <p className="rounded-xl bg-surface-2 px-4 py-2.5 text-sm text-ink-2">
-            <strong className="text-ink">Non-calculator paper:</strong> put the calculator away — every question can be done with mental or written methods.
-          </p>
-        ) : null}
+        <p className="rounded-xl bg-surface-2 px-4 py-2.5 text-sm text-ink-2">
+          <strong className="text-ink">No dictionary, no translator.</strong> Work it out from what you know — use the accent keys for á é í ó ú ñ.
+        </p>
         <PaperRunner
           key={`${active.id}:${running.timed ? "timed" : "untimed"}`}
           attemptKey={attemptKey(active)}
@@ -263,7 +261,7 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
         <>
           <ol className="grid gap-3 sm:grid-cols-3" aria-label="How it works">
             {[
-              { n: 1, title: "Choose a paper", text: "Calculator or non-calculator, timed or not." },
+              { n: 1, title: "Choose a paper", text: "Reading & grammar or translation & writing, timed or not." },
               { n: 2, title: "Answer everything", text: "Nothing is marked as you go — jump between questions freely." },
               { n: 3, title: "Mark & review", text: "Get your score, mark written answers, and see which topics to revise." },
             ].map((s) => (
@@ -344,7 +342,7 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
                             <Switch checked={useTimer && timerAvailable} onChange={setUseTimer} disabled={!timerAvailable} labelledBy={`${headingId}-timer`} describedBy={`${headingId}-timer-desc`} />
                           </div>
                           <ul className="mt-3 list-disc space-y-0.5 pl-5 text-sm text-ink-2">
-                            <li>{paper.calculator ? "You may use a calculator." : "No calculator — have scrap paper and a pencil ready."}</li>
+                            <li>{paper.calculator ? "Translation and writing: accents count — use the accent keys." : "Reading and grammar: read each passage twice before you answer."}</li>
                             <li>Answers are marked when you press “Finish & mark”. Written answers are marked by you against the mark scheme.</li>
                           </ul>
                           <div className="mt-4 flex flex-wrap gap-2">

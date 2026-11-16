@@ -1,11 +1,11 @@
 "use client";
-// /episodes — every "Totally Raotional" episode in one place: a player plus a playlist,
+// /episodes — every ¡Qué Caos! episode in one place: a player plus a playlist,
 // with an optional binge mode that rolls straight into the next episode.
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { SITCOM_EPISODES } from "@/lib/sitcom";
+import { SHOW_TITLE, SITCOM_EPISODES } from "@/lib/sitcom";
 import { EpisodePlayer, formatDuration, useWatchedEpisodes } from "./EpisodePlayer";
 
 export function EpisodesHub() {
@@ -40,9 +40,9 @@ export function EpisodesHub() {
             <span className="chip border-0 bg-brand-soft text-brand">📺 Season 1 · {eps.length} episode{eps.length === 1 ? "" : "s"} · {totalMin} min</span>
             <span className="chip">⭐ {watchedCount}/{eps.length} watched</span>
           </div>
-          <h1 className="mt-2 text-2xl font-black sm:text-3xl">Totally Raotional</h1>
+          <h1 className="mt-2 text-2xl font-black sm:text-3xl">{SHOW_TITLE}</h1>
           <p className="text-sm text-ink-2">
-            One sarcastic family, one 100-eyed calculator monster, every Year 8 topic. Each episode ends with three pause challenges.
+            One Singapore family, one Spanish exchange student, one very opinionated parrot — every Year 8 topic. Each episode ends with three pause challenges.
           </p>
         </div>
         <label className="flex cursor-pointer items-center gap-2 text-sm font-bold">

@@ -3,8 +3,8 @@ import { TOPICS } from "@/lib/server/content";
 import { WatchHub } from "@/components/WatchHub";
 
 export const metadata: Metadata = {
-  title: "Watch — Studio Masterclasses & Beast Sitcoms",
-  description: "20 interactive Studio Masterclass whiteboards and 20 Beast-Mode cartoon sitcom episodes for Year 8 Maths.",
+  title: "Watch — ¡Qué Caos! sitcom",
+  description: "Animated Claude sitcom episodes for every Year 8 Spanish topic, with pause challenges.",
 };
 
 export default function WatchPage() {

@@ -38,7 +38,7 @@ export function DrillPage({ skillId, topicReady = true }: { skillId: string; top
           🧭
         </div>
         <h1 className="mt-2 text-2xl font-extrabold">We couldn&apos;t find that skill</h1>
-        <p className="mt-2 text-ink-2">It may have been renamed in the new version of the Maths Lab.</p>
+        <p className="mt-2 text-ink-2">It may have been renamed in the new version of the Spanish Lab.</p>
         <Link href="/skills" className="btn btn-primary mt-6">
           Open the skills map
         </Link>

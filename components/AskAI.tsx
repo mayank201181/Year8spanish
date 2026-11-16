@@ -1,5 +1,5 @@
 "use client";
-// "Ask Professor Pi" — AoPS-style AI tutor panel. Gives hints, not answers.
+// "Ask Profe Lola" — AoPS-style AI tutor panel. Gives hints, not answers.
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { Rich } from "./Rich";
@@ -40,10 +40,10 @@ export function AskAI({ context, compact }: { context: string; compact?: boolean
     try {
       const r = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next, context }) });
       const j = await r.json().catch(() => ({}));
-      if (!r.ok || typeof j.reply !== "string") setError(typeof j.error === "string" ? j.error : "Professor Pi couldn't answer just now.");
+      if (!r.ok || typeof j.reply !== "string") setError(typeof j.error === "string" ? j.error : "Profe Lola couldn't answer just now.");
       else setTurns([...next, { role: "assistant", content: j.reply }]);
     } catch {
-      setError("Couldn't reach Professor Pi. Check your internet connection.");
+      setError("Couldn't reach Profe Lola. Check your internet connection.");
     } finally {
       setBusy(false);
     }
@@ -52,21 +52,21 @@ export function AskAI({ context, compact }: { context: string; compact?: boolean
   if (!open) {
     return (
       <button type="button" className={compact ? "btn btn-ghost btn-sm" : "btn btn-secondary"} onClick={() => setOpen(true)}>
-        🦉 Ask Professor Pi
+        🦜 Ask Profe Lola
       </button>
     );
   }
 
   return (
-    <div className="w-full basis-full rounded-2xl border border-line bg-surface p-3 sm:p-4" role="region" aria-label="Professor Pi tutor">
+    <div className="w-full basis-full rounded-2xl border border-line bg-surface p-3 sm:p-4" role="region" aria-label="Profe Lola tutor">
       <div className="mb-2 flex items-center justify-between">
-        <div className="font-extrabold">🦉 Professor Pi</div>
+        <div className="font-extrabold">🦜 Profe Lola</div>
         <button type="button" className="btn btn-ghost btn-sm" onClick={() => setOpen(false)} aria-label="Close tutor">
           ✕
         </button>
       </div>
       {mode === "guest" ? (
-        <p className="text-sm text-ink-2">Professor Pi is available with a family account (so a grown-up can keep an eye on usage). Sign in from the menu to use it.</p>
+        <p className="text-sm text-ink-2">Profe Lola is available with a family account (so a grown-up can keep an eye on usage). Sign in from the menu to use it.</p>
       ) : (
         <>
           <p className="text-xs text-ink-2">I give hints and explanations — you do the thinking! 🧠</p>
@@ -76,7 +76,7 @@ export function AskAI({ context, compact }: { context: string; compact?: boolean
                 {t.role === "assistant" ? <Rich text={t.content} /> : t.content}
               </div>
             ))}
-            {busy ? <div className="mr-4 rounded-xl bg-surface-2 px-3 py-2 text-sm text-ink-2">Professor Pi is thinking…</div> : null}
+            {busy ? <div className="mr-4 rounded-xl bg-surface-2 px-3 py-2 text-sm text-ink-2">Profe Lola is thinking…</div> : null}
             {error ? <div className="rounded-xl bg-bad-soft px-3 py-2 text-sm">{error}</div> : null}
             <div ref={endRef} />
           </div>

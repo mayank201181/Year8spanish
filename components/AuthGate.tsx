@@ -29,7 +29,7 @@ export function AuthGate() {
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-brand to-brand-2 text-4xl text-white shadow-lg" aria-hidden>
           π
         </div>
-        <h1 className="mt-4 text-3xl font-black tracking-tight">Year 8 Maths Lab</h1>
+        <h1 className="mt-4 text-3xl font-black tracking-tight">Year 8 Spanish Lab</h1>
         <p className="mt-2 text-ink-2">Problem-first lessons, auto-marked practice, skill drills and a Daily 5 — built to make you a confident problem solver.</p>
       </div>
 
@@ -48,7 +48,7 @@ export function AuthGate() {
           <button type="button" className="btn btn-ghost w-full" onClick={startGuest}>
             {cloudAvailable ? "Just practise on this device (guest)" : "Start practising"}
           </button>
-          {cloudAvailable ? <p className="text-center text-xs text-ink-2">A family account syncs progress across devices and unlocks the parent dashboard and Professor Pi.</p> : null}
+          {cloudAvailable ? <p className="text-center text-xs text-ink-2">A family account syncs progress across devices and unlocks the parent dashboard and Profe Lola.</p> : null}
         </div>
       ) : (
         <form className="card mt-8 space-y-4 p-5" onSubmit={submit}>

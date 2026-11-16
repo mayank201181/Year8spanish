@@ -21,6 +21,7 @@ import { InteractiveTab } from "./InteractiveTab";
 import { LearnSmart } from "./LearnSmart";
 import { RichInline } from "./Rich";
 import { WatchTab } from "./WatchTab";
+import { VocabTab } from "./VocabTab";
 
 export interface TopicLink {
   id: string;
@@ -28,10 +29,11 @@ export interface TopicLink {
   icon?: string;
 }
 
-export type TopicTab = "learn" | "watch" | "practise" | "challenge" | "explore" | "revise";
+export type TopicTab = "learn" | "vocab" | "watch" | "practise" | "challenge" | "explore" | "revise";
 
 const TABS: { id: TopicTab; label: string; icon: string }[] = [
   { id: "learn", label: "Learn", icon: "📖" },
+  { id: "vocab", label: "Vocab", icon: "🗣️" },
   { id: "watch", label: "Watch", icon: "🎬" },
   { id: "practise", label: "Practise", icon: "✏️" },
   { id: "challenge", label: "Challenge", icon: "🧗" },
@@ -597,6 +599,7 @@ export function TopicView({
 
       <div id="topic-panel" role="tabpanel" aria-labelledby={`tab-${tab}`} className="mt-5">
         {tab === "learn" ? <GuideView topic={topic} extras={extras} onPractise={() => selectTab("practise")} /> : null}
+        {tab === "vocab" ? <VocabTab topicId={topic.id} topicTitle={topic.title} /> : null}
         {tab === "watch" ? <WatchTab topic={topic} onPractise={() => selectTab("practise")} onChallenge={() => selectTab("challenge")} /> : null}
         {tab === "practise" ? <PractiseTab topic={topic} drills={drills} runner={runner} onOpen={openRunner} onLesson={goLesson} /> : null}
         {tab === "challenge" ? <ChallengeTab topic={topic} /> : null}

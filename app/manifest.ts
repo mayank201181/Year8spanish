@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 
-// Web app manifest: makes the Maths Lab installable ("Add to Home Screen").
+// Web app manifest: makes the Spanish Lab installable ("Add to Home Screen").
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Year 8 Maths Lab",
-    short_name: "Maths Lab",
-    description: "Learn, practise and master Year 8 maths — problem-first lessons, auto-marked practice, skill drills and a daily mixed set.",
+    name: "Year 8 Spanish Lab",
+    short_name: "Spanish Lab",
+    description: "Learn, practise and master Year 8 Spanish — problem-first lessons, auto-marked practice, skill drills and a daily mixed set.",
     lang: "en-GB",
     start_url: "/",
     scope: "/",

@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { EpisodesHub } from "@/components/EpisodesHub";
 
 export const metadata: Metadata = {
-  title: "Sitcom Episodes — Totally Raotional",
-  description: "Animated sitcom episodes for every Year 8 Maths topic, with pause challenges.",
+  title: "Sitcom Episodes — ¡Qué Caos!",
+  description: "Animated Claude sitcom episodes for every Year 8 Spanish topic, with pause challenges.",
 };
 
 export default function EpisodesPage() {

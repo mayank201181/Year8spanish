@@ -150,7 +150,7 @@ export function ProgressView({ summaries }: { summaries: TopicSummary[] }) {
     <div className="space-y-6">
       <header>
         <h1 className="text-2xl font-black sm:text-3xl">{name ? `${name}'s progress` : "Your progress"}</h1>
-        <p className="mt-1 text-ink-2">Everything you&apos;ve done in the Maths Lab, in one place.</p>
+        <p className="mt-1 text-ink-2">Everything you&apos;ve done in the Spanish Lab, in one place.</p>
       </header>
 
       <RankCard stars={data.stars} />

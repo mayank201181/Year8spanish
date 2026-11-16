@@ -1,6 +1,6 @@
 "use client";
 // Home: a calm "what next?" dashboard — greeting, today's plan (Daily 5,
-// minutes, weekly goal), continue, review, one suggestion from Professor Pi,
+// minutes, weekly goal), continue, review, one suggestion from Profe Lola,
 // rank, focus topics, quick links and every topic grouped by strand.
 import Link from "next/link";
 import { useMemo, useSyncExternalStore } from "react";
@@ -25,7 +25,7 @@ const QUICK_LINKS = [
   { href: "/sprint", icon: "⚡", label: "Fluency sprint", blurb: "Quick-fire questions — beat your best" },
   { href: "/skills", icon: "🧩", label: "Skills", blurb: "Your mastery map, skill by skill" },
   { href: "/exam", icon: "📝", label: "Big Exam", blurb: "Mixed papers across every topic" },
-  { href: "/formulas", icon: "📋", label: "Formula sheet", blurb: "Every key fact on one page" },
+  { href: "/formulas", icon: "📋", label: "Grammar sheet", blurb: "Every key pattern on one page" },
 ] as const;
 
 // ---------------------------------------------------------------------------
@@ -172,7 +172,7 @@ function timeAgo(at: number, now: number, today: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Professor Pi: one suggestion, chosen by priority
+// Profe Lola: one suggestion, chosen by priority
 // ---------------------------------------------------------------------------
 
 interface Tip {
@@ -370,7 +370,7 @@ export function HomeDashboard({ summaries }: { summaries: TopicSummary[] }) {
     return { questions, skills, rusty, total: questions + skills };
   }, [data.srs, data.skills, today]);
 
-  // ---- Professor Pi ----
+  // ---- Profe Lola ----
   const tip = useMemo(() => chooseTip(data, summaries, focusTopics, review.total, dailyDone), [data, summaries, focusTopics, review.total, dailyDone]);
 
   // ---- rank ----
@@ -588,7 +588,7 @@ export function HomeDashboard({ summaries }: { summaries: TopicSummary[] }) {
               </span>
               <div className="min-w-0 flex-1">
                 <h2 id="tip-h" className="text-xs font-bold uppercase tracking-wide text-brand">
-                  Professor Pi suggests
+                  Profe Lola suggests
                 </h2>
                 <p className="mt-1 font-extrabold">{tip.title}</p>
                 <p className="mt-1 text-sm text-ink-2">{tip.body}</p>

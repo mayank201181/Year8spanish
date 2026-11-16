@@ -12,7 +12,7 @@ function Loading() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-ink-2" role="status">
       <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-soft border-t-brand" aria-hidden />
-      <span>Opening your Maths Lab…</span>
+      <span>Opening your Spanish Lab…</span>
     </div>
   );
 }

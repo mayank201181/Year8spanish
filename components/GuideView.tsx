@@ -73,7 +73,8 @@ export function toSpeech(text: string): string {
     .replace(/\|\s*$/gm, ".")
     .replace(/\|/g, ", ")
     .replace(/\*\*|__|`/g, "")
-    .replace(/(^|[\s(])\*(\S[^*\n]*?)\*/g, "$1$2")
+    // *italic* = Spanish in this app: mark it so it is read with a Spanish voice.
+    .replace(/(^|[\s(])\*(\S[^*\n]*?)\*/g, "$1«$2»")
     .replace(/^\s*[-•]\s+/gm, "")
     .replace(/^>\s?/gm, "")
     // Maths written outside {{ }} (plain ASCII in prose).
@@ -182,17 +183,30 @@ function useSpeech() {
       }
       const voices = synth.getVoices();
       const voice = voices.find((v) => v.lang === "en-GB") ?? voices.find((v) => v.lang?.toLowerCase().startsWith("en"));
+      const esVoice = voices.find((v) => v.lang?.toLowerCase() === "es-es") ?? voices.find((v) => v.lang?.toLowerCase().startsWith("es"));
+      // Split each chunk into English and «Spanish» runs.
+      const runs: { es: boolean; text: string }[] = [];
+      let inEs = false;
+      for (const chunk of chunks) {
+        for (const piece of chunk.split(/([«»])/)) {
+          if (piece === "«") inEs = true;
+          else if (piece === "»") inEs = false;
+          else if (piece.trim()) runs.push({ es: inEs, text: piece.trim() });
+        }
+        inEs = false;
+      }
       const stop = () => {
         if (run.current === token) setSpeakingId(null);
       };
       const start = () => {
         if (run.current !== token) return;
-        chunks.forEach((chunk, i) => {
-          const u = new SpeechSynthesisUtterance(chunk);
-          u.lang = voice?.lang ?? "en-GB";
-          if (voice) u.voice = voice;
-          u.rate = 0.95;
-          if (i === chunks.length - 1) u.onend = stop;
+        runs.forEach((run, i) => {
+          const u = new SpeechSynthesisUtterance(run.text);
+          const v = run.es ? esVoice : voice;
+          u.lang = v?.lang ?? (run.es ? "es-ES" : "en-GB");
+          if (v) u.voice = v;
+          u.rate = run.es ? 0.85 : 0.95;
+          if (i === runs.length - 1) u.onend = stop;
           u.onerror = stop;
           synth.speak(u);
         });
@@ -648,7 +662,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
   const core = sections.filter((s) => !stretchIds.has(s.id));
   const coreRead = core.filter((s) => isRead(s.id)).length;
   const allCoreRead = core.length > 0 && coreRead === core.length;
-  const askContext = `Year 8 maths topic: ${topic.title}. Lesson sections: ${sections.map((s) => s.heading).join("; ")}.`;
+  const askContext = `Year 8 Spanish topic: ${topic.title}. Lesson sections: ${sections.map((s) => s.heading).join("; ")}.`;
   const didYouKnow = extras.didYouKnow ?? [];
   const activities = extras.activities ?? [];
   const bonus = extras.bonusDiagrams ?? [];
@@ -795,7 +809,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
                     ) : null}
                     {a.maths ? (
                       <div className="mt-4 rounded-xl bg-brand-soft p-3 text-sm">
-                        <div className="font-extrabold text-brand">The maths</div>
+                        <div className="font-extrabold text-brand">The Spanish</div>
                         <Rich text={a.maths} className="mt-1" />
                       </div>
                     ) : null}
@@ -825,7 +839,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
 
           {extras.history ? (
             <section aria-labelledby="gv-history" className="card p-4 sm:p-6">
-              <div className="text-xs font-black uppercase tracking-wider text-ink-2">📜 From the history of maths</div>
+              <div className="text-xs font-black uppercase tracking-wider text-ink-2">🌍 Culture corner</div>
               <h2 id="gv-history" className="mt-1 text-lg font-extrabold">
                 <RichInline text={extras.history.title} />
               </h2>

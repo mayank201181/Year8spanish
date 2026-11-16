@@ -7,9 +7,9 @@ export default function NotFound() {
         🧭
       </div>
       <h1 className="mt-2 text-2xl font-extrabold">We couldn&apos;t find that page</h1>
-      <p className="mt-2 text-ink-2">It may have moved in the new version of the Maths Lab.</p>
+      <p className="mt-2 text-ink-2">It may have moved in the new version of the Spanish Lab.</p>
       <Link href="/" className="btn btn-primary mt-6">
-        Back to the Maths Lab
+        Back to the Spanish Lab
       </Link>
     </div>
   );

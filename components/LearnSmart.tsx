@@ -345,7 +345,7 @@ export function LearnSmart({ topic }: { topic: Topic }) {
   const nav = [
     { id: "rv-cards", label: "Flashcards", show: flashcards.length > 0 },
     { id: "rv-canyou", label: "Can you…?", show: mustKnow.length > 0 },
-    { id: "rv-formulas", label: "Formulas", show: formulas.length > 0 },
+    { id: "rv-formulas", label: "Grammar", show: formulas.length > 0 },
     { id: "rv-myths", label: "Myth vs fact", show: myths.length > 0 },
     { id: "rv-mistakes", label: "Exam mistakes", show: mistakes.length > 0 },
     { id: "rv-tricks", label: "Memory tricks", show: mnemonics.length > 0 },
@@ -391,7 +391,7 @@ export function LearnSmart({ topic }: { topic: Topic }) {
       ) : null}
 
       {formulas.length ? (
-        <Block id="rv-formulas" icon="📐" title="Formulas & key facts">
+        <Block id="rv-formulas" icon="🧩" title="Key grammar & phrase frames">
           <ul className="grid gap-3 sm:grid-cols-2">
             {formulas.map((f, i) => (
               <li key={i} className="card p-4">
@@ -471,7 +471,7 @@ export function LearnSmart({ topic }: { topic: Topic }) {
       ) : null}
 
       {realWorld.length ? (
-        <Block id="rv-real" icon="🌍" title="Maths in the real world">
+        <Block id="rv-real" icon="🌍" title="Spanish in the real world">
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {realWorld.map((r, i) => (
               <li key={i} className="card p-4">

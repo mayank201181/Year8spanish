@@ -16,6 +16,7 @@ ns = {}
 exec(open(os.path.join(HERE, "common.py")).read(), ns)
 exec(open(script_path).read(), ns)
 BEATS, VOICES, EP = ns["B"], ns["VOICES"], ns["EP"]
+HOST = ns.get("HOST", "centi")
 
 _k = None
 def kokoro():
@@ -25,12 +26,24 @@ def kokoro():
         _k = Kokoro(os.path.join(HERE, "kokoro-v1.0.onnx"), os.path.join(HERE, "voices-v1.0.bin"))
     return _k
 
-def tts(who, text):
+SPANISH = re.compile(r"\[\[(.+?)\]\]")
+
+def segments(text):
+    """Split a line into (lang_kind, text) parts: [[...]] is Spanish, the rest English."""
+    out, pos = [], 0
+    for m in SPANISH.finditer(text):
+        if text[pos:m.start()].strip(): out.append(("en", text[pos:m.start()].strip()))
+        out.append(("es", m.group(1).strip())); pos = m.end()
+    if text[pos:].strip(): out.append(("en", text[pos:].strip()))
+    return out
+
+def tts_one(who, text, kind):
     v = VOICES[who]
-    key = hashlib.sha1(json.dumps([v, text]).encode()).hexdigest()[:16]
+    lang = "es" if kind == "es" else v["lang"]
+    key = hashlib.sha1(json.dumps([v, text, lang]).encode()).hexdigest()[:16]
     f = os.path.join(cache, f"{who}_{key}.wav")
     if not os.path.exists(f):
-        s, sr = kokoro().create(text, voice=v["voice"], speed=v["speed"], lang=v["lang"])
+        s, sr = kokoro().create(text, voice=v["voice"], speed=v.get("es_speed", v["speed"]) if kind == "es" else v["speed"], lang=lang)
         assert sr == SR
         raw = f + ".raw.wav"; sf.write(raw, s, sr)
         if v.get("pitch"):
@@ -42,10 +55,20 @@ def tts(who, text):
             os.replace(raw, f)
     a, sr = sf.read(f, dtype="float32")
     if a.ndim > 1: a = a.mean(1)
-    # trim silence edges
     idx = np.where(np.abs(a) > 0.01)[0]
     if len(idx): a = a[max(0, idx[0] - 600): idx[-1] + 1200]
     return a
+
+def tts(who, text):
+    """Voice a line. Spanish parts ([[...]]) use the Spanish G2P with the SAME voice, so every
+    character keeps one voice across both languages."""
+    parts = segments(text)
+    gap = np.zeros(int(0.12 * SR), dtype=np.float32)
+    chunks_ = []
+    for i, (kind, t) in enumerate(parts):
+        if i: chunks_.append(gap)
+        chunks_.append(tts_one(who, t, kind))
+    return np.concatenate(chunks_) if chunks_ else np.zeros(1, dtype=np.float32)
 
 def envelope(a):
     hop = SR // FPS
@@ -150,11 +173,19 @@ def chunks(text, maxlen=95):
             if cur: out.append(cur)
             cur = p
     if cur: out.append(cur)
-    return out
+    # keep [[Spanish]] markers balanced inside each subtitle chunk
+    fixed, carry = [], False
+    for c in out:
+        if carry: c = "[[" + c
+        opens, closes = c.count("[["), c.count("]]")
+        carry = opens > closes
+        if carry: c = c + "]]"
+        fixed.append(c)
+    return fixed
 
 def display_text(text):
-    # spoken -> display tweaks
-    return text.replace("G S T", "GST").replace("Banana Coin", "BananaCoin")
+    # spoken -> display: keep [[Spanish]] markers so the renderer can highlight them
+    return text
 
 # ---------------- timeline assembly ----------------
 segs, sfx_events, dialog = [], [], []
@@ -213,12 +244,12 @@ for b in BEATS:
                 for i in range(5): sfx_events.append((t + i, "tick", 1.0))
                 push("challenge", 5.2, phase="count", n=b["n"], q=b["q"], a=b["a"], work=b["work"]); continue
             text = b["qs"] if phase == "q" else b["as_"]
-            a = tts("centi", text)
+            a = tts(HOST, text)
             if phase == "a": sfx_events.append((t, "ding", 0.7))
             st = t + 0.3; dialog.append((st, a))
             d = len(a)/SR
             push("challenge", 0.3 + d + 0.9, phase=phase, n=b["n"], q=b["q"], a=b["a"], work=b["work"],
-                 who="centi", say0=round(st, 3), env=envelope(a), subs=[], text=display_text(text))
+                 who=HOST, say0=round(st, 3), env=envelope(a), subs=[], text=display_text(text))
         continue
     if k == "line":
         who = b["who"]

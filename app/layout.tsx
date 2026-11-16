@@ -8,10 +8,10 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "Year 8 Maths Lab", template: "%s · Year 8 Maths Lab" },
-  description: "Learn, practise and master Year 8 maths — problem-first lessons, auto-marked practice, skill drills, a daily mixed set and a parent dashboard.",
-  applicationName: "Maths Lab",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "Maths Lab" },
+  title: { default: "Year 8 Spanish Lab", template: "%s · Year 8 Spanish Lab" },
+  description: "Learn, practise and master Year 8 Spanish — problem-first lessons, auto-marked practice, skill drills, a daily mixed set and a parent dashboard.",
+  applicationName: "Spanish Lab",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Spanish Lab" },
   formatDetection: { telephone: false },
 };
 

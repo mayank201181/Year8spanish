@@ -13,7 +13,7 @@ export function generateStaticParams(): { id: string }[] {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  if (id === "year8") return { title: "Year 8 Maths certificate" };
+  if (id === "year8") return { title: "Year 8 Spanish certificate" };
   const meta = metaById(id);
   return { title: meta ? `${meta.title} certificate` : "Certificate" };
 }

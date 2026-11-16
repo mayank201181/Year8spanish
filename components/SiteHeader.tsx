@@ -61,7 +61,7 @@ export function SiteHeader() {
           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-lg text-white" aria-hidden>
             π
           </span>
-          <span className="hidden sm:inline">Maths Lab</span>
+          <span className="hidden sm:inline">Spanish Lab</span>
         </Link>
 
         <nav className="ml-2 hidden items-center gap-1 md:flex" aria-label="Main">
@@ -111,7 +111,7 @@ export function SiteHeader() {
                   📝 The Big Exam
                 </Link>
                 <Link role="menuitem" href="/formulas" className="block rounded-lg px-3 py-2 hover:bg-surface-2">
-                  📋 Formula sheet
+                  📋 Grammar sheet
                 </Link>
                 <hr className="my-1 border-line" />
                 {mode === "cloud" ? (

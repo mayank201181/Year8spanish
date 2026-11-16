@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 
-const AVATARS = ["🦊", "🐼", "🦉", "🐯", "🐬", "🦄", "🐙", "🦁", "🐧", "🐢", "🦋", "🐝", "🌟", "🚀", "🎧", "🎨"];
+const AVATARS = ["🦊", "🐼", "🦜", "🐯", "🐬", "🦄", "🐙", "🦁", "🐧", "🐢", "🦋", "🐝", "🌟", "🚀", "🎧", "🎨"];
 
 export function ProfilePicker() {
   const { account, selectProfile, createProfile, importGuest: importGuestInto, updateProfile, deleteProfile, guestHasProgress, logout } = useStore();

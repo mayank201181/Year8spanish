@@ -1,5 +1,5 @@
 "use client";
-// Plays one "Totally Raotional" sitcom episode and records it as watched (90% viewed)
+// Plays one ¡Qué Caos! sitcom episode and records it as watched (90% viewed)
 // in the same localStorage object the Watch tab already uses (y8m2:watch-v1).
 import { useRef, useSyncExternalStore } from "react";
 import type { SitcomEpisode } from "@/lib/sitcom";

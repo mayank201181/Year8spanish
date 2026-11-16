@@ -1,5 +1,5 @@
 "use client";
-// Typed-answer box with a maths keypad and a live "we read this as" preview.
+// Typed-answer box with a Spanish accent keypad (and, for numeric specs, a maths keypad + preview).
 import { useId, useRef } from "react";
 import type { AnswerSpec } from "@/lib/types";
 import { typedToMathML } from "@/lib/mathml";
@@ -12,7 +12,7 @@ const KEYS_BY_TYPE: Record<AnswerSpec["type"], string[]> = {
   list: [",", "−", "/", "(", ")"],
   ratio: [":", "/", "."],
   expression: ["x", "y", "n", "^", "(", ")", "−", "/", "√", "π"],
-  text: ["<", ">", "≤", "≥", "−", "x"],
+  text: ["á", "é", "í", "ó", "ú", "ñ", "ü", "¿", "¡"],
 };
 
 const PLACEHOLDER: Record<AnswerSpec["type"], string> = {
@@ -21,7 +21,7 @@ const PLACEHOLDER: Record<AnswerSpec["type"], string> = {
   list: "e.g. 28, 35",
   ratio: "e.g. 3 : 4",
   expression: "e.g. 3x + 2 or 2(x − 1)",
-  text: "Type your answer",
+  text: "Escribe aquí… (type your answer)",
 };
 
 /** Convert typed input into display maths for the preview, read the way the marker reads it. */
@@ -49,7 +49,7 @@ export function AnswerInput({
   const id = useId();
   const ref = useRef<HTMLInputElement>(null);
   const keys = KEYS_BY_TYPE[type] ?? [];
-  const showPreview = value.trim().length > 0 && /[/^√π*×]|sqrt|\d\s+\d+\//.test(value);
+  const showPreview = type !== "text" && value.trim().length > 0 && /[/^√π*×]|sqrt|\d\s+\d+\//.test(value);
 
   function insert(key: string) {
     const el = ref.current;
@@ -75,6 +75,7 @@ export function AnswerInput({
         id={id}
         ref={ref}
         className="input font-semibold tabular-nums"
+        lang={type === "text" ? "es" : undefined}
         value={value}
         disabled={disabled}
         autoFocus={autoFocus}
@@ -93,9 +94,9 @@ export function AnswerInput({
         }}
       />
       {!disabled && keys.length ? (
-        <div className="flex flex-wrap gap-1.5" aria-label="Maths keys">
+        <div className="flex flex-wrap gap-1.5" aria-label={type === "text" ? "Spanish accent keys" : "Maths keys"}>
           {keys.map((key) => (
-            <button key={key} type="button" className="kbd text-sm" onClick={() => insert(key)} aria-label={`insert ${key === "␣" ? "space" : key}`}>
+            <button key={key} type="button" className="kbd min-w-10 text-base" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(key)} aria-label={`insert ${key === "␣" ? "space" : key}`}>
               {key}
             </button>
           ))}
