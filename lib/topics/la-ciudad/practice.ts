@@ -3,6 +3,9 @@ import type { TopicPractice } from "../../types.ts";
 // Same town map as the MCQ papers: you start at the bottom facing up the main street.
 const MAP_TOWN = `<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Town map. You start at the bottom of the main street, facing up it. On the first street: la biblioteca at the left end, el cine at the right end. On the second street: el museo at the left end, la piscina at the right end. At the end of the main street: la plaza mayor."><rect x="0" y="0" width="420" height="300" fill="#ffffff"/><rect x="105" y="190" width="210" height="30" fill="#e2e8f0"/><rect x="105" y="100" width="210" height="30" fill="#e2e8f0"/><rect x="190" y="45" width="40" height="255" fill="#e2e8f0"/><rect x="130" y="5" width="160" height="40" rx="6" fill="#fde68a" stroke="#334155"/><text x="210" y="30" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">la plaza mayor</text><rect x="5" y="180" width="100" height="50" rx="6" fill="#c7d2fe" stroke="#334155"/><text x="55" y="209" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">la biblioteca</text><rect x="315" y="180" width="100" height="50" rx="6" fill="#fecaca" stroke="#334155"/><text x="365" y="209" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">el cine</text><rect x="5" y="90" width="100" height="50" rx="6" fill="#bbf7d0" stroke="#334155"/><text x="55" y="119" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">el museo</text><rect x="315" y="90" width="100" height="50" rx="6" fill="#bae6fd" stroke="#334155"/><text x="365" y="119" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">la piscina</text><text x="148" y="209" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#334155">1.ª calle</text><text x="148" y="119" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#334155">2.ª calle</text><circle cx="210" cy="280" r="7" fill="#1f2937"/><line x1="210" y1="270" x2="210" y2="248" stroke="#1f2937" stroke-width="2"/><polygon points="210,238 204,250 216,250" fill="#1f2937"/><text x="226" y="284" font-family="sans-serif" font-size="12" fill="#1f2937">Estás aquí</text></svg>`;
 
+// Same town layout, starting outside la biblioteca facing right along the first street towards the main street.
+const MAP_FROM_LIBRARY = `<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Town map. You start outside la biblioteca on the left, facing right along the first street towards the main street. Across the main street on that first street is el cine. Further up the main street, the next cross-street has el museo on the left and la piscina on the right. At the top of the main street is la plaza mayor."><rect x="0" y="0" width="420" height="300" fill="#ffffff"/><rect x="105" y="190" width="210" height="30" fill="#e2e8f0"/><rect x="105" y="100" width="210" height="30" fill="#e2e8f0"/><rect x="190" y="45" width="40" height="255" fill="#e2e8f0"/><rect x="130" y="5" width="160" height="40" rx="6" fill="#fde68a" stroke="#334155"/><text x="210" y="30" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">la plaza mayor</text><rect x="5" y="180" width="100" height="50" rx="6" fill="#c7d2fe" stroke="#334155"/><text x="55" y="209" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">la biblioteca</text><rect x="315" y="180" width="100" height="50" rx="6" fill="#fecaca" stroke="#334155"/><text x="365" y="209" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">el cine</text><rect x="5" y="90" width="100" height="50" rx="6" fill="#bbf7d0" stroke="#334155"/><text x="55" y="119" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">el museo</text><rect x="315" y="90" width="100" height="50" rx="6" fill="#bae6fd" stroke="#334155"/><text x="365" y="119" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">la piscina</text><circle cx="122" cy="205" r="7" fill="#1f2937"/><line x1="132" y1="205" x2="158" y2="205" stroke="#1f2937" stroke-width="2"/><polygon points="168,205 156,199 156,211" fill="#1f2937"/><text x="145" y="236" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Estás aquí</text></svg>`;
+
 // Calle Real seen from above.
 const MAP_STREET = `<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Calle Real seen from above. North side, left to right: el banco, el cine, la biblioteca. South side, left to right: el parque, la iglesia, el mercado. The church is directly opposite the cinema."><rect x="0" y="0" width="420" height="220" fill="#ffffff"/><rect x="0" y="90" width="420" height="40" fill="#e2e8f0"/><text x="210" y="115" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#334155">Calle Real</text><rect x="10" y="20" width="120" height="60" rx="6" fill="#fde68a" stroke="#334155"/><text x="70" y="55" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">el banco</text><rect x="150" y="20" width="120" height="60" rx="6" fill="#fecaca" stroke="#334155"/><text x="210" y="55" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">el cine</text><rect x="290" y="20" width="120" height="60" rx="6" fill="#c7d2fe" stroke="#334155"/><text x="350" y="55" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">la biblioteca</text><rect x="10" y="140" width="120" height="60" rx="6" fill="#bbf7d0" stroke="#334155"/><text x="70" y="175" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">el parque</text><rect x="150" y="140" width="120" height="60" rx="6" fill="#fde68a" stroke="#334155"/><text x="210" y="175" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">la iglesia</text><rect x="290" y="140" width="120" height="60" rx="6" fill="#bae6fd" stroke="#334155"/><text x="350" y="175" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#1f2937">el mercado</text></svg>`;
 
@@ -815,8 +818,8 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "la-ciudad-ch-q04",
       question:
-        "Look at the map. This time you are coming out of **la biblioteca**, walking along the first street towards the main street. Write *tú* directions to **la piscina** in one sentence, starting with *Sigue todo recto…*",
-      diagram: MAP_TOWN,
+        "Look at the map. This time you are coming out of **la biblioteca**, walking along the street towards the main street. Write *tú* directions to **la piscina** in one sentence, starting with *Sigue todo recto…*",
+      diagram: MAP_FROM_LIBRARY,
       answer: {
         type: "text",
         accept: [
@@ -836,6 +839,19 @@ export const practice: TopicPractice = {
           "sigue todo recto y tuerce a la izquierda y toma la primera a la derecha",
           "sigue todo recto y tuerce a la izquierda y coge la primera calle a la derecha",
           "sigue todo recto y tuerce a la izquierda y coge la primera a la derecha",
+          "sigue todo recto luego gira a la izquierda y toma la primera calle a la derecha",
+          "sigue todo recto luego gira a la izquierda y toma la primera a la derecha",
+          "sigue todo recto luego gira a la izquierda y coge la primera calle a la derecha",
+          "sigue todo recto luego gira a la izquierda y coge la primera a la derecha",
+          "sigue todo recto después gira a la izquierda y toma la primera calle a la derecha",
+          "sigue todo recto después gira a la izquierda y coge la primera calle a la derecha",
+          "sigue todo recto gira a la izquierda y luego toma la primera calle a la derecha",
+          "sigue todo recto gira a la izquierda y después toma la primera calle a la derecha",
+          "sigue todo recto gira a la izquierda y gira a la derecha",
+          "sigue todo recto gira a la izquierda y luego gira a la derecha",
+          "sigue todo recto gira a la izquierda y después gira a la derecha",
+          "sigue todo recto tuerce a la izquierda y tuerce a la derecha",
+          "sigue todo recto tuerce a la izquierda y luego tuerce a la derecha",
         ],
       },
       solution: [
@@ -845,11 +861,11 @@ export const practice: TopicPractice = {
         "**Sigue todo recto, gira a la izquierda y toma la primera calle a la derecha.**",
       ],
       traps: [
-        { spec: { type: "text", accept: ["sigue todo recto gira a la derecha y toma la primera calle a la derecha", "sigue todo recto y gira a la derecha y toma la primera calle a la derecha"] }, feedback: "Turning right at the main street takes you down towards *Estás aquí*. Picture yourself walking: which way is 'up the map'?" },
+        { spec: { type: "text", accept: ["sigue todo recto gira a la derecha y toma la primera calle a la derecha", "sigue todo recto y gira a la derecha y toma la primera calle a la derecha"] }, feedback: "Turning right at the main street takes you down towards the bottom of the map. Picture yourself walking: which way is 'up the map'?" },
         { spec: { type: "text", accept: ["sigue todo recto gira a la izquierda y toma la segunda calle a la derecha", "sigue todo recto y gira a la izquierda y toma la segunda calle a la derecha"] }, feedback: "Count again from where you join the main street: the pool's street is the first one you reach." },
         { spec: { type: "text", accept: ["sigue todo recto gira a la izquierda y toma la primera calle a la izquierda", "sigue todo recto y gira a la izquierda y toma la primera calle a la izquierda"] }, feedback: "That takes you to the museum. Walking up the main street, which side is the pool on?" },
       ],
-      commonError: "Giving directions as if you were still at *Estás aquí* — left and right depend on which way YOU are facing.",
+      commonError: "Giving directions as if you were facing up the map from the bottom — left and right depend on which way YOU are facing.",
       difficulty: "challenge",
       guideRef: "directions",
       hints: [

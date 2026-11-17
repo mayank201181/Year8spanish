@@ -435,6 +435,8 @@ export const morePapers: Paper[] = [
             "va a levantarse ducharse y salir de casa",
             "ella va a levantarse a ducharse y a salir de casa",
             "va a levantarse a ducharse y a salir de casa",
+            "ella se va a levantar duchar y salir de casa",
+            "se va a levantar duchar y salir de casa",
           ],
         },
         solution: [

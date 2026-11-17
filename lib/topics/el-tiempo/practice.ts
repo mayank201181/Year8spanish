@@ -833,7 +833,7 @@ export const practice: TopicPractice = {
     {
       kind: "short",
       id: "el-tiempo-ch-q02",
-      question: "This sentence contains **two** mistakes. Write it out correctly in Spanish:\n\n    Hoy es muy calor y hace nublado.\n\n(= Today it's very hot and cloudy.)",
+      question: "Both weather expressions in this sentence are wrong. Write the sentence out correctly in Spanish:\n\n    Hoy es muy calor y hace nublado.\n\n(= Today it's very hot and cloudy.)",
       answer: { type: "text", accept: ["hoy hace mucho calor y está nublado"] },
       traps: [
         { spec: { type: "text", accept: ["hoy hace muy calor y está nublado"] }, feedback: "One mistake fixed! But *calor* is a noun, so 'very hot' = *mucho calor*." },

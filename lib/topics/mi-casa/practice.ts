@@ -275,7 +275,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "mi-casa-p1-q09",
           question: "Translate into Spanish: 'The bedrooms are quite big.'",
-          answer: { type: "text", accept: ["Los dormitorios son bastante grandes.", "las habitaciones son bastante grandes"] },
+          answer: { type: "text", accept: ["Los dormitorios son bastante grandes.", "las habitaciones son bastante grandes", "los cuartos son bastante grandes"] },
           solution: ["'The bedrooms are' = *los dormitorios son*.", "'Quite' = *bastante* (it never changes).", "*Grande* is the same for both genders, but adds *-s* in the plural → **Los dormitorios son bastante grandes.**"],
           traps: [
             { spec: { type: "text", accept: ["los dormitorios son bastante grande"] }, feedback: "*Grande* doesn't change for gender, but it does go plural: *grandes*." },
@@ -855,8 +855,10 @@ export const practice: TopicPractice = {
         accept: [
           "Mi dormitorio está en la primera planta y es verde.",
           "mi habitación está en la primera planta y es verde",
+          "mi cuarto está en la primera planta y es verde",
           "mi dormitorio está en el primer piso y es verde",
           "mi habitación está en el primer piso y es verde",
+          "mi cuarto está en el primer piso y es verde",
         ],
       },
       solution: [

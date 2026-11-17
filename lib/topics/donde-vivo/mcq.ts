@@ -704,7 +704,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "The subject is the activity *vivir en Singapur* — an infinitive, which counts as **masculine singular** → *aburrido*, *caro*. *Menos … como* mixes up the frames (*menos* goes with *que*). *Aburrida / cara* agree with an imaginary feminine noun. The last option swaps *más* and *menos*, reversing the meaning.",
+          "The subject is the activity *vivir en Singapur* — an infinitive, which counts as **masculine singular** → *aburrido*, *caro*. *Menos … como* mixes up the frames (*menos* goes with *que*). *Aburrida / cara* agree with an imaginary feminine noun. *Más aburrido … menos caro* swaps *más* and *menos*, reversing the meaning.",
         difficulty: "challenge",
         guideRef: "comparing-places",
         hints: [

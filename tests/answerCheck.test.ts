@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { checkAnswer, checkWithTraps, specSelfCheck } from "../lib/answerCheck.ts";
-import type { AnswerSpec } from "../lib/types.ts";
+import { checkAnswer, checkWithTraps, specSelfCheck, suggestMarks } from "../lib/answerCheck.ts";
+import type { AnswerSpec, WrittenQ } from "../lib/types.ts";
 
 const st = (spec: AnswerSpec, input: string) => checkAnswer(spec, input).status;
 
@@ -161,13 +161,48 @@ test("text (Spanish): case, punctuation and accents", () => {
   assert.equal(st(s, "¡Me levanto a las siete!"), "correct");
   assert.equal(st(s, "  Yo  me levanto a las siete. "), "correct");
   assert.equal(st(s, "me levante a las siete"), "incorrect");
-  // accent-only difference → "close" (nudge), never correct
+  // accent-only difference → "close" (nudge), never correct (critical when accent distinguishes tense: habló vs hablo)
   assert.equal(st({ type: "text", accept: ["habló"] }, "hablo"), "close");
+  assert.equal(st({ type: "text", accept: ["hablo"] }, "habló"), "close");
   assert.equal(st({ type: "text", accept: ["habló"] }, "Habló."), "correct");
   assert.equal(st({ type: "text", accept: ["el año"] }, "el ano"), "close");
+  // adversarial opposites / wrong verb forms are never marked correct
+  const pairs: Array<[string, string]> = [
+    ["bueno", "malo"],
+    ["grande", "pequeño"],
+    ["ayer", "mañana"],
+    ["soy", "estoy"],
+    ["fui", "fue"],
+    ["me gusta", "me gustan"],
+  ];
+  for (const [a, b] of pairs) {
+    assert.equal(st({ type: "text", accept: [a] }, b), "incorrect", `${a} vs ${b}`);
+    assert.equal(st({ type: "text", accept: [b] }, a), "incorrect", `${b} vs ${a}`);
+  }
   // apostrophes are ignored so "I'm" = "Im"
   assert.equal(st({ type: "text", accept: ["I'm going to play"] }, "Im going to play"), "correct");
   assert.equal(st({ type: "text", accept: ["isosceles"] }, "Isosceles."), "correct");
+});
+
+test("suggestMarks: full marks on model, zero on stem-copy or non-answers, punctuation & markdown handled", () => {
+  const q: WrittenQ = {
+    id: "test-w1",
+    kind: "written",
+    difficulty: "challenge",
+    question: "Write 2 questions in Spanish (e.g. *¿dónde vives?*) and use *jugar a*.",
+    marks: 3,
+    modelAnswer: "*¿Dónde vives? ¿Con quién vas a **jugar** al tenis?* *Jugar* is followed by *a*.",
+    markScheme: [
+      { point: "Uses ¿ punctuation", keywords: ["¿"] },
+      { point: "Explains jugar a", keywords: ["followed by a", "jugar a"] },
+      { point: "Uses al tenis", keywords: ["al tenis"] },
+    ],
+    hints: ["Check ¿…?", "Explain jugar + a"],
+  };
+  assert.deepEqual(suggestMarks(q, q.modelAnswer), [true, true, true]);
+  for (const bad of ["no sé", "No lo sé.", "I don't know", "idk", "nada", "", q.question]) {
+    assert.deepEqual(suggestMarks(q, bad), [false, false, false], `should score 0 for: ${bad}`);
+  }
 });
 
 test("self-check of display answers", () => {

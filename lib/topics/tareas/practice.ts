@@ -668,6 +668,11 @@ export const practice: TopicPractice = {
               "yo creo que todo el mundo debe ayudar",
               "yo creo que todos deberían ayudar",
               "yo creo que todos debemos ayudar",
+              "en mi opinión todos deben ayudar",
+              "en mi opinión todo el mundo debe ayudar",
+              "en mi opinión todos deberían ayudar",
+              "para mí todos deben ayudar",
+              "para mí todo el mundo debe ayudar",
             ],
           },
           solution: [
@@ -1061,7 +1066,7 @@ export const practice: TopicPractice = {
         ],
       },
       solution: [
-        "'What' in a question = *qué* (with an accent) — and the question opens with *¿*.",
+        "'What' in a question = *qué* (with an accent) — and the question is framed by *¿…?*.",
         "'Do you have to' = *tienes que* — Spanish has no 'do' helper word.",
         "'Do' (the action) = the infinitive *hacer*.",
         "→ **¿Qué tienes que hacer en casa?**",

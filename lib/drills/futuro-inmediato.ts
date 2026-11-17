@@ -492,7 +492,7 @@ export const drills: Drill[] = [
       const agree = accept.length > 1 && accept.some((a) => a.includes("próxim")) ? `\n\n(Two ways: *… que viene* or *próximo / próxima …* — either is accepted.)` : "";
       return {
         prompt: `Write the time phrase in Spanish: '${en}'.`,
-        answer: { type: "text", accept, display: accept.join(" / ") },
+        answer: { type: "text", accept, display: accept[0] },
         solution: [`'${en}' = **${accept.join("** or **")}**.${agree}`],
         hint: en.startsWith("next") ? "'Next' = *que viene* after the noun, or *próximo/próxima* before it." : "Think of the topic's time phrases: *esta…, este…, mañana…*",
         traps: traps(accept, wrong),
@@ -522,7 +522,7 @@ export const drills: Drill[] = [
         const frame = sentence(join(time, s.es ?? "", `___ (${inf})`, a.es));
         return {
           prompt: `Fill the gap with the near future of the verb in brackets (either pronoun position):\n\n    ${frame}${s.es ? "" : `\n\n(The subject is ${s.label}.)`}`,
-          answer: { type: "text", accept: uniq([...forms, ...fullAccept]), display: forms.join(" / ") },
+          answer: { type: "text", accept: uniq([...forms, ...fullAccept]), display: forms[0] },
           solution: [
             `Subject ${s.es ? `*${s.es}*` : s.label} → *ir*: *${irP(s.p)}*; pronoun: *${pron[s.p]}*.`,
             `Pronoun on the end of the infinitive: *${forms[0]}*.`,
@@ -541,7 +541,7 @@ export const drills: Drill[] = [
       const forms = nf(inf, p);
       return {
         prompt: `Write the near future of *${inf}* for ${s.label}. (Either position of the pronoun is fine.)`,
-        answer: { type: "text", accept, display: forms.join(" / ") },
+        answer: { type: "text", accept, display: forms[0] },
         solution: [
           `*${inf}* is reflexive: *-se* becomes *${pron[p]}* for ${s.label}.`,
           `*ir* → *${irP(p)}* + *a* + *${base}*.`,
@@ -576,7 +576,7 @@ export const drills: Drill[] = [
       const refl = forms.length > 1;
       return {
         prompt: `Make this sentence negative (keep everything else the same):\n\n    ${positive}`,
-        answer: { type: "text", accept, display: refl ? `${canon} / ${sentence(join(s.es ?? "", negForms[1], a.es))}` : canon },
+        answer: { type: "text", accept, display: canon },
         solution: [
           "Put *no* straight in front of the part of *ir*.",
           refl ? `With a reflexive, *no* goes before the whole block: *no ${forms[1]}* — or *no ${forms[0]}*.` : "Everything else stays the same.",
@@ -913,7 +913,7 @@ export const drills: Drill[] = [
       const isIr = a.inf === "ir";
       return {
         prompt: `Change this habit into a one-off plan. Start with *${cap(plan)}* and use *ir a* + infinitive:\n\n    ${given}`,
-        answer: { type: "text", accept, display: forms.length > 1 && a.inf !== "ir" ? `${canon} / ${sentence(`${plan} ${subjCanon(s, forms[1])}`)}` : canon },
+        answer: { type: "text", accept, display: canon },
         solution: [
           `Find the infinitive: *${present}* → *${a.inf}*.${isIr ? " (Yes — *ir* itself! You go to go.)" : ""}`,
           `Same person, so *ir* → *${irP(s.p)}*; swap *${h}* for *${plan}*.`,

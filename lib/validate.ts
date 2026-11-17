@@ -4,7 +4,7 @@
 // Pure — no React, no Next.
 // ---------------------------------------------------------------------------
 import type { AnswerSpec, Question, Topic, Trap, WorkedExample } from "./types.ts";
-import { checkAnswer, specSelfCheck, specSample } from "./answerCheck.ts";
+import { checkAnswer, displayAnswer, specSelfCheck, specSample } from "./answerCheck.ts";
 import { toMathML } from "./mathml.ts";
 
 export interface Issue {
@@ -47,6 +47,10 @@ export function checkSpec(where: string, spec: AnswerSpec, issues: Issue[]) {
   }
   const r = specSelfCheck(spec);
   if (r.status !== "correct") issues.push({ where, problem: `answer spec fails its own check (${r.status}: ${r.feedback ?? ""}) ${JSON.stringify(spec)}` });
+  if (spec.type === "text") {
+    const dr = checkAnswer(spec, displayAnswer(spec));
+    if (dr.status !== "correct") issues.push({ where, problem: `displayAnswer "${displayAnswer(spec)}" fails checkAnswer (${dr.status})` });
+  }
   if (spec.type === "number" && !Number.isFinite(spec.value)) issues.push({ where, problem: "number answer is not finite" });
   if (spec.type === "fraction" && (!Number.isInteger(spec.n) || !Number.isInteger(spec.d) || spec.d === 0)) issues.push({ where, problem: "fraction n/d must be integers, d≠0" });
   if (spec.type === "text" && (!spec.accept || spec.accept.length === 0)) issues.push({ where, problem: "text answer has no accepted strings" });
@@ -87,10 +91,16 @@ export function checkQuestion(where: string, q: Question, sectionIds: Set<string
     }
     if (!Number.isInteger(q.answerIndex) || q.answerIndex < 0 || q.answerIndex > 3) issues.push({ where, problem: "answerIndex out of range" });
     checkText(`${where}.explanation`, q.explanation, issues);
-    if (/\b(?:option|answer|choice)\s*\(?[A-D]\)?(?![a-z])|\b[A-D]\)\s|\bthe (?:first|second|third|fourth|last) (?:option|answer|choice)/.test(q.explanation)) {
+    const posRe = /\b(?:[Oo]ption|[Aa]nswer|[Cc]hoice)\s*\(?[A-D]\)?(?![a-z])|\b[A-D]\)\s|\b[Tt]he (?:first|second|third|fourth|last) (?:option|answer|choice)\b/;
+    if (posRe.test(q.explanation)) {
       issues.push({ where, problem: "explanation refers to an option by letter/position (options are shuffled)" });
     }
-    if (/\b(?:all|none) of the above\b/i.test(q.options.join(" "))) issues.push({ where, problem: "'all/none of the above' breaks when options are shuffled" });
+    if (q.hints.some((h) => posRe.test(h))) {
+      issues.push({ where, problem: "hint refers to an option by letter/position (options are shuffled)" });
+    }
+    if (/\b(?:all|none) of the above\b|\bboth [A-D] and [A-D]\b/i.test(q.options.join(" "))) {
+      issues.push({ where, problem: "'all/none of the above' or 'both A and B' breaks when options are shuffled" });
+    }
   } else if (q.kind === "short") {
     checkSpec(`${where}.answer`, q.answer, issues);
     if (!Array.isArray(q.solution) || q.solution.length === 0) issues.push({ where, problem: "short question needs solution steps" });

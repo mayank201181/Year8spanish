@@ -302,7 +302,7 @@ export const guide: TopicGuide = {
           title: "Invite and refuse",
           problem: "Invite Javier to play tennis on Sunday. He says he can't because he has to do his homework.",
           steps: [
-            "Invitation: *¿Quieres* (tú form of *querer*, e→ie) + infinitive *jugar al tenis* + *el domingo*.",
+            "Invitation: *¿Quieres…?* (tú form of *querer*, e→ie) + infinitive *jugar al tenis* + *el domingo*.",
             "Refusal: *No puedo* (yo form of *poder*, o→ue).",
             "Reason: *porque tengo que* + infinitive: *hacer los deberes*.",
           ],

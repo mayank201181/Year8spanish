@@ -872,7 +872,7 @@ export const drills: Drill[] = [
     level: 2,
     guideRef: "three-tenses",
     generate(rng, tier) {
-      const PAST = ["past", "preterite", "the past", "past tense", "the preterite", "pasado", "pretérito", "el pretérito", "el pasado", "pretérito indefinido"];
+      const PAST = ["past", "preterite", "past (preterite)", "the past", "past tense", "the preterite", "pasado", "pretérito", "el pretérito", "el pasado", "pretérito indefinido"];
       const PRESENT = ["present", "the present", "present tense", "presente", "el presente"];
       const FUTURE = ["future", "near future", "the future", "the near future", "immediate future", "futuro", "futuro inmediato", "el futuro", "ir a"];
       const TIME: Record<Tense, string[]> = {

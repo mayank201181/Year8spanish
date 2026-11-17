@@ -710,7 +710,7 @@ export const practice: TopicPractice = {
           markScheme: [
             { point: "Four different question words, each with its accent", keywords: ["dónde", "cuándo", "quién", "qué", "cómo", "cuántos", "por qué", "donde", "cuando", "quien", "que"] },
             { point: "Every verb correctly in the tú form (-as / -es)", keywords: ["vives", "tienes", "juegas", "estudias", "haces", "comes", "te levantas", "vas"] },
-            { point: "Correct ¿…? punctuation on every question", keywords: ["¿", "?"] },
+            { point: "Correct ¿…? punctuation on every question", keywords: ["¿"] },
             { point: "At least one question uses a stem-changing, reflexive or irregular verb correctly", keywords: ["juegas", "quieres", "prefieres", "te levantas", "vas", "tienes", "haces", "eres"] },
           ],
           commonError: "Leaving the preposition at the end, English-style (*¿Quién juegas con?*) — Spanish says *¿Con quién juegas?*",

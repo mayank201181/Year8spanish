@@ -454,7 +454,7 @@ export const practice: TopicPractice = {
         {
           kind: "mcq",
           id: "rutina-diaria-p1-q11",
-          question: "Which is the odd one out?",
+          question: "Look at how the verb stems behave in the present tense. Which one is the odd one out?",
           options: ["me visto", "me acuesto", "me ducho", "me despierto"],
           answerIndex: 2,
           explanation:

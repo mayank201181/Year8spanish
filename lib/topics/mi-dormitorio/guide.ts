@@ -36,7 +36,7 @@ export const guide: TopicGuide = {
           answer: "*las lámparas* · *los ordenadores*",
           yourTurn: {
             question: "Your turn: write 'the televisions' in Spanish, with the article.",
-            answer: { type: "text", accept: ["las televisiones"] },
+            answer: { type: "text", accept: ["las televisiones", "los televisores"] },
             solution:
               "*Televisión* ends in *-ión* → feminine → *las*. It ends in a consonant → add *-es*. The stress now falls naturally on *-sio-*, so the accent goes: **las televisiones**.",
           },
@@ -176,10 +176,13 @@ export const guide: TopicGuide = {
               accept: [
                 "no hay televisión en mi dormitorio",
                 "no hay televisión en mi habitación",
+                "no hay televisión en mi cuarto",
                 "en mi dormitorio no hay televisión",
                 "en mi habitación no hay televisión",
+                "en mi cuarto no hay televisión",
                 "no hay una televisión en mi dormitorio",
                 "no hay una televisión en mi habitación",
+                "no hay una televisión en mi cuarto",
                 "en mi dormitorio no hay una televisión",
                 "en mi habitación no hay una televisión",
                 "no hay tele en mi dormitorio",
@@ -298,10 +301,13 @@ export const guide: TopicGuide = {
               accept: [
                 "me encanta mi dormitorio porque es grande",
                 "me encanta mi habitación porque es grande",
+                "me encanta mi cuarto porque es grande",
                 "me encanta mi dormitorio ya que es grande",
                 "me encanta mi habitación ya que es grande",
+                "me encanta mi cuarto ya que es grande",
                 "mi dormitorio me encanta porque es grande",
                 "mi habitación me encanta porque es grande",
+                "mi cuarto me encanta porque es grande",
               ],
             },
             solution:

@@ -93,7 +93,7 @@ export const paper: ExamPaper = {
       guideRef: "chores-vocab",
       difficulty: "warmup",
       question: "Translate into Spanish: *I make the bed.*",
-      answer: { type: "text", accept: ["hago la cama", "yo hago la cama"] },
+      answer: { type: "text", accept: ["hago la cama", "yo hago la cama", "hago mi cama", "yo hago mi cama"] },
       traps: [
         { spec: { type: "text", accept: ["hago el cama", "yo hago el cama"] }, feedback: "*Cama* is feminine: *la cama*." },
         { spec: { type: "text", accept: ["hace la cama", "yo hace la cama"] }, feedback: "*Hace* is 'he/she makes'. 'I make' is the irregular *hago*." },

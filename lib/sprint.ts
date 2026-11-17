@@ -107,20 +107,41 @@ function verbItem(rng: Rng, tense: Tense, mode: SprintFactMode): SprintItem {
   return { prompt: "*jugar* · yo", answer: ["juego", "yo juego"], fact: "*jugar* · yo → **juego**", mode };
 }
 
-let vocabPool: { es: string; en: string }[] = [];
+let vocabPool: { en: string; answer: string[]; fact: string }[] = [];
 /** Load vocabulary for the vocab mode (call once with VOCAB from the generated registry). */
 export function setSprintVocab(groups: Record<string, VocabGroup[]>): void {
-  vocabPool = Object.values(groups)
-    .flatMap((gs) => gs.flatMap((g) => g.items))
-    // Short, single-meaning items work best at speed.
-    .filter((it) => it.es.length <= 28 && it.en.length <= 40 && !/[/(]/.test(it.es));
+  const byPrompt = new Map<string, { prompt: string; answers: string[] }>();
+  for (const gs of Object.values(groups)) {
+    for (const g of gs) {
+      for (const it of g.items) {
+        // Short, single-meaning items work best at speed; skip grammar frames like "voy a + infinitive".
+        if (it.es.length > 28 || it.en.length > 40 || /[/(+…]|\.\.\./.test(it.es) || /[+…]|\.\.\./.test(it.en)) continue;
+        // Split on ";" or " / " (spaced slash), never bare "/" inside "he/she" or "his/her".
+        const en = it.en.split(/;| \/ /)[0].trim();
+        if (!en || /^(?:he\/she|his\/her)\b/i.test(en)) continue;
+        const key = en.toLowerCase();
+        let entry = byPrompt.get(key);
+        if (!entry) {
+          entry = { prompt: en, answers: [] };
+          byPrompt.set(key, entry);
+        }
+        if (!entry.answers.some((a) => a.toLowerCase() === it.es.toLowerCase())) {
+          entry.answers.push(it.es);
+        }
+      }
+    }
+  }
+  vocabPool = [...byPrompt.values()].map(({ prompt, answers }) => ({
+    en: prompt,
+    answer: answers,
+    fact: `${prompt} → **${answers.join(" / ")}**`,
+  }));
 }
 
 function vocabItem(rng: Rng): SprintItem {
   if (!vocabPool.length) return verbItem(rng, "present", "present");
   const it = rng.pick(vocabPool);
-  const en = it.en.split(/[;/]/)[0].trim();
-  return { prompt: en, answer: [it.es], fact: `${en} → **${it.es}**`, mode: "vocab" };
+  return { prompt: it.en, answer: it.answer, fact: it.fact, mode: "vocab" };
 }
 
 /** One quick fact for a sprint mode ("mixed" picks a random family). */

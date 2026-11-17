@@ -9,7 +9,7 @@
 //               does not count as an attempt
 // ---------------------------------------------------------------------------
 
-import type { AnswerSpec } from "./types.ts";
+import type { AnswerSpec, WrittenQ } from "./types.ts";
 import {
   countTerms,
   evalExpr,
@@ -438,4 +438,51 @@ export function specSample(spec: AnswerSpec): string {
 /** Self-check used by tests and the content validator: does the canonical answer pass its own spec? */
 export function specSelfCheck(spec: AnswerSpec): CheckResult {
   return checkAnswer(spec, specSample(spec));
+}
+
+/**
+ * Suggest which mark-scheme points a written answer hits.
+ * Guards against trivial non-answers ("no sé", "I don't know") and verbatim stem-copying.
+ */
+export function suggestMarks(q: WrittenQ, text: string): boolean[] {
+  const empty = () => q.markScheme.map(() => false);
+  const fold = (x: string) =>
+    x
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[*_`"'‘’“”]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+
+  const rawFold = fold(text ?? "").trim();
+  if (!rawFold) return empty();
+
+  const alphaOnly = rawFold.replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+  if (/^(?:|no\s+(?:lo\s+)?se|i\s+don\s*t\s+know|dont\s+know|idk|nada|ninguno|ninguna|pass|skip)$/.test(alphaOnly)) {
+    return empty();
+  }
+
+  const qFold = fold(q.question).trim();
+  if (qFold.includes(rawFold)) return empty();
+
+  let cleaned = rawFold;
+  for (const line of q.question.split("\n")) {
+    const lf = fold(line).trim();
+    if (lf.replace(/[^a-z0-9]/g, "").length >= 12) {
+      cleaned = cleaned.split(lf).join(" ");
+    }
+  }
+  if (!cleaned.replace(/[^a-z0-9]/g, "").trim()) return empty();
+
+  const t = ` ${cleaned} `;
+  // Short alphanumeric keywords ("vi", "y", "tan") must match whole words, not parts of "vivo", "hay", "también".
+  // Pure punctuation keywords ("¿", "¡") match directly since a letter immediately follows "¿".
+  const hit = (k: string) => {
+    const f = fold(k).trim();
+    if (!f) return false;
+    if (!/[a-z0-9]/.test(f) || f.length > 3) return t.includes(f);
+    const esc = f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(^|[^a-z0-9])${esc}([^a-z0-9]|$)`).test(t);
+  };
+  return q.markScheme.map((p) => p.keywords.some((k) => k && hit(k)));
 }

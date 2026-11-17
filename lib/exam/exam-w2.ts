@@ -151,7 +151,7 @@ export const paper: ExamPaper = {
       guideRef: "describing-home",
       difficulty: "core",
       question: "Translate into Spanish: *My flat is quite small but very bright.*",
-      answer: { type: "text", accept: combos(["Mi piso", "Mi apartamento"], ["es bastante pequeño pero muy luminoso"]) },
+      answer: { type: "text", accept: combos(["Mi piso", "Mi apartamento"], ["es bastante pequeño pero muy luminoso", "es bastante pequeño pero es muy luminoso"]) },
       traps: [
         { spec: { type: "text", accept: ["Mi piso es bastante pequeña pero muy luminosa"] }, feedback: "*Piso* is masculine, so the adjectives are too: *pequeño… luminoso*." },
         { spec: { type: "text", accept: ["Mi piso está bastante pequeño pero muy luminoso"] }, feedback: "Describing what your flat is like uses *ser*: *mi piso es…*" },
@@ -295,12 +295,18 @@ export const paper: ExamPaper = {
       guideRef: "gustar-and-preferences",
       difficulty: "core",
       question: "Translate into Spanish: *My sister likes horror films.*",
-      answer: { type: "text", accept: ["A mi hermana le gustan las películas de terror"] },
+      answer: {
+        type: "text",
+        accept: combos(
+          ["A mi hermana le gustan"],
+          ["las películas de terror", "las películas de miedo", "las pelis de terror", "las pelis de miedo"],
+        ),
+      },
       traps: [
-        { spec: { type: "text", accept: ["A mi hermana le gusta las películas de terror"] }, feedback: "*Las películas* is plural, so the verb is plural: *le gustan*." },
-        { spec: { type: "text", accept: ["Mi hermana le gustan las películas de terror", "Mi hermana gusta las películas de terror", "Mi hermana gustan las películas de terror"] }, feedback: "With *gustar*, the person goes after *a*, plus *le*: *A mi hermana le gustan…*" },
-        { spec: { type: "text", accept: ["A mi hermana le gustan las películas de horror"] }, feedback: "Nearly — in Spanish horror films are *las películas de terror*." },
-        { spec: { type: "text", accept: ["A mi hermana le gustan películas de terror"] }, feedback: "Nearly — Spanish keeps the article when talking about things in general: *le gustan las películas de terror*." },
+        { spec: { type: "text", accept: ["A mi hermana le gusta las películas de terror", "A mi hermana le gusta las películas de miedo"] }, feedback: "*Las películas* is plural, so the verb is plural: *le gustan*." },
+        { spec: { type: "text", accept: ["Mi hermana le gustan las películas de terror", "Mi hermana gusta las películas de terror", "Mi hermana gustan las películas de terror", "Mi hermana le gustan las películas de miedo", "Mi hermana gusta las películas de miedo", "Mi hermana gustan las películas de miedo"] }, feedback: "With *gustar*, the person goes after *a*, plus *le*: *A mi hermana le gustan…*" },
+        { spec: { type: "text", accept: ["A mi hermana le gustan las películas de horror"] }, feedback: "Nearly — in Spanish horror films are *las películas de terror* (or *de miedo*)." },
+        { spec: { type: "text", accept: ["A mi hermana le gustan películas de terror", "A mi hermana le gustan películas de miedo"] }, feedback: "Nearly — Spanish keeps the article when talking about things in general: *le gustan las películas de terror*." },
         { spec: { type: "text", accept: ["A mi hermana me gustan las películas de terror", "A mi hermana se gustan las películas de terror"] }, feedback: "For 'she likes' the pronoun is *le*: *a mi hermana le gustan…*" },
       ],
       solution: ["'She likes' → *a mi hermana le gusta(n)*.", "*las películas de terror* is plural → *gustan*.", "→ **A mi hermana le gustan las películas de terror.**"],
@@ -336,8 +342,8 @@ export const paper: ExamPaper = {
       answer: {
         type: "text",
         accept: [
-          ...combos(["", "yo"], ["paseo al perro", "saco al perro", "saco a pasear al perro"], ["dos veces a la semana", "dos veces por semana"]),
-          ...combos(["dos veces a la semana", "dos veces por semana"], ["", "yo"], ["paseo al perro", "saco al perro", "saco a pasear al perro"]),
+          ...combos(["", "yo"], ["paseo al perro", "saco al perro", "saco a pasear al perro", "doy un paseo con el perro"], ["dos veces a la semana", "dos veces por semana"]),
+          ...combos(["dos veces a la semana", "dos veces por semana"], ["", "yo"], ["paseo al perro", "saco al perro", "saco a pasear al perro", "doy un paseo con el perro"]),
         ],
       },
       traps: [

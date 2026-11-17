@@ -1051,6 +1051,14 @@ export const practice: TopicPractice = {
             "would you like to come to the movies this Friday with me",
             "would you like to come to the pictures on Friday with me",
             "would you like to come to the pictures this Friday with me",
+            "do you want to go to the movie theatre with me on Friday",
+            "do you want to go to the movie theater with me on Friday",
+            "do you want to go to the movie theatre with me this Friday",
+            "do you want to go to the movie theater with me this Friday",
+            "would you like to go to the movie theatre with me on Friday",
+            "would you like to go to the movie theater with me on Friday",
+            "on Friday do you want to go to the movie theatre with me",
+            "on Friday do you want to go to the movie theater with me",
           ],
           },
           solution: [
@@ -1092,7 +1100,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "futuro-inmediato-p2-q11",
           question: "Write in Spanish: 'It's going to be boring.'",
-          answer: { type: "text", accept: ["va a ser aburrido"] },
+          answer: { type: "text", accept: ["va a ser aburrido", "va a ser aburrida", "va a ser un rollo"] },
           solution: ["'It's going to be' → *va a ser*.", "'boring' → *aburrido*.", "→ **Va a ser aburrido.**"],
           traps: [
             { spec: { type: "text", accept: ["va a estar aburrido"] }, feedback: "*Estar aburrido* = to be bored (a feeling). To describe the event as boring, use *ser*." },
