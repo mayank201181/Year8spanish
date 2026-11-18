@@ -12,6 +12,7 @@ const NAV = [
   { href: "/topics", label: "Topics", icon: "📚" },
   { href: "/watch", label: "Watch", icon: "🎬" },
   { href: "/episodes", label: "Sitcom", icon: "📺" },
+  { href: "/shorts", label: "Shorts", icon: "📱" },
   { href: "/daily", label: "Daily 5", icon: "🎯" },
   { href: "/review", label: "Review", icon: "🔁" },
   { href: "/progress", label: "Progress", icon: "📈" },
@@ -21,6 +22,7 @@ const DESKTOP_NAV = [
   { href: "/topics", label: "Topics" },
   { href: "/watch", label: "🎬 Watch" },
   { href: "/episodes", label: "📺 Sitcom" },
+  { href: "/shorts", label: "📱 Shorts" },
   { href: "/daily", label: "Daily 5" },
   { href: "/review", label: "Review" },
   { href: "/progress", label: "Progress" },
@@ -82,6 +84,7 @@ export function SiteHeader() {
             🎬 <span className="hidden sm:inline">Watch</span>
           </Link>
 
+          <Link href="/shorts" className="chip border-brand/30 bg-brand-soft text-brand text-sm md:hidden" title="Concept Shorts">📱 <span className="hidden sm:inline">Shorts</span></Link>
           <Link href="/progress" className="chip text-sm" title={`${rank.name} · ${data.stars} stars`}>
             ⭐ {data.stars}
           </Link>
@@ -155,7 +158,7 @@ export function MobileNav() {
 
   return (
     <nav className="no-print fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur" aria-label="Bottom navigation">
-      <div className="mx-auto grid max-w-2xl grid-cols-7 px-1">
+      <div className="mx-auto grid max-w-3xl grid-cols-8 px-1">
         {NAV.map((n) => (
           <Link key={n.href} href={n.href} className={`flex flex-col items-center gap-0.5 py-2 text-[0.62rem] font-bold transition-colors sm:text-xs ${active(path, n.href) ? "text-brand" : "text-ink-2 hover:text-ink"}`} aria-current={active(path, n.href) ? "page" : undefined}>
             <span className="text-lg sm:text-xl" aria-hidden>
