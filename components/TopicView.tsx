@@ -22,6 +22,8 @@ import { LearnSmart } from "./LearnSmart";
 import { RichInline } from "./Rich";
 import { WatchTab } from "./WatchTab";
 import { ShortsHub } from "./ShortsHub";
+import { CramSheet } from "./CramSheet";
+import { buildTopicCramPack } from "@/lib/cram";
 import { VocabTab } from "./VocabTab";
 
 export interface TopicLink {
@@ -30,7 +32,7 @@ export interface TopicLink {
   icon?: string;
 }
 
-export type TopicTab = "learn" | "vocab" | "watch" | "practise" | "challenge" | "explore" | "revise" | "shorts";
+export type TopicTab = "learn" | "vocab" | "watch" | "practise" | "challenge" | "explore" | "revise" | "shorts" | "cram";
 
 const TABS: { id: TopicTab; label: string; icon: string }[] = [
   { id: "learn", label: "Learn", icon: "📖" },
@@ -41,6 +43,7 @@ const TABS: { id: TopicTab; label: string; icon: string }[] = [
   { id: "challenge", label: "Challenge", icon: "🧗" },
   { id: "explore", label: "Explore", icon: "🎛️" },
   { id: "revise", label: "Revise", icon: "🧠" },
+  { id: "cram", label: "Exam Cram", icon: "🚨" },
 ];
 
 const parseTab = (v: string | null): TopicTab => (TABS.some((t) => t.id === v) ? (v as TopicTab) : "learn");
@@ -608,6 +611,7 @@ export function TopicView({
         {tab === "challenge" ? <ChallengeTab topic={topic} /> : null}
         {tab === "explore" ? <InteractiveTab topicId={topic.id} onGoTab={selectTab} /> : null}
         {tab === "revise" ? <LearnSmart topic={topic} /> : null}
+        {tab === "cram" ? <CramSheet packs={[buildTopicCramPack(topic)]} singleTopicMode subjectLabel="Year 8 Spanish" onPractise={() => selectTab("practise")} /> : null}
       </div>
 
       {!focusMode && (neighbours.prev || neighbours.next) ? (
